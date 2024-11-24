@@ -50,25 +50,28 @@ public class DataNoise extends Noise {
      *
      * @param relation The Relation to be perturbed.
      * @param noisePercentage The percentage of data to apply noise to.
-     * @param splitType The type of split ("Horizontal" for rows, "Vertical" for columns).
      * @param dataNoiseInKeys Whether keys in the data can receive noise.
      * @return The perturbed Relation.
      * @throws Exception If noise cannot be applied.
      */
-    public Relation perturbData(Relation relation, int noisePercentage, String splitType, boolean dataNoiseInKeys) throws Exception {
+    public Relation perturbData(Relation relation, int noisePercentage, int noiseInsidePercentage, boolean dataNoiseInKeys) throws Exception {
 
         // If noisePercentage is 0, return original relation
         if (noisePercentage == 0) {
             return relation;
         }
 
-        // Determine whether Rows or Columns will de perturbed (according to Split type)
-        if (splitType.equals("Horizontal")) {
-            // Horizontal Splitting means that the rows overlap
-            return perturbRowData(relation, noisePercentage, dataNoiseInKeys);
+        // Determine whether Rows or Columns or both will de perturbed
+        if (relation.getOverlappingColumnsIndices() == null) {
+            // Due to horizontal Splitting, the rows should be perturbed
+            return perturbRowData(relation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys, false);
+        } else if (relation.getNumOfOverlappingRows() == null) {
+            //  Due to vertical Splitting, the columns should be perturbed
+            return perturbColumnData(relation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys);
         } else {
-            // Vertical Splitting means that columns overlap
-            return perturbColumnData(relation, noisePercentage, dataNoiseInKeys);
+            // Both splittings have been applied, so we add noise to columns and strings
+            Relation perturbedColumnRelation = perturbColumnData(relation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys);
+            return perturbRowData(perturbedColumnRelation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys, true);
         }
     }
 
@@ -79,10 +82,11 @@ public class DataNoise extends Noise {
      * @param relation The Relation to be perturbed.
      * @param noisePercentage The percentage of rows to apply noise to.
      * @param dataNoiseInKeys Whether keys in the data can receive noise.
+     * @param columnPerturbation Whether the data already includes noise in columns.
      * @return The perturbed Relation.
      * @throws Exception If noise cannot be applied.
      */
-    public Relation perturbRowData(Relation relation, int noisePercentage, boolean dataNoiseInKeys) throws Exception {
+    public Relation perturbRowData(Relation relation, int noisePercentage, int noiseInsidePercentage ,boolean dataNoiseInKeys, boolean columnPerturbation) throws Exception {
 
         // Get schema, data, key Indices and number of Row Overlap from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
@@ -109,20 +113,31 @@ public class DataNoise extends Noise {
             selectableIndices.removeAll(foreignKeyIndices);
         }
 
+        // Remove the overlappingColumnIndices if the relation already contains column noise
+        if (columnPerturbation) {
+            selectableIndices.removeAll(relation.getOverlappingColumnsIndices());
+        }
+
         // Get the rows of each index in indicesToPerturb (Loop through all rows that should be perturbed)
         for (int rowIndex : indicesToPerturb) {
 
+            // Determine the number of values that can be perturbed
+            int numOfValues = selectableIndices.size();
+
             // Calculate number of errors that will be added in row entries
-            int numOfErrors = chooseNumberOfErrors(dataNoiseInKeys ? schema.size() : schema.size() - keyIndices.size(), noisePercentage);
+            int numOfErrors = (int) Math.round((double) (numOfValues * noiseInsidePercentage) / 100); //chooseNumberOfErrors(numOfValues, noisePercentage)
 
             // Add noise into numOfErrors random entries
             Collections.shuffle(selectableIndices);
             for (int i = 0; i < numOfErrors; i++) {
                 int columnIndex = selectableIndices.get(i);
                 String entry = data.get(columnIndex).get(rowIndex);
+                System.out.println("Original: " + entry);
                 String replacement = chooseNoise(entry, schema.get(columnIndex), columnIndex, data.get(columnIndex));
+                System.out.println("Replacement: " + replacement);
                 data.get(columnIndex).set(rowIndex, replacement);
             }
+            System.out.println("Row got chosen for Noise: " + rowIndex);
         }
         return relation;
     }
@@ -137,9 +152,9 @@ public class DataNoise extends Noise {
      * @return The perturbed Relation.
      * @throws Exception If noise cannot be applied.
      */
-    public Relation perturbColumnData(Relation relation, int noisePercentage, boolean dataNoiseInKeys) throws Exception {
+    public Relation perturbColumnData(Relation relation, int noisePercentage, int noiseInsidePercentage, boolean dataNoiseInKeys) throws Exception {
 
-        // Get schema, data, overlapping and columns indices from Relation
+        // Get schema, data and overlapping columns indices from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
         List<Integer> candidateColumnsIndices = new ArrayList<>(relation.getOverlappingColumnsIndices());
@@ -174,10 +189,10 @@ public class DataNoise extends Noise {
         int numStringPerturbation = numToPerturb - numNumericPerturbation;
 
         // Add Noise into data
-        Map<Integer, List<String>> dataWithNumericErrors = perturbNumericColumnData(data, numNumericPerturbation, numericIndices, noisePercentage);
-        Map<Integer, List<String>> dataWithAllErrors = perturbStringColumnData(dataWithNumericErrors, numStringPerturbation, stringIndices, noisePercentage);
+        Map<Integer, List<String>> dataWithNumericErrors = perturbNumericColumnData(data, numNumericPerturbation, numericIndices, noiseInsidePercentage);
+        Map<Integer, List<String>> dataWithAllErrors = perturbStringColumnData(dataWithNumericErrors, numStringPerturbation, stringIndices, noiseInsidePercentage);
 
-        return new Relation(schema, dataWithAllErrors, relation.getKeyIndices(), relation.getForeignKeyIndices(), relation.getOverlappingColumnsIndices());
+        return new Relation(schema, dataWithAllErrors, relation.getKeyIndices(), relation.getForeignKeyIndices(), relation.getOverlappingColumnsIndices(), relation.getNumOfOverlappingRows());
     }
 
 
@@ -187,10 +202,10 @@ public class DataNoise extends Noise {
      * @param data The data to perturb.
      * @param numNumericPerturbation The number of numeric columns to perturb.
      * @param numericIndices Indices of columns containing numeric data.
-     * @param noisePercentage The noise percentage for column perturbation.
+     * @param noiseInsidePercentage The noise percentage for column perturbation.
      * @return Data with numeric noise applied.
      */
-    public Map<Integer, List<String>> perturbNumericColumnData(Map<Integer, List<String>> data, int numNumericPerturbation, List<Integer> numericIndices, int noisePercentage) {
+    public Map<Integer, List<String>> perturbNumericColumnData(Map<Integer, List<String>> data, int numNumericPerturbation, List<Integer> numericIndices, int noiseInsidePercentage) {
 
         // Shuffle the lists of column indices to randomize which ones will be perturbed
         Collections.shuffle(numericIndices);
@@ -207,7 +222,7 @@ public class DataNoise extends Noise {
             List<Double> numericColumn = createListOfDouble(column);
             double mean = calculateMean(numericColumn);
             double standardDeviation = calculateStandardDeviation(numericColumn, mean);
-            int numOfErrors = chooseNumberOfErrors(numericColumn.size(), noisePercentage);
+            int numOfErrors = (int) Math.round((double) (numericColumn.size() * noiseInsidePercentage) / 100); //chooseNumberOfErrors(numericColumn.size(), noisePercentage);
 
             // Filter indices of Double values
             List<Integer> doubleIndices = new ArrayList<>();
@@ -237,11 +252,11 @@ public class DataNoise extends Noise {
      * @param data The data to perturb.
      * @param numStringPerturbation The number of string columns to perturb.
      * @param stringIndices Indices of columns containing string data.
-     * @param noisePercentage The noise percentage for column perturbation.
+     * @param noiseInsidePercentage The noise percentage for column perturbation.
      * @return Data with string noise applied.
      * @throws Exception If noise cannot be applied.
      */
-    public Map<Integer, List<String>> perturbStringColumnData(Map<Integer, List<String>> data, int numStringPerturbation, List<Integer> stringIndices, int noisePercentage) throws Exception {
+    public Map<Integer, List<String>> perturbStringColumnData(Map<Integer, List<String>> data, int numStringPerturbation, List<Integer> stringIndices, int noiseInsidePercentage) throws Exception {
 
         // Shuffle the lists of column indices to randomize which ones will be perturbed
         Collections.shuffle(stringIndices);
@@ -254,8 +269,14 @@ public class DataNoise extends Noise {
             List<String> column = data.get(colIndex);
             System.out.println("Column got string noise " + colIndex);
 
+            // Randomly decide whether mapColumns will be applied (only method that is applied to a column, not to an entry)
+            if (Math.random() < 1.0 / selectedStringMethods.size() && selectedStringMethods.contains("mapColumn")) {
+                data.put(colIndex, mapColumn(column));
+                continue; // move to the next column after mapColumn is applied
+            }
+
             // Calculate number of errors that will be added in column entries
-            int numOfErrors = chooseNumberOfErrors(column.size(), noisePercentage);
+            int numOfErrors = (int) Math.round((double) (column.size() * noiseInsidePercentage) / 100); //chooseNumberOfErrors(column.size(), noisePercentage);
 
             // Choose numOfErrors unique indices from the column to receive noise
             Set<Integer> indicesToModify = pickUniqueRandomIndices(column.size(), numOfErrors);
@@ -414,34 +435,6 @@ public class DataNoise extends Noise {
             case "generateRandomString" -> generateRandomString();
             default -> entry;
         };
-    }
-
-
-    /**
-     * Calculates the number of errors to introduce into a set of data values based on a noise percentage.
-     *
-     * @param numOfValues The number of values in the data set.
-     * @param noisePercentage The noise percentage.
-     * @return The number of errors to introduce.
-     */
-    public int chooseNumberOfErrors(int numOfValues, int noisePercentage) {
-        Random random = new Random();
-        double percentage = 0;
-
-        if (noisePercentage >= 0 && noisePercentage <= 25) {
-            percentage = 40 + random.nextInt(11); // random value between 40 and 50
-        } else if (noisePercentage >= 26 && noisePercentage <= 50) {
-            percentage = 30 + random.nextInt(11); // random value between 30 and 40
-        } else if (noisePercentage >= 51 && noisePercentage <= 75) {
-            percentage = 20 + random.nextInt(11); // random value between 20 and 30
-        } else if (noisePercentage >= 76 && noisePercentage <= 100) {
-            percentage = 10 + random.nextInt(11); // random value between 10 and 20
-        }
-
-        double numOfErrors = Math.round((numOfValues * percentage) / 100);
-
-        // Calculate the percentage of the column length
-        return (int) numOfErrors;
     }
 
 

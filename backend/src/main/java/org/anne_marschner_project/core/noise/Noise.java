@@ -351,7 +351,7 @@ public class Noise {
                 return ""; // If no synonyms were found return empty string
             }
         } catch (Exception e) {
-            // Catch any exception and return "entry" as fallback
+            // Catch any exception and return "" as fallback
             return "";
         }
     }
@@ -863,5 +863,30 @@ public class Noise {
     public double roundDouble(double value, int places) {
         double scale = Math.pow(10, places);
         return Math.round(value * scale) / scale;
+    }
+
+
+    /**
+     * Maps the unique values of an input column to a sequence of numeric strings ("0", "1", ..., "n").
+     *
+     * @param inputColumn the input list of strings to be mapped
+     * @return a new list where each entry from the input list is replaced by its corresponding
+     *         numeric mapping
+     */
+    public List<String> mapColumn(List<String> inputColumn) {
+
+        Set<String> uniqueValues = new LinkedHashSet<>(inputColumn);
+
+        // Create Mapping
+        Map<String, String> dynamicMapping = new LinkedHashMap<>();
+        int index = 0;
+        for (String value : uniqueValues) {
+            dynamicMapping.put(value, String.valueOf(index++));
+        }
+
+        // Change each entry
+        return inputColumn.stream()
+                .map(dynamicMapping::get)
+                .collect(Collectors.toList());
     }
 }

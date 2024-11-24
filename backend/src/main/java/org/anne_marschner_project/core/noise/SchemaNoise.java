@@ -47,18 +47,24 @@ public class SchemaNoise extends Noise {
      * @param relation the {@link Relation} whose schema is to be perturbed
      * @param noisePercentage the percentage of columns to perturb
      * @param schemaNoiseInKeys whether the keys should be perturbed
+     * @param deleteSchema whether headers should be deleted
      * @return a {@link Relation} object with the perturbed schema
      * @throws Exception if an error occurs during the schema perturbation
      */
-    public Relation perturbSchema(Relation relation, int noisePercentage, boolean schemaNoiseInKeys) throws Exception {
+    public Relation perturbSchema(Relation relation, int noisePercentage, boolean schemaNoiseInKeys, boolean deleteSchema) throws Exception {
 
         // Get schema and overlapping columns indices from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
         List<Integer> overlappingColumnsIndices = relation.getOverlappingColumnsIndices();
 
+        // If deleteSchema was selected return dataset without headers
+        if (deleteSchema) {
+            return deleteHeaders(relation);
+        }
+
         // Determine the indices of the columns that are eligible for perturbation
         List<Integer> columnsToConsider;
-        if (overlappingColumnsIndices == null) {
+        if (relation.getNumOfOverlappingRows() != null) { // overlappingColumnsIndices == null
             // Due to horizontal Splitting, all columns are eligible, since they are all duplicates
             columnsToConsider = new ArrayList<>(schema.keySet());
         } else {
@@ -93,6 +99,20 @@ public class SchemaNoise extends Noise {
 
         // Return the new relation with the perturbed schema
         relation.setSchema(schema);
+        return relation;
+    }
+
+
+    /**
+     * Deletes the headers of the relation by setting them to null.
+     *
+     * @param relation the {@link Relation} which headers should be removed.
+     * @return the {@link Relation} withouut headers.
+     */
+    public Relation deleteHeaders(Relation relation) {
+        for (Map.Entry<Integer, Attribute> entry: relation.getSchema().entrySet()) {
+            relation.getSchema().get(entry.getKey()).setColumnName(null);
+        }
         return relation;
     }
 

@@ -35,23 +35,26 @@ public class Normalization {
      * @throws IOException                   If an I/O error occurs during file operations.
      * @throws AlgorithmExecutionException   If an error occurs in the Normalize algorithm execution.
      */
-    public List<Relation> transformToBCNF(Relation relation, String separator) throws IOException, AlgorithmExecutionException {
+    public List<Relation> transformToBCNF(Relation relation, char separator, Integer normalizePercentage) throws IOException, AlgorithmExecutionException {
 
         // create temporary csv file
         Path tempFilepath = Files.createTempFile("temp", ".csv");
         tempFilepath.toFile().deleteOnExit();
 
         // Write Data of Relation that should be normalized into CSV as Normalize needs CSV as Input
-        new CSVTool().writeCSV(relation,String.valueOf(tempFilepath), false, separator,"No Change");
+        new CSVTool().writeCSV(relation,String.valueOf(tempFilepath), separator,"No Change");
 
         // Apply Normalization to receive information about which indices should form which new relation
-        List<IndexSummary> indicesBCNF = normalize(String.valueOf(tempFilepath), separator.charAt(0));
+        List<IndexSummary> indicesBCNF = normalize(String.valueOf(tempFilepath), separator);
 
         // Translate indices of BCNF Relations into column indices of original relation
         List<IndexSummary> indicesRelations = getRelationIndices(indicesBCNF, relation);
 
+        // Choose the relations that will be built by using the given percentage
+        List<IndexSummary> indicesPickedRelations = chooseDegreeOfNormalization(indicesRelations, normalizePercentage);
+
         // Create the new relations and return them
-        return createBCNFDatasets(relation, indicesRelations);
+        return createBCNFDatasets(relation, indicesPickedRelations);
     }
 
 
@@ -207,6 +210,41 @@ public class Normalization {
             indicesRelations.add(new IndexSummary(columnIndices, keyIndices, foreignKeyIndices));
         }
         return indicesRelations;
+    }
+
+
+    /**
+     * Selects a subset of decomposed relations up to the specified degree of normalization.
+     *
+     * @param indicesRelations    A list of IndexSummary objects representing decomposed relations of indices.
+     * @param normalizePercentage The percentage indicating the degree of normalization to apply.
+     * @return A list of IndexSummary objects of the chosen decompositions.
+     */
+    public  List<IndexSummary> chooseDegreeOfNormalization(List<IndexSummary> indicesRelations, Integer normalizePercentage) {
+
+        // Find number of decomposition steps by calculating the given percentage of the possible decomposition steps
+        int numOfSteps = (int) Math.round((normalizePercentage / 100.0) * (indicesRelations.size() - 1));
+        if (numOfSteps == indicesRelations.size() - 1) {
+            return indicesRelations;
+        }
+
+        List<IndexSummary> chosenRelations = new ArrayList<>();
+
+        // add the first numOfSteps of IndexSummarys
+        for (int i = 0; i < numOfSteps; i++) {
+            chosenRelations.add(indicesRelations.get(i));
+        }
+
+        // Combine remaining entries in a shared IndexSummary
+        IndexSummary mergedSummary = indicesRelations.get(numOfSteps);
+        for (int i = numOfSteps + 1; i < indicesRelations.size(); i++) {
+            mergedSummary.addColumnIndices(indicesRelations.get(i).getColumnIndices());
+            mergedSummary.setForeignKeyIndices(new ArrayList<>());
+        }
+        Collections.sort(mergedSummary.getColumnIndices());
+        chosenRelations.add(mergedSummary);
+
+        return chosenRelations;
     }
 
 

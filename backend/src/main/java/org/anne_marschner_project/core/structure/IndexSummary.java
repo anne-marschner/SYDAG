@@ -1,5 +1,6 @@
 package org.anne_marschner_project.core.structure;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,4 +69,27 @@ public class IndexSummary {
     public List<Integer> getForeignKeys() {
         return foreignKeyIndices;
     }
+
+    /**
+     * Sets the list of foreign key column indices.
+     *
+     * @param foreignKeyIndices the list of foreign key indices.
+     */
+    public void setForeignKeyIndices(List<Integer> foreignKeyIndices) {
+        this.foreignKeyIndices = foreignKeyIndices;
+    }
+
+    /**
+     * Adds the list of column indices.
+     *
+     * @param indices the list of indices to add.
+     */
+    public void addColumnIndices(List<Integer> indices) {
+        for (Integer index : indices) {
+            if (!this.columnIndices.contains(index)) {
+                this.columnIndices.add(index);
+            }
+        }
+    }
 }
+

@@ -32,12 +32,30 @@ public class Attribute {
 
 
     /**
-     * Returns the data type of the column.
+     * Returns the data type of the attribute.
      *
-     * @return the {@link Type} of the column
+     * @return the {@link Type} of the attribute
      */
     public Type getDataType() {
         return type;
+    }
+
+    public void setColumnName(String columnName) {
+        this.columnName = columnName;
+    }
+
+
+    /**
+     * Returns the data type that represents both attributes.
+     *
+     * @return STRING if one or both attributes have String Values, else return DOUBLE.
+     */
+    public Type getSharedType(Attribute attribute) {
+        if ((this.type).equals(Type.STRING) || attribute.getDataType().equals(Type.STRING)) {
+            return Type.STRING;
+        } else {
+            return Type.DOUBLE;
+        }
     }
 }
 
