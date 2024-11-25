@@ -54,6 +54,8 @@ public class KeyFinder {
                     .map(ColumnIdentifier::getColumnIdentifier)
                     .map(Integer::parseInt)
                     .toList();
+        } else {
+            keyColumns = relation.getSchema().keySet().stream().toList();
         }
         return keyColumns;
     }
