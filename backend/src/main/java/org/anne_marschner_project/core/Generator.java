@@ -144,13 +144,13 @@ public class Generator {
             datasets.add(applyNormalization(splitDataset.get(i), structureTypes[i], separator, quoteChar, normalizePercentages[i]));
         }
 
-        // Add Noise to the datasets
+        // Add Schema Noise to the datasets
         for (int i = 0; i < datasets.size(); i++) {
             datasets.set(i, addSchemaNoise(datasets.get(i), hasHeaders, selectedSchemaMethods.get(i), schemaNoisePercentages[i],
                     schemaNoiseInKeys[i], schemaNoise[i], deleteSchema[i]));
         }
 
-        // Add Noise to datasets
+        // Add Data Noise to datasets
         for (int i = 0; i < datasets.size(); i++) {
             datasets.set(i, addDataNoise(datasets.get(i), selectedStringMethods.get(i), selectedNumericMethods.get(i),
                     dataNoisePercentages[i], noiseInsidePercentage[i], dataNoiseInKeys[i], dataNoise[i]));
