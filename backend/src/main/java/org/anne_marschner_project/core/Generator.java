@@ -42,7 +42,6 @@ public class Generator {
         char separator = formDataWrapper.getSeparator().charAt(0);
         char quoteChar = formDataWrapper.getQuoteChar();
         char escapeChar = formDataWrapper.getEscapeChar();
-        boolean ignoreLeadingWhitespace = formDataWrapper.getIgnoreLeadingWhitespace();
         String[] splitType = formDataWrapper.getSplitType();
         Integer columnOverlapPercentage = formDataWrapper.getColumnOverlapPercentage();
         Integer rowOverlapPercentage = formDataWrapper.getRowOverlapPercentage();
@@ -131,7 +130,7 @@ public class Generator {
 
         // Begin processing
         // Read information from file into relation
-        Relation inputRelation = readInput(csvFile, hasHeaders, separator, quoteChar, escapeChar, ignoreLeadingWhitespace);
+        Relation inputRelation = readInput(csvFile, hasHeaders, separator, quoteChar, escapeChar);
 
         // Set key indices for the input relation
         setKeyIndices(inputRelation);
@@ -142,7 +141,7 @@ public class Generator {
         // Apply BCNF
         List<Dataset> datasets = new ArrayList<>();
         for (int i = 0; i < splitDataset.size(); i++) {
-            datasets.add(applyNormalization(splitDataset.get(i), structureTypes[i], separator, normalizePercentages[i]));
+            datasets.add(applyNormalization(splitDataset.get(i), structureTypes[i], separator, quoteChar, normalizePercentages[i]));
         }
 
         // Add Noise to the datasets
@@ -165,7 +164,7 @@ public class Generator {
         // Write datasets to CSV
         CSVTool csvTool = new CSVTool();
         for (int i = 0; i < datasets.size(); i++) {
-            writeDataset(csvTool, datasets.get(i), filepathOutput + "_" + identifier[i], separator, shuffleTypes[i], i, identifier[i]);
+            writeDataset(csvTool, datasets.get(i), filepathOutput + "_" + identifier[i], separator, quoteChar, shuffleTypes[i], i, identifier[i]);
         }
 
         // Write Mapping
@@ -179,12 +178,14 @@ public class Generator {
      * @param csvFile    The CSV file to read.
      * @param hasHeaders Indicates if the CSV file has headers.
      * @param separator  The separator used in the CSV file.
+     * @param quoteChar  The quote Character used in the CSV file.
+     * @param escapeChar  The escape Character used in the CSV file.
      * @return A {@link Relation} object representing the CSV data, or null if an error occurs.
      */
-    public Relation readInput(MultipartFile csvFile, boolean hasHeaders, char separator, char quoteChar, char escapeChar, boolean ignoreLeadingWhitespace) {
+    public Relation readInput(MultipartFile csvFile, boolean hasHeaders, char separator, char quoteChar, char escapeChar) {
         try {
             CSVTool csvTool = new CSVTool();
-            return csvTool.readCSVColumns(csvFile, hasHeaders, separator, quoteChar, escapeChar, ignoreLeadingWhitespace);
+            return csvTool.readCSVColumns(csvFile, hasHeaders, separator, quoteChar, escapeChar);
         } catch (IOException e) {
             System.err.println("Error reading CSV file: " + e.getMessage());
             return null;
@@ -252,14 +253,15 @@ public class Generator {
      * @param relation        The {@link Relation} to be normalized.
      * @param structureType   The structure type ("BCNF", "Join Columns" or "No Change").
      * @param separator       The separator for the CSV file.
+     * @param quoteChar       The quote character for the CSV file.
      * @return A {@link Dataset} containing the BCNF-normalized relations.
      */
-    private Dataset applyNormalization(Relation relation, String structureType, char separator, Integer normalizePercentage) {
+    private Dataset applyNormalization(Relation relation, String structureType, char separator, char quoteChar, Integer normalizePercentage) {
         try {
             Normalization normalization = new Normalization();
             Dataset dataset = new Dataset();
             if (structureType.equals("BCNF")) {
-                dataset.setRelations(normalization.transformToBCNF(relation, separator, normalizePercentage));
+                dataset.setRelations(normalization.transformToBCNF(relation, separator, quoteChar, normalizePercentage));
             } else {
                 dataset.getRelations().add(relation);
             }
@@ -359,10 +361,11 @@ public class Generator {
      * @param dataset        The dataset to write to CSV.
      * @param filepathOutput The base path for the output files.
      * @param separator      The separator used in the CSV files.
+     * @param quoteChar      The quote character used in the CSV files.
      * @param shuffleType    The type of shuffling to apply ("Shuffle Rows", "Shuffle Columns" or "No Change").
      * @param identifier     The Letter that identifies the created Dataset.
      */
-    private void writeDataset(CSVTool csvTool, Dataset dataset, String filepathOutput, char separator, String shuffleType, int datasetNumber, String identifier) {
+    private void writeDataset(CSVTool csvTool, Dataset dataset, String filepathOutput, char separator, char quoteChar, String shuffleType, int datasetNumber, String identifier) {
         try {
             // Save order of Column Indices
             List<List<Integer>> columnOrder = new ArrayList<>();
@@ -370,7 +373,7 @@ public class Generator {
             // Write Dataset in CSV
             for (int i = 1; i <= dataset.getRelations().size(); i++) {
                 String outputFilepath = filepathOutput + i + ".csv";
-                columnOrder.add(csvTool.writeCSV(dataset.getRelations().get(i - 1), outputFilepath, separator, shuffleType));
+                columnOrder.add(csvTool.writeCSV(dataset.getRelations().get(i - 1), outputFilepath, separator, quoteChar, shuffleType));
             }
 
             // Write Keys for dataset in txt file

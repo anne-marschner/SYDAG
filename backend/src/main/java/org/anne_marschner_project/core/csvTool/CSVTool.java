@@ -32,11 +32,10 @@ public class CSVTool {
      * @param separator the character used to separate values in the CSV file
      * @param quoteChar the character used for quoted values in the CSV file
      * @param escapeChar the escape character used in the CSV file
-     * @param ignoreLeadingWhitespace whether to ignore leading whitespaces
      * @return a Relation object containing the data and schema from the CSV file
      * @throws IOException if an I/O error occurs or if the file is empty
      */
-    public Relation readCSVColumns(MultipartFile file, boolean hasHeader, char separator, char quoteChar, char escapeChar, boolean ignoreLeadingWhitespace) throws IOException {
+    public Relation readCSVColumns(MultipartFile file, boolean hasHeader, char separator, char quoteChar, char escapeChar) throws IOException {
 
         // Check if the file is empty
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
@@ -54,7 +53,7 @@ public class CSVTool {
                 .withQuote(quoteChar)
                 .withEscape(escapeChar)
                 .withIgnoreEmptyLines(true)
-                .withIgnoreSurroundingSpaces(ignoreLeadingWhitespace);
+                .withIgnoreSurroundingSpaces(true);
 
         // If there is a header, parse with headers
         if (hasHeader) {
@@ -118,7 +117,7 @@ public class CSVTool {
      * @throws IOException if an I/O error occurs
      * @throws IllegalArgumentException if the relation, schema, or data is null or empty
      */
-    public List<Integer> writeCSV(Relation relation, String filePath, char separator, String shuffleType) throws IOException {
+    public List<Integer> writeCSV(Relation relation, String filePath, char separator, char quoteChar, String shuffleType) throws IOException {
 
         // Check that Relation cannot be null in order to write it in CSV
         if (relation == null || relation.getData() == null || relation.getSchema() == null
@@ -128,9 +127,9 @@ public class CSVTool {
 
         // Choose shuffle Type and apply it while writing
         return switch (shuffleType) {
-            case "Shuffle Columns" -> writeShuffledColumns(relation, filePath, separator);
-            case "Shuffle Rows" -> writeShuffledRows(relation, filePath, separator);
-            default -> writeInOrder(relation, filePath, separator);
+            case "Shuffle Columns" -> writeShuffledColumns(relation, filePath, separator, quoteChar);
+            case "Shuffle Rows" -> writeShuffledRows(relation, filePath, separator, quoteChar);
+            default -> writeInOrder(relation, filePath, separator, quoteChar);
         };
     }
 
@@ -141,10 +140,11 @@ public class CSVTool {
      * @param relation   the Relation object containing data and schema to be written
      * @param filePath   the path to the CSV file to be created
      * @param separator  the character used to separate values in the CSV file
+     * @param quoteChar  the character used to quote values in the CSV file
      * @return A List of the column indices in correct order
      * @throws IOException if an I/O error occurs
      */
-    public List<Integer> writeShuffledColumns(Relation relation, String filePath, char separator) throws IOException {
+    public List<Integer> writeShuffledColumns(Relation relation, String filePath, char separator, char quoteChar) throws IOException {
 
         // Get schema and data from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
@@ -166,6 +166,9 @@ public class CSVTool {
                     int colIndex = columnIndices.get(listIndex);
                     Attribute attribute = schema.get(colIndex);
                     String columnName = attribute.getColumnName();
+                    if (columnName != null && columnName.indexOf(separator) >= 0) {
+                        columnName = quoteChar + columnName + quoteChar;
+                    }
                     writer.write(columnName != null ? columnName : "");
                     if (listIndex < columnIndices.size() - 1) {
                         writer.write(separator); // divide columns
@@ -179,6 +182,9 @@ public class CSVTool {
                 for (int listIndex = 0; listIndex < columnIndices.size(); listIndex++) {
                     int colIndex = columnIndices.get(listIndex);
                     String value = data.get(colIndex).get(rowIndex);
+                    if (value != null && value.indexOf(separator) >= 0) {
+                        value = quoteChar + value + quoteChar;
+                    }
                     writer.write(value != null ? value : "");
                     if (listIndex < columnIndices.size() - 1) {
                         writer.write(separator); // divide columns
@@ -197,10 +203,11 @@ public class CSVTool {
      * @param relation   the Relation object containing data and schema to be written
      * @param filePath   the path to the CSV file to be created
      * @param separator  the character used to separate values in the CSV file
+     * @param quoteChar  the character used to quote values in the CSV file
      * @return A List of the column indices in correct order
      * @throws IOException if an I/O error occurs
      */
-    public List<Integer> writeShuffledRows(Relation relation, String filePath, char separator) throws IOException {
+    public List<Integer> writeShuffledRows(Relation relation, String filePath, char separator, char quoteChar) throws IOException {
 
         // Get schema and data from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
@@ -225,6 +232,9 @@ public class CSVTool {
                     int colIndex = columnIndices.get(listIndex);
                     Attribute attribute = schema.get(colIndex);
                     String columnName = attribute.getColumnName();
+                    if (columnName != null && columnName.indexOf(separator) >= 0) {
+                        columnName = quoteChar + columnName + quoteChar;
+                    }
                     writer.write(columnName != null ? columnName : "");
                     if (listIndex < columnIndices.size() - 1) {
                         writer.write(separator); // divide columns
@@ -238,6 +248,9 @@ public class CSVTool {
                 for (int listIndex = 0; listIndex < columnIndices.size(); listIndex++) {
                     int colIndex = columnIndices.get(listIndex);
                     String value = data.get(colIndex).get(rowIndex);
+                    if (value != null && value.indexOf(separator) >= 0) {
+                        value = quoteChar + value + quoteChar;
+                    }
                     writer.write(value != null ? value : "");
                     if (listIndex < columnIndices.size() - 1) {
                         writer.write(separator); // divide columns
@@ -256,10 +269,11 @@ public class CSVTool {
      * @param relation   the Relation object containing data and schema to be written
      * @param filePath   the path to the CSV file to be created
      * @param separator  the character used to separate values in the CSV file
+     * @param quoteChar  the character used to quote values in the CSV file
      * @return A List of the column indices in correct order
      * @throws IOException if an I/O error occurs
      */
-    public List<Integer> writeInOrder(Relation relation, String filePath, char separator) throws IOException {
+    public List<Integer> writeInOrder(Relation relation, String filePath, char separator, char quoteChar) throws IOException {
 
         // Get schema and data from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
@@ -280,6 +294,9 @@ public class CSVTool {
                     int colIndex = columnIndices.get(listIndex);
                     Attribute attribute = schema.get(colIndex);
                     String columnName = attribute.getColumnName();
+                    if (columnName != null && columnName.indexOf(separator) >= 0) {
+                        columnName = quoteChar + columnName + quoteChar;
+                    }
                     writer.write(columnName != null ? columnName : "");
                     if (listIndex < columnIndices.size() - 1) {
                         writer.write(separator); // divide columns
@@ -293,6 +310,9 @@ public class CSVTool {
                 for (int listIndex = 0; listIndex < columnIndices.size(); listIndex++) {
                     int colIndex = columnIndices.get(listIndex);
                     String value = data.get(colIndex).get(rowIndex);
+                    if (value != null && value.indexOf(separator) >= 0) {
+                        value = quoteChar + value + quoteChar;
+                    }
                     writer.write(value != null ? value : "");
                     if (listIndex < columnIndices.size() - 1) {
                         writer.write(separator); // divide columns
@@ -303,6 +323,7 @@ public class CSVTool {
         }
         return columnIndices;
     }
+
 
     /**
      * Writes information about BCNF relations, including foreign and primary keys, to an output file.

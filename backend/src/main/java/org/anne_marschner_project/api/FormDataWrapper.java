@@ -26,8 +26,6 @@ public class FormDataWrapper {
     // new
     private char escapeChar;
 
-    // new
-    private Boolean ignoreLeadingWhitespace;
 
     @NotNull(message = "manualInput cannot be null")
     private Boolean manualInput;

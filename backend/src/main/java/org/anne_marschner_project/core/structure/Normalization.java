@@ -31,18 +31,19 @@ public class Normalization {
      *
      * @param relation        The original {@link Relation} to normalize.
      * @param separator       The column separator for the CSV file.
+     * @param quoteChar       The quote character for the CSV file.
      * @return A list of {@link Relation} objects in BCNF.
      * @throws IOException                   If an I/O error occurs during file operations.
      * @throws AlgorithmExecutionException   If an error occurs in the Normalize algorithm execution.
      */
-    public List<Relation> transformToBCNF(Relation relation, char separator, Integer normalizePercentage) throws IOException, AlgorithmExecutionException {
+    public List<Relation> transformToBCNF(Relation relation, char separator, char quoteChar, Integer normalizePercentage) throws IOException, AlgorithmExecutionException {
 
         // create temporary csv file
         Path tempFilepath = Files.createTempFile("temp", ".csv");
         tempFilepath.toFile().deleteOnExit();
 
         // Write Data of Relation that should be normalized into CSV as Normalize needs CSV as Input
-        new CSVTool().writeCSV(relation,String.valueOf(tempFilepath), separator,"No Change");
+        new CSVTool().writeCSV(relation,String.valueOf(tempFilepath), separator, quoteChar, "No Change");
 
         // Apply Normalization to receive information about which indices should form which new relation
         List<IndexSummary> indicesBCNF = normalize(String.valueOf(tempFilepath), separator);
