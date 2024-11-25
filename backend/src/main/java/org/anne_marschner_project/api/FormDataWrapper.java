@@ -11,6 +11,8 @@ import java.util.List;
 @Data
 public class FormDataWrapper {
 
+
+    // --------------- CSV ------------------
     @NotNull(message = "hasHeaders cannot be null")
     private Boolean hasHeaders;
 
@@ -33,7 +35,10 @@ public class FormDataWrapper {
     @NotBlank(message = "Mode cannot be blank")
     private String mode;
 
-    // chaged to array
+
+
+    // --------------- SPLIT ------------------
+    // changed to array
     @NotBlank(message = "Split type cannot be blank")
     private String[] splitType;
 
@@ -49,9 +54,16 @@ public class FormDataWrapper {
 
     // new
     private Integer columnDistribution;
+
+    // new
     private Integer rowDistribution;
+
+    // new
     private Boolean mixedOverlap;
 
+
+
+    // --------------- STRUCTURE ------------------
     @NotBlank(message = "Dataset1 structure type cannot be blank")
     private String dataset1StructureType;
 
@@ -68,67 +80,91 @@ public class FormDataWrapper {
 
     // new
     private Integer joinPercentage1;
+
+    // new
     private Integer joinPercentage2;
+
+    // new
     private Integer joinPercentage3;
+
+    // new
     private Integer joinPercentage4;
+
+    // new
     private Integer normalizePercentage1;
+
+    // new
     private Integer normalizePercentage2;
+
+    // new
     private Integer normalizePercentage3;
+
+    // new
     private Integer normalizePercentage4;
 
 
-    // SCHEMA NOISE
 
+    // --------------- SCHEMA NOISE ------------------
     @NotNull(message = "Dataset1 schema noise flag cannot be null")
     private Boolean dataset1SchemaNoise;
-
-    @Min(value = 0, message = "Dataset1 schema noise value must be at least 0")
-    private Integer dataset1SchemaNoiseValue;
-
-    @NotNull(message = "Dataset1 schema key noise flag cannot be null")
-    private Boolean dataset1SchemaKeyNoise;
-
-    // new
-    private Boolean deleteSchema1;
 
     @NotNull(message = "Dataset2 schema noise flag cannot be null")
     private Boolean dataset2SchemaNoise;
 
+    // new
+    @NotNull(message = "Dataset3 schema noise flag cannot be null")
+    private Boolean dataset3SchemaNoise;
+
+    // new
+    @NotNull(message = "Dataset4 schema noise flag cannot be null")
+    private Boolean dataset4SchemaNoise;
+
+
+    @Min(value = 0, message = "Dataset1 schema noise value must be at least 0")
+    private Integer dataset1SchemaNoiseValue;
+
     @Min(value = 0, message = "Dataset2 schema noise value must be at least 0")
     private Integer dataset2SchemaNoiseValue;
+
+    // new
+    @Min(value = 0, message = "Dataset3 schema noise value must be at least 0")
+    private Integer dataset3SchemaNoiseValue;
+
+    // new
+    @Min(value = 0, message = "Dataset4 schema noise value must be at least 0")
+    private Integer dataset4SchemaNoiseValue;
+
+
+    @NotNull(message = "Dataset1 schema key noise flag cannot be null")
+    private Boolean dataset1SchemaKeyNoise;
 
     @NotNull(message = "Dataset2 schema key noise flag cannot be null")
     private Boolean dataset2SchemaKeyNoise;
 
     // new
-    private Boolean deleteSchema2;
-
-    @NotNull(message = "Dataset3 schema noise flag cannot be null")
-    private Boolean dataset3SchemaNoise;
-
-    @Min(value = 0, message = "Dataset3 schema noise value must be at least 0")
-    private Integer dataset3SchemaNoiseValue;
-
     @NotNull(message = "Dataset3 schema key noise flag cannot be null")
     private Boolean dataset3SchemaKeyNoise;
 
     // new
-    private Boolean deleteSchema3;
-
-    @NotNull(message = "Dataset4 schema noise flag cannot be null")
-    private Boolean dataset4SchemaNoise;
-
-    @Min(value = 0, message = "Dataset4 schema noise value must be at least 0")
-    private Integer dataset4SchemaNoiseValue;
-
     @NotNull(message = "Dataset4 schema key noise flag cannot be null")
     private Boolean dataset4SchemaKeyNoise;
+
+
+    // new
+    private Boolean deleteSchema1;
+
+    // new
+    private Boolean deleteSchema2;
+
+    // new
+    private Boolean deleteSchema3;
 
     // new
     private Boolean deleteSchema4;
 
 
-    // DATA NOISE
+
+    // --------------- DATA NOISE ------------------
 
     @NotNull(message = "Dataset1 data noise flag cannot be null")
     private Boolean dataset1DataNoise;
@@ -143,7 +179,6 @@ public class FormDataWrapper {
     // new
     @NotNull(message = "Dataset4 data noise flag cannot be null")
     private Boolean dataset4DataNoise;
-
 
 
     @Min(value = 0, message = "Dataset1 data noise value must be at least 0")
@@ -175,10 +210,17 @@ public class FormDataWrapper {
     @NotNull(message = "Dataset1 data key noise flag cannot be null")
     private Boolean dataset4DataKeyNoise;
 
+
     // new
     private Integer dataset1NoiseInside;
+
+    // new
     private Integer dataset2NoiseInside;
+
+    // new
     private Integer dataset3NoiseInside;
+
+    // new
     private Integer dataset4NoiseInside;
 
 
@@ -196,6 +238,7 @@ public class FormDataWrapper {
     @NotBlank(message = "Dataset2 shuffle option cannot be blank")
     private String dataset4ShuffleOption;
 
+
     @NotNull(message = "Selected schema methods for dataset1 cannot be null")
     private List<String> selectedSchemaMethods1;
 
@@ -210,6 +253,7 @@ public class FormDataWrapper {
     @NotNull(message = "Selected schema methods for dataset4 cannot be null")
     private List<String> selectedSchemaMethods4;
 
+
     @NotNull(message = "Selected string methods for dataset1 cannot be null")
     private List<String> selectedStringMethods1;
 
@@ -223,6 +267,7 @@ public class FormDataWrapper {
     // new
     @NotNull(message = "Selected string methods for dataset4 cannot be null")
     private List<String> selectedStringMethods4;
+
 
     @NotNull(message = "Selected numeric methods for dataset1 cannot be null")
     private List<String> selectedNumericMethods1;
