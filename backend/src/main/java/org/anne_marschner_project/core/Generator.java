@@ -220,7 +220,7 @@ public class Generator {
      * @param splitType               The split type ("Vertical" or "Horizontal").
      * @return A list of {@link Relation} objects after the split.
      */
-    private List<Relation> splitRelation(Relation relation, Integer columnOverlapPercentage, Integer rowOverlapPercentage, int columnDistribution, int rowDistribution, String[] splitType, boolean mixedOverlap) {
+    private List<Relation> splitRelation(Relation relation, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String[] splitType, boolean mixedOverlap) {
 
         // Check which split Types have been chosen
         boolean hasHorizontal = Arrays.asList(splitType).contains("Horizontal");
