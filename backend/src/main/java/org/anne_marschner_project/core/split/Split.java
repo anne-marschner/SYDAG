@@ -26,7 +26,7 @@ public class Split {
      * @return a List of {@link Relation} objects, representing the split relation according to the specified parameters.
      */
     // Idea: add distribution of data (remainingRowDistribution, remainingColumnDistribution)
-    public List<Relation> splitRelation(Relation source, int columnOverlapPercentage, int rowOverlapPercentage, int columnDistribution, int rowDistribution, String splitType, boolean mixedOverlap) {
+    public List<Relation> splitRelation(Relation source, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String splitType, boolean mixedOverlap) {
 
         // Choose which type of split has to be applied
         if (splitType.equals("Horizontal")) {
@@ -49,7 +49,7 @@ public class Split {
      * @return A List of two new {@link Relation} objects. The first contains the top portion
      *         with overlapping rows, the second contains the bottom portion with the same overlap.
      */
-    public List<Relation> splitHorizontally(Relation source, int overlapPercentage, int rowDistribution) {
+    public List<Relation> splitHorizontally(Relation source, Integer overlapPercentage, Integer rowDistribution) {
 
         // Get schema and data from Relation
         Map<Integer, Attribute> sourceSchema = source.getSchema();
@@ -138,7 +138,7 @@ public class Split {
      * @return A List of two new {@link Relation} objects. The first contains the top portion
      *         with overlapping rows, the second contains the bottom portion with the same overlap.
      */
-    public List<Relation> splitHorizontallyWithMixedOverlap(Relation source, int overlapPercentage, int rowDistribution) {
+    public List<Relation> splitHorizontallyWithMixedOverlap(Relation source, Integer overlapPercentage, Integer rowDistribution) {
 
         // Get schema and data from Relation
         Map<Integer, Attribute> sourceSchema = source.getSchema();
@@ -208,7 +208,7 @@ public class Split {
      *
      * @return A list of two new {@link Relation} objects, both containing key columns and some overlapping non-key columns.
      */
-    public List<Relation> splitVertically(Relation source, int overlapPercentage, int columnDistribution) {
+    public List<Relation> splitVertically(Relation source, Integer overlapPercentage, Integer columnDistribution) {
 
         // Get schema, data and keys from Relation
         Map<Integer, Attribute> sourceSchema = source.getSchema();
