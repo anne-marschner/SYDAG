@@ -4,6 +4,7 @@ import org.anne_marschner_project.core.data.Attribute;
 import org.anne_marschner_project.core.data.Relation;
 import org.anne_marschner_project.core.data.Type;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -54,7 +55,7 @@ public class DataNoise extends Noise {
      * @return The perturbed Relation.
      * @throws Exception If noise cannot be applied.
      */
-    public Relation perturbData(Relation relation, int noisePercentage, int noiseInsidePercentage, boolean dataNoiseInKeys) throws Exception {
+    public Relation perturbData(Relation relation, Integer noisePercentage, Integer noiseInsidePercentage, boolean dataNoiseInKeys) throws Exception {
 
         // If noisePercentage is 0, return original relation
         if (noisePercentage == 0) {

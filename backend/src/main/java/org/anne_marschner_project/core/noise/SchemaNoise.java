@@ -25,7 +25,9 @@ public class SchemaNoise extends Noise {
      */
     public SchemaNoise (List<String> allSelectedMethods) {
         this.allSelectedMethods = allSelectedMethods;
-        this.availableMethods = new ArrayList<>(allSelectedMethods);
+        if (allSelectedMethods != null) {
+            this.availableMethods = new ArrayList<>(allSelectedMethods);
+        }
     }
 
 
@@ -51,7 +53,7 @@ public class SchemaNoise extends Noise {
      * @return a {@link Relation} object with the perturbed schema
      * @throws Exception if an error occurs during the schema perturbation
      */
-    public Relation perturbSchema(Relation relation, int noisePercentage, boolean schemaNoiseInKeys, boolean deleteSchema) throws Exception {
+    public Relation perturbSchema(Relation relation, Integer noisePercentage, boolean schemaNoiseInKeys, boolean deleteSchema) throws Exception {
 
         // Get schema and overlapping columns indices from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
