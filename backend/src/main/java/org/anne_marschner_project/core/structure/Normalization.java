@@ -107,7 +107,7 @@ public class Normalization {
         Pattern bracketPattern = Pattern.compile("\\[(.*?)\\]");
         Pattern columnPattern = Pattern.compile("column(\\d+)");
         Pattern foreignKeyPattern = Pattern.compile("ForeignKey\\s+-\\s+(.*?);");
-        Pattern primaryKeyPattern = Pattern.compile("PrimaryKey\\s+-\\s+(.*?)$");
+        Pattern primaryKeyPattern = Pattern.compile("PrimaryKey\\s+-\\s+(.*?);");
 
         // Lists to save the column indices and key indices of each new Relation
         List<IndexSummary> indicesOfAllRelations = new ArrayList<>();
