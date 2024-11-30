@@ -67,6 +67,7 @@ public class Join {
 
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
+        List<Integer> keys = relation.getKeyIndices();
         Set<Integer> joinedColumnIndices = new HashSet<>();
 
         // Join until the desired number of joined columns in achieved
@@ -104,6 +105,11 @@ public class Join {
             data.remove(secondColumnIndex);
             schema.put(firstColumnIndex, joinedAttribute);
             schema.remove(secondColumnIndex);
+            keys.remove(secondColumnIndex);
+            if (!keys.contains(firstColumnIndex)) {
+                keys.add(firstColumnIndex);
+                Collections.sort(keys);
+            }
 
             // Update values to keep track
             joinedColumnIndices.add(firstColumnIndex);
@@ -112,7 +118,7 @@ public class Join {
         }
 
         // Return the modified relation
-        return new Relation(schema, data, relation.getKeyIndices(), relation.getOverlappingColumnsIndices(),
+        return new Relation(schema, data, keys, relation.getOverlappingColumnsIndices(),
                 relation.getNumOfOverlappingRows());
     }
 
