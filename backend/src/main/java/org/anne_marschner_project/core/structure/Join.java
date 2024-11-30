@@ -105,10 +105,12 @@ public class Join {
             data.remove(secondColumnIndex);
             schema.put(firstColumnIndex, joinedAttribute);
             schema.remove(secondColumnIndex);
-            keys.remove(secondColumnIndex);
-            if (!keys.contains(firstColumnIndex)) {
-                keys.add(firstColumnIndex);
-                Collections.sort(keys);
+            if (keys.contains(secondColumnIndex)) {
+                if (!keys.contains(firstColumnIndex)) {
+                    keys.add(firstColumnIndex);
+                    Collections.sort(keys);
+                }
+                keys.remove(secondColumnIndex);
             }
 
             // Update values to keep track
