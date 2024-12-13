@@ -286,7 +286,9 @@ public class Normalization {
                 overlappingColumnIndices = new ArrayList<>(relation.getOverlappingColumnsIndices());
                 overlappingColumnIndices.retainAll(indicesOfRelation.getColumnIndices());
             }
-            relations.add(new Relation(schema, data, keyIndices, foreignKeyIndices, overlappingColumnIndices, relation.getNumOfOverlappingRows()));
+            Relation createdRelation = new Relation(schema, data, keyIndices, foreignKeyIndices, overlappingColumnIndices, relation.getNumOfOverlappingRows());
+            createdRelation.setKeysBeforeNormalization(relation.getKeyIndices());
+            relations.add(createdRelation);
         }
 
         // Clean each new relation/ relation (remove redundant Records)
@@ -351,6 +353,8 @@ public class Normalization {
             newData.put(columnIndex, filteredColumnValues);
         }
 
-        return new Relation(relation.getSchema(), newData, relation.getKeyIndices(), relation.getForeignKeyIndices() ,relation.getOverlappingColumnsIndices(), remainingOverlappingRows);
+        Relation cleanedRelation = new Relation(relation.getSchema(), newData, relation.getKeyIndices(), relation.getForeignKeyIndices() ,relation.getOverlappingColumnsIndices(), remainingOverlappingRows);
+        cleanedRelation.setKeysBeforeNormalization(relation.getKeysBeforeNormalization());
+        return cleanedRelation;
     }
 }

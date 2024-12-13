@@ -16,6 +16,7 @@ public class Relation {
     private List<Integer> foreignKeyIndices; // Holds the indices of the foreign key columns
     private List<Integer> overlappingColumnsIndices; // Holds all Indices of the overlapping columns with other result Relation
     private Integer numOfOverlappingRows; // Holds the number of rows that overlap with other result Relation
+    private List<Integer> keysBeforeNormalization = new ArrayList<>(); // Holds the keys of the Original Relation that was normalized
 
 
     /**
@@ -210,6 +211,24 @@ public class Relation {
      */
     public List<Integer> getForeignKeyIndices() {
         return foreignKeyIndices;
+    }
+
+    /**
+     * Returns the list of key indices that represent the key columns of the original relation before Normalization.
+     *
+     * @return a list of indices representing the key columns
+     */
+    public List<Integer> getKeysBeforeNormalization() {
+        return keysBeforeNormalization;
+    }
+
+    /**
+     * Sets the list of key indices that represent the key columns of the original relation before Normalization.
+     *
+     * @param keysBeforeNormalization a list of indices representing the key columns
+     */
+    public void setKeysBeforeNormalization(List<Integer> keysBeforeNormalization) {
+        this.keysBeforeNormalization = keysBeforeNormalization;
     }
 }
 

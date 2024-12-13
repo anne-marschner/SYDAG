@@ -76,6 +76,7 @@ public class SchemaNoise extends Noise {
         if (!schemaNoiseInKeys) {
             columnsToConsider.removeAll(relation.getKeyIndices());
             columnsToConsider.removeAll(relation.getForeignKeyIndices());
+            columnsToConsider.removeAll(relation.getKeysBeforeNormalization());
         }
 
         // Calculate number of columns to perturb based on the percentage

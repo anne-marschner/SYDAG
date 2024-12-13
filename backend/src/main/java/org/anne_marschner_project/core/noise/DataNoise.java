@@ -89,12 +89,10 @@ public class DataNoise extends Noise {
      */
     public Relation perturbRowData(Relation relation, int noisePercentage, int noiseInsidePercentage ,boolean dataNoiseInKeys, boolean columnPerturbation) throws Exception {
 
-        // Get schema, data, key Indices and number of Row Overlap from Relation
+        // Get schema, data and number of Row Overlap from Relation
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
         Integer numOfOverlappingRows = relation.getNumOfOverlappingRows();
-        List<Integer> keyIndices = relation.getKeyIndices();
-        List<Integer> foreignKeyIndices = relation.getForeignKeyIndices();
 
         // Calculate number of rows to perturb based on the percentage
         int numToPerturb = (int) Math.round((noisePercentage / 100.0) * numOfOverlappingRows);
@@ -110,8 +108,9 @@ public class DataNoise extends Noise {
 
         // Remove Keys if they shall not receive noise
         if (!dataNoiseInKeys) {
-            selectableIndices.removeAll(keyIndices);
-            selectableIndices.removeAll(foreignKeyIndices);
+            selectableIndices.removeAll(relation.getKeyIndices());
+            selectableIndices.removeAll(relation.getForeignKeyIndices());
+            selectableIndices.removeAll(relation.getKeysBeforeNormalization());
         }
 
         // Remove the overlappingColumnIndices if the relation already contains column noise
@@ -164,6 +163,7 @@ public class DataNoise extends Noise {
         if (!dataNoiseInKeys) {
             candidateColumnsIndices.removeAll(relation.getKeyIndices());
             candidateColumnsIndices.removeAll(relation.getForeignKeyIndices());
+            candidateColumnsIndices.removeAll(relation.getKeysBeforeNormalization());
         }
 
         // Create Lists of indices of the Types
