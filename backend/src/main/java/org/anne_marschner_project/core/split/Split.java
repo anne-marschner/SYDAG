@@ -26,11 +26,11 @@ public class Split {
      * @return a List of {@link Relation} objects, representing the split relation according to the specified parameters.
      */
     // Idea: add distribution of data (remainingRowDistribution, remainingColumnDistribution)
-    public List<Relation> splitRelation(Relation source, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String splitType, boolean mixedOverlap) {
+    public List<Relation> splitRelation(Relation source, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String splitType, String overlapType) {
 
         // Choose which type of split has to be applied
         if (splitType.equals("Horizontal")) {
-            return mixedOverlap
+            return overlapType.equals("Mixed Overlap")
                     ? splitHorizontallyWithMixedOverlap(source, rowOverlapPercentage, rowDistribution)
                     : splitHorizontally(source, rowOverlapPercentage, rowDistribution);
         } else {

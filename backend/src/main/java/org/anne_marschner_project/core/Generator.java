@@ -40,26 +40,26 @@ public class Generator {
         // Extract fields from FormDataWrapper
         boolean hasHeaders = formDataWrapper.getHasHeaders();
         char separator = formDataWrapper.getSeparator().charAt(0);
-        char quoteChar = formDataWrapper.getQuoteChar();
-        char escapeChar = formDataWrapper.getEscapeChar();
-        String[] splitType = formDataWrapper.getSplitType();
+        char quoteChar = formDataWrapper.getQuote().charAt(0);
+        char escapeChar = formDataWrapper.getEscape().charAt(0);
+        String splitType = formDataWrapper.getSplitType();
         Integer columnOverlapPercentage = formDataWrapper.getColumnOverlapPercentage();
         Integer rowOverlapPercentage = formDataWrapper.getRowOverlapPercentage();
         Integer columnDistribution = formDataWrapper.getColumnDistribution();
         Integer rowDistribution = formDataWrapper.getRowDistribution();
-        boolean mixedOverlap = formDataWrapper.getMixedOverlap();
+        String overlapType = formDataWrapper.getOverlapType();
         String dataset1StructureType = formDataWrapper.getDataset1StructureType();
         String dataset2StructureType = formDataWrapper.getDataset2StructureType();
         String dataset3StructureType = formDataWrapper.getDataset3StructureType();
         String dataset4StructureType = formDataWrapper.getDataset4StructureType();
-        Integer joinPercentage1 = formDataWrapper.getJoinPercentage1();
-        Integer joinPercentage2 = formDataWrapper.getJoinPercentage2();
-        Integer joinPercentage3 = formDataWrapper.getJoinPercentage3();
-        Integer joinPercentage4 = formDataWrapper.getJoinPercentage4();
-        Integer normalizePercentage1 = formDataWrapper.getNormalizePercentage1();
-        Integer normalizePercentage2 = formDataWrapper.getNormalizePercentage2();
-        Integer normalizePercentage3 = formDataWrapper.getNormalizePercentage3();
-        Integer normalizePercentage4 = formDataWrapper.getNormalizePercentage4();
+        Integer joinPercentage1 = formDataWrapper.getDataset1JoinColumnsSliderValue();
+        Integer joinPercentage2 = formDataWrapper.getDataset2JoinColumnsSliderValue();
+        Integer joinPercentage3 = formDataWrapper.getDataset3JoinColumnsSliderValue();
+        Integer joinPercentage4 = formDataWrapper.getDataset4JoinColumnsSliderValue();
+        Integer normalizePercentage1 = formDataWrapper.getDataset1BCNFSliderValue();
+        Integer normalizePercentage2 = formDataWrapper.getDataset2BCNFSliderValue();
+        Integer normalizePercentage3 = formDataWrapper.getDataset3BCNFSliderValue();
+        Integer normalizePercentage4 = formDataWrapper.getDataset4BCNFSliderValue();
         boolean dataset1SchemaNoise = formDataWrapper.getDataset1SchemaNoise();
         boolean dataset2SchemaNoise = formDataWrapper.getDataset2SchemaNoise();
         boolean dataset3SchemaNoise = formDataWrapper.getDataset3SchemaNoise();
@@ -72,10 +72,10 @@ public class Generator {
         boolean dataset2SchemaKeyNoise = formDataWrapper.getDataset2SchemaKeyNoise();
         boolean dataset3SchemaKeyNoise = formDataWrapper.getDataset3SchemaKeyNoise();
         boolean dataset4SchemaKeyNoise = formDataWrapper.getDataset4SchemaKeyNoise();
-        boolean deleteSchema1 = formDataWrapper.getDeleteSchema1();
-        boolean deleteSchema2 = formDataWrapper.getDeleteSchema2();
-        boolean deleteSchema3 = formDataWrapper.getDeleteSchema3();
-        boolean deleteSchema4 = formDataWrapper.getDeleteSchema4();
+        boolean deleteSchema1 = formDataWrapper.getDataset1SchemaDeleteSchema();
+        boolean deleteSchema2 = formDataWrapper.getDataset2SchemaDeleteSchema();
+        boolean deleteSchema3 = formDataWrapper.getDataset3SchemaDeleteSchema();
+        boolean deleteSchema4 = formDataWrapper.getDataset4SchemaDeleteSchema();
         List<String> selectedSchemaMethods1 = formDataWrapper.getSelectedSchemaMethods1();
         List<String> selectedSchemaMethods2 = formDataWrapper.getSelectedSchemaMethods2();
         List<String> selectedSchemaMethods3 = formDataWrapper.getSelectedSchemaMethods3();
@@ -88,10 +88,10 @@ public class Generator {
         Integer dataset2DataNoiseValue = formDataWrapper.getDataset2DataNoiseValue();
         Integer dataset3DataNoiseValue = formDataWrapper.getDataset3DataNoiseValue();
         Integer dataset4DataNoiseValue = formDataWrapper.getDataset4DataNoiseValue();
-        Integer dataset1NoiseInside = formDataWrapper.getDataset1NoiseInside();
-        Integer dataset2NoiseInside = formDataWrapper.getDataset2NoiseInside();
-        Integer dataset3NoiseInside = formDataWrapper.getDataset3NoiseInside();
-        Integer dataset4NoiseInside = formDataWrapper.getDataset4NoiseInside();
+        Integer dataset1NoiseInside = formDataWrapper.getDataset1DataNoiseInside();
+        Integer dataset2NoiseInside = formDataWrapper.getDataset2DataNoiseInside();
+        Integer dataset3NoiseInside = formDataWrapper.getDataset3DataNoiseInside();
+        Integer dataset4NoiseInside = formDataWrapper.getDataset4DataNoiseInside();
         boolean dataset1DataKeyNoise = formDataWrapper.getDataset1DataKeyNoise();
         boolean dataset2DataKeyNoise = formDataWrapper.getDataset2DataKeyNoise();
         boolean dataset3DataKeyNoise = formDataWrapper.getDataset3DataKeyNoise();
@@ -136,7 +136,7 @@ public class Generator {
         setKeyIndices(inputRelation);
 
         // Split Relation according to selected direction
-        List<Relation> splitDataset = splitRelation(inputRelation, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, splitType, mixedOverlap);
+        List<Relation> splitDataset = splitRelation(inputRelation, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, splitType, overlapType);
 
         // Apply BCNF
         List<Dataset> datasets = new ArrayList<>();
@@ -220,26 +220,23 @@ public class Generator {
      * @param splitType               The split type ("Vertical" or "Horizontal").
      * @return A list of {@link Relation} objects after the split.
      */
-    private List<Relation> splitRelation(Relation relation, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String[] splitType, boolean mixedOverlap) {
+    private List<Relation> splitRelation(Relation relation, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String splitType, String overlapType) {
 
-        // Check which split Types have been chosen
-        boolean hasHorizontal = Arrays.asList(splitType).contains("Horizontal");
-        boolean hasVertical = Arrays.asList(splitType).contains("Vertical");
         Split split = new Split();
         List<Relation> splitRelations = new ArrayList<>();
 
         // Apply horizontal split first
-        if (hasHorizontal) {
-            splitRelations = split.splitRelation(relation, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, "Horizontal", mixedOverlap);
+        if (splitType.equals("Horizontal") || splitType.equals("VerticalHorizontal")) {
+            splitRelations = split.splitRelation(relation, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, "Horizontal", overlapType);
         }
 
         // Apply vertical split next
-        if (hasVertical) {
+        if (splitType.equals("Vertical") || splitType.equals("VerticalHorizontal")) {
             List<Relation> tempRelations = new ArrayList<>();
 
             // Either use results from horizontal split or only apply vertical split (according to chosen type)
             for (Relation rel : splitRelations.isEmpty() ? List.of(relation) : splitRelations) {
-                tempRelations.addAll(split.splitRelation(rel, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, "Vertical", mixedOverlap));
+                tempRelations.addAll(split.splitRelation(rel, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, "Vertical", overlapType));
             }
             splitRelations = tempRelations;
         }
