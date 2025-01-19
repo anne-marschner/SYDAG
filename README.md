@@ -1,11 +1,11 @@
 # SYDAG
 ## Table of Contents
-1. [General Info](#general-info)
+1. [General Information](#general-information)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
 3. [User Instructions](#user-instructions)
 
-### General Info
+### General Information
 SYDAG is a **Sy**ntehtic **Da**taset **G**eneartor for data integration scenarios.
 Users can apply it to create integration scenarios that are customized to their specific needs. The generator works with relational datamodels. The user must supply SYADG with a relation stored in the form of a CSV file. SYDAG can process this relation to create an integration scenario of multiple datasets and relations.
 The user can choose between varies configuration options to achieve a specific result. 
@@ -62,7 +62,7 @@ For each new Dataset X:\
 **datasetXSchemaDeleteSchema**: whether the schema should be deleted (true or false). \
 **datasetXSchemaMultiselect**: the methods that are chosen for the noise. ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation").
 
-### Data Noise:
+### Data Noise
 For each new Dataset X:\
 **dataset1DataNoise**: whether the data should include errors or not (true or false). \
 **dataset1DataNoiseValue**:  the percentage of rows/ columns to receive noise. (0-100) \
