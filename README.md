@@ -18,12 +18,14 @@ A list of technologies used within the project:
 * [Java](https://www.oracle.com/java/technologies/downloads/#java21): Version 21
 * [Spring Boot](https://spring.io/projects/spring-boot): Version 3.3.4
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 4.9.5
-* [React](https://react.dev/): Version 18.2.0
-* [NextJS](https://nextjs.org/): Version 14.2.14
+* [React](https://react.dev/): Version 19.0.0
+* [NextJS](https://nextjs.org/): Version 15.1.5
 
 
 ## Installation
-To install SYDAG the user must clone the GitHub repository. The project uses docker for fast and easy access. Therefore users must execute the [docker compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the docker environment.
+To install SYDAG the user must clone the GitHub repository. It is necessary to install react via: npm install --save-exact react@^19.0.0 react-dom@^19.0.0 and npm install --save-exact @types/react@^19.0.0 @types/react-dom@^19.0.0 .
+The user also needs to install NextJS via: npx @next/codemod@canary upgrade latest .
+The project uses docker for fast and easy access. Therefore users must execute the [docker compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the docker environment.
 
 ## User Instructions
 The configuration of SYDAG includes several parameters that the user must adjust.
