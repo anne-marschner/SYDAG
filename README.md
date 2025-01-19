@@ -45,7 +45,7 @@ In the follwing we give an overview over all of the parameters and their effects
 **rowOverlapPercentage**: The percentage of rows that should overlap between the split relations. \
 **columnOverlapPercentage**: The percentage of columns that should overlap between the split relations. \
 **rowDistribution**:  The distribution of the non-overlapping rows between the new relations. This percentage describes how many non-overlapping rows will be part of one of the new relations (0-100). \
-**columnDistribution**: The distribution of the non-overlapping columns between the new relations. This percentage describes how many non-overlapping columns will be part of one of the new relations (0-100). \ 
+**columnDistribution**: The distribution of the non-overlapping columns between the new relations. This percentage describes how many non-overlapping columns will be part of one of the new relations (0-100). \
 **overlapType**: the way the overlapping rows should be picked (as block overlap or random overlap).
 
 ### Structure
