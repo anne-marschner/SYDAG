@@ -1,3 +1,4 @@
+// src/main/java/org/anne_marschner_project/api/FormDataWrapper.java
 package org.anne_marschner_project.api;
 
 import lombok.Data;
@@ -10,7 +11,6 @@ import java.util.List;
  */
 @Data
 public class FormDataWrapper {
-
 
     // --------------- Step 1: CSV ------------------
     @NotNull(message = "CSV file cannot be null")
@@ -274,42 +274,29 @@ public class FormDataWrapper {
     // --------------- Selected Methods ------------------
     // Schema Methods
     @NotNull(message = "Selected schema methods for dataset1 cannot be null")
-    private List<String> selectedSchemaMethods1;
+    private List<String> dataset1SchemaMultiselect;
 
     @NotNull(message = "Selected schema methods for dataset2 cannot be null")
-    private List<String> selectedSchemaMethods2;
+    private List<String> dataset2SchemaMultiselect;
 
     @NotNull(message = "Selected schema methods for dataset3 cannot be null")
-    private List<String> selectedSchemaMethods3;
+    private List<String> dataset3SchemaMultiselect;
 
     @NotNull(message = "Selected schema methods for dataset4 cannot be null")
-    private List<String> selectedSchemaMethods4;
+    private List<String> dataset4SchemaMultiselect;
 
     // String Methods
     @NotNull(message = "Selected string methods for dataset1 cannot be null")
-    private List<String> selectedStringMethods1;
+    private List<String> dataset1DataMultiselect;
 
     @NotNull(message = "Selected string methods for dataset2 cannot be null")
-    private List<String> selectedStringMethods2;
+    private List<String> dataset2DataMultiselect;
 
     @NotNull(message = "Selected string methods for dataset3 cannot be null")
-    private List<String> selectedStringMethods3;
+    private List<String> dataset3DataMultiselect;
 
     @NotNull(message = "Selected string methods for dataset4 cannot be null")
-    private List<String> selectedStringMethods4;
-
-    // Numeric Methods
-    @NotNull(message = "Selected numeric methods for dataset1 cannot be null")
-    private List<String> selectedNumericMethods1;
-
-    @NotNull(message = "Selected numeric methods for dataset2 cannot be null")
-    private List<String> selectedNumericMethods2;
-
-    @NotNull(message = "Selected numeric methods for dataset3 cannot be null")
-    private List<String> selectedNumericMethods3;
-
-    @NotNull(message = "Selected numeric methods for dataset4 cannot be null")
-    private List<String> selectedNumericMethods4;
+    private List<String> dataset4DataMultiselect;
 
     // --------------- Output Path ------------------
     @NotBlank(message = "File path output cannot be blank")
@@ -359,5 +346,5 @@ public class FormDataWrapper {
         return !Boolean.TRUE.equals(dataset4DataNoise) || (dataset4DataNoiseValue != null && dataset4DataNoiseValue >= 0 && dataset4DataNoiseValue <= 100);
     }
 
-    // Add similar methods for other conditional validations as needed
+    // Add additional conditional validations as needed
 }

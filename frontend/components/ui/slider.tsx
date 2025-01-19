@@ -1,4 +1,3 @@
-// "@/components/ui/slider.tsx"
 import React from 'react';
 import * as SliderComp from "@radix-ui/react-slider";
 
@@ -10,10 +9,10 @@ const Slider = React.forwardRef<
     React.ElementRef<typeof SliderComp.Root>,
     SliderProps
 >(({ className, ...props }, ref) => (
-    <form className="w-full">
+    <div className={`w-full ${className}`}>
         <SliderComp.Root
             ref={ref}
-            className={`relative flex items-center select-none touch-none w-full h-5 ${className}`}
+            className="relative flex items-center select-none touch-none w-full h-5"
             {...props}
         >
             {/* Track */}
@@ -27,7 +26,7 @@ const Slider = React.forwardRef<
                 aria-label="Slider Thumb"
             />
         </SliderComp.Root>
-    </form>
+    </div>
 ));
 
 Slider.displayName = 'Slider';

@@ -1,4 +1,4 @@
-import {RoughNotation} from "react-rough-notation";
+import React from 'react';
 
 // Define the type for props passed into the `SideBar` component.
 type NavProps = {
@@ -6,19 +6,18 @@ type NavProps = {
     goTo: (index: number) => void;
 };
 
-
 const steps = [
-    {label: 'Datasource', textColorClass: 'text-yellow-400', underlineColor: '#ffe666'},
-    {label: 'Select Mode', textColorClass: 'text-red-600', underlineColor: '#bd284d'},
-    {label: 'Select Split', textColorClass: 'text-purple-300', underlineColor: '#E7B8FF'},
-    {label: 'Select Structure', textColorClass: 'text-green-400', underlineColor: '#6fe79f'},
-    {label: 'Select Schema Noise', textColorClass: 'text-orange-500', underlineColor: '#FF6347'},
-    {label: 'Select Data Noise', textColorClass: 'text-orange-500', underlineColor: '#FF6347'},
-    {label: 'Select Shuffle', textColorClass: 'text-teal-400', underlineColor: '#20B2AA'},
-    {label: 'Summary', textColorClass: 'text-green-400', underlineColor: '#6fe79f'},
+    { label: 'Datasource', textColorClass: 'text-yellow-400', underlineColor: '#ffe666' },
+    { label: 'Select Mode', textColorClass: 'text-red-600', underlineColor: '#bd284d' },
+    { label: 'Select Split', textColorClass: 'text-purple-300', underlineColor: '#E7B8FF' },
+    { label: 'Select Structure', textColorClass: 'text-green-400', underlineColor: '#6fe79f' },
+    { label: 'Select Schema Noise', textColorClass: 'text-orange-500', underlineColor: '#FF6347' },
+    { label: 'Select Data Noise', textColorClass: 'text-orange-500', underlineColor: '#FF6347' },
+    { label: 'Select Shuffle', textColorClass: 'text-teal-400', underlineColor: '#20B2AA' },
+    { label: 'Summary', textColorClass: 'text-green-400', underlineColor: '#6fe79f' },
 ];
 
-const SideBar = ({currentStepIndex, goTo}: NavProps) => {
+const SideBar = ({ currentStepIndex, goTo }: NavProps) => {
     return (
         <div className="absolute -top-20 left-0 w-full md:w-[25%] md:relative md:top-0 md:left-0">
             <nav className="py-5 text-slate-200 bg-neutral-900 h-full rounded-md border border-neutral-700 md:p-5">
@@ -31,17 +30,18 @@ const SideBar = ({currentStepIndex, goTo}: NavProps) => {
                             <button
                                 tabIndex={0}
                                 onClick={() => goTo(index)}
-                                className={`text-sm md:text-base ${
+                                className={`relative group text-sm md:text-base focus:outline-none ${
                                     currentStepIndex === index ? step.textColorClass : 'text-white'
                                 }`}
                             >
-                                <RoughNotation
-                                    type="underline"
-                                    show={currentStepIndex === index}
-                                    color={step.underlineColor}
-                                >
-                                    {step.label}
-                                </RoughNotation>
+                                <span>{step.label}</span>
+                                {/* Underline */}
+                                {currentStepIndex === index && (
+                                    <span
+                                        className="absolute left-0 bottom-0 h-1 w-full transition-all duration-300"
+                                        style={{ backgroundColor: step.underlineColor }}
+                                    ></span>
+                                )}
                             </button>
                         </li>
                     ))}

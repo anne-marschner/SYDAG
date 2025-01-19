@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
 
 /**
  * The Generator class combines various processes, such as reading, splitting,
@@ -26,17 +28,18 @@ import java.util.*;
 @Service
 public class Generator {
 
+
+
     /**
      * Executes the entire data generation process using the parameters provided.
      *
      * @param params The parameters encapsulated in a GeneratorParameters object.
      */
-    public void execute(GeneratorParameters params) {
+    public void execute(GeneratorParameters params, String outputPath) {
 
         // Extract parameters from GeneratorParameters
         MultipartFile csvFile = params.getCsvFile();
         FormDataWrapper formDataWrapper = params.getFormDataWrapper();
-
         // Extract fields from FormDataWrapper
         boolean hasHeaders = formDataWrapper.getHasHeaders();
         char separator = formDataWrapper.getSeparator().charAt(0);
@@ -76,10 +79,10 @@ public class Generator {
         boolean deleteSchema2 = formDataWrapper.getDataset2SchemaDeleteSchema();
         boolean deleteSchema3 = formDataWrapper.getDataset3SchemaDeleteSchema();
         boolean deleteSchema4 = formDataWrapper.getDataset4SchemaDeleteSchema();
-        List<String> selectedSchemaMethods1 = formDataWrapper.getSelectedSchemaMethods1();
-        List<String> selectedSchemaMethods2 = formDataWrapper.getSelectedSchemaMethods2();
-        List<String> selectedSchemaMethods3 = formDataWrapper.getSelectedSchemaMethods3();
-        List<String> selectedSchemaMethods4 = formDataWrapper.getSelectedSchemaMethods4();
+        List<String> selectedSchemaMethods1 = formDataWrapper.getDataset1SchemaMultiselect();
+        List<String> selectedSchemaMethods2 = formDataWrapper.getDataset2SchemaMultiselect();
+        List<String> selectedSchemaMethods3 = formDataWrapper.getDataset3SchemaMultiselect();
+        List<String> selectedSchemaMethods4 = formDataWrapper.getDataset4SchemaMultiselect();
         boolean dataset1DataNoise = formDataWrapper.getDataset1DataNoise();
         boolean dataset2DataNoise = formDataWrapper.getDataset2DataNoise();
         boolean dataset3DataNoise = formDataWrapper.getDataset3DataNoise();
@@ -96,19 +99,22 @@ public class Generator {
         boolean dataset2DataKeyNoise = formDataWrapper.getDataset2DataKeyNoise();
         boolean dataset3DataKeyNoise = formDataWrapper.getDataset3DataKeyNoise();
         boolean dataset4DataKeyNoise = formDataWrapper.getDataset4DataKeyNoise();
-        List<String> selectedStringMethods1 = formDataWrapper.getSelectedStringMethods1();
-        List<String> selectedStringMethods2 = formDataWrapper.getSelectedStringMethods2();
-        List<String> selectedStringMethods3 = formDataWrapper.getSelectedStringMethods3();
-        List<String> selectedStringMethods4 = formDataWrapper.getSelectedStringMethods4();
-        List<String> selectedNumericMethods1 = formDataWrapper.getSelectedNumericMethods1();
-        List<String> selectedNumericMethods2 = formDataWrapper.getSelectedNumericMethods2();
-        List<String> selectedNumericMethods3 = formDataWrapper.getSelectedNumericMethods3();
-        List<String> selectedNumericMethods4 = formDataWrapper.getSelectedNumericMethods4();
+        List<String> selectedDataMethods1 = formDataWrapper.getDataset1DataMultiselect();
+        List<String> selectedDataMethods2 = formDataWrapper.getDataset2DataMultiselect();
+        List<String> selectedDataMethods3 = formDataWrapper.getDataset3DataMultiselect();
+        List<String> selectedDataMethods4 = formDataWrapper.getDataset4DataMultiselect();
+        List<String> selectedStringMethods1 = extractStringMethods(selectedDataMethods1);
+        List<String> selectedStringMethods2 = extractStringMethods(selectedDataMethods2);
+        List<String> selectedStringMethods3 = extractStringMethods(selectedDataMethods3);
+        List<String> selectedStringMethods4 = extractStringMethods(selectedDataMethods4);
+        List<String> selectedNumericMethods1 = extractNumericMethods(selectedDataMethods1);
+        List<String> selectedNumericMethods2 = extractNumericMethods(selectedDataMethods2);
+        List<String> selectedNumericMethods3 = extractNumericMethods(selectedDataMethods3);
+        List<String> selectedNumericMethods4 = extractNumericMethods(selectedDataMethods4);
         String dataset1ShuffleOption = formDataWrapper.getDataset1ShuffleOption();
         String dataset2ShuffleOption = formDataWrapper.getDataset2ShuffleOption();
         String dataset3ShuffleOption = formDataWrapper.getDataset3ShuffleOption();
         String dataset4ShuffleOption = formDataWrapper.getDataset4ShuffleOption();
-        String filepathOutput = formDataWrapper.getFilepathOutput();
 
         // Set Arrays
         String[] structureTypes = {dataset1StructureType, dataset2StructureType, dataset3StructureType, dataset4StructureType};
@@ -161,14 +167,70 @@ public class Generator {
             datasets.set(i, applyJoin(datasets.get(i), structureTypes[i], joinPercentages[i], separator));
         }
 
-        // Write datasets to CSV
+        // CountDownLatch to synchronize file writing
+        CountDownLatch latch = new CountDownLatch(datasets.size());
+
         CSVTool csvTool = new CSVTool();
         for (int i = 0; i < datasets.size(); i++) {
-            writeDataset(csvTool, datasets.get(i), filepathOutput + "_" + identifier[i], separator, quoteChar, shuffleTypes[i], i, identifier[i]);
+            final int index = i;
+            new Thread(() -> {
+                try {
+                    writeDataset(csvTool, datasets.get(index), outputPath + "_" + identifier[index], separator, quoteChar, shuffleTypes[index], index, identifier[index]);
+                } finally {
+                    latch.countDown(); // Signal file writing is complete for this dataset
+                }
+            }).start();
         }
 
-        // Write Mapping
-        csvTool.writeMapping(inputRelation, datasets, identifier,filepathOutput + "_Mapping.txt");
+        try {
+            // Wait for all files to be written
+            latch.await();
+            System.out.println("All files have been written successfully.");
+        } catch (InterruptedException e) {
+            System.err.println("Error waiting for file writing to complete: " + e.getMessage());
+        }
+
+        csvTool.writeMapping(inputRelation, datasets, identifier, outputPath + "_Mapping.txt");
+    }
+
+
+    /**
+     * Extracts the list of methods related to string operations from the provided list.
+     *
+     * @param allChosenMethods the list of all selected methods
+     * @return a list of methods that are categorized as string-related methods
+     */
+    public List<String> extractStringMethods(List<String> allChosenMethods) {
+
+        // Define the String Methods
+        Set<String> stringMethods = Set.of(
+                "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue",
+                "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                "generateRandomString"
+        );
+        // Filter the entries that are String methods
+        return allChosenMethods.stream()
+                .filter(stringMethods::contains)
+                .collect(Collectors.toList());
+    }
+
+
+    /**
+     * Extracts a list of methods related to numeric operations from the provided list.
+     *
+     * @param allChosenMethods the list of all selected methods
+     * @return a list of methods that are categorized as numeric-related methods
+     */
+    public List<String> extractNumericMethods(List<String> allChosenMethods) {
+
+        // Define the String Methods
+        Set<String> stringMethods = Set.of(
+                "changeValue", "changeValueToOutlier"
+        );
+        // Filter the entries that are String methods
+        return allChosenMethods.stream()
+                .filter(stringMethods::contains)
+                .collect(Collectors.toList());
     }
 
 

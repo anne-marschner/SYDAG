@@ -52,10 +52,11 @@ const FormWrapper = ({title, description, children}: FormWrapperProps) => {
                 <p className="text-sm text-neutral-300 md:text-base">
                     {description} {/* Displays the description passed as a prop. */}
                 </p>
-            </div>
 
+            </div>
             {/* Rendering the children (form content or components) passed into the FormWrapper. */}
             {children}
+
         </motion.div>
     );
 };

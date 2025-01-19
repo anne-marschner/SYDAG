@@ -6,28 +6,35 @@ import { Label } from "@/components/ui/label";
 import { FormItems } from "@/components/types/formTypes";
 import { Toggle } from "@/components/ui/toggle";
 
+
 type StepProps = {
     csvFile: File | null;
     hasHeaders: boolean | null;
     separator: string | null;
+    quote: string | null; // Added quote type
+    escape: string | null; // Added escape type
     updateForm: (fieldToUpdate: Partial<FormItems>) => void;
     errors: Record<string, string[]>;
 };
 
 const Step1_FileUploadForm = ({
-    csvFile,
-    hasHeaders,
-    separator,
-    errors,
-    updateForm,
-}: StepProps) => {
+                                  csvFile,
+                                  hasHeaders,
+                                  separator,
+                                  quote,
+                                  escape,
+                                  errors,
+                                  updateForm,
+                              }: StepProps) => {
     // State for tracking whether the CSV file has headers or not
     const [hasHeadersState, setHasHeadersState] = useState<boolean | null>(
         hasHeaders
     );
 
-    // State for the separator
+    // States for separator, quote, and escape
     const [separatorState, setSeparatorState] = useState<string | null>(separator);
+    const [quoteState, setQuoteState] = useState<string | null>(quote);
+    const [escapeState, setEscapeState] = useState<string | null>(escape);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -47,6 +54,18 @@ const Step1_FileUploadForm = ({
         updateForm({ separator: newSeparator });
     };
 
+    const handleQuoteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newQuote = e.target.value;
+        setQuoteState(newQuote);
+        updateForm({ quote: newQuote });
+    };
+
+    const handleEscapeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newEscape = e.target.value;
+        setEscapeState(newEscape);
+        updateForm({ escape: newEscape });
+    };
+
     return (
         <FormWrapper
             title="Upload your Datasource"
@@ -54,8 +73,8 @@ const Step1_FileUploadForm = ({
         >
             <div className="w-full flex flex-col gap-10">
                 {/* File Upload Section */}
-                <div className="flex flex-col gap-2">
-                    <Label htmlFor="file">CSV File</Label>
+                <div className="flex flex-col gap-2 custom-label">
+                    <Label htmlFor="file">CSV File </Label>
 
                     {/* Display the uploaded file name if available */}
                     {csvFile && (
@@ -82,7 +101,7 @@ const Step1_FileUploadForm = ({
                 </div>
 
                 {/* Toggle for indicating whether the CSV has headers */}
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-5 custom-label">
                     <Label htmlFor="hasHeadersToggle">
                         Does the CSV file have headers?
                     </Label>
@@ -103,16 +122,13 @@ const Step1_FileUploadForm = ({
                     </div>
                 </div>
 
-
-
-
                 {/* Display an error message if the user hasn't made a selection */}
                 {hasHeadersState === null && errors.hasHeaders && (
                     <p className="text-red-500 text-sm">{errors.hasHeaders[0]}</p>
                 )}
 
                 {/* Separator input field */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 custom-label">
                     <Label htmlFor="separator">Separator</Label>
                     <Input
                         type="text"
@@ -127,6 +143,44 @@ const Step1_FileUploadForm = ({
                     {/* Displays an error message if there's a validation error for the separator input */}
                     {errors.separator && (
                         <p className="text-red-500 text-sm">{errors.separator[0]}</p>
+                    )}
+                </div>
+
+                {/* Quote input field */}
+                <div className="flex flex-col gap-2 custom-label">
+                    <Label htmlFor="quote">Quote</Label>
+                    <Input
+                        type="text"
+                        name="quote"
+                        id="quote"
+                        value={quoteState ?? ""}
+                        onChange={handleQuoteChange}
+                        placeholder={`e.g., '"'`}
+                        className="w-full"
+                    />
+
+                    {/* Displays an error message if there's a validation error for the quote input */}
+                    {errors.quote && (
+                        <p className="text-red-500 text-sm">{errors.quote[0]}</p>
+                    )}
+                </div>
+
+                {/* Escape input field */}
+                <div className="flex flex-col gap-2 custom-label">
+                    <Label htmlFor="escape">Escape</Label>
+                    <Input
+                        type="text"
+                        name="escape"
+                        id="escape"
+                        value={escapeState ?? ""}
+                        onChange={handleEscapeChange}
+                        placeholder="e.g., '\'"
+                    className="w-full"
+                    />
+
+                    {/* Displays an error message if there's a validation error for the escape input */}
+                    {errors.escape && (
+                        <p className="text-red-500 text-sm">{errors.escape[0]}</p>
                     )}
                 </div>
             </div>

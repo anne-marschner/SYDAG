@@ -1,219 +1,824 @@
+// components/Step6_DataNoiseForm.tsx
+
 "use client";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
 
-// Defining the types for the props passed to the DataNoiseForm component.
+// ===== Multi-Select Imports =====
+import { MultiSelect } from "@/components/ui/multi-select";
+import { Cat, Dog, Fish} from "lucide-react";
+
+// Multi-select options.
+const frameworksList = [
+  { value: "replaceWithSynonyms", label: "replaceWithSynonyms", icon: Fish },
+  { value: "addRandomPrefix", label: "addRandomPrefix", icon: Cat },
+  { value: "replaceWithTranslation", label: "replaceWithTranslation", icon: Dog },
+  { value: "shuffleWords", label: "shuffleWords", icon: Fish },
+  { value: "generateMissingValue", label: "generateMissingValue", icon: Fish },
+  { value: "generatePhoneticError", label: "generatePhoneticError", icon: Fish },
+  { value: "generateOCRError", label: "generateOCRError", icon: Fish },
+  { value: "changeFormat", label: "changeFormat", icon: Fish },
+  { value: "generateTypingError", label: "generateTypingError", icon: Fish },
+  { value: "generateRandomString", label: "generateRandomString", icon: Fish },
+  { value: "changeValue", label: "changeValue", icon: Fish },
+  { value: "changeValueToOutlier", label: "changeValueToOutlier", icon: Fish }
+];
+
 type StepProps = {
-    dataset1DataNoise: boolean | null;
-    dataset1DataNoiseValue: number | null;
-    dataset1DataKeyNoise: boolean | null;
-    dataset2DataNoise: boolean | null;
-    dataset2DataNoiseValue: number | null;
-    dataset2DataKeyNoise: boolean | null;
-    updateForm: (fieldToUpdate: Partial<FormItems>) => void; // Function to update form fields.
-    errors: Record<string, string[]>;
+  splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
+
+  // Dataset 1
+  dataset1DataNoise: boolean | null;
+  dataset1DataNoiseValue: number | null;
+  dataset1DataKeyNoise: boolean | null;
+  dataset1DataNoiseInside: number | null;
+  dataset1DataMultiselect: string[] | null; 
+
+  // Dataset 2
+  dataset2DataNoise: boolean | null;
+  dataset2DataNoiseValue: number | null;
+  dataset2DataKeyNoise: boolean | null;
+  dataset2DataNoiseInside: number | null;
+  dataset2DataMultiselect: string[] | null; // NEW
+
+  // Dataset 3
+  dataset3DataNoise: boolean | null;
+  dataset3DataNoiseValue: number | null;
+  dataset3DataKeyNoise: boolean | null;
+  dataset3DataNoiseInside: number | null;
+  dataset3DataMultiselect: string[] | null; // NEW
+
+  // Dataset 4
+  dataset4DataNoise: boolean | null;
+  dataset4DataNoiseValue: number | null;
+  dataset4DataKeyNoise: boolean | null;
+  dataset4DataNoiseInside: number | null;
+  dataset4DataMultiselect: string[] | null; // NEW
+
+  updateForm: (fieldToUpdate: Partial<FormItems>) => void;
+  errors: Record<string, string[]>;
 };
 
 const Step6_DataNoiseForm = ({
-    updateForm,
-    dataset1DataNoise,
-    dataset1DataNoiseValue,
-    dataset1DataKeyNoise,
-    dataset2DataNoise,
-    dataset2DataNoiseValue,
-    dataset2DataKeyNoise,
-    errors,
+  splitType,
+  updateForm,
+  // Dataset 1
+  dataset1DataNoise,
+  dataset1DataNoiseValue,
+  dataset1DataKeyNoise,
+  dataset1DataNoiseInside,
+  dataset1DataMultiselect, // NEW
+  // Dataset 2
+  dataset2DataNoise,
+  dataset2DataNoiseValue,
+  dataset2DataKeyNoise,
+  dataset2DataNoiseInside,
+  dataset2DataMultiselect, // NEW
+  // Dataset 3
+  dataset3DataNoise,
+  dataset3DataNoiseValue,
+  dataset3DataKeyNoise,
+  dataset3DataNoiseInside,
+  dataset3DataMultiselect, // NEW
+  // Dataset 4
+  dataset4DataNoise,
+  dataset4DataNoiseValue,
+  dataset4DataKeyNoise,
+  dataset4DataNoiseInside,
+  dataset4DataMultiselect, // NEW
+  errors,
 }: StepProps) => {
-    // State management for checkbox and slider values for both datasets
-    const [dataset1NoiseEnabled, setDataset1NoiseEnabled] = useState<boolean | null>(dataset1DataNoise);
-    const [dataset1NoiseLevel, setDataset1NoiseLevel] = useState<number | null>(dataset1DataNoiseValue);
-    const [dataset1KeyNoiseEnabled, setDataset1KeyNoiseEnabled] = useState<boolean | null>(dataset1DataKeyNoise);
+  // ============= DATASET 1 STATE =============
+  const [dataset1Enabled, setDataset1Enabled] = useState<boolean>(!!dataset1DataNoise);
+  const [dataset1Level, setDataset1Level] = useState<number>(dataset1DataNoiseValue ?? 0);
+  const [dataset1KeyEnabled, setDataset1KeyEnabled] = useState<boolean>(!!dataset1DataKeyNoise);
+  const [dataset1DataNoiseInsideState, setDataset1DataNoiseInsideState] = useState<number>(
+    dataset1DataNoiseInside ?? 0
+  );
 
-    const [dataset2NoiseEnabled, setDataset2NoiseEnabled] = useState<boolean | null>(dataset2DataNoise);
-    const [dataset2NoiseLevel, setDataset2NoiseLevel] = useState<number | null>(dataset2DataNoiseValue);
-    const [dataset2KeyNoiseEnabled, setDataset2KeyNoiseEnabled] = useState<boolean | null>(dataset2DataKeyNoise);
+  // NEW: multi-select local state
+  const [dataset1Selections, setDataset1Selections] = useState<string[]>(
+    dataset1DataMultiselect ?? []
+  );
 
+  // ============= DATASET 2 STATE =============
+  const [dataset2Enabled, setDataset2Enabled] = useState<boolean>(!!dataset2DataNoise);
+  const [dataset2Level, setDataset2Level] = useState<number>(dataset2DataNoiseValue ?? 0);
+  const [dataset2KeyEnabled, setDataset2KeyEnabled] = useState<boolean>(!!dataset2DataKeyNoise);
+  const [dataset2DataNoiseInsideState, setDataset2DataNoiseInsideState] = useState<number>(
+    dataset2DataNoiseInside ?? 0
+  );
 
-    // Handler functions for the checkbox and slider value changes
-    const handleDataset1NoiseToggle = (checked: boolean) => {
-        setDataset1NoiseEnabled(checked);
-        if (!checked) {
-            setDataset1NoiseLevel(0);
-            setDataset1KeyNoiseEnabled(false);
-            updateForm({
-                dataset1DataNoise: checked,
-                dataset1DataNoiseValue: 0,
-                dataset1DataKeyNoise: false,
-            });
-        } else {
-            updateForm({ dataset1DataNoise: checked });
-        }
-    };
+  // NEW
+  const [dataset2Selections, setDataset2Selections] = useState<string[]>(
+    dataset2DataMultiselect ?? []
+  );
 
-    const handleDataset1SliderChange = (value: number[]) => {
-        const newLevel = value[0];
-        setDataset1NoiseLevel(newLevel);
-        updateForm({ dataset1DataNoiseValue: newLevel });
-    };
+  // ============= DATASET 3 STATE =============
+  const [dataset3Enabled, setDataset3Enabled] = useState<boolean>(!!dataset3DataNoise);
+  const [dataset3Level, setDataset3Level] = useState<number>(dataset3DataNoiseValue ?? 0);
+  const [dataset3KeyEnabled, setDataset3KeyEnabled] = useState<boolean>(!!dataset3DataKeyNoise);
+  const [dataset3DataNoiseInsideState, setDataset3DataNoiseInsideState] = useState<number>(
+    dataset3DataNoiseInside ?? 0
+  );
 
-    const handleDataset1KeyNoiseToggle = (checked: boolean) => {
-        setDataset1KeyNoiseEnabled(checked);
-        updateForm({ dataset1DataKeyNoise: checked });
-    };
+  // NEW
+  const [dataset3Selections, setDataset3Selections] = useState<string[]>(
+    dataset3DataMultiselect ?? []
+  );
 
-    const handleDataset2NoiseToggle = (checked: boolean) => {
-        setDataset2NoiseEnabled(checked);
-        if (!checked) {
-            setDataset2NoiseLevel(0);
-            setDataset2KeyNoiseEnabled(false);
-            updateForm({
-                dataset2DataNoise: checked,
-                dataset2DataNoiseValue: 0,
-                dataset2DataKeyNoise: false,
-            });
-        } else {
-            updateForm({ dataset2DataNoise: checked });
-        }
-    };
+  // ============= DATASET 4 STATE =============
+  const [dataset4Enabled, setDataset4Enabled] = useState<boolean>(!!dataset4DataNoise);
+  const [dataset4Level, setDataset4Level] = useState<number>(dataset4DataNoiseValue ?? 0);
+  const [dataset4KeyEnabled, setDataset4KeyEnabled] = useState<boolean>(!!dataset4DataKeyNoise);
+  const [dataset4DataNoiseInsideState, setDataset4DataNoiseInsideState] = useState<number>(
+    dataset4DataNoiseInside ?? 0
+  );
 
-    const handleDataset2SliderChange = (value: number[]) => {
-        const newLevel = value[0];
-        setDataset2NoiseLevel(newLevel);
-        updateForm({ dataset2DataNoiseValue: newLevel });
-    };
+  // NEW
+  const [dataset4Selections, setDataset4Selections] = useState<string[]>(
+    dataset4DataMultiselect ?? []
+  );
 
-    const handleDataset2KeyNoiseToggle = (checked: boolean) => {
-        setDataset2KeyNoiseEnabled(checked);
-        updateForm({ dataset2DataKeyNoise: checked });
-    };
+  // ============= DATASET 1 HANDLERS =============
+  const handleDataset1Toggle = (checked: boolean) => {
+    setDataset1Enabled(checked);
+    if (!checked) {
+      setDataset1Level(0);
+      setDataset1KeyEnabled(false);
+      setDataset1DataNoiseInsideState(0);
+      // Reset multi-select
+      setDataset1Selections([]);
 
-    return (
-        <FormWrapper
-            title="Select Noise Options for Data"
-            description="You can choose if you want to add noise into the data of each dataset"
-        >
-            <div className="flex flex-col md:flex-row md:gap-8 w-full">
-                {/* First Checkbox and Slider */}
-                <div className="flex flex-col w-full">
-                    <h3 className="text-lg text-white mb-2">Dataset 1</h3>
-                    <div className="flex items-center gap-2">
-                        <Checkbox
-                            checked={!!dataset1NoiseEnabled} // Ensure it's a boolean
-                            onCheckedChange={handleDataset1NoiseToggle}
-                            id="dataset1Noise"
-                        />
-                        <label htmlFor="dataset1Noise" className="text-white">
-                            Enable Option
-                        </label>
-                    </div>
-                    {errors.dataset1Noise && (
-                        <p className="text-red-500 text-sm mt-1">{errors.dataset1Noise[0]}</p>
-                    )}
+      updateForm({
+        dataset1DataNoise: checked,
+        dataset1DataNoiseValue: 0,
+        dataset1DataKeyNoise: false,
+        dataset1DataNoiseInside: 0,
+        dataset1DataMultiselect: [], // reset in parent
+      });
+    } else {
+      updateForm({ dataset1DataNoise: checked });
+    }
+  };
 
-                    {dataset1NoiseEnabled && (
-                        <>
-                            <div className="flex items-center gap-2 mt-2">
-                                <Checkbox
-                                    checked={!!dataset1KeyNoiseEnabled} // Ensure it's a boolean
-                                    onCheckedChange={handleDataset1KeyNoiseToggle}
-                                    id="dataset1DataKeyNoise"
-                                />
-                                <label htmlFor="dataset1DataKeyNoise" className="text-white">
-                                Enable Data Noise in Key´s 
-                                </label>
-                            </div>
-                            {errors.dataset1DataKeyNoise && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.dataset1DataKeyNoise[0]}
-                                </p>
-                            )}
+  const handleDataset1Slider = (value: number[]) => {
+    const newLevel = value[0];
+    setDataset1Level(newLevel);
+    updateForm({ dataset1DataNoiseValue: newLevel });
+  };
 
-                            <Slider
-                                className="my-4 w-full"
-                                value={[dataset1NoiseLevel ?? 0]}
-                                onValueChange={handleDataset1SliderChange}
-                                min={0}
-                                max={100}
-                                step={1}
-                            />
-                            {/* Display the current value of the slider */}
-                            <span className="text-white text-sm">
-                                Percentage: {dataset1NoiseLevel ?? 0} %
-                            </span>
-                            {errors.dataset1NoiseValue && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.dataset1NoiseValue[0]}
-                                </p>
-                            )}
+  const handleDataset1KeyToggle = (checked: boolean) => {
+    setDataset1KeyEnabled(checked);
+    updateForm({ dataset1DataKeyNoise: checked });
+  };
 
-                        </>
-                    )}
+  const handleDataset1DataNoiseInsideSlider = (value: number[]) => {
+    const newValue = value[0];
+    setDataset1DataNoiseInsideState(newValue);
+    updateForm({ dataset1DataNoiseInside: newValue });
+  };
+
+  // NEW: handle multi-select changes for dataset 1
+  const handleDataset1MultiselectChange = (values: string[]) => {
+    setDataset1Selections(values);
+    updateForm({ dataset1DataMultiselect: values });
+  };
+
+  // ============= DATASET 2 HANDLERS =============
+  const handleDataset2Toggle = (checked: boolean) => {
+    setDataset2Enabled(checked);
+    if (!checked) {
+      setDataset2Level(0);
+      setDataset2KeyEnabled(false);
+      setDataset2DataNoiseInsideState(0);
+      setDataset2Selections([]);
+
+      updateForm({
+        dataset2DataNoise: checked,
+        dataset2DataNoiseValue: 0,
+        dataset2DataKeyNoise: false,
+        dataset2DataNoiseInside: 0,
+        dataset2DataMultiselect: [],
+      });
+    } else {
+      updateForm({ dataset2DataNoise: checked });
+    }
+  };
+
+  const handleDataset2Slider = (value: number[]) => {
+    const newLevel = value[0];
+    setDataset2Level(newLevel);
+    updateForm({ dataset2DataNoiseValue: newLevel });
+  };
+
+  const handleDataset2KeyToggle = (checked: boolean) => {
+    setDataset2KeyEnabled(checked);
+    updateForm({ dataset2DataKeyNoise: checked });
+  };
+
+  const handleDataset2DataNoiseInsideSlider = (value: number[]) => {
+    const newValue = value[0];
+    setDataset2DataNoiseInsideState(newValue);
+    updateForm({ dataset2DataNoiseInside: newValue });
+  };
+
+  // NEW: handle multi-select changes for dataset 2
+  const handleDataset2MultiselectChange = (values: string[]) => {
+    setDataset2Selections(values);
+    updateForm({ dataset2DataMultiselect: values });
+  };
+
+  // ============= DATASET 3 HANDLERS =============
+  const handleDataset3Toggle = (checked: boolean) => {
+    setDataset3Enabled(checked);
+    if (!checked) {
+      setDataset3Level(0);
+      setDataset3KeyEnabled(false);
+      setDataset3DataNoiseInsideState(0);
+      setDataset3Selections([]);
+
+      updateForm({
+        dataset3DataNoise: checked,
+        dataset3DataNoiseValue: 0,
+        dataset3DataKeyNoise: false,
+        dataset3DataNoiseInside: 0,
+        dataset3DataMultiselect: [],
+      });
+    } else {
+      updateForm({ dataset3DataNoise: checked });
+    }
+  };
+
+  const handleDataset3Slider = (value: number[]) => {
+    const newLevel = value[0];
+    setDataset3Level(newLevel);
+    updateForm({ dataset3DataNoiseValue: newLevel });
+  };
+
+  const handleDataset3KeyToggle = (checked: boolean) => {
+    setDataset3KeyEnabled(checked);
+    updateForm({ dataset3DataKeyNoise: checked });
+  };
+
+  const handleDataset3DataNoiseInsideSlider = (value: number[]) => {
+    const newValue = value[0];
+    setDataset3DataNoiseInsideState(newValue);
+    updateForm({ dataset3DataNoiseInside: newValue });
+  };
+
+  // NEW: handle multi-select changes for dataset 3
+  const handleDataset3MultiselectChange = (values: string[]) => {
+    setDataset3Selections(values);
+    updateForm({ dataset3DataMultiselect: values });
+  };
+
+  // ============= DATASET 4 HANDLERS =============
+  const handleDataset4Toggle = (checked: boolean) => {
+    setDataset4Enabled(checked);
+    if (!checked) {
+      setDataset4Level(0);
+      setDataset4KeyEnabled(false);
+      setDataset4DataNoiseInsideState(0);
+      setDataset4Selections([]);
+
+      updateForm({
+        dataset4DataNoise: checked,
+        dataset4DataNoiseValue: 0,
+        dataset4DataKeyNoise: false,
+        dataset4DataNoiseInside: 0,
+        dataset4DataMultiselect: [],
+      });
+    } else {
+      updateForm({ dataset4DataNoise: checked });
+    }
+  };
+
+  const handleDataset4Slider = (value: number[]) => {
+    const newLevel = value[0];
+    setDataset4Level(newLevel);
+    updateForm({ dataset4DataNoiseValue: newLevel });
+  };
+
+  const handleDataset4KeyToggle = (checked: boolean) => {
+    setDataset4KeyEnabled(checked);
+    updateForm({ dataset4DataKeyNoise: checked });
+  };
+
+  const handleDataset4DataNoiseInsideSlider = (value: number[]) => {
+    const newValue = value[0];
+    setDataset4DataNoiseInsideState(newValue);
+    updateForm({ dataset4DataNoiseInside: newValue });
+  };
+
+  // NEW: handle multi-select changes for dataset 4
+  const handleDataset4MultiselectChange = (values: string[]) => {
+    setDataset4Selections(values);
+    updateForm({ dataset4DataMultiselect: values });
+  };
+
+  // ============= USE EFFECT =============
+  // Reset Datasets 3 and 4 if splitType != "VerticalHorizontal"
+  useEffect(() => {
+    if (splitType !== "VerticalHorizontal") {
+      // Reset Dataset 3
+      setDataset3Enabled(false);
+      setDataset3Level(0);
+      setDataset3KeyEnabled(false);
+      setDataset3DataNoiseInsideState(0);
+      setDataset3Selections([]);
+
+      // Reset Dataset 4
+      setDataset4Enabled(false);
+      setDataset4Level(0);
+      setDataset4KeyEnabled(false);
+      setDataset4DataNoiseInsideState(0);
+      setDataset4Selections([]);
+
+      // Update form
+      updateForm({
+        dataset3DataNoise: false,
+        dataset3DataNoiseValue: 0,
+        dataset3DataKeyNoise: false,
+        dataset3DataNoiseInside: 0,
+        dataset3DataMultiselect: [],
+
+        dataset4DataNoise: false,
+        dataset4DataNoiseValue: 0,
+        dataset4DataKeyNoise: false,
+        dataset4DataNoiseInside: 0,
+        dataset4DataMultiselect: [],
+      });
+    }
+  }, [splitType, updateForm]);
+
+  // ============= RENDER =============
+  return (
+    <FormWrapper
+      title="Select Noise Options for Data"
+      description="You can choose if you want to add noise into the data of each dataset"
+    >
+      <div className="flex flex-col w-full h-[750px] max-h-[35vh] p-4 scrollbar-custom">
+        <div className="flex flex-col md:flex-row md:gap-8 w-full">
+          {/* ================= Dataset 1 ================= */}
+          <div className="flex flex-col w-full">
+            <h3 className="text-lg text-white mb-2">Dataset 1</h3>
+            <div className="flex items-center gap-2 custom-label">
+              <Checkbox
+                checked={dataset1Enabled}
+                onCheckedChange={handleDataset1Toggle}
+                id="dataset1Noise"
+              />
+              <label htmlFor="dataset1Noise" className="text-white">
+                Enable Option
+              </label>
+            </div>
+            {errors.dataset1DataNoise && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.dataset1DataNoise[0]}
+              </p>
+            )}
+
+            {dataset1Enabled && (
+              <>
+                {/* Preserve Key Constraints Checkbox */}
+                <div className="flex items-center gap-2 mt-2 custom-label">
+                  <Checkbox
+                    checked={dataset1KeyEnabled}
+                    onCheckedChange={handleDataset1KeyToggle}
+                    id="dataset1DataKeyNoise"
+                  />
+                  <label htmlFor="dataset1DataKeyNoise" className="text-white">
+                    Preserve Key Constraints
+                  </label>
+                </div>
+                {errors.dataset1DataKeyNoise && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.dataset1DataKeyNoise[0]}
+                  </p>
+                )}
+
+                {/* Multi-Select for Dataset 1 */}
+                <div className="mt-4">
+                  <label htmlFor="dataset1DataMultiSelect" className="text-white">
+                    Dataset 1 Multi-Select
+                  </label>
+                  <MultiSelect
+                    id="dataset1DataMultiSelect"
+                    options={frameworksList}
+                    onValueChange={handleDataset1MultiselectChange}
+                    defaultValue={dataset1Selections}
+                    placeholder="Select frameworks for Dataset 1"
+                    variant="inverted"
+                    animation={2}
+                    maxCount={3}
+                  />
+                  <div className="text-white text-sm mt-2">
+                    Selected: {dataset1Selections.join(", ")}
+                  </div>
                 </div>
 
-                {/* Second Checkbox and Slider */}
-                <div className="flex flex-col w-full">
-                    <h3 className="text-lg text-white mb-2">Dataset 2</h3>
-                    <div className="flex items-center gap-2">
-                        <Checkbox
-                            checked={!!dataset2NoiseEnabled} // Ensure it's a boolean
-                            onCheckedChange={handleDataset2NoiseToggle}
-                            id="dataset2Noise"
-                        />
-                        <label htmlFor="dataset2Noise" className="text-white">
-                            Enable Option
-                        </label>
-                    </div>
-                    {errors.dataset2Noise && (
-                        <p className="text-red-500 text-sm mt-1">{errors.dataset2Noise[0]}</p>
-                    )}
-
-                    {dataset2NoiseEnabled && (
-                        <>
-                            <div className="flex items-center gap-2 mt-2">
-                                <Checkbox
-                                    checked={!!dataset2KeyNoiseEnabled} // Ensure it's a boolean
-                                    onCheckedChange={handleDataset2KeyNoiseToggle}
-                                    id="dataset2DataKeyNoise"
-                                />
-                                <label htmlFor="dataset2DataKeyNoise" className="text-white">
-                                    Enable Data Noise in Key´s 
-                                </label>
-                            </div>
-                            {errors.dataset2DataKeyNoise && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.dataset2DataKeyNoise[0]}
-                                </p>
-                            )}
-
-                            <Slider
-                                className="my-4 w-full"
-                                value={[dataset2NoiseLevel ?? 0]}
-                                onValueChange={handleDataset2SliderChange}
-                                min={0}
-                                max={100}
-                                step={1}
-                            />
-                            {/* Display the current value of the slider */}
-                            <span className="text-white text-sm">
-                                Percentage: {dataset2NoiseLevel ?? 0} %
-                            </span>
-                            {errors.dataset2NoiseValue && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.dataset2NoiseValue[0]}
-                                </p>
-                            )}
-
-                        </>
-                    )}
+                {/* Existing Noise Slider */}
+                <div className="mt-4">
+                  <label htmlFor="dataset1DataNoiseSlider" className="text-white">
+                    Noise Percentage
+                  </label>
+                  <Slider
+                    id="dataset1DataNoiseSlider"
+                    className="my-2 w-full"
+                    value={[dataset1Level]}
+                    onValueChange={handleDataset1Slider}
+                    min={0}
+                    max={100}
+                    step={1}
+                  />
+                  <span className="text-white text-sm">
+                    Percentage: {dataset1Level} %
+                  </span>
+                  {errors.dataset1DataNoiseValue && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.dataset1DataNoiseValue[0]}
+                    </p>
+                  )}
                 </div>
+
+                {/* New Noise Inside Slider */}
+                <div className="mt-4">
+                  <label
+                    htmlFor="dataset1DataNoiseInsideSlider"
+                    className="text-white"
+                  >
+                    Noise Inside Percentage
+                  </label>
+                  <Slider
+                    id="dataset1DataNoiseInsideSlider"
+                    className="my-2 w-full"
+                    value={[dataset1DataNoiseInsideState]}
+                    onValueChange={handleDataset1DataNoiseInsideSlider}
+                    min={0}
+                    max={100}
+                    step={1}
+                  />
+                  <span className="text-white text-sm">
+                    Percentage: {dataset1DataNoiseInsideState} %
+                  </span>
+                  {errors.dataset1DataNoiseInside && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.dataset1DataNoiseInside[0]}
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* ================= Dataset 2 ================= */}
+          <div className="flex flex-col w-full">
+            <h3 className="text-lg text-white mb-2">Dataset 2</h3>
+            <div className="flex items-center gap-2 custom-label">
+              <Checkbox
+                checked={dataset2Enabled}
+                onCheckedChange={handleDataset2Toggle}
+                id="dataset2Noise"
+              />
+              <label htmlFor="dataset2Noise" className="text-white">
+                Enable Option
+              </label>
+            </div>
+            {errors.dataset2DataNoise && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.dataset2DataNoise[0]}
+              </p>
+            )}
+
+            {dataset2Enabled && (
+              <>
+                {/* Preserve Key Constraints Checkbox */}
+                <div className="flex items-center gap-2 mt-2 custom-label">
+                  <Checkbox
+                    checked={dataset2KeyEnabled}
+                    onCheckedChange={handleDataset2KeyToggle}
+                    id="dataset2DataKeyNoise"
+                  />
+                  <label htmlFor="dataset2DataKeyNoise" className="text-white">
+                    Preserve Key Constraints
+                  </label>
+                </div>
+                {errors.dataset2DataKeyNoise && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.dataset2DataKeyNoise[0]}
+                  </p>
+                )}
+
+                {/* Multi-Select for Dataset 2 */}
+                <div className="mt-4">
+                  <label htmlFor="dataset2DataMultiSelect" className="text-white">
+                    Dataset 2 Multi-Select
+                  </label>
+                  <MultiSelect
+                    id="dataset2DataMultiSelect"
+                    options={frameworksList}
+                    onValueChange={handleDataset2MultiselectChange}
+                    defaultValue={dataset2Selections}
+                    placeholder="Select frameworks for Dataset 2"
+                    variant="inverted"
+                    animation={2}
+                    maxCount={3}
+                  />
+                  <div className="text-white text-sm mt-2">
+                    Selected: {dataset2Selections.join(", ")}
+                  </div>
+                </div>
+
+                {/* Existing Noise Slider */}
+                <div className="mt-4">
+                  <label htmlFor="dataset2DataNoiseSlider" className="text-white">
+                    Noise Percentage
+                  </label>
+                  <Slider
+                    id="dataset2DataNoiseSlider"
+                    className="my-2 w-full"
+                    value={[dataset2Level]}
+                    onValueChange={handleDataset2Slider}
+                    min={0}
+                    max={100}
+                    step={1}
+                  />
+                  <span className="text-white text-sm">
+                    Percentage: {dataset2Level} %
+                  </span>
+                  {errors.dataset2DataNoiseValue && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.dataset2DataNoiseValue[0]}
+                    </p>
+                  )}
+                </div>
+
+                {/* New Noise Inside Slider */}
+                <div className="mt-4">
+                  <label
+                    htmlFor="dataset2DataNoiseInsideSlider"
+                    className="text-white"
+                  >
+                    Noise Inside Percentage
+                  </label>
+                  <Slider
+                    id="dataset2DataNoiseInsideSlider"
+                    className="my-2 w-full"
+                    value={[dataset2DataNoiseInsideState]}
+                    onValueChange={handleDataset2DataNoiseInsideSlider}
+                    min={0}
+                    max={100}
+                    step={1}
+                  />
+                  <span className="text-white text-sm">
+                    Percentage: {dataset2DataNoiseInsideState} %
+                  </span>
+                  {errors.dataset2DataNoiseInside && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.dataset2DataNoiseInside[0]}
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Conditionally Render Dataset 3 and Dataset 4 Controls */}
+        {splitType === "VerticalHorizontal" && (
+          <div className="flex flex-col md:flex-row md:gap-8 w-full mt-8">
+            {/* ================= Dataset 3 ================= */}
+            <div className="flex flex-col w-full">
+              <h3 className="text-lg text-white mb-2">Dataset 3</h3>
+              <div className="flex items-center gap-2 custom-label">
+                <Checkbox
+                  checked={dataset3Enabled}
+                  onCheckedChange={handleDataset3Toggle}
+                  id="dataset3Noise"
+                />
+                <label htmlFor="dataset3Noise" className="text-white">
+                  Enable Option
+                </label>
+              </div>
+              {errors.dataset3DataNoise && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.dataset3DataNoise[0]}
+                </p>
+              )}
+
+              {dataset3Enabled && (
+                <>
+                  {/* Preserve Key Constraints Checkbox */}
+                  <div className="flex items-center gap-2 mt-2 custom-label">
+                    <Checkbox
+                      checked={dataset3KeyEnabled}
+                      onCheckedChange={handleDataset3KeyToggle}
+                      id="dataset3DataKeyNoise"
+                    />
+                    <label htmlFor="dataset3DataKeyNoise" className="text-white">
+                      Preserve Key Constraints
+                    </label>
+                  </div>
+                  {errors.dataset3DataKeyNoise && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.dataset3DataKeyNoise[0]}
+                    </p>
+                  )}
+
+                  {/* Multi-Select for Dataset 3 */}
+                  <div className="mt-4">
+                    <label htmlFor="dataset3DataMultiSelect" className="text-white">
+                      Dataset 3 Multi-Select
+                    </label>
+                    <MultiSelect
+                      id="dataset3DataMultiSelect"
+                      options={frameworksList}
+                      onValueChange={handleDataset3MultiselectChange}
+                      defaultValue={dataset3Selections}
+                      placeholder="Select frameworks for Dataset 3"
+                      variant="inverted"
+                      animation={2}
+                      maxCount={3}
+                    />
+                    <div className="text-white text-sm mt-2">
+                      Selected: {dataset3Selections.join(", ")}
+                    </div>
+                  </div>
+
+                  {/* Existing Noise Slider */}
+                  <div className="mt-4">
+                    <label htmlFor="dataset3DataNoiseSlider" className="text-white">
+                      Noise Percentage
+                    </label>
+                    <Slider
+                      id="dataset3DataNoiseSlider"
+                      className="my-2 w-full"
+                      value={[dataset3Level]}
+                      onValueChange={handleDataset3Slider}
+                      min={0}
+                      max={100}
+                      step={1}
+                    />
+                    <span className="text-white text-sm">
+                      Percentage: {dataset3Level} %
+                    </span>
+                    {errors.dataset3DataNoiseValue && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.dataset3DataNoiseValue[0]}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* New Noise Inside Slider */}
+                  <div className="mt-4">
+                    <label
+                      htmlFor="dataset3DataNoiseInsideSlider"
+                      className="text-white"
+                    >
+                      Noise Inside Percentage
+                    </label>
+                    <Slider
+                      id="dataset3DataNoiseInsideSlider"
+                      className="my-2 w-full"
+                      value={[dataset3DataNoiseInsideState]}
+                      onValueChange={handleDataset3DataNoiseInsideSlider}
+                      min={0}
+                      max={100}
+                      step={1}
+                    />
+                    <span className="text-white text-sm">
+                      Percentage: {dataset3DataNoiseInsideState} %
+                    </span>
+                    {errors.dataset3DataNoiseInside && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.dataset3DataNoiseInside[0]}
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
 
+            {/* ================= Dataset 4 ================= */}
+            <div className="flex flex-col w-full">
+              <h3 className="text-lg text-white mb-2">Dataset 4</h3>
+              <div className="flex items-center gap-2 custom-label">
+                <Checkbox
+                  checked={dataset4Enabled}
+                  onCheckedChange={handleDataset4Toggle}
+                  id="dataset4Noise"
+                />
+                <label htmlFor="dataset4Noise" className="text-white">
+                  Enable Option
+                </label>
+              </div>
+              {errors.dataset4DataNoise && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.dataset4DataNoise[0]}
+                </p>
+              )}
 
-        </FormWrapper>
-    );
+              {dataset4Enabled && (
+                <>
+                  {/* Preserve Key Constraints Checkbox */}
+                  <div className="flex items-center gap-2 mt-2 custom-label">
+                    <Checkbox
+                      checked={dataset4KeyEnabled}
+                      onCheckedChange={handleDataset4KeyToggle}
+                      id="dataset4DataKeyNoise"
+                    />
+                    <label htmlFor="dataset4DataKeyNoise" className="text-white">
+                      Preserve Key Constraints
+                    </label>
+                  </div>
+                  {errors.dataset4DataKeyNoise && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.dataset4DataKeyNoise[0]}
+                    </p>
+                  )}
+
+                  {/* Multi-Select for Dataset 4 */}
+                  <div className="mt-4">
+                    <label htmlFor="dataset4DataMultiSelect" className="text-white">
+                      Dataset 4 Multi-Select
+                    </label>
+                    <MultiSelect
+                      id="dataset4DataMultiSelect"
+                      options={frameworksList}
+                      onValueChange={handleDataset4MultiselectChange}
+                      defaultValue={dataset4Selections}
+                      placeholder="Select frameworks for Dataset 4"
+                      variant="inverted"
+                      animation={2}
+                      maxCount={3}
+                    />
+                    <div className="text-white text-sm mt-2">
+                      Selected: {dataset4Selections.join(", ")}
+                    </div>
+                  </div>
+
+                  {/* Existing Noise Slider */}
+                  <div className="mt-4">
+                    <label htmlFor="dataset4DataNoiseSlider" className="text-white">
+                      Noise Percentage
+                    </label>
+                    <Slider
+                      id="dataset4DataNoiseSlider"
+                      className="my-2 w-full"
+                      value={[dataset4Level]}
+                      onValueChange={handleDataset4Slider}
+                      min={0}
+                      max={100}
+                      step={1}
+                    />
+                    <span className="text-white text-sm">
+                      Percentage: {dataset4Level} %
+                    </span>
+                    {errors.dataset4DataNoiseValue && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.dataset4DataNoiseValue[0]}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* New Noise Inside Slider */}
+                  <div className="mt-4">
+                    <label
+                      htmlFor="dataset4DataNoiseInsideSlider"
+                      className="text-white"
+                    >
+                      Noise Inside Percentage
+                    </label>
+                    <Slider
+                      id="dataset4DataNoiseInsideSlider"
+                      className="my-2 w-full"
+                      value={[dataset4DataNoiseInsideState]}
+                      onValueChange={handleDataset4DataNoiseInsideSlider}
+                      min={0}
+                      max={100}
+                      step={1}
+                    />
+                    <span className="text-white text-sm">
+                      Percentage: {dataset4DataNoiseInsideState} %
+                    </span>
+                    {errors.dataset4DataNoiseInside && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.dataset4DataNoiseInside[0]}
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </FormWrapper>
+  );
 };
 
 export default Step6_DataNoiseForm;
