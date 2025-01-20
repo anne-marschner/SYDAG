@@ -3,9 +3,10 @@
 1. [General Information](#general-information)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
-3. [User Instructions](#user-instructions)
+4. [User Instructions](#user-instructions)
+5. [FAQ](#faq)
 
-### General Information
+## General Information
 SYDAG is a **Sy**ntehtic **Da**taset **G**eneartor for data integration scenarios.
 Users can apply it to create integration scenarios that are customized to their specific needs. The generator works with relational datamodels. The user must supply SYADG with a relation stored in the form of a CSV file. SYDAG can process this relation to create an integration scenario of multiple datasets and relations.
 The user can choose between varies configuration options to achieve a specific result. 
@@ -23,11 +24,12 @@ A list of technologies used within the project:
 
 
 ## Installation
-To install SYDAG the user must clone the GitHub repository. It is necessary to install react and NextJS with the following commands: \
-'npm install --save-exact react@^19.0.0 react-dom@^19.0.0' \
-'npm install --save-exact @types/react@^19.0.0 @types/react-dom@^19.0.0' \
-'npx @next/codemod@canary upgrade latest' \
-The project uses docker for fast and easy access. Therefore users must execute the [docker compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the docker environment.
+To install SYDAG the user must clone the GitHub repository. It is necessary to install React and Next.js with the following commands:
+* `npm install --save-exact react@^19.0.0 react-dom@^19.0.0`
+* `npm install --save-exact @types/react@^19.0.0 @types/react-dom@^19.0.0`
+* `npx @next/codemod@canary upgrade latest`
+
+The project uses Docker for fast and easy access. Therefore, users must execute the [Docker Compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the Docker environment.
 
 ## User Instructions
 The configuration of SYDAG includes several parameters that the user must adjust.
@@ -76,3 +78,117 @@ For each new Dataset X:\
 ### Shuffle
 For each new Dataset X:\
 **datasetXShuffleOption**: the shuffle option for the new datasets (row shuffle, column shuffle or no change).
+
+### JSON Upload
+In the GUI the user can either set the parameters manually or upload a JSON file that conatains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.
+```
+{
+  "splitType": "VerticalHorizontal", 	// "Vertical", "Horizontal", "VerticalHorizontal" 
+  "rowOverlapPercentage": 0,		// 0 to 100
+  "columnOverlapPercentage": 0,		// 0 to 100
+  "rowDistribution": 0,			// 0 to 100
+  "columnDistribution": 0,		// 0 to 100
+  "overlapType": "Mixed Overlap",	// "Mixed Overlap", "Block Overlap"
+
+  "dataset1StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "dataset1BCNFSliderValue": 0,		// 0 to 100
+  "dataset1JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset2StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "dataset2BCNFSliderValue": 0,		// 0 to 100
+  "dataset2JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset3StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "dataset3BCNFSliderValue": 0,		// 0 to 100
+  "dataset3JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset4StructureType": "No Change", // "No Change", "BCNF", "Join Columns"
+  "dataset4BCNFSliderValue": 0,		// 0 to 100
+  "dataset4JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset1SchemaNoise": false,		// false, true
+  "dataset1SchemaNoiseValue": 0,	// 0 to 100
+  "dataset1SchemaKeyNoise": false,	// false, true
+  "dataset1SchemaDeleteSchema": false,	// false, true
+  "dataset1SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset2SchemaNoise": false,		// false, true
+  "dataset2SchemaNoiseValue": 0,	// 0 to 100
+  "dataset2SchemaKeyNoise": false,	// false, true
+  "dataset2SchemaDeleteSchema": false,	// false, true
+  "dataset2SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset3SchemaNoise": false,		// false, true
+  "dataset3SchemaNoiseValue": 0,	// 0 to 100
+  "dataset3SchemaKeyNoise": false,	// false, true
+  "dataset3SchemaDeleteSchema": false,	// false, true
+  "dataset3SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset4SchemaNoise": false,		// false, true
+  "dataset4SchemaNoiseValue": 0,	// 0 to 100
+  "dataset4SchemaKeyNoise": false,	// false, true
+  "dataset4SchemaDeleteSchema": false,	// false, true
+  "dataset4SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset1DataNoise": false,		// false, true
+  "dataset1DataNoiseValue": 0,		// 0 to 100
+  "dataset1DataKeyNoise": false,	// false, true
+  "dataset1DataNoiseInside": 0,		// 0 to 100
+  "dataset1DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset2DataNoise": false,		// false, true
+  "dataset2DataNoiseValue": 0,		// 0 to 100
+  "dataset2DataKeyNoise": false,	// false, true
+  "dataset2DataNoiseInside": 0,		// 0 to 100
+  "dataset2DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset3DataNoise": false,		// false, true
+  "dataset3DataNoiseValue": 0,		// 0 to 100
+  "dataset3DataKeyNoise": false,	// false, true
+  "dataset3DataNoiseInside": 0,		// 0 to 100
+  "dataset3DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset4DataNoise": false,		// false, true
+  "dataset4DataNoiseValue": 0,		// 0 to 100
+  "dataset4DataKeyNoise": false,	// false, true
+  "dataset4DataNoiseInside": 0,		// 0 to 100
+  "dataset4DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset1ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
+  "dataset2ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
+  "dataset3ShuffleOption": "No Change",	// "No Change", "Shuffle Rows", "Shuffle Columns"
+  "dataset4ShuffleOption": "No Change"	// "No Change", "Shuffle Rows", "Shuffle Columns"
+}
+```
+
+
+## FAQ
+#### Why is the installation not working?
+You need to install React and Next.js. Please check if this installation was successful.  
+If you have problems with building the Docker containers, please check if you are executing VS Code and Docker as an administrator.
+
+#### Why do my generated datasets look different from what I expected?
+You can check several points:
+1. Did you specify the correct separator? If you specify the wrong character, it is possible that the tool will read the entries of a whole row as one single entry.
+2. Did you specify error methods? If you chose to enable noise, you must specify what methods SYDAG is allowed to use. If you do not choose methods, SYDAG cannot add errors.
+3. Did you try adding errors to numeric values? If so, you need to chose at least one method that is applied on numeric methods: "changeValue" or "changeValueToOutlier". If you do not chose one of them, SYDAG cannot add numeric errors.
+4. Did you use normalization? If you choose to apply normalization and preserve the key constraints, it is possible that fewer errors than you expected appear in your relations. This happens because, in that case, SYDAG does not add errors to the key and foreign key columns. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will cause fewer foreign-key columns, and therefore more columns remain to receive noise.
+
+#### What should I set the parameters in the JSON file for the third and fourth datasets to when I only apply a vertical or horizontal split?
+If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used. Set the booleans to false and the noise percentages to 0, as they will not be used for the generation anyway.
