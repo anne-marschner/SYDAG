@@ -3,7 +3,8 @@
 1. [General Information](#general-information)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
-3. [User Instructions](#user-instructions)
+4. [User Instructions](#user-instructions)
+5. [FAQ](#faq)
 
 ### General Information
 SYDAG is a **Sy**ntehtic **Da**taset **G**eneartor for data integration scenarios.
