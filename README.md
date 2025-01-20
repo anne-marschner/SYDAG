@@ -76,3 +76,15 @@ For each new Dataset X:\
 ### Shuffle
 For each new Dataset X:\
 **datasetXShuffleOption**: the shuffle option for the new datasets (row shuffle, column shuffle or no change).
+
+## FAQ
+#### Why is the installation not working?
+You need to install React and Next.js. Please check if this installation was successful.  
+If you have problems with building the Docker containers, please check if you are executing VS Code and Docker as an administrator.
+
+#### Why do my generated datasets look different from what I expected?
+You can check several points:
+1. Did you specify the correct separator? If you specify the wrong character, it is possible that the tool will read the entries of a whole row as one single entry.
+2. Did you specify error methods? If you chose to enable noise, you must specify what methods SYDAG is allowed to use. If you do not choose methods, SYDAG cannot add errors.
+3. Did you use normalization? If you choose to apply normalization and preserve the key constraints, it is possible that fewer errors than you expected appear in your relations. This happens because, in that case, SYDAG does not add errors to the key and foreign key columns. You can either choose a higher percentage, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will cause fewer foreign-key columns, and therefore more columns remain to receive noise.
+
