@@ -193,4 +193,4 @@ You can check several points:
 #### What should I set the parameters, which I am not using, to in the JSON configuration file?
 If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
 Additionally, Split, Structure and Noise can include parameters that are not needed, for example, when the noise is not enabled or the structure is not changed.
-In the JSON file, set the booleans to false and the percentages to 0, as they will not be used for the generation anyway.
+In the JSON file, set the unused booleans to false, the arrays of chosen methods to empty '[]' and the rest of the parameters to null. They will not be used for the generation anyway.
