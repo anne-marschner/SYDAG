@@ -78,6 +78,90 @@ For each new Dataset X:\
 For each new Dataset X:\
 **datasetXShuffleOption**: the shuffle option for the new datasets (row shuffle, column shuffle or no change).
 
+### JSON Upload
+In the GUI the user can either set the parameters manually or upload a JSON file that conatains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.\
+```json
+{
+
+  "splitType": "VerticalHorizontal", 	// "Vertical", "Horizontal", "VerticalHorizontal" 
+  "rowOverlapPercentage": 0,		// 0 to 100
+  "columnOverlapPercentage": 0,		// 0 to 100
+  "rowDistribution": 0,			// 0 to 100
+  "columnDistribution": 0,		// 0 to 100
+  "overlapType": "Mixed Overlap",	// "Mixed Overlap", "Block Overlap"
+
+  "dataset1StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "dataset1BCNFSliderValue": 0,		// 0 to 100
+  "dataset1JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset2StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "dataset2BCNFSliderValue": 0,		// 0 to 100
+  "dataset2JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset3StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "dataset3BCNFSliderValue": 0,		// 0 to 100
+  "dataset3JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset4StructureType": "No Change", // "No Change", "BCNF", "Join Columns"
+  "dataset4BCNFSliderValue": 0,		// 0 to 100
+  "dataset4JoinColumnsSliderValue": 0,	// 0 to 100
+
+  "dataset1SchemaNoise": false,		// false, true
+  "dataset1SchemaNoiseValue": 0,	// 0 to 100
+  "dataset1SchemaKeyNoise": false,	// false, true
+  "dataset1SchemaDeleteSchema": false,	// false, true
+  "dataset1SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset2SchemaNoise": false,		// false, true
+  "dataset2SchemaNoiseValue": 0,	// 0 to 100
+  "dataset2SchemaKeyNoise": false,	// false, true
+  "dataset2SchemaDeleteSchema": false,	// false, true
+  "dataset2SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset3SchemaNoise": false,		// false, true
+  "dataset3SchemaNoiseValue": 0,	// 0 to 100
+  "dataset3SchemaKeyNoise": false,	// false, true
+  "dataset3SchemaDeleteSchema": false,	// false, true
+  "dataset3SchemaMultiselect": [],	 //"generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset4SchemaNoise": false,		// false, true
+  "dataset4SchemaNoiseValue": 0,	// 0 to 100
+  "dataset4SchemaKeyNoise": false,	// false, true
+  "dataset4SchemaDeleteSchema": false,	// false, true
+  "dataset4SchemaMultiselect": [],	// //"generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+
+  "dataset1DataNoise": false,		// false, true
+  "dataset1DataNoiseValue": 0,		// 0 to 100
+  "dataset1DataKeyNoise": false,	// false, true
+  "dataset1DataNoiseInside": 0,		// 0 to 100
+  "dataset1DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset2DataNoise": false,		// false, true
+  "dataset2DataNoiseValue": 0,		// 0 to 100
+  "dataset2DataKeyNoise": false,	// false, true
+  "dataset2DataNoiseInside": 0,		// 0 to 100
+  "dataset2DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset3DataNoise": false,		// false, true
+  "dataset3DataNoiseValue": 0,		// 0 to 100
+  "dataset3DataKeyNoise": false,	// false, true
+  "dataset3DataNoiseInside": 0,		// 0 to 100
+  "dataset3DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset4DataNoise": false,		// false, true
+  "dataset4DataNoiseValue": 0,		// 0 to 100
+  "dataset4DataKeyNoise": false,	// false, true
+  "dataset4DataNoiseInside": 0,		// 0 to 100
+  "dataset4DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+
+  "dataset1ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
+  "dataset2ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
+  "dataset3ShuffleOption": "No Change",	// "No Change", "Shuffle Rows", "Shuffle Columns"
+  "dataset4ShuffleOption": "No Change"	// "No Change", "Shuffle Rows", "Shuffle Columns"
+}
+
+
+
 ## FAQ
 #### Why is the installation not working?
 You need to install React and Next.js. Please check if this installation was successful.  
