@@ -82,7 +82,6 @@ For each new Dataset X:\
 In the GUI the user can either set the parameters manually or upload a JSON file that conatains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.
 ```
 {
-
   "splitType": "VerticalHorizontal", 	// "Vertical", "Horizontal", "VerticalHorizontal" 
   "rowOverlapPercentage": 0,		// 0 to 100
   "columnOverlapPercentage": 0,		// 0 to 100
@@ -110,49 +109,65 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "dataset1SchemaNoiseValue": 0,	// 0 to 100
   "dataset1SchemaKeyNoise": false,	// false, true
   "dataset1SchemaDeleteSchema": false,	// false, true
-  "dataset1SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+  "dataset1SchemaMultiselect": [],	//  "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                      "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
   "dataset2SchemaNoise": false,		// false, true
   "dataset2SchemaNoiseValue": 0,	// 0 to 100
   "dataset2SchemaKeyNoise": false,	// false, true
   "dataset2SchemaDeleteSchema": false,	// false, true
-  "dataset2SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+  "dataset2SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                      "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
   "dataset3SchemaNoise": false,		// false, true
   "dataset3SchemaNoiseValue": 0,	// 0 to 100
   "dataset3SchemaKeyNoise": false,	// false, true
   "dataset3SchemaDeleteSchema": false,	// false, true
-  "dataset3SchemaMultiselect": [],	 //"generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+  "dataset3SchemaMultiselect": [],	 //"generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                      "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
   "dataset4SchemaNoise": false,		// false, true
   "dataset4SchemaNoiseValue": 0,	// 0 to 100
   "dataset4SchemaKeyNoise": false,	// false, true
   "dataset4SchemaDeleteSchema": false,	// false, true
-  "dataset4SchemaMultiselect": [],	// //"generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+  "dataset4SchemaMultiselect": [],	//"generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                      "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
   "dataset1DataNoise": false,		// false, true
   "dataset1DataNoiseValue": 0,		// 0 to 100
   "dataset1DataKeyNoise": false,	// false, true
   "dataset1DataNoiseInside": 0,		// 0 to 100
-  "dataset1DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+  "dataset1DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                    "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                    "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                    "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset2DataNoise": false,		// false, true
   "dataset2DataNoiseValue": 0,		// 0 to 100
   "dataset2DataKeyNoise": false,	// false, true
   "dataset2DataNoiseInside": 0,		// 0 to 100
-  "dataset2DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+  "dataset2DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                    "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                    "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                    "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset3DataNoise": false,		// false, true
   "dataset3DataNoiseValue": 0,		// 0 to 100
   "dataset3DataKeyNoise": false,	// false, true
   "dataset3DataNoiseInside": 0,		// 0 to 100
-  "dataset3DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+  "dataset3DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                    "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                    "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                    "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset4DataNoise": false,		// false, true
   "dataset4DataNoiseValue": 0,		// 0 to 100
   "dataset4DataKeyNoise": false,	// false, true
   "dataset4DataNoiseInside": 0,		// 0 to 100
-  "dataset4DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier" 
+  "dataset4DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+                                    "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                    "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                    "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset1ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
   "dataset2ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
@@ -174,3 +189,5 @@ You can check several points:
 3. Did you try adding errors to numeric values? If so, you need to chose at least one method that is applied on numeric methods: "changeValue" or "changeValueToOutlier". If you do not chose one of them, SYDAG cannot add numeric errors.
 4. Did you use normalization? If you choose to apply normalization and preserve the key constraints, it is possible that fewer errors than you expected appear in your relations. This happens because, in that case, SYDAG does not add errors to the key and foreign key columns. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will cause fewer foreign-key columns, and therefore more columns remain to receive noise.
 
+#### What should I set the parameters in the JSON file for the third and fourth datasets to when I only apply a vertical or horizontal split?
+If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used. Set the booleans to false and the noise percentages to 0, as they will not be used for the generation anyway.
