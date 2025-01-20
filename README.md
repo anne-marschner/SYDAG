@@ -123,8 +123,8 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "dataset3SchemaNoiseValue": 0,	// 0 to 100
   "dataset3SchemaKeyNoise": false,	// false, true
   "dataset3SchemaDeleteSchema": false,	// false, true
-  "dataset3SchemaMultiselect": [],	 // "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
-                                          "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+  "dataset3SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
   "dataset4SchemaNoise": false,		// false, true
   "dataset4SchemaNoiseValue": 0,	// 0 to 100
@@ -138,36 +138,36 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "dataset1DataKeyNoise": false,	// false, true
   "dataset1DataNoiseInside": 0,		// 0 to 100
   "dataset1DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
-                                      "shuffleWords", "generateMissingValue", "generatePhoneticError",
-                                      "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                      "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset2DataNoise": false,		// false, true
   "dataset2DataNoiseValue": 0,		// 0 to 100
   "dataset2DataKeyNoise": false,	// false, true
   "dataset2DataNoiseInside": 0,		// 0 to 100
   "dataset2DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
-                                      "shuffleWords", "generateMissingValue", "generatePhoneticError",
-                                      "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                      "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset3DataNoise": false,		// false, true
   "dataset3DataNoiseValue": 0,		// 0 to 100
   "dataset3DataKeyNoise": false,	// false, true
   "dataset3DataNoiseInside": 0,		// 0 to 100
   "dataset3DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
-                                      "shuffleWords", "generateMissingValue", "generatePhoneticError",
-                                      "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                      "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset4DataNoise": false,		// false, true
   "dataset4DataNoiseValue": 0,		// 0 to 100
   "dataset4DataKeyNoise": false,	// false, true
   "dataset4DataNoiseInside": 0,		// 0 to 100
   "dataset4DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
-                                      "shuffleWords", "generateMissingValue", "generatePhoneticError",
-                                      "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                      "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "shuffleWords", "generateMissingValue", "generatePhoneticError",
+                                        "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
+                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
 
   "dataset1ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
   "dataset2ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
