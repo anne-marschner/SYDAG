@@ -36,11 +36,11 @@ The configuration of SYDAG includes several parameters that the user must adjust
 In the following we give an overview over all of the parameters and their effects on the generation. For our explanation we follow the grouping of the parameters in the interface. 
 
 ### Input File
-**csvFile**: An input relation stored as a CSV file. \
-**hasHeaders**: Whether the relation has headers. \
-**separator**:  The characters used as separator in the csv file. \
-**quote**: The characters used for quotes in the csv file. \
-**escape**: The characters used as escape sequence in the csv file.
+* **csvFile**: An input relation stored as a CSV file. \
+* **hasHeaders**: Whether the relation has headers. \
+* **separator**:  The characters used as separator in the csv file. \
+* **quote**: The characters used for quotes in the csv file. \
+* **escape**: The characters used as escape sequence in the csv file.
 
 ### Configuration Type
 **jsonFile**: A json file that includes all configuration settings. \
