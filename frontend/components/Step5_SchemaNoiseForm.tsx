@@ -13,13 +13,13 @@ import { Cat, Dog, Fish } from "lucide-react";
 
 // Example multi-select options. Adjust as needed:
 const frameworksList = [
-  { value: "generateRandomString", label: "generateRandomString", icon: Fish },
-  { value: "abbreviateFirstLetters", label: "abbreviateFirstLetters", icon: Cat },
-  { value: "abbreviateRandomLength", label: "abbreviateRandomLength", icon: Dog },
-  { value: "addRandomPrefix", label: "addRandomPrefix", icon: Fish },
-  { value: "shuffleLetters", label: "shuffleLetters", icon: Fish },
-  { value: "replaceWithSynonyms", label: "replaceWithSynonyms", icon: Fish },
-  { value: "replaceWithTranslation", label: "replaceWithTranslation", icon: Fish }
+  { value: "generateRandomString", label: "generateRandomString" },
+  { value: "abbreviateFirstLetters", label: "abbreviateFirstLetters" },
+  { value: "abbreviateRandomLength", label: "abbreviateRandomLength" },
+  { value: "addRandomPrefix", label: "addRandomPrefix" },
+  { value: "shuffleLetters", label: "shuffleLetters" },
+  { value: "replaceWithSynonyms", label: "replaceWithSynonyms" },
+  { value: "replaceWithTranslation", label: "replaceWithTranslation" }
 ];
 
 type StepProps = {

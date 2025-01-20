@@ -13,18 +13,18 @@ import { Cat, Dog, Fish} from "lucide-react";
 
 // Multi-select options.
 const frameworksList = [
-  { value: "replaceWithSynonyms", label: "replaceWithSynonyms", icon: Fish },
-  { value: "addRandomPrefix", label: "addRandomPrefix", icon: Cat },
-  { value: "replaceWithTranslation", label: "replaceWithTranslation", icon: Dog },
-  { value: "shuffleWords", label: "shuffleWords", icon: Fish },
-  { value: "generateMissingValue", label: "generateMissingValue", icon: Fish },
-  { value: "generatePhoneticError", label: "generatePhoneticError", icon: Fish },
-  { value: "generateOCRError", label: "generateOCRError", icon: Fish },
-  { value: "changeFormat", label: "changeFormat", icon: Fish },
-  { value: "generateTypingError", label: "generateTypingError", icon: Fish },
-  { value: "generateRandomString", label: "generateRandomString", icon: Fish },
-  { value: "changeValue", label: "changeValue", icon: Fish },
-  { value: "changeValueToOutlier", label: "changeValueToOutlier", icon: Fish }
+  { value: "replaceWithSynonyms", label: "replaceWithSynonyms" },
+  { value: "addRandomPrefix", label: "addRandomPrefix" },
+  { value: "replaceWithTranslation", label: "replaceWithTranslation" },
+  { value: "shuffleWords", label: "shuffleWords" },
+  { value: "generateMissingValue", label: "generateMissingValue" },
+  { value: "generatePhoneticError", label: "generatePhoneticError" },
+  { value: "generateOCRError", label: "generateOCRError" },
+  { value: "changeFormat", label: "changeFormat" },
+  { value: "generateTypingError", label: "generateTypingError" },
+  { value: "generateRandomString", label: "generateRandomString" },
+  { value: "changeValue", label: "changeValue" },
+  { value: "changeValueToOutlier", label: "changeValueToOutlier" }
 ];
 
 type StepProps = {
