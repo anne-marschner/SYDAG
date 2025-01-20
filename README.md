@@ -190,5 +190,7 @@ You can check several points:
 3. Did you try adding errors to numeric values? If so, you need to chose at least one method that is applied on numeric methods: "changeValue" or "changeValueToOutlier". If you do not chose one of them, SYDAG cannot add numeric errors.
 4. Did you use normalization? If you choose to apply normalization and preserve the key constraints, it is possible that fewer errors than you expected appear in your relations. This happens because, in that case, SYDAG does not add errors to the key and foreign key columns. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will cause fewer foreign-key columns, and therefore more columns remain to receive noise.
 
-#### What should I set the parameters in the JSON file for the third and fourth datasets to when I only apply a vertical or horizontal split?
-If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used. Set the booleans to false and the noise percentages to 0, as they will not be used for the generation anyway.
+#### What should I set the parameters, which I am not using, to in the JSON configuration file?
+If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
+Additionally, Split, Structure and Noise can include parameters that are not needed, for example, when the noise is not enabled or the structure is not changed.
+In the JSON file, set the booleans to false and the percentages to 0, as they will not be used for the generation anyway.
