@@ -24,11 +24,12 @@ A list of technologies used within the project:
 
 
 ## Installation
-To install SYDAG the user must clone the GitHub repository. It is necessary to install react and NextJS with the following commands: 
-* 'npm install --save-exact react@^19.0.0 react-dom@^19.0.0' 
-* 'npm install --save-exact @types/react@^19.0.0 @types/react-dom@^19.0.0' 
-* 'npx @next/codemod@canary upgrade latest' 
-The project uses docker for fast and easy access. Therefore users must execute the [docker compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the docker environment.
+To install SYDAG the user must clone the GitHub repository. It is necessary to install React and Next.js with the following commands:
+* `npm install --save-exact react@^19.0.0 react-dom@^19.0.0`
+* `npm install --save-exact @types/react@^19.0.0 @types/react-dom@^19.0.0`
+* `npx @next/codemod@canary upgrade latest`
+
+The project uses Docker for fast and easy access. Therefore, users must execute the [Docker Compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the Docker environment.
 
 ## User Instructions
 The configuration of SYDAG includes several parameters that the user must adjust.
