@@ -6,7 +6,7 @@
 4. [User Instructions](#user-instructions)
 5. [FAQ](#faq)
 
-### General Information
+## General Information
 SYDAG is a **Sy**ntehtic **Da**taset **G**eneartor for data integration scenarios.
 Users can apply it to create integration scenarios that are customized to their specific needs. The generator works with relational datamodels. The user must supply SYADG with a relation stored in the form of a CSV file. SYDAG can process this relation to create an integration scenario of multiple datasets and relations.
 The user can choose between varies configuration options to achieve a specific result. 
