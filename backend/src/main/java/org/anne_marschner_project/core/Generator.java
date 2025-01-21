@@ -34,6 +34,7 @@ public class Generator {
      * Executes the entire data generation process using the parameters provided.
      *
      * @param params The parameters encapsulated in a GeneratorParameters object.
+     * @param outputPath the path for the output datasets and metadata
      */
     public void execute(GeneratorParameters params, String outputPath) {
 
