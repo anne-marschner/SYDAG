@@ -36,48 +36,48 @@ The configuration of SYDAG includes several parameters that the user must adjust
 In the following we give an overview over all of the parameters and their effects on the generation. For our explanation we follow the grouping of the parameters in the interface. 
 
 ### Input File
-**csvFile**: An input relation stored as a CSV file. \
-**hasHeaders**: Whether the relation has headers. \
-**separator**:  The characters used as separator in the csv file. \
-**quote**: The characters used for quotes in the csv file. \
-**escape**: The characters used as escape sequence in the csv file.
+* **csvFile**: An input relation stored as a CSV file. 
+* **hasHeaders**: Whether the relation has headers. 
+* **separator**:  The characters used as separator in the csv file. 
+* **quote**: The characters used for quotes in the csv file. 
+* **escape**: The characters used as escape sequence in the csv file.
 
 ### Configuration Type
-**jsonFile**: A json file that includes all configuration settings. \
-**mode**: The option of setting the configuration (manual setting or upload of a json file).
+* **jsonFile**: A json file that includes all configuration settings. 
+* **mode**: The option of setting the configuration (manual setting or upload of a json file).
 
 ### Split
-**splitType**: The type of split to be applied to the input relation (horizontal, vertical or both). \
-**rowOverlapPercentage**: The percentage of rows that should overlap between the split relations. \
-**columnOverlapPercentage**: The percentage of columns that should overlap between the split relations. \
-**rowDistribution**:  The distribution of the non-overlapping rows between the new relations. This percentage describes how many non-overlapping rows will be part of one of the new relations (0-100). \
-**columnDistribution**: The distribution of the non-overlapping columns between the new relations. This percentage describes how many non-overlapping columns will be part of one of the new relations (0-100). \
-**overlapType**: the way the overlapping rows should be picked (as block overlap or random overlap).
+* **splitType**: The type of split to be applied to the input relation (horizontal, vertical or both). 
+* **rowOverlapPercentage**: The percentage of rows that should overlap between the split relations. 
+* **columnOverlapPercentage**: The percentage of columns that should overlap between the split relations. 
+* **rowDistribution**:  The distribution of the non-overlapping rows between the new relations. This percentage describes how many non-overlapping rows will be part of one of the new relations (0-100). 
+* **columnDistribution**: The distribution of the non-overlapping columns between the new relations. This percentage describes how many non-overlapping columns will be part of one of the new relations (0-100). 
+* **overlapType**: the way the overlapping rows should be picked (as block overlap or random overlap).
 
 ### Structure
-For each new Dataset X: \
-**datasetXStructureType**: the structure change that will be applied to the new datsets (Join of Columns, Normalization to BCNF or no change).\
-**datasetXBCNFSliderValue**: the percentage that determines how many of the possible decomposition steps should be executed (0-100). \
-**datasetXJoinColumnsSliderValue**: the percentage of overlapping columns to join (0-100).
+For each new Dataset X: 
+* **datasetXStructureType**: the structure change that will be applied to the new datsets (Join of Columns, Normalization to BCNF or no change).
+* **datasetXBCNFSliderValue**: the percentage that determines how many of the possible decomposition steps should be executed (0-100). 
+* **datasetXJoinColumnsSliderValue**: the percentage of overlapping columns to join (0-100).
 
 ### Schema Noise
-For each new Dataset X:\
-**datasetXSchemaNoise**: whether the schema should include errors or not (true or false). \
-**datasetXSchemaNoiseValue**: the percentage that determines how many of the attributes overlapping with other relations the generator will change. (0-100) \
-**datasetXSchemaKeyNoise**: whether key columns should also be affected by the noise (true or false). \
-**datasetXSchemaDeleteSchema**: whether the schema should be deleted (true or false). \
-**datasetXSchemaMultiselect**: the methods that are chosen for the noise. ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation").
+For each new Dataset X:
+* **datasetXSchemaNoise**: whether the schema should include errors or not (true or false). 
+* **datasetXSchemaNoiseValue**: the percentage that determines how many of the attributes overlapping with other relations the generator will change. (0-100) 
+* **datasetXSchemaKeyNoise**: whether key columns should also be affected by the noise (true or false). 
+* **datasetXSchemaDeleteSchema**: whether the schema should be deleted (true or false). 
+* **datasetXSchemaMultiselect**: the methods that are chosen for the noise. ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation").
 
 ### Data Noise
-For each new Dataset X:\
-**dataset1DataNoise**: whether the data should include errors or not (true or false). \
-**dataset1DataNoiseValue**:  the percentage of rows/ columns to receive noise. (0-100) \
-**dataset1DataNoiseInside**: percentage that indicates how many of the entries within a for noise selected column or row should receive errors. (0-100) \
-**datasetXDataMultiselect**:  the methods that are chosen for the noise. ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier").
+For each new Dataset X:
+* **dataset1DataNoise**: whether the data should include errors or not (true or false). 
+* **dataset1DataNoiseValue**:  the percentage of rows/ columns to receive noise. (0-100) 
+* **dataset1DataNoiseInside**: percentage that indicates how many of the entries within a for noise selected column or row should receive errors. (0-100) 
+* **datasetXDataMultiselect**:  the methods that are chosen for the noise. ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier").
 
 ### Shuffle
-For each new Dataset X:\
-**datasetXShuffleOption**: the shuffle option for the new datasets (row shuffle, column shuffle or no change).
+For each new Dataset X:
+* **datasetXShuffleOption**: the shuffle option for the new datasets (row shuffle, column shuffle or no change).
 
 ### JSON Upload
 In the GUI the user can either set the parameters manually or upload a JSON file that conatains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.
@@ -190,5 +190,7 @@ You can check several points:
 3. Did you try adding errors to numeric values? If so, you need to chose at least one method that is applied on numeric methods: "changeValue" or "changeValueToOutlier". If you do not chose one of them, SYDAG cannot add numeric errors.
 4. Did you use normalization? If you choose to apply normalization and preserve the key constraints, it is possible that fewer errors than you expected appear in your relations. This happens because, in that case, SYDAG does not add errors to the key and foreign key columns. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will cause fewer foreign-key columns, and therefore more columns remain to receive noise.
 
-#### What should I set the parameters in the JSON file for the third and fourth datasets to when I only apply a vertical or horizontal split?
-If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used. Set the booleans to false and the noise percentages to 0, as they will not be used for the generation anyway.
+#### When using the JSON file, what value should I assign to the parameters I am not using?
+If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
+Additionally, Split, Structure and Noise can include parameters that are not needed, for example, when the noise is not enabled or the structure is not changed.
+In the JSON file, set the unused booleans to false, the arrays of chosen methods to empty '[]' and the rest of the parameters to null. They will not be used for the generation anyway.
