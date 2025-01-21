@@ -1,8 +1,0 @@
-Relation 1: 
-Foreign Key: Column 1, Column 5, Column 6, Column 7, Column 9;
-Primary Key: Column 1, Column 2, Column 3, Column 4, Column 5, Column 6, Column 7, Column 8, Column 9, Column 10;
-Relation 2: 
-Foreign Key: Column 4, Column 5;
-Primary Key: Column 1, Column 3, Column 4, Column 5, Column 6;
-Relation 3: 
-Primary Key: Column 2, Column 3;
