@@ -1,4 +1,3 @@
-// components/Step8_SummaryForm.tsx
 "use client";
 import React from "react";
 import FormWrapper from "./FormWrapper";
@@ -35,7 +34,7 @@ const Step8_SummaryForm = ({
     dataset3StructureType,
     dataset4StructureType,
 
-    // Step 5: Schema Noise
+    // Step 5
     dataset1SchemaNoise,
     dataset1SchemaNoiseValue,
     dataset1SchemaKeyNoise,
@@ -60,7 +59,7 @@ const Step8_SummaryForm = ({
     dataset4SchemaDeleteSchema,
     dataset4SchemaMultiselect,
 
-    // Step 6: Data Noise
+    // Step 6
     dataset1DataNoise,
     dataset1DataNoiseValue,
     dataset1DataKeyNoise,
@@ -360,7 +359,7 @@ const Step8_SummaryForm = ({
                                     }`}
                             </p>
 
-                            {/* NEW: Show multi-select */}
+                            {/* multi-select */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 Multi-Select:
                                 {dataset1SchemaMultiselect && dataset1SchemaMultiselect.length > 0
@@ -393,7 +392,7 @@ const Step8_SummaryForm = ({
                                     }`}
                             </p>
 
-                            {/* NEW: Show multi-select */}
+                            {/* multi-select */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 Multi-Select:
                                 {dataset2SchemaMultiselect && dataset2SchemaMultiselect.length > 0
@@ -429,7 +428,7 @@ const Step8_SummaryForm = ({
                                             }`}
                                     </p>
 
-                                    {/* NEW: Show multi-select */}
+                                    {/* multi-select */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         Multi-Select:
                                         {dataset3SchemaMultiselect && dataset3SchemaMultiselect.length > 0
@@ -462,7 +461,7 @@ const Step8_SummaryForm = ({
                                             }`}
                                     </p>
 
-                                    {/* NEW: Show multi-select */}
+                                    {/* multi-select */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         Multi-Select:
                                         {dataset4SchemaMultiselect && dataset4SchemaMultiselect.length > 0
@@ -506,7 +505,7 @@ const Step8_SummaryForm = ({
                                     }`}
                             </p>
 
-                            {/* NEW: Multi-Select Summary */}
+                            {/* Multi-Select Summary */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {dataset1DataMultiselect && dataset1DataMultiselect.length > 0
                                     ? `Multi-Select: ${dataset1DataMultiselect.join(", ")}`
@@ -539,7 +538,7 @@ const Step8_SummaryForm = ({
                                     }`}
                             </p>
 
-                            {/* NEW: Multi-Select Summary */}
+                            {/* Multi-Select Summary */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {dataset2DataMultiselect && dataset2DataMultiselect.length > 0
                                     ? `Multi-Select: ${dataset2DataMultiselect.join(", ")}`
@@ -575,7 +574,7 @@ const Step8_SummaryForm = ({
                                             }`}
                                     </p>
 
-                                    {/* NEW: Multi-Select Summary */}
+                                    {/* Multi-Select Summary */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {dataset3DataMultiselect && dataset3DataMultiselect.length > 0
                                             ? `Multi-Select: ${dataset3DataMultiselect.join(", ")}`
@@ -608,7 +607,7 @@ const Step8_SummaryForm = ({
                                             }`}
                                     </p>
 
-                                    {/* NEW: Multi-Select Summary */}
+                                    {/* Multi-Select Summary */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {dataset4DataMultiselect && dataset4DataMultiselect.length > 0
                                             ? `Multi-Select: ${dataset4DataMultiselect.join(", ")}`

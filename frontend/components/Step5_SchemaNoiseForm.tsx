@@ -1,17 +1,11 @@
-// components/Step5_SchemaNoiseForm.tsx
-
 "use client";
 import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import FormWrapper from "./FormWrapper";
-import { FormItems } from "@/components/types/formTypes";
-
-// ===== Multi-Select Imports =====
+import { FormItems } from "@/components/types/formTypes"; 
 import { MultiSelect } from "@/components/ui/multi-select";
-import { Cat, Dog, Fish } from "lucide-react";
 
-// Example multi-select options. Adjust as needed:
 const frameworksList = [
   { value: "generateRandomString", label: "generateRandomString" },
   { value: "abbreviateFirstLetters", label: "abbreviateFirstLetters" },
@@ -111,7 +105,7 @@ const Step5_SchemaNoiseForm = ({
   const [dataset1DeleteSchemaEnabled, setDataset1DeleteSchemaEnabled] = useState<boolean>(
     !!dataset1SchemaDeleteSchema
   );
-  // NEW: initialize local state from props
+  // initialize local state from props
   const [dataset1Selections, setDataset1Selections] = useState<string[]>(
     dataset1SchemaMultiselect ?? []
   );
@@ -123,7 +117,7 @@ const Step5_SchemaNoiseForm = ({
   const [dataset2DeleteSchemaEnabled, setDataset2DeleteSchemaEnabled] = useState<boolean>(
     !!dataset2SchemaDeleteSchema
   );
-  // NEW
+  
   const [dataset2Selections, setDataset2Selections] = useState<string[]>(
     dataset2SchemaMultiselect ?? []
   );
@@ -135,7 +129,7 @@ const Step5_SchemaNoiseForm = ({
   const [dataset3DeleteSchemaEnabled, setDataset3DeleteSchemaEnabled] = useState<boolean>(
     !!dataset3SchemaDeleteSchema
   );
-  // NEW
+  
   const [dataset3Selections, setDataset3Selections] = useState<string[]>(
     dataset3SchemaMultiselect ?? []
   );
@@ -147,16 +141,12 @@ const Step5_SchemaNoiseForm = ({
   const [dataset4DeleteSchemaEnabled, setDataset4DeleteSchemaEnabled] = useState<boolean>(
     !!dataset4SchemaDeleteSchema
   );
-  // NEW
+  
   const [dataset4Selections, setDataset4Selections] = useState<string[]>(
     dataset4SchemaMultiselect ?? []
   );
 
-  // ============= HANDLERS =============
-  // We already have handlers for toggles/sliders.
-  // We'll add multi-select handlers to update the parent form.
-
-  // === DATASET 1 ===
+  // DATASET 1
   const handleDataset1Toggle = (checked: boolean) => {
     setDataset1Enabled(checked);
     if (!checked) {
@@ -210,14 +200,14 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // NEW: handle multi-select changes for dataset 1
+  // handle multi-select changes for dataset 1
   const handleDataset1MultiselectChange = (values: string[]) => {
     setDataset1Selections(values);
     // Also store in parent form
     updateForm({ dataset1SchemaMultiselect: values });
   };
 
-  // === DATASET 2 ===
+  // DATASET 2
   const handleDataset2Toggle = (checked: boolean) => {
     setDataset2Enabled(checked);
     if (!checked) {
@@ -230,7 +220,7 @@ const Step5_SchemaNoiseForm = ({
         dataset2SchemaNoiseValue: 0,
         dataset2SchemaKeyNoise: false,
         dataset2SchemaDeleteSchema: false,
-        dataset2SchemaMultiselect: [], // reset in parent
+        dataset2SchemaMultiselect: [],
       });
     } else {
       updateForm({ dataset2SchemaNoise: checked });
@@ -269,13 +259,13 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // NEW: handle multi-select changes for dataset 2
+  // handle multi-select changes for dataset 2
   const handleDataset2MultiselectChange = (values: string[]) => {
     setDataset2Selections(values);
     updateForm({ dataset2SchemaMultiselect: values });
   };
 
-  // === DATASET 3 ===
+  // DATASET 3
   const handleDataset3Toggle = (checked: boolean) => {
     setDataset3Enabled(checked);
     if (!checked) {
@@ -288,7 +278,7 @@ const Step5_SchemaNoiseForm = ({
         dataset3SchemaNoiseValue: 0,
         dataset3SchemaKeyNoise: false,
         dataset3SchemaDeleteSchema: false,
-        dataset3SchemaMultiselect: [], // reset in parent
+        dataset3SchemaMultiselect: [], 
       });
     } else {
       updateForm({ dataset3SchemaNoise: checked });
@@ -327,13 +317,13 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // NEW: handle multi-select changes for dataset 3
+  // handle multi-select changes for dataset 3
   const handleDataset3MultiselectChange = (values: string[]) => {
     setDataset3Selections(values);
     updateForm({ dataset3SchemaMultiselect: values });
   };
 
-  // === DATASET 4 ===
+  // DATASET 4
   const handleDataset4Toggle = (checked: boolean) => {
     setDataset4Enabled(checked);
     if (!checked) {
@@ -385,7 +375,7 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // NEW: handle multi-select changes for dataset 4
+  // handle multi-select changes for dataset 4
   const handleDataset4MultiselectChange = (values: string[]) => {
     setDataset4Selections(values);
     updateForm({ dataset4SchemaMultiselect: values });
@@ -487,7 +477,7 @@ const Step5_SchemaNoiseForm = ({
                   </p>
                 )}
 
-                {/* ===== Multi-Select for Dataset 1 ===== */}
+                {/* Multi-Select for Dataset 1 */}
                 <div className="mt-4">
                   <label htmlFor="dataset1MultiSelect" className="text-white">
                     Dataset 1 Multi-Select
@@ -590,7 +580,7 @@ const Step5_SchemaNoiseForm = ({
                   </p>
                 )}
 
-                {/* ===== Multi-Select for Dataset 2 ===== */}
+                {/* Multi-Select for Dataset 2 */}
                 <div className="mt-4">
                   <label htmlFor="dataset2MultiSelect" className="text-white">
                     Dataset 2 Multi-Select
@@ -697,7 +687,7 @@ const Step5_SchemaNoiseForm = ({
                     </p>
                   )}
 
-                  {/* ===== Multi-Select for Dataset 3 ===== */}
+                  {/* Multi-Select for Dataset 3 */}
                   <div className="mt-4">
                     <label htmlFor="dataset3MultiSelect" className="text-white">
                       Dataset 3 Multi-Select
@@ -800,7 +790,7 @@ const Step5_SchemaNoiseForm = ({
                     </p>
                   )}
 
-                  {/* ===== Multi-Select for Dataset 4 ===== */}
+                  {/* Multi-Select for Dataset 4 */}
                   <div className="mt-4">
                     <label htmlFor="dataset4MultiSelect" className="text-white">
                       Dataset 4 Multi-Select

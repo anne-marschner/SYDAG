@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { RefreshCcw, Download } from "lucide-react"; // Import Download icon
+import { RefreshCcw, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import successIcon from "../public/assets/success.png";
 import React from "react";
@@ -26,22 +26,12 @@ const successVariants = {
     },
 };
 
-/**
- * Component for rendering the success message with a download button.
- *
- * @param {Step10_SuccessMessageProps} props - The component props.
- * @param {string} props.downloadUrl - The URL to download the ZIP file.
- * @returns {JSX.Element} The rendered component.
- */
+
 const Step10_SuccessMessage: React.FC<Step10_SuccessMessageProps> = ({ downloadUrl }) => {
 
-    // Function to reload the page when the user clicks the "Restart" button.
     const refresh = () => window.location.reload();
 
-    /**
-     * Handles the download of the ZIP file.
-     * Creates a temporary anchor element to trigger the download.
-     */
+    //Handles the download of the ZIP file.
     const handleDownload = () => {
         if (!downloadUrl) {
             alert("Download link is not available.");
@@ -50,7 +40,7 @@ const Step10_SuccessMessage: React.FC<Step10_SuccessMessageProps> = ({ downloadU
 
         const link = document.createElement('a');
         link.href = downloadUrl;
-        link.download = 'datasets.zip'; // Name of the downloaded file
+        link.download = 'datasets.zip';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -82,7 +72,7 @@ const Step10_SuccessMessage: React.FC<Step10_SuccessMessageProps> = ({ downloadU
                 </h4>
 
                 <p className="text-sm max-w-md text-neutral-300 md:text-base">
-                    Your dataset has been successfully generated. You can now download the ZIP file containing your data.
+                    Your datasets have been successfully generated. You can now download the ZIP file containing your data.
                 </p>
 
                 <div className="flex items-center mt-6 gap-4">

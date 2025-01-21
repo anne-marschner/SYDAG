@@ -1,4 +1,3 @@
-// hooks/useFormHandler.ts
 import React, { useState, useCallback } from 'react';
 import { useMultistepForm } from '@/hooks/useMultistepForm';
 import { FormItems } from '@/components/types/formTypes';
@@ -9,8 +8,8 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
     const [errors, setErrors] = useState<Record<string, string[]>>({});
     const [showSuccessMsg, setShowSuccessMsg] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
-    const [downloadUrl, setDownloadUrl] = useState<string>(''); // URL for downloading
-    const [downloadBlob, setDownloadBlob] = useState<Blob | null>(null); // Blob data
+    const [downloadUrl, setDownloadUrl] = useState<string>('');
+    const [downloadBlob, setDownloadBlob] = useState<Blob | null>(null); 
 
     const {
         previousStep,
@@ -24,14 +23,14 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
     } = useMultistepForm(totalSteps, true);
 
     /**
-     * Memoized function to update form data.
+     * Function to update form data.
      */
     const updateForm = useCallback((fieldToUpdate: Partial<FormItems>) => {
         setFormData((prevFormData) => ({ ...prevFormData, ...fieldToUpdate }));
     }, []);
 
     /**
-     * Memoized handleOnSubmit function.
+     * HandleOnSubmit function.
      */
     const handleOnSubmit = useCallback(
         async (e: React.FormEvent<HTMLFormElement>) => {
@@ -100,7 +99,6 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                         new Blob([JSON.stringify(jsonParameters)], { type: 'application/json' })
                     );
 
-                    // Debug: log each part
                     formDataToSend.forEach((value, key) => {
                         console.log(`Key: ${key}`);
                         if (value instanceof Blob) {
@@ -108,7 +106,7 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                             reader.onload = function () {
                                 console.log(`Value: ${reader.result}`);
                             };
-                            reader.readAsText(value); // Read the Blob as text
+                            reader.readAsText(value);
                         } else {
                             console.log(`Value: ${value}`);
                         }
@@ -123,13 +121,13 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                     if (response.ok) {
                         // Extract the ZIP file from the response
                         const blob = await response.blob();
-                        setDownloadBlob(blob); // Store the blob data
+                        setDownloadBlob(blob);
 
                         // Create a URL for the blob
                         const url = window.URL.createObjectURL(blob);
-                        setDownloadUrl(url); // Store the download URL
+                        setDownloadUrl(url);
 
-                        setShowSuccessMsg(true); // Show success message
+                        setShowSuccessMsg(true);
                     } else {
                         // Handle error response
                         const errorData = await response.json();

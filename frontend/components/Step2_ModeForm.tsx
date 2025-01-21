@@ -13,25 +13,14 @@ import { Label } from "@/components/ui/label";
 import { FormItemsJSONSchema } from "@/utils/formValidation/formSchemas/formSchemas";
 import { z } from "zod";
 
-/**
- * We keep the original props for `mode`, `jsonFile`, etc.,
- * plus an *optional* `formData` for merging.
- */
 type StepProps = {
     mode: "UploadJson" | "Manual" | null;
     jsonFile: File | null;
     manualInput: boolean | null;
     errors: Record<string, string[]>;
 
-    /**
-     * If you want to merge in existing data (like csvFile, hasHeaders, etc.),
-     * pass it here. If not provided, `formData` can be undefined.
-     */
     formData?: FormItems;
 
-    /**
-     * Update function that takes a Partial<FormItems> and merges it in the parent.
-     */
     updateForm: (fields: Partial<FormItems>) => void;
 };
 
@@ -40,8 +29,6 @@ const Step2_ModeForm = ({
                             jsonFile,
                             manualInput,
                             errors,
-
-                            // Optionally passed for merging older fields:
                             formData,
 
                             updateForm
@@ -64,7 +51,6 @@ const Step2_ModeForm = ({
                 setFileError(null);
             }
 
-            // Partial update: keep your existing approach for these fields
             updateForm({
                 mode: newModeSelected as "UploadJson" | "Manual",
                 jsonFile: isManualMode ? null : jsonFile,
@@ -87,13 +73,12 @@ const Step2_ModeForm = ({
                 return;
             }
 
-            // Clear any previous file error
             setFileError(null);
 
-            // Immediately update the form with the File reference
+            // Update the form with the File reference
             updateForm({ jsonFile: file });
 
-            // Now read the file and parse it
+            // Read the file and parse it
             const reader = new FileReader();
             reader.onload = async (event) => {
                 try {

@@ -2,7 +2,6 @@ import React from "react";
 import * as ToggleComp from "@radix-ui/react-toggle";
 import { cn } from "@/lib/utils";
 
-// A modified toggle component to fit with existing styles
 const Toggle = React.forwardRef<
     React.ElementRef<typeof ToggleComp.Root>,
     React.ComponentPropsWithoutRef<typeof ToggleComp.Root>

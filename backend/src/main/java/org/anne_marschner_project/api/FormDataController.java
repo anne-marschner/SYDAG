@@ -56,24 +56,24 @@ public class FormDataController {
      */
     @PostMapping(value = "/runSYDAG", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> handleFormSubmit(@RequestPart("parameters") FormDataWrapper formDataWrapper, BindingResult bindingResult, @RequestPart(value = "csvFile", required = false) MultipartFile csvFile) throws IOException {
-        // 1. Check for binding errors
+        // Check for binding errors
         if (bindingResult.hasErrors()) {
             return createBindingErrorResponse(bindingResult);
         }
 
-        // 2. Validate CSV file
+        // Validate CSV file
         ResponseEntity<?> fileValidationResponse = validateCsvFile(csvFile);
         if (fileValidationResponse != null) {
             return fileValidationResponse;
         }
 
-        // 3. Prepare output path and generator parameters
+        // Prepare output path and generator parameters
         String outputPath = OUTPUT_PATH_BASE;
         GeneratorParameters params = new GeneratorParameters();
         params.setCsvFile(csvFile);
         params.setFormDataWrapper(formDataWrapper);
 
-        // 4. Execute generator and build ZIP response
+        // Execute generator and build ZIP response
         try {
             String generatorOutputPath = createGeneratorOutputPath(csvFile);
             generator.execute(params, generatorOutputPath);
@@ -85,7 +85,7 @@ public class FormDataController {
             logger.error("Error processing request", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while generating datasets.");
         } finally {
-            // 6. Cleanup
+            // Cleanup
             deleteFilesInDirectory(outputPath);
         }
     }

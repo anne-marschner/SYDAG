@@ -18,7 +18,7 @@ A list of technologies used within the project:
 * [HyUCC](https://hpi.de/naumann/projects/data-profiling-and-analytics/metanome-data-profiling/algorithms.html): Version 1.2
 * [Java](https://www.oracle.com/java/technologies/downloads/#java21): Version 21
 * [Spring Boot](https://spring.io/projects/spring-boot): Version 3.3.4
-* [TypeScript](https://www.npmjs.com/package/typescript): Version 4.9.5
+* [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
 * [React](https://react.dev/): Version 19.0.0
 * [NextJS](https://nextjs.org/): Version 15.1.5
 

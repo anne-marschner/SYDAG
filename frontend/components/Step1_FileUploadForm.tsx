@@ -11,8 +11,8 @@ type StepProps = {
     csvFile: File | null;
     hasHeaders: boolean | null;
     separator: string | null;
-    quote: string | null; // Added quote type
-    escape: string | null; // Added escape type
+    quote: string | null;
+    escape: string | null;
     updateForm: (fieldToUpdate: Partial<FormItems>) => void;
     errors: Record<string, string[]>;
 };
@@ -94,7 +94,7 @@ const Step1_FileUploadForm = ({
                         className="w-full"
                     />
 
-                    {/* Displays an error message if there's a validation error for the file input */}
+                    {/* Display an error message if there's a validation error for the file input */}
                     {errors.csvFile && (
                         <p className="text-red-500 text-sm">{errors.csvFile[0]}</p>
                     )}
@@ -140,7 +140,7 @@ const Step1_FileUploadForm = ({
                         className="w-full"
                     />
 
-                    {/* Displays an error message if there's a validation error for the separator input */}
+                    {/* Display an error message if there's a validation error for the separator input */}
                     {errors.separator && (
                         <p className="text-red-500 text-sm">{errors.separator[0]}</p>
                     )}
@@ -159,7 +159,7 @@ const Step1_FileUploadForm = ({
                         className="w-full"
                     />
 
-                    {/* Displays an error message if there's a validation error for the quote input */}
+                    {/* Display an error message if there's a validation error for the quote input */}
                     {errors.quote && (
                         <p className="text-red-500 text-sm">{errors.quote[0]}</p>
                     )}
@@ -178,7 +178,7 @@ const Step1_FileUploadForm = ({
                     className="w-full"
                     />
 
-                    {/* Displays an error message if there's a validation error for the escape input */}
+                    {/* Display an error message if there's a validation error for the escape input */}
                     {errors.escape && (
                         <p className="text-red-500 text-sm">{errors.escape[0]}</p>
                     )}

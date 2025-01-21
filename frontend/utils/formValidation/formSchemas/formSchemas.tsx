@@ -26,7 +26,7 @@ export const Step2Schema = z.object({
     jsonFile: z
         .instanceof(File)
         .refine((file) => file.type === 'application/json', {message: 'File must be a JSON.'})
-        .nullable(), // jsonFile can be null if mode is "Manual"
+        .nullable(),
     manualInput: z.boolean(),
 }).superRefine((data, ctx) => {
     // If the mode is 'UploadJson', the jsonFile must be provided
@@ -159,7 +159,6 @@ export const Step3Schema = z.object({
 // Step 4 Schema
 export const Step4Schema = z
     .object({
-        // Split Type (Consistent with Step 3)
         splitType: z.enum(["Horizontal", "Vertical", "VerticalHorizontal"]).nullable(),
 
         // Structure Type selections for all datasets

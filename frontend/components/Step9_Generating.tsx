@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 
-// Framer Motion animation variants for the container
 const generatingVariants = {
     hidden: {
         opacity: 0,
@@ -19,7 +18,6 @@ const generatingVariants = {
     },
 };
 
-// Framer Motion animation for the loader icon (spins in place)
 const loaderVariants = {
     animate: {
         rotate: 360,

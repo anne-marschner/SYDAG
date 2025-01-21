@@ -1,45 +1,41 @@
-import {ReactNode} from "react"; // Importing ReactNode type to type the `children` prop (used for rendering nested components).
-import {motion} from "framer-motion"; // Importing the `motion` component from Framer Motion for animation handling.
+import {ReactNode} from "react";
+import {motion} from "framer-motion"; 
 
-// Defining the types for the props that will be passed into the `FormWrapper` component.
+// Define the types for the props that will be passed into the `FormWrapper` component
 type FormWrapperProps = {
-    title: string; // The title of the form section.
-    description: string; // A brief description of the form section.
-    children: ReactNode; // The content (or form fields) passed as children, rendered inside the wrapper.
+    title: string;
+    description: string; 
+    children: ReactNode; 
 };
 
-// Defining animation variants for the form container using Framer Motion.
-// These variants control how the form appears on the screen (with opacity and position changes).
+// Define animation variants for the form container using Framer Motion
 const formVariants = {
     hidden: {
-        opacity: 0,  // Initially hidden (opacity set to 0).
-        x: -50,      // Initially positioned 50 pixels to the left (off-screen).
+        opacity: 0,
+        x: -50,     
     },
     visible: {
-        opacity: 1,  // Fully visible (opacity set to 1).
-        x: 0,        // Moves to its final position (x: 0, i.e., centered).
+        opacity: 1,  
+        x: 0,       
     },
     exit: {
-        opacity: 0,  // Fades out (opacity set to 0).
-        x: 50,       // Moves 50 pixels to the right during exit.
+        opacity: 0,
+        x: 50,
         transition: {
-            ease: "easeOut", // Smooth easing for the exit transition.
+            ease: "easeOut",
         },
     },
 };
 
-// The `FormWrapper` component is responsible for rendering a form section with a title, description, and form content.
+// `FormWrapper` component is responsible for rendering a form
 const FormWrapper = ({title, description, children}: FormWrapperProps) => {
     return (
-        // `motion.div` from Framer Motion is used to animate the container div.
-        // The `variants` prop defines the animation behavior (defined in `formVariants`).
-        // The `initial` state is "hidden", and it transitions to "visible" when mounted, and exits with the "exit" variant.
         <motion.div
-            className="flex flex-col gap-5" // Using Tailwind CSS classes for layout and spacing.
-            variants={formVariants} // Applying the animation variants defined earlier.
-            initial="hidden" // The form starts in the hidden state.
-            animate="visible" // When the component mounts, it animates to the visible state.
-            exit="exit" // When the component is removed, it animates using the exit variant.
+            className="flex flex-col gap-5"
+            variants={formVariants}
+            initial="hidden" 
+            animate="visible"
+            exit="exit"
         >
             {/* The header section of the form, containing the title and description. */}
             <div className="flex flex-col gap-2">
@@ -61,4 +57,4 @@ const FormWrapper = ({title, description, children}: FormWrapperProps) => {
     );
 };
 
-export default FormWrapper; // Exporting the `FormWrapper` component for use in other parts of the application.
+export default FormWrapper;

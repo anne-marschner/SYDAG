@@ -1,17 +1,13 @@
-// components/Step6_DataNoiseForm.tsx
-
 "use client";
 import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
-
-// ===== Multi-Select Imports =====
 import { MultiSelect } from "@/components/ui/multi-select";
 import { Cat, Dog, Fish} from "lucide-react";
 
-// Multi-select options.
+// Multi-select options
 const frameworksList = [
   { value: "replaceWithSynonyms", label: "replaceWithSynonyms" },
   { value: "addRandomPrefix", label: "addRandomPrefix" },
@@ -70,28 +66,28 @@ const Step6_DataNoiseForm = ({
   dataset1DataNoiseValue,
   dataset1DataKeyNoise,
   dataset1DataNoiseInside,
-  dataset1DataMultiselect, // NEW
+  dataset1DataMultiselect,
   // Dataset 2
   dataset2DataNoise,
   dataset2DataNoiseValue,
   dataset2DataKeyNoise,
   dataset2DataNoiseInside,
-  dataset2DataMultiselect, // NEW
+  dataset2DataMultiselect,
   // Dataset 3
   dataset3DataNoise,
   dataset3DataNoiseValue,
   dataset3DataKeyNoise,
   dataset3DataNoiseInside,
-  dataset3DataMultiselect, // NEW
+  dataset3DataMultiselect,
   // Dataset 4
   dataset4DataNoise,
   dataset4DataNoiseValue,
   dataset4DataKeyNoise,
   dataset4DataNoiseInside,
-  dataset4DataMultiselect, // NEW
+  dataset4DataMultiselect,
   errors,
 }: StepProps) => {
-  // ============= DATASET 1 STATE =============
+  // DATASET 1 STATE
   const [dataset1Enabled, setDataset1Enabled] = useState<boolean>(!!dataset1DataNoise);
   const [dataset1Level, setDataset1Level] = useState<number>(dataset1DataNoiseValue ?? 0);
   const [dataset1KeyEnabled, setDataset1KeyEnabled] = useState<boolean>(!!dataset1DataKeyNoise);
@@ -99,12 +95,12 @@ const Step6_DataNoiseForm = ({
     dataset1DataNoiseInside ?? 0
   );
 
-  // NEW: multi-select local state
+  // multi-select local state
   const [dataset1Selections, setDataset1Selections] = useState<string[]>(
     dataset1DataMultiselect ?? []
   );
 
-  // ============= DATASET 2 STATE =============
+  // DATASET 2 STATE
   const [dataset2Enabled, setDataset2Enabled] = useState<boolean>(!!dataset2DataNoise);
   const [dataset2Level, setDataset2Level] = useState<number>(dataset2DataNoiseValue ?? 0);
   const [dataset2KeyEnabled, setDataset2KeyEnabled] = useState<boolean>(!!dataset2DataKeyNoise);
@@ -112,12 +108,11 @@ const Step6_DataNoiseForm = ({
     dataset2DataNoiseInside ?? 0
   );
 
-  // NEW
   const [dataset2Selections, setDataset2Selections] = useState<string[]>(
     dataset2DataMultiselect ?? []
   );
 
-  // ============= DATASET 3 STATE =============
+  // DATASET 3 STATE 
   const [dataset3Enabled, setDataset3Enabled] = useState<boolean>(!!dataset3DataNoise);
   const [dataset3Level, setDataset3Level] = useState<number>(dataset3DataNoiseValue ?? 0);
   const [dataset3KeyEnabled, setDataset3KeyEnabled] = useState<boolean>(!!dataset3DataKeyNoise);
@@ -125,12 +120,11 @@ const Step6_DataNoiseForm = ({
     dataset3DataNoiseInside ?? 0
   );
 
-  // NEW
   const [dataset3Selections, setDataset3Selections] = useState<string[]>(
     dataset3DataMultiselect ?? []
   );
 
-  // ============= DATASET 4 STATE =============
+  // DATASET 4 STATE
   const [dataset4Enabled, setDataset4Enabled] = useState<boolean>(!!dataset4DataNoise);
   const [dataset4Level, setDataset4Level] = useState<number>(dataset4DataNoiseValue ?? 0);
   const [dataset4KeyEnabled, setDataset4KeyEnabled] = useState<boolean>(!!dataset4DataKeyNoise);
@@ -138,12 +132,11 @@ const Step6_DataNoiseForm = ({
     dataset4DataNoiseInside ?? 0
   );
 
-  // NEW
   const [dataset4Selections, setDataset4Selections] = useState<string[]>(
     dataset4DataMultiselect ?? []
   );
 
-  // ============= DATASET 1 HANDLERS =============
+  // DATASET 1 HANDLERS
   const handleDataset1Toggle = (checked: boolean) => {
     setDataset1Enabled(checked);
     if (!checked) {
@@ -158,7 +151,7 @@ const Step6_DataNoiseForm = ({
         dataset1DataNoiseValue: 0,
         dataset1DataKeyNoise: false,
         dataset1DataNoiseInside: 0,
-        dataset1DataMultiselect: [], // reset in parent
+        dataset1DataMultiselect: [],
       });
     } else {
       updateForm({ dataset1DataNoise: checked });
@@ -182,13 +175,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ dataset1DataNoiseInside: newValue });
   };
 
-  // NEW: handle multi-select changes for dataset 1
+  // handle multi-select changes for dataset 1
   const handleDataset1MultiselectChange = (values: string[]) => {
     setDataset1Selections(values);
     updateForm({ dataset1DataMultiselect: values });
   };
 
-  // ============= DATASET 2 HANDLERS =============
+  // DATASET 2 HANDLERS
   const handleDataset2Toggle = (checked: boolean) => {
     setDataset2Enabled(checked);
     if (!checked) {
@@ -226,13 +219,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ dataset2DataNoiseInside: newValue });
   };
 
-  // NEW: handle multi-select changes for dataset 2
+  // handle multi-select changes for dataset 2
   const handleDataset2MultiselectChange = (values: string[]) => {
     setDataset2Selections(values);
     updateForm({ dataset2DataMultiselect: values });
   };
 
-  // ============= DATASET 3 HANDLERS =============
+  // DATASET 3 HANDLERS
   const handleDataset3Toggle = (checked: boolean) => {
     setDataset3Enabled(checked);
     if (!checked) {
@@ -270,13 +263,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ dataset3DataNoiseInside: newValue });
   };
 
-  // NEW: handle multi-select changes for dataset 3
+  // handle multi-select changes for dataset 3
   const handleDataset3MultiselectChange = (values: string[]) => {
     setDataset3Selections(values);
     updateForm({ dataset3DataMultiselect: values });
   };
 
-  // ============= DATASET 4 HANDLERS =============
+  // DATASET 4 HANDLERS
   const handleDataset4Toggle = (checked: boolean) => {
     setDataset4Enabled(checked);
     if (!checked) {
@@ -314,13 +307,12 @@ const Step6_DataNoiseForm = ({
     updateForm({ dataset4DataNoiseInside: newValue });
   };
 
-  // NEW: handle multi-select changes for dataset 4
+  // handle multi-select changes for dataset 4
   const handleDataset4MultiselectChange = (values: string[]) => {
     setDataset4Selections(values);
     updateForm({ dataset4DataMultiselect: values });
   };
 
-  // ============= USE EFFECT =============
   // Reset Datasets 3 and 4 if splitType != "VerticalHorizontal"
   useEffect(() => {
     if (splitType !== "VerticalHorizontal") {
@@ -355,7 +347,7 @@ const Step6_DataNoiseForm = ({
     }
   }, [splitType, updateForm]);
 
-  // ============= RENDER =============
+  
   return (
     <FormWrapper
       title="Select Noise Options for Data"
@@ -363,7 +355,7 @@ const Step6_DataNoiseForm = ({
     >
       <div className="flex flex-col w-full h-[750px] max-h-[35vh] p-4 scrollbar-custom">
         <div className="flex flex-col md:flex-row md:gap-8 w-full">
-          {/* ================= Dataset 1 ================= */}
+          {/* Dataset 1 */}
           <div className="flex flex-col w-full">
             <h3 className="text-lg text-white mb-2">Dataset 1</h3>
             <div className="flex items-center gap-2 custom-label">
@@ -421,7 +413,7 @@ const Step6_DataNoiseForm = ({
                   </div>
                 </div>
 
-                {/* Existing Noise Slider */}
+                {/* Noise Slider */}
                 <div className="mt-4">
                   <label htmlFor="dataset1DataNoiseSlider" className="text-white">
                     Noise Percentage
@@ -445,7 +437,7 @@ const Step6_DataNoiseForm = ({
                   )}
                 </div>
 
-                {/* New Noise Inside Slider */}
+                {/* Noise Inside Slider */}
                 <div className="mt-4">
                   <label
                     htmlFor="dataset1DataNoiseInsideSlider"
@@ -475,7 +467,7 @@ const Step6_DataNoiseForm = ({
             )}
           </div>
 
-          {/* ================= Dataset 2 ================= */}
+          {/* Dataset 2 */}
           <div className="flex flex-col w-full">
             <h3 className="text-lg text-white mb-2">Dataset 2</h3>
             <div className="flex items-center gap-2 custom-label">
@@ -533,7 +525,7 @@ const Step6_DataNoiseForm = ({
                   </div>
                 </div>
 
-                {/* Existing Noise Slider */}
+                {/* Noise Slider */}
                 <div className="mt-4">
                   <label htmlFor="dataset2DataNoiseSlider" className="text-white">
                     Noise Percentage
@@ -557,7 +549,7 @@ const Step6_DataNoiseForm = ({
                   )}
                 </div>
 
-                {/* New Noise Inside Slider */}
+                {/* Noise Inside Slider */}
                 <div className="mt-4">
                   <label
                     htmlFor="dataset2DataNoiseInsideSlider"
@@ -591,7 +583,7 @@ const Step6_DataNoiseForm = ({
         {/* Conditionally Render Dataset 3 and Dataset 4 Controls */}
         {splitType === "VerticalHorizontal" && (
           <div className="flex flex-col md:flex-row md:gap-8 w-full mt-8">
-            {/* ================= Dataset 3 ================= */}
+            {/* Dataset 3 */}
             <div className="flex flex-col w-full">
               <h3 className="text-lg text-white mb-2">Dataset 3</h3>
               <div className="flex items-center gap-2 custom-label">
@@ -649,7 +641,7 @@ const Step6_DataNoiseForm = ({
                     </div>
                   </div>
 
-                  {/* Existing Noise Slider */}
+                  {/* Noise Slider */}
                   <div className="mt-4">
                     <label htmlFor="dataset3DataNoiseSlider" className="text-white">
                       Noise Percentage
@@ -673,7 +665,7 @@ const Step6_DataNoiseForm = ({
                     )}
                   </div>
 
-                  {/* New Noise Inside Slider */}
+                  {/* Noise Inside Slider */}
                   <div className="mt-4">
                     <label
                       htmlFor="dataset3DataNoiseInsideSlider"
@@ -703,7 +695,7 @@ const Step6_DataNoiseForm = ({
               )}
             </div>
 
-            {/* ================= Dataset 4 ================= */}
+            {/* Dataset 4 */}
             <div className="flex flex-col w-full">
               <h3 className="text-lg text-white mb-2">Dataset 4</h3>
               <div className="flex items-center gap-2 custom-label">
@@ -761,7 +753,7 @@ const Step6_DataNoiseForm = ({
                     </div>
                   </div>
 
-                  {/* Existing Noise Slider */}
+                  {/* Noise Slider */}
                   <div className="mt-4">
                     <label htmlFor="dataset4DataNoiseSlider" className="text-white">
                       Noise Percentage
@@ -785,7 +777,7 @@ const Step6_DataNoiseForm = ({
                     )}
                   </div>
 
-                  {/* New Noise Inside Slider */}
+                  {/* Noise Inside Slider */}
                   <div className="mt-4">
                     <label
                       htmlFor="dataset4DataNoiseInsideSlider"

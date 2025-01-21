@@ -1,4 +1,3 @@
-// src/main/java/org/anne_marschner_project/api/FormDataWrapper.java
 package org.anne_marschner_project.api;
 
 import lombok.Data;

@@ -1,28 +1,26 @@
-// components/Step7_ShuffleForm.tsx
 "use client";
 import React, { useState, useCallback, useEffect } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
 
-// Defining the types for the props passed to the Step7_ShuffleForm component.
 type StepProps = {
-    splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null; // Added splitType for conditional rendering
+    splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null; 
 
     dataset1ShuffleOption: "Shuffle Columns" | "Shuffle Rows" | "No Change" | null;
     dataset2ShuffleOption: "Shuffle Columns" | "Shuffle Rows" | "No Change" | null;
-    dataset3ShuffleOption: "Shuffle Columns" | "Shuffle Rows" | "No Change" | null; // Added Dataset 3
-    dataset4ShuffleOption: "Shuffle Columns" | "Shuffle Rows" | "No Change" | null; // Added Dataset 4
+    dataset3ShuffleOption: "Shuffle Columns" | "Shuffle Rows" | "No Change" | null;
+    dataset4ShuffleOption: "Shuffle Columns" | "Shuffle Rows" | "No Change" | null;
 
-    updateForm: (fieldToUpdate: Partial<FormItems>) => void; // Function to update form fields.
+    updateForm: (fieldToUpdate: Partial<FormItems>) => void;
     errors: Record<string, string[]>;
 };
 
 type ShuffleType = "Shuffle Columns" | "Shuffle Rows" | "No Change" | null;
 
-// Main functional component for selecting shuffle options.
+// Main functional component for selecting shuffle options
 const Step7_ShuffleForm = ({
-                               splitType, // Added splitType prop
+                               splitType,
                                updateForm,
                                dataset1ShuffleOption,
                                dataset2ShuffleOption,
@@ -30,7 +28,7 @@ const Step7_ShuffleForm = ({
                                dataset4ShuffleOption,
                                errors,
                            }: StepProps) => {
-    // State management for the selected shuffle options.
+    // State management for the selected shuffle options
     const [shuffleOptionSelected1, setShuffleOptionSelected1] = useState<ShuffleType>(
         dataset1ShuffleOption
     );
@@ -46,7 +44,6 @@ const Step7_ShuffleForm = ({
 
     /**
      * Handler functions for changing the selected shuffle option.
-     * Memoized using useCallback to ensure stable references across renders.
      */
     const handleValueChange1 = useCallback(
         (selected: string | null) => {
@@ -106,7 +103,6 @@ const Step7_ShuffleForm = ({
 
     /**
      * Effect to reset Datasets 3 and 4 when splitType changes away from "VerticalHorizontal".
-     * Ensures that state is clean when these datasets are not applicable.
      */
     useEffect(() => {
         if (splitType !== "VerticalHorizontal") {
@@ -297,5 +293,4 @@ const Step7_ShuffleForm = ({
 );
 };
 
-// Memoizing the component to prevent unnecessary re-renders
 export default React.memo(Step7_ShuffleForm);

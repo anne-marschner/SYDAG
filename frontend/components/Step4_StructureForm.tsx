@@ -1,4 +1,3 @@
-// components/Step4_StructureForm.tsx
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
@@ -52,7 +51,7 @@ const Step4_StructureForm = ({
                                  dataset4JoinColumnsSliderValue,
                                  errors,
                              }: StepProps) => {
-    // State management for the selected normalization option for each dataset.
+    // State management for the selected normalization option for each dataset
     const [planSelected1, setPlanSelected1] = useState<StructureType | null>(
         dataset1StructureType
     );
@@ -96,7 +95,6 @@ const Step4_StructureForm = ({
 
     /**
      * Handler functions for each dataset's structure type.
-     * Memoized using useCallback to ensure stable references across renders.
      */
     const handleValueChange1 = useCallback(
         (selected: string | null) => {
@@ -196,7 +194,6 @@ const Step4_StructureForm = ({
 
     /**
      * Handler functions for sliders.
-     * Memoized using useCallback to ensure stable references across renders.
      */
     const handleDataset1BCNFSliderChange = useCallback(
         (value: number[]) => {
