@@ -68,7 +68,7 @@ const Step10_SuccessMessage: React.FC<Step10_SuccessMessageProps> = ({ downloadU
                 />
 
                 <h4 className="text-2xl font-semibold text-white md:text-3xl">
-                    Dataset Generated Successfully!
+                    Datasets Generated Successfully!
                 </h4>
 
                 <p className="text-sm max-w-md text-neutral-300 md:text-base">
