@@ -119,6 +119,15 @@ public class CSVTool {
      */
     public List<Integer> writeCSV(Relation relation, String filePath, char separator, char quoteChar, String shuffleType) throws IOException {
 
+        // Ensure the directory for the file path exists
+        File file = new File(filePath);
+        File parentDirectory = file.getParentFile();
+        if (parentDirectory != null && !parentDirectory.exists()) {
+            if (!parentDirectory.mkdirs()) {
+                throw new IOException("Failed to create the directory: " + parentDirectory.getAbsolutePath());
+            }
+        }
+
         // Check that Relation cannot be null in order to write it in CSV
         if (relation == null || relation.getData() == null || relation.getSchema() == null
                 || relation.getData().isEmpty() || relation.getSchema().isEmpty()) {
