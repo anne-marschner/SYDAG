@@ -4,7 +4,6 @@ import org.anne_marschner_project.core.data.Attribute;
 import org.anne_marschner_project.core.data.Relation;
 import org.anne_marschner_project.core.data.Type;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 import java.util.function.Predicate;
 
