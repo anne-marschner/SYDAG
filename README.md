@@ -16,6 +16,8 @@ We provide a graphical user interface for an easy usage of SYDAG. The output inc
 A list of technologies used within the project:
 * [Normalize](https://hpi.de/naumann/projects/data-profiling-and-analytics/metanome-data-profiling/algorithms.html): Version 1.2 
 * [HyUCC](https://hpi.de/naumann/projects/data-profiling-and-analytics/metanome-data-profiling/algorithms.html): Version 1.2
+* [Datamuse](https://www.datamuse.com/api/): Version 1.1
+* [MyMemory](https://mymemory.translated.net/doc/spec.php)
 * [Java](https://www.oracle.com/java/technologies/downloads/#java21): Version 21
 * [Spring Boot](https://spring.io/projects/spring-boot): Version 3.3.4
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
