@@ -207,7 +207,7 @@ public class Generator {
         Set<String> stringMethods = Set.of(
                 "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue",
                 "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                "generateRandomString"
+                "generateRandomString", "mapColumn"
         );
         // Filter the entries that are String methods
         return allChosenMethods.stream()

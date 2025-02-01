@@ -5,7 +5,6 @@ import { Slider } from "@/components/ui/slider";
 import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
 import { MultiSelect } from "@/components/ui/multi-select";
-import { Cat, Dog, Fish} from "lucide-react";
 
 // Multi-select options
 const frameworksList = [
@@ -20,7 +19,8 @@ const frameworksList = [
   { value: "generateTypingError", label: "generateTypingError" },
   { value: "generateRandomString", label: "generateRandomString" },
   { value: "changeValue", label: "changeValue" },
-  { value: "changeValueToOutlier", label: "changeValueToOutlier" }
+  { value: "changeValueToOutlier", label: "changeValueToOutlier" },
+  { value: "mapColumn", label: "mapColumn" }
 ];
 
 type StepProps = {
