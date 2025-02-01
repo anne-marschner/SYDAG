@@ -22,7 +22,7 @@ A list of technologies used within the project:
 * [Spring Boot](https://spring.io/projects/spring-boot): Version 3.3.4
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
 * [React](https://react.dev/): Version 19.0.0
-* [NextJS](https://nextjs.org/): Version 15.1.5
+* [Next.js](https://nextjs.org/): Version 15.1.5
 
 
 ## Installation
