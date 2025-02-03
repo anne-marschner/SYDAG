@@ -418,7 +418,7 @@ const Step5_SchemaNoiseForm = ({
   return (
     <FormWrapper
       title="Select Noise Options for Schema"
-      description="You can choose if you want to add noise into the schema of each dataset"
+      description="For each dataset, choose whether to add noise to the schema."
     >
       <div className="flex flex-col w-full h-[750px] max-h-[35vh] p-4 scrollbar-custom">
         <div className="flex flex-col md:flex-row md:gap-8 w-full">
@@ -432,7 +432,7 @@ const Step5_SchemaNoiseForm = ({
                 id="dataset1SchemaNoise"
               />
               <label htmlFor="dataset1SchemaNoise" className="text-white">
-                Enable Option
+                Enable Noise
               </label>
             </div>
             {errors.dataset1SchemaNoise && (
@@ -535,7 +535,7 @@ const Step5_SchemaNoiseForm = ({
                 id="dataset2SchemaNoise"
               />
               <label htmlFor="dataset2SchemaNoise" className="text-white">
-                Enable Option
+                Enable Noise
               </label>
             </div>
             {errors.dataset2SchemaNoise && (
@@ -642,7 +642,7 @@ const Step5_SchemaNoiseForm = ({
                   id="dataset3SchemaNoise"
                 />
                 <label htmlFor="dataset3SchemaNoise" className="text-white">
-                  Enable Option
+                  Enable Noise
                 </label>
               </div>
               {errors.dataset3SchemaNoise && (
@@ -745,7 +745,7 @@ const Step5_SchemaNoiseForm = ({
                   id="dataset4SchemaNoise"
                 />
                 <label htmlFor="dataset4SchemaNoise" className="text-white">
-                  Enable Option
+                  Enable Noise
                 </label>
               </div>
               {errors.dataset4SchemaNoise && (

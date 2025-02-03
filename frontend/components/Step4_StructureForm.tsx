@@ -298,7 +298,7 @@ const Step4_StructureForm = ({
     return (
         <FormWrapper
             title="Select Structure Options"
-            description="Choose between 'No Change', 'BCNF' and 'Join Columns' for each dataset"
+            description="Choose between 'No Change', 'BCNF' and 'Join Columns' for each dataset."
         >
             {/* Unified Scrollable Container */}
             <div className="flex flex-col w-full  p-4 scrollbar-custom">

@@ -94,7 +94,7 @@ const Step3_SplitForm = ({
     return (
         <FormWrapper
             title="Select Split Type"
-            description="You have the option of horizontal, vertical, or both splits."
+            description="Choose between horizontal, vertical, or both splits."
         >
             <ToggleGroup.Root
                 orientation="horizontal"
