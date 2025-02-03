@@ -468,7 +468,7 @@ const Step5_SchemaNoiseForm = ({
                     disabled={dataset1DeleteSchemaEnabled}
                   />
                   <label htmlFor="dataset1SchemaKeyNoise" className="text-white">
-                    Preserve Key Constraints
+                    Preserve attribute name of keys
                   </label>
                 </div>
                 {errors.dataset1SchemaKeyNoise && (
@@ -480,7 +480,7 @@ const Step5_SchemaNoiseForm = ({
                 {/* Multi-Select for Dataset 1 */}
                 <div className="mt-4">
                   <label htmlFor="dataset1MultiSelect" className="text-white">
-                    Dataset 1 Multi-Select
+                    Dataset 1 Error Methods
                   </label>
                   <MultiSelect
                     id="dataset1MultiSelect"
@@ -571,7 +571,7 @@ const Step5_SchemaNoiseForm = ({
                     disabled={dataset2DeleteSchemaEnabled}
                   />
                   <label htmlFor="dataset2SchemaKeyNoise" className="text-white">
-                    Preserve Key Constraints
+                    Preserve attribute name of keys
                   </label>
                 </div>
                 {errors.dataset2SchemaKeyNoise && (
@@ -583,7 +583,7 @@ const Step5_SchemaNoiseForm = ({
                 {/* Multi-Select for Dataset 2 */}
                 <div className="mt-4">
                   <label htmlFor="dataset2MultiSelect" className="text-white">
-                    Dataset 2 Multi-Select
+                    Dataset 2 Error Methods
                   </label>
                   <MultiSelect
                     id="dataset2MultiSelect"
@@ -678,7 +678,7 @@ const Step5_SchemaNoiseForm = ({
                       disabled={dataset3DeleteSchemaEnabled}
                     />
                     <label htmlFor="dataset3SchemaKeyNoise" className="text-white">
-                      Preserve Key Constraints
+                      Preserve attribute name of keys
                     </label>
                   </div>
                   {errors.dataset3SchemaKeyNoise && (
@@ -690,7 +690,7 @@ const Step5_SchemaNoiseForm = ({
                   {/* Multi-Select for Dataset 3 */}
                   <div className="mt-4">
                     <label htmlFor="dataset3MultiSelect" className="text-white">
-                      Dataset 3 Multi-Select
+                      Dataset 3 Error Methods
                     </label>
                     <MultiSelect
                       id="dataset3MultiSelect"
@@ -781,7 +781,7 @@ const Step5_SchemaNoiseForm = ({
                       disabled={dataset4DeleteSchemaEnabled}
                     />
                     <label htmlFor="dataset4SchemaKeyNoise" className="text-white">
-                      Preserve Key Constraints
+                      Preserve attribute name of keys
                     </label>
                   </div>
                   {errors.dataset4SchemaKeyNoise && (
@@ -793,7 +793,7 @@ const Step5_SchemaNoiseForm = ({
                   {/* Multi-Select for Dataset 4 */}
                   <div className="mt-4">
                     <label htmlFor="dataset4MultiSelect" className="text-white">
-                      Dataset 4 Multi-Select
+                      Dataset 4 Error Methods
                     </label>
                     <MultiSelect
                       id="dataset4MultiSelect"

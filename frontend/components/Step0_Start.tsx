@@ -13,10 +13,10 @@ const Step0_Start = ({ onStart }: { onStart: () => void }) => {
                 <li><strong>Datasource</strong>: Upload a CSV as the data source.</li>
                 <li><strong>Select Mode</strong>: Use a JSON template or input parameters.</li>
                 <li><strong>Select Split</strong>: Split the dataset horizontally or vertically.</li>
-                <li><strong>Select Structure</strong>: Choose a structure type, like BCNF.</li>
-                <li><strong>Schema Noise</strong>: Add noise to the schema for variation.</li>
-                <li><strong>Data Noise</strong>: Introduce noise to data values.</li>
-                <li><strong>Shuffle</strong>: Randomize record order for variability.</li>
+                <li><strong>Select Structure</strong>: Choose a structure type, like BCNF or Join.</li>
+                <li><strong>Schema Noise</strong>: Add noise to the schema.</li>
+                <li><strong>Data Noise</strong>: Introduce noise to the data values.</li>
+                <li><strong>Shuffle</strong>: Randomize data order for variability.</li>
             </ul>
             <Button
                 onClick={onStart}

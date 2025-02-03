@@ -396,7 +396,7 @@ const Step6_DataNoiseForm = ({
                 {/* Multi-Select for Dataset 1 */}
                 <div className="mt-4">
                   <label htmlFor="dataset1DataMultiSelect" className="text-white">
-                    Dataset 1 Multi-Select
+                    Dataset 1 Error Methods
                   </label>
                   <MultiSelect
                     id="dataset1DataMultiSelect"
@@ -416,7 +416,7 @@ const Step6_DataNoiseForm = ({
                 {/* Noise Slider */}
                 <div className="mt-4">
                   <label htmlFor="dataset1DataNoiseSlider" className="text-white">
-                    Noise Percentage
+                    Percentage of noisy Columns/ Rows
                   </label>
                   <Slider
                     id="dataset1DataNoiseSlider"
@@ -443,7 +443,7 @@ const Step6_DataNoiseForm = ({
                     htmlFor="dataset1DataNoiseInsideSlider"
                     className="text-white"
                   >
-                    Noise Inside Percentage
+                    Percentage of noisy entries in Column/ Row
                   </label>
                   <Slider
                     id="dataset1DataNoiseInsideSlider"
@@ -508,7 +508,7 @@ const Step6_DataNoiseForm = ({
                 {/* Multi-Select for Dataset 2 */}
                 <div className="mt-4">
                   <label htmlFor="dataset2DataMultiSelect" className="text-white">
-                    Dataset 2 Multi-Select
+                    Dataset 2 Error Methods
                   </label>
                   <MultiSelect
                     id="dataset2DataMultiSelect"
@@ -528,7 +528,7 @@ const Step6_DataNoiseForm = ({
                 {/* Noise Slider */}
                 <div className="mt-4">
                   <label htmlFor="dataset2DataNoiseSlider" className="text-white">
-                    Noise Percentage
+                    Percentage of noisy Columns/ Rows
                   </label>
                   <Slider
                     id="dataset2DataNoiseSlider"
@@ -555,7 +555,7 @@ const Step6_DataNoiseForm = ({
                     htmlFor="dataset2DataNoiseInsideSlider"
                     className="text-white"
                   >
-                    Noise Inside Percentage
+                    Percentage of noisy entries in Column/ Row
                   </label>
                   <Slider
                     id="dataset2DataNoiseInsideSlider"
@@ -624,7 +624,7 @@ const Step6_DataNoiseForm = ({
                   {/* Multi-Select for Dataset 3 */}
                   <div className="mt-4">
                     <label htmlFor="dataset3DataMultiSelect" className="text-white">
-                      Dataset 3 Multi-Select
+                      Dataset 3 Error Methods
                     </label>
                     <MultiSelect
                       id="dataset3DataMultiSelect"
@@ -644,7 +644,7 @@ const Step6_DataNoiseForm = ({
                   {/* Noise Slider */}
                   <div className="mt-4">
                     <label htmlFor="dataset3DataNoiseSlider" className="text-white">
-                      Noise Percentage
+                      Percentage of noisy Columns/ Rows
                     </label>
                     <Slider
                       id="dataset3DataNoiseSlider"
@@ -671,7 +671,7 @@ const Step6_DataNoiseForm = ({
                       htmlFor="dataset3DataNoiseInsideSlider"
                       className="text-white"
                     >
-                      Noise Inside Percentage
+                      Percentage of noisy entries in Column/ Row
                     </label>
                     <Slider
                       id="dataset3DataNoiseInsideSlider"
@@ -736,7 +736,7 @@ const Step6_DataNoiseForm = ({
                   {/* Multi-Select for Dataset 4 */}
                   <div className="mt-4">
                     <label htmlFor="dataset4DataMultiSelect" className="text-white">
-                      Dataset 4 Multi-Select
+                      Dataset 4 Error Methods
                     </label>
                     <MultiSelect
                       id="dataset4DataMultiSelect"
@@ -756,7 +756,7 @@ const Step6_DataNoiseForm = ({
                   {/* Noise Slider */}
                   <div className="mt-4">
                     <label htmlFor="dataset4DataNoiseSlider" className="text-white">
-                      Noise Percentage
+                    Percentage of noisy Columns/ Rows
                     </label>
                     <Slider
                       id="dataset4DataNoiseSlider"
@@ -783,7 +783,7 @@ const Step6_DataNoiseForm = ({
                       htmlFor="dataset4DataNoiseInsideSlider"
                       className="text-white"
                     >
-                      Noise Inside Percentage
+                      Percentage of noisy entries in Column/ Row
                     </label>
                     <Slider
                       id="dataset4DataNoiseInsideSlider"
