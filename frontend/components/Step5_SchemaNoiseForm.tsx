@@ -12,8 +12,10 @@ const frameworksList = [
   { value: "abbreviateRandomLength", label: "abbreviateRandomLength" },
   { value: "addRandomPrefix", label: "addRandomPrefix" },
   { value: "shuffleLetters", label: "shuffleLetters" },
+  { value: "shuffleWords", label: "shuffleWords" },
   { value: "replaceWithSynonyms", label: "replaceWithSynonyms" },
-  { value: "replaceWithTranslation", label: "replaceWithTranslation" }
+  { value: "replaceWithTranslation", label: "replaceWithTranslation" },
+  { value: "removeVowels", label: "removeVowels" }
 ];
 
 type StepProps = {
