@@ -47,7 +47,7 @@ const Step9_Generating = () => {
                 Generating dataset...
             </h4>
             <p className="text-sm max-w-md text-neutral-300 md:text-base">
-                Please wait while we prepare your data.
+                Please wait while we create your datasets.
             </p>
         </motion.section>
     );

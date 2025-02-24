@@ -390,30 +390,20 @@ export const FormItemsJSONSchema = z
         if (data.splitType === "VerticalHorizontal") {
             const requiredFields = [
                 "dataset3StructureType",
-                "dataset3BCNFSliderValue",
-                "dataset3JoinColumnsSliderValue",
                 "dataset4StructureType",
-                "dataset4BCNFSliderValue",
-                "dataset4JoinColumnsSliderValue",
                 "dataset3SchemaNoise",
-                "dataset3SchemaNoiseValue",
                 "dataset3SchemaKeyNoise",
                 "dataset3SchemaDeleteSchema",
                 "dataset3SchemaMultiselect",
                 "dataset4SchemaNoise",
-                "dataset4SchemaNoiseValue",
                 "dataset4SchemaKeyNoise",
                 "dataset4SchemaDeleteSchema",
                 "dataset4SchemaMultiselect",
                 "dataset3DataNoise",
-                "dataset3DataNoiseValue",
                 "dataset3DataKeyNoise",
-                "dataset3DataNoiseInside",
                 "dataset3DataMultiselect",
                 "dataset4DataNoise",
-                "dataset4DataNoiseValue",
                 "dataset4DataKeyNoise",
-                "dataset4DataNoiseInside",
                 "dataset4DataMultiselect",
                 "dataset3ShuffleOption",
                 "dataset4ShuffleOption"
@@ -430,12 +420,16 @@ export const FormItemsJSONSchema = z
             });
         } else {
             const optionalFields = [
-                "dataset3StructureType",
                 "dataset3BCNFSliderValue",
                 "dataset3JoinColumnsSliderValue",
-                "dataset4StructureType",
                 "dataset4BCNFSliderValue",
-                "dataset4JoinColumnsSliderValue"
+                "dataset4JoinColumnsSliderValue",
+                "dataset3SchemaNoiseValue",
+                "dataset4SchemaNoiseValue",
+                "dataset3DataNoiseValue",
+                "dataset3DataNoiseInside",
+                "dataset4DataNoiseValue",
+                "dataset4DataNoiseInside"
             ];
 
             optionalFields.forEach((field) => {

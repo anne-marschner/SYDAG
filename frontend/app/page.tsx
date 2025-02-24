@@ -11,6 +11,7 @@ import Step5_SchemaNoiseForm from "@/components/Step5_SchemaNoiseForm";
 import Step6_DataNoiseForm from "@/components/Step6_DataNoiseForm";
 import Step7_ShuffleForm from "@/components/Step7_ShuffelForm";
 import Step8_SummaryForm from "@/components/Step8_SummaryForm";
+import Step9_Generating from "@/components/Step9_Generating";
 import Step10_SuccessMessage from "@/components/Step10_SuccessMessage";
 import SideBar from "@/components/SideBar";
 import { useFormHandler } from "@/hooks/useFormHandler";
@@ -128,13 +129,14 @@ export default function Home() {
                     className={`flex gap-12
                     w-full max-w-7xl relative min-h-[1200px] m-1 rounded-lg border border-neutral-700 bg-[#262626] p-4`}
                 >
-                    {!showSuccessMsg && (
+                    {!showSuccessMsg && !isGenerating && (
                         <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />
                     )}
                     <main className="w-full md:mt-5 md:w-[100%] flex flex-col justify-between">
-                        {showSuccessMsg ? (
+                        {isGenerating ? (
+                            <Step9_Generating />
+                        ) : showSuccessMsg ? (
                             <AnimatePresence mode="wait">
-                                {/* Ensure downloadUrl is passed correctly */}
                                 <Step10_SuccessMessage downloadUrl={downloadUrl} />
                             </AnimatePresence>
                         ) : (
@@ -156,7 +158,6 @@ export default function Home() {
                                     )}
                                     {currentStepIndex === 1 && (
                                         <Step2_ModeForm
-
                                             mode={formData.mode}
                                             jsonFile={formData.jsonFile}
                                             manualInput={formData.manualInput}
@@ -195,7 +196,6 @@ export default function Home() {
                                             errors={errors}
                                         />
                                     )}
-
                                     {currentStepIndex === 4 && (
                                         <Step5_SchemaNoiseForm
                                             splitType={formData.splitType}
@@ -204,25 +204,21 @@ export default function Home() {
                                             dataset1SchemaKeyNoise={formData.dataset1SchemaKeyNoise}
                                             dataset1SchemaDeleteSchema={formData.dataset1SchemaDeleteSchema}
                                             dataset1SchemaMultiselect={formData.dataset1SchemaMultiselect}
-
                                             dataset2SchemaNoise={formData.dataset2SchemaNoise}
                                             dataset2SchemaNoiseValue={formData.dataset2SchemaNoiseValue}
                                             dataset2SchemaKeyNoise={formData.dataset2SchemaKeyNoise}
                                             dataset2SchemaDeleteSchema={formData.dataset2SchemaDeleteSchema}
                                             dataset2SchemaMultiselect={formData.dataset2SchemaMultiselect}
-
                                             dataset3SchemaNoise={formData.dataset3SchemaNoise}
                                             dataset3SchemaNoiseValue={formData.dataset3SchemaNoiseValue}
                                             dataset3SchemaKeyNoise={formData.dataset3SchemaKeyNoise}
                                             dataset3SchemaDeleteSchema={formData.dataset3SchemaDeleteSchema}
                                             dataset3SchemaMultiselect={formData.dataset3SchemaMultiselect}
-
                                             dataset4SchemaNoise={formData.dataset4SchemaNoise}
                                             dataset4SchemaNoiseValue={formData.dataset4SchemaNoiseValue}
                                             dataset4SchemaKeyNoise={formData.dataset4SchemaKeyNoise}
                                             dataset4SchemaDeleteSchema={formData.dataset4SchemaDeleteSchema}
                                             dataset4SchemaMultiselect={formData.dataset4SchemaMultiselect}
-
                                             updateForm={updateForm}
                                             errors={errors}
                                         />
@@ -230,31 +226,26 @@ export default function Home() {
                                     {currentStepIndex === 5 && (
                                         <Step6_DataNoiseForm
                                             splitType={formData.splitType}
-
                                             dataset1DataNoise={formData.dataset1DataNoise}
                                             dataset1DataNoiseValue={formData.dataset1DataNoiseValue}
                                             dataset1DataKeyNoise={formData.dataset1DataKeyNoise}
                                             dataset1DataNoiseInside={formData.dataset1DataNoiseInside}
                                             dataset1DataMultiselect={formData.dataset1DataMultiselect}
-
                                             dataset2DataNoise={formData.dataset2DataNoise}
                                             dataset2DataNoiseValue={formData.dataset2DataNoiseValue}
                                             dataset2DataKeyNoise={formData.dataset2DataKeyNoise}
                                             dataset2DataNoiseInside={formData.dataset2DataNoiseInside}
                                             dataset2DataMultiselect={formData.dataset2DataMultiselect}
-
                                             dataset3DataNoise={formData.dataset3DataNoise}
                                             dataset3DataNoiseValue={formData.dataset3DataNoiseValue}
                                             dataset3DataKeyNoise={formData.dataset3DataKeyNoise}
                                             dataset3DataNoiseInside={formData.dataset3DataNoiseInside}
                                             dataset3DataMultiselect={formData.dataset3DataMultiselect}
-
                                             dataset4DataNoise={formData.dataset4DataNoise}
                                             dataset4DataNoiseValue={formData.dataset4DataNoiseValue}
                                             dataset4DataKeyNoise={formData.dataset4DataKeyNoise}
                                             dataset4DataNoiseInside={formData.dataset4DataNoiseInside}
                                             dataset4DataMultiselect={formData.dataset4DataMultiselect}
-
                                             updateForm={updateForm}
                                             errors={errors}
                                         />
@@ -277,18 +268,15 @@ export default function Home() {
                                             separator={formData.separator}
                                             quote={formData.quote}
                                             escape={formData.escape}
-
                                             jsonFile={formData.jsonFile}
                                             manualInput={formData.manualInput}
                                             mode={formData.mode}
-
                                             splitType={formData.splitType}
                                             columnOverlapPercentage={formData.columnOverlapPercentage}
                                             rowOverlapPercentage={formData.rowOverlapPercentage}
                                             rowDistribution={formData.rowDistribution}
                                             columnDistribution={formData.columnDistribution}
                                             overlapType={formData.overlapType}
-
                                             dataset1StructureType={formData.dataset1StructureType}
                                             dataset2StructureType={formData.dataset2StructureType}
                                             dataset1BCNFSliderValue={formData.dataset1BCNFSliderValue}
@@ -301,55 +289,46 @@ export default function Home() {
                                             dataset3JoinColumnsSliderValue={formData.dataset3JoinColumnsSliderValue}
                                             dataset4BCNFSliderValue={formData.dataset4BCNFSliderValue}
                                             dataset4JoinColumnsSliderValue={formData.dataset4JoinColumnsSliderValue}
-
                                             dataset1SchemaNoise={formData.dataset1SchemaNoise}
                                             dataset1SchemaNoiseValue={formData.dataset1SchemaNoiseValue}
                                             dataset1SchemaKeyNoise={formData.dataset1SchemaKeyNoise}
                                             dataset1SchemaDeleteSchema={formData.dataset1SchemaDeleteSchema}
                                             dataset1SchemaMultiselect={formData.dataset1SchemaMultiselect}
-
                                             dataset2SchemaNoise={formData.dataset2SchemaNoise}
                                             dataset2SchemaNoiseValue={formData.dataset2SchemaNoiseValue}
                                             dataset2SchemaKeyNoise={formData.dataset2SchemaKeyNoise}
                                             dataset2SchemaDeleteSchema={formData.dataset2SchemaDeleteSchema}
                                             dataset2SchemaMultiselect={formData.dataset2SchemaMultiselect}
-
                                             dataset3SchemaNoise={formData.dataset3SchemaNoise}
                                             dataset3SchemaNoiseValue={formData.dataset3SchemaNoiseValue}
                                             dataset3SchemaKeyNoise={formData.dataset3SchemaKeyNoise}
                                             dataset3SchemaDeleteSchema={formData.dataset3SchemaDeleteSchema}
                                             dataset3SchemaMultiselect={formData.dataset3SchemaMultiselect}
-
                                             dataset4SchemaNoise={formData.dataset4SchemaNoise}
                                             dataset4SchemaNoiseValue={formData.dataset4SchemaNoiseValue}
                                             dataset4SchemaKeyNoise={formData.dataset4SchemaKeyNoise}
                                             dataset4SchemaDeleteSchema={formData.dataset4SchemaDeleteSchema}
                                             dataset4SchemaMultiselect={formData.dataset4SchemaMultiselect}
-
                                             dataset1DataNoise={formData.dataset1DataNoise}
                                             dataset1DataNoiseValue={formData.dataset1DataNoiseValue}
                                             dataset1DataKeyNoise={formData.dataset1DataKeyNoise}
                                             dataset1DataNoiseInside={formData.dataset1DataNoiseInside}
                                             dataset1DataMultiselect={formData.dataset1DataMultiselect}
-
                                             dataset2DataNoise={formData.dataset2DataNoise}
                                             dataset2DataNoiseValue={formData.dataset2DataNoiseValue}
                                             dataset2DataKeyNoise={formData.dataset2DataKeyNoise}
                                             dataset2DataNoiseInside={formData.dataset2DataNoiseInside}
                                             dataset2DataMultiselect={formData.dataset2DataMultiselect}
-
                                             dataset3DataNoise={formData.dataset3DataNoise}
                                             dataset3DataNoiseValue={formData.dataset3DataNoiseValue}
                                             dataset3DataKeyNoise={formData.dataset3DataKeyNoise}
                                             dataset3DataNoiseInside={formData.dataset3DataNoiseInside}
                                             dataset3DataMultiselect={formData.dataset3DataMultiselect}
-
                                             dataset4DataNoise={formData.dataset4DataNoise}
                                             dataset4DataNoiseValue={formData.dataset4DataNoiseValue}
                                             dataset4DataKeyNoise={formData.dataset4DataKeyNoise}
                                             dataset4DataNoiseInside={formData.dataset4DataNoiseInside}
                                             dataset4DataMultiselect={formData.dataset4DataMultiselect}
-
                                             dataset1ShuffleOption={formData.dataset1ShuffleOption}
                                             dataset2ShuffleOption={formData.dataset2ShuffleOption}
                                             dataset3ShuffleOption={formData.dataset3ShuffleOption}
