@@ -24,7 +24,7 @@ A list of technologies used within the project:
 * [React](https://react.dev/): Version 19.0.0
 * [Next.js](https://nextjs.org/): Version 15.1.5
   
-Basis of the Design:   
+Basis of the frontend implementation:   
 
 * [Multi-step form](https://github.com/Marcosfitzsimons/multi-step-form?tab=readme-ov-file#author)
 
