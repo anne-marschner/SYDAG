@@ -127,7 +127,7 @@ export default function Home() {
             ) : (
                 <div
                     className={`flex gap-12
-                    w-full max-w-7xl relative min-h-[1200px] m-1 rounded-lg border border-neutral-700 bg-[#262626] p-4`}
+                    w-full max-w-7xl  h-[850px] m-1 rounded-lg border border-neutral-700 bg-[#262626] p-4`}
                 >
                     {!showSuccessMsg && !isGenerating && (
                         <SideBar currentStepIndex={currentStepIndex} goTo={goTo} />

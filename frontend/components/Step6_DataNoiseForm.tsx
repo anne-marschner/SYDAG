@@ -353,7 +353,8 @@ const Step6_DataNoiseForm = ({
       title="Select Noise Options for Data"
       description="For each dataset, choose whether to add noise to the data."
     >
-      <div className="flex flex-col w-full h-[750px] max-h-[35vh] p-4 scrollbar-custom">
+      <div className="max-h-[750px] overflow-y-auto scrollbar-custom p-4 space-y-6">
+        <div className="flex flex-col w-full h-full max-h-[50vh] p-4 scrollbar-custom">
         <div className="flex flex-col md:flex-row md:gap-8 w-full">
           {/* Dataset 1 */}
           <div className="flex flex-col w-full">
@@ -808,6 +809,7 @@ const Step6_DataNoiseForm = ({
             </div>
           </div>
         )}
+      </div>
       </div>
     </FormWrapper>
   );

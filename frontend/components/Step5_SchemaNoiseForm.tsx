@@ -422,7 +422,8 @@ const Step5_SchemaNoiseForm = ({
       title="Select Noise Options for Schema"
       description="For each dataset, choose whether to add noise to the schema."
     >
-      <div className="flex flex-col w-full h-[750px] max-h-[35vh] p-4 scrollbar-custom">
+      <div className="max-h-[750px] overflow-y-auto scrollbar-custom p-4 space-y-6">
+      <div className="flex flex-col w-full h-full max-h-[50vh] p-4 scrollbar-custom">
         <div className="flex flex-col md:flex-row md:gap-8 w-full">
           {/* Dataset 1 Controls */}
           <div className="flex flex-col w-full">
@@ -841,6 +842,7 @@ const Step5_SchemaNoiseForm = ({
             </div>
           </div>
         )}
+      </div>
       </div>
     </FormWrapper>
   );

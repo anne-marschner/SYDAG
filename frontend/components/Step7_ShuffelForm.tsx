@@ -125,7 +125,8 @@ const Step7_ShuffleForm = ({
             title="Select Shuffle Options"
             description="Choose between 'Shuffle Columns', 'Shuffle Rows', and 'No Change' for each dataset."
         >
-            <div className="flex flex-col w-full h-[750px] max-h-[35vh] p-4 scrollbar-custom">
+            <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
+            <div className="flex flex-col w-full h-[750px] max-h-[60vh] p-4 scrollbar-custom">
                 <div className="flex flex-col md:flex-row md:gap-8 w-full">
                     {/* Shuffle Options Toggle for Dataset 1 */}
                     <div className="flex flex-col w-full">
@@ -288,6 +289,7 @@ const Step7_ShuffleForm = ({
                         </div>
                     </div>
                 )}
+            </div>
             </div>
         </FormWrapper>
 );

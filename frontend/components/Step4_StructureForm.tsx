@@ -51,62 +51,43 @@ const Step4_StructureForm = ({
                                  dataset4JoinColumnsSliderValue,
                                  errors,
                              }: StepProps) => {
-    // State management for the selected normalization option for each dataset
-    const [planSelected1, setPlanSelected1] = useState<StructureType | null>(
-        dataset1StructureType
-    );
-    const [planSelected2, setPlanSelected2] = useState<StructureType | null>(
-        dataset2StructureType
-    );
-    const [planSelected3, setPlanSelected3] = useState<StructureType | null>(
-        dataset3StructureType
-    );
-    const [planSelected4, setPlanSelected4] = useState<StructureType | null>(
-        dataset4StructureType
+    // State for selected structure type per dataset
+    const [planSelected1, setPlanSelected1] = useState<StructureType | null>(dataset1StructureType);
+    const [planSelected2, setPlanSelected2] = useState<StructureType | null>(dataset2StructureType);
+    const [planSelected3, setPlanSelected3] = useState<StructureType | null>(dataset3StructureType);
+    const [planSelected4, setPlanSelected4] = useState<StructureType | null>(dataset4StructureType);
+
+    // State for sliders
+    const [dataset1BCNFValue, setDataset1BCNFValue] = useState<number>(dataset1BCNFSliderValue || 0);
+    const [dataset1JoinColumnsValue, setDataset1JoinColumnsValue] = useState<number>(
+        dataset1JoinColumnsSliderValue || 0
     );
 
-    // State management for sliders - Dataset 1
-    const [dataset1BCNFValue, setDataset1BCNFValue] = useState<number>(
-        dataset1BCNFSliderValue || 0
+    const [dataset2BCNFValue, setDataset2BCNFValue] = useState<number>(dataset2BCNFSliderValue || 0);
+    const [dataset2JoinColumnsValue, setDataset2JoinColumnsValue] = useState<number>(
+        dataset2JoinColumnsSliderValue || 0
     );
-    const [dataset1JoinColumnsValue, setDataset1JoinColumnsValue] =
-        useState<number>(dataset1JoinColumnsSliderValue || 0);
 
-    // State management for sliders - Dataset 2
-    const [dataset2BCNFValue, setDataset2BCNFValue] = useState<number>(
-        dataset2BCNFSliderValue || 0
+    const [dataset3BCNFValue, setDataset3BCNFValue] = useState<number>(dataset3BCNFSliderValue || 0);
+    const [dataset3JoinColumnsValue, setDataset3JoinColumnsValue] = useState<number>(
+        dataset3JoinColumnsSliderValue || 0
     );
-    const [dataset2JoinColumnsValue, setDataset2JoinColumnsValue] =
-        useState<number>(dataset2JoinColumnsSliderValue || 0);
 
-    // State management for sliders - Dataset 3
-    const [dataset3BCNFValue, setDataset3BCNFValue] = useState<number>(
-        dataset3BCNFSliderValue || 0
+    const [dataset4BCNFValue, setDataset4BCNFValue] = useState<number>(dataset4BCNFSliderValue || 0);
+    const [dataset4JoinColumnsValue, setDataset4JoinColumnsValue] = useState<number>(
+        dataset4JoinColumnsSliderValue || 0
     );
-    const [dataset3JoinColumnsValue, setDataset3JoinColumnsValue] =
-        useState<number>(dataset3JoinColumnsSliderValue || 0);
-
-    // State management for sliders - Dataset 4
-    const [dataset4BCNFValue, setDataset4BCNFValue] = useState<number>(
-        dataset4BCNFSliderValue || 0
-    );
-    const [dataset4JoinColumnsValue, setDataset4JoinColumnsValue] =
-        useState<number>(dataset4JoinColumnsSliderValue || 0);
 
     /**
-     * Handler functions for each dataset's structure type.
+     * Handlers for structure type toggles
      */
     const handleValueChange1 = useCallback(
         (selected: string | null) => {
-            if (
-                selected === "BCNF" ||
-                selected === "Join Columns" ||
-                selected === "No Change"
-            ) {
+            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
                 setPlanSelected1(selected as StructureType);
                 updateForm({ dataset1StructureType: selected as StructureType });
 
-                // Reset slider values when structure type changes
+                // Reset sliders if not relevant
                 if (selected !== "BCNF") {
                     setDataset1BCNFValue(0);
                     updateForm({ dataset1BCNFSliderValue: 0 });
@@ -122,15 +103,10 @@ const Step4_StructureForm = ({
 
     const handleValueChange2 = useCallback(
         (selected: string | null) => {
-            if (
-                selected === "BCNF" ||
-                selected === "Join Columns" ||
-                selected === "No Change"
-            ) {
+            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
                 setPlanSelected2(selected as StructureType);
                 updateForm({ dataset2StructureType: selected as StructureType });
 
-                // Reset slider values when structure type changes
                 if (selected !== "BCNF") {
                     setDataset2BCNFValue(0);
                     updateForm({ dataset2BCNFSliderValue: 0 });
@@ -146,15 +122,10 @@ const Step4_StructureForm = ({
 
     const handleValueChange3 = useCallback(
         (selected: string | null) => {
-            if (
-                selected === "BCNF" ||
-                selected === "Join Columns" ||
-                selected === "No Change"
-            ) {
+            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
                 setPlanSelected3(selected as StructureType);
                 updateForm({ dataset3StructureType: selected as StructureType });
 
-                // Reset slider values when structure type changes
                 if (selected !== "BCNF") {
                     setDataset3BCNFValue(0);
                     updateForm({ dataset3BCNFSliderValue: 0 });
@@ -170,15 +141,10 @@ const Step4_StructureForm = ({
 
     const handleValueChange4 = useCallback(
         (selected: string | null) => {
-            if (
-                selected === "BCNF" ||
-                selected === "Join Columns" ||
-                selected === "No Change"
-            ) {
+            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
                 setPlanSelected4(selected as StructureType);
                 updateForm({ dataset4StructureType: selected as StructureType });
 
-                // Reset slider values when structure type changes
                 if (selected !== "BCNF") {
                     setDataset4BCNFValue(0);
                     updateForm({ dataset4BCNFSliderValue: 0 });
@@ -193,7 +159,7 @@ const Step4_StructureForm = ({
     );
 
     /**
-     * Handler functions for sliders.
+     * Slider handlers
      */
     const handleDataset1BCNFSliderChange = useCallback(
         (value: number[]) => {
@@ -268,12 +234,10 @@ const Step4_StructureForm = ({
     );
 
     /**
-     * Effect to reset Datasets 3 and 4 when splitType changes away from "VerticalHorizontal".
-     * Ensures that state is clean when these datasets are not applicable.
+     * Reset Datasets 3 and 4 if splitType != "VerticalHorizontal"
      */
     useEffect(() => {
         if (splitType !== "VerticalHorizontal") {
-            // Reset Dataset 3
             setPlanSelected3(null);
             setDataset3BCNFValue(0);
             setDataset3JoinColumnsValue(0);
@@ -283,7 +247,6 @@ const Step4_StructureForm = ({
                 dataset3JoinColumnsSliderValue: 0,
             });
 
-            // Reset Dataset 4
             setPlanSelected4(null);
             setDataset4BCNFValue(0);
             setDataset4JoinColumnsValue(0);
@@ -295,15 +258,40 @@ const Step4_StructureForm = ({
         }
     }, [splitType, updateForm]);
 
+    /**
+     * 1. Count how many sliders are visible
+     *    Each dataset can have either BCNF or Join Columns => 1 slider
+     *    If it's "No Change", 0 sliders
+     * 2. Multiply that count by 100 for the container height
+     */
+    let visibleSlidersCount = 0;
+
+    if (planSelected1 === "BCNF" || planSelected1 === "Join Columns") {
+        visibleSlidersCount++;
+    }
+    if (planSelected2 === "BCNF" || planSelected2 === "Join Columns") {
+        visibleSlidersCount++;
+    }
+    if (splitType === "VerticalHorizontal") {
+        if (planSelected3 === "BCNF" || planSelected3 === "Join Columns") {
+            visibleSlidersCount++;
+        }
+        if (planSelected4 === "BCNF" || planSelected4 === "Join Columns") {
+            visibleSlidersCount++;
+        }
+    }
+
+    const sliderContainerHeight = visibleSlidersCount * 130;
+
     return (
         <FormWrapper
             title="Select Structure Options"
             description="Choose between 'No Change', 'BCNF' and 'Join Columns' for each dataset."
         >
-            {/* Unified Scrollable Container */}
-            <div className="flex flex-col w-full  p-4 scrollbar-custom">
+            {/* Outer scrollable container for everything */}
+            <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
                 {/* Main Flex Container for Dataset Controls */}
-                <div className="flex flex-col md:flex-row  md:gap-8 w-full">
+                <div className="flex flex-col md:flex-row md:gap-8 w-full">
                     {/* Dataset 1 Controls */}
                     <div className="flex flex-col w-full md:w-1/2 lg:w-1/2 mb-4">
                         <h3 className="text-lg text-white mb-2">Dataset 1</h3>
@@ -386,7 +374,7 @@ const Step4_StructureForm = ({
                     {splitType === "VerticalHorizontal" && (
                         <>
                             {/* Dataset 3 Controls */}
-                            <div className="flex flex-col w-full md:w-1/2 lg:w-1/4 mb-4">
+                            <div className="flex flex-col w-full md:w-1/2 lg:w-1/2 mb-4">
                                 <h3 className="text-lg text-white mb-2">Dataset 3</h3>
                                 <ToggleGroup.Root
                                     orientation="vertical"
@@ -425,7 +413,7 @@ const Step4_StructureForm = ({
                             </div>
 
                             {/* Dataset 4 Controls */}
-                            <div className="flex flex-col w-full md:w-1/2 lg:w-1/4 mb-4">
+                            <div className="flex flex-col w-full md:w-1/2 lg:w-1/2 mb-4">
                                 <h3 className="text-lg text-white mb-2">Dataset 4</h3>
                                 <ToggleGroup.Root
                                     orientation="vertical"
@@ -466,208 +454,200 @@ const Step4_StructureForm = ({
                     )}
                 </div>
 
-                {/* Sliders Section */}
-                <div className="flex flex-col w-full h-[100px] space-y-3.5">
-                    {/* Wrapper to control dynamic height */}
+                {/* 2. Sliders Section - dynamic height based on how many are visible */}
+                <div className="flex flex-col w-full space-y-3.5">
+                    {/**
+                     * Count how many "BCNF" or "Join Columns" are selected across all visible datasets
+                     * Each is 1 slider => multiply by 100
+                     */}
                     <div
+                        className="overflow-hidden transition-all duration-300"
+                        style={{ height: `${sliderContainerHeight}px` }}
                     >
                         {/* Dataset 1 Sliders */}
-                        <div className="flex flex-col w-full mb-10 ">
-                            {planSelected1 === "BCNF" && (
-                                <>
-                                    <h3 className="text-lg text-white">Dataset 1 - BCNF Percentage</h3>
-                                    <Slider
-                                        className="my-4 w-full"
-                                        value={[dataset1BCNFValue]}
-                                        onValueChange={handleDataset1BCNFSliderChange}
-                                        min={0}
-                                        max={100}
-                                        step={1}
-                                    />
-                                    <span className="text-white text-sm">
-                                        BCNF Percentage: {dataset1BCNFValue}%
-                                    </span>
-                                    {errors.dataset1BCNFSliderValue && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.dataset1BCNFSliderValue[0]}
-                                        </p>
-                                    )}
-                                </>
-                            )}
+                        {planSelected1 === "BCNF" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 1 - BCNF Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset1BCNFValue]}
+                                    onValueChange={handleDataset1BCNFSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  BCNF Percentage: {dataset1BCNFValue}%
+                </span>
+                                {errors.dataset1BCNFSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset1BCNFSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
-                            {planSelected1 === "Join Columns" && (
-                                <>
-                                    <h3 className="text-lg text-white">Dataset 1 - Join Columns Percentage</h3>
-                                    <Slider
-                                        className="my-4 w-full"
-                                        value={[dataset1JoinColumnsValue]}
-                                        onValueChange={handleDataset1JoinColumnsSliderChange}
-                                        min={0}
-                                        max={100}
-                                        step={1}
-                                    />
-                                    <span className="text-white text-sm">
-                                        Join Columns Percentage: {dataset1JoinColumnsValue}%
-                                    </span>
-                                    {errors.dataset1JoinColumnsSliderValue && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.dataset1JoinColumnsSliderValue[0]}
-                                        </p>
-                                    )}
-                                </>
-                            )}
-                        </div>
+                        {planSelected1 === "Join Columns" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 1 - Join Columns Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset1JoinColumnsValue]}
+                                    onValueChange={handleDataset1JoinColumnsSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  Join Columns Percentage: {dataset1JoinColumnsValue}%
+                </span>
+                                {errors.dataset1JoinColumnsSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset1JoinColumnsSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
                         {/* Dataset 2 Sliders */}
-                        <div className="flex flex-col w-full mb-10">
-                            {planSelected2 === "BCNF" && (
-                                <>
-                                    <h3 className="text-lg text-white">Dataset 2 - BCNF Percentage</h3>
-                                    <Slider
-                                        className="my-4 w-full"
-                                        value={[dataset2BCNFValue]}
-                                        onValueChange={handleDataset2BCNFSliderChange}
-                                        min={0}
-                                        max={100}
-                                        step={1}
-                                    />
-                                    <span className="text-white text-sm">
-                                        BCNF Percentage: {dataset2BCNFValue}%
-                                    </span>
-                                    {errors.dataset2BCNFSliderValue && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.dataset2BCNFSliderValue[0]}
-                                        </p>
-                                    )}
-                                </>
-                            )}
+                        {planSelected2 === "BCNF" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 2 - BCNF Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset2BCNFValue]}
+                                    onValueChange={handleDataset2BCNFSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  BCNF Percentage: {dataset2BCNFValue}%
+                </span>
+                                {errors.dataset2BCNFSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset2BCNFSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
-                            {planSelected2 === "Join Columns" && (
-                                <>
-                                    <h3 className="text-lg text-white">Dataset 2 - Join Columns Percentage</h3>
-                                    <Slider
-                                        className="my-4 w-full"
-                                        value={[dataset2JoinColumnsValue]}
-                                        onValueChange={handleDataset2JoinColumnsSliderChange}
-                                        min={0}
-                                        max={100}
-                                        step={1}
-                                    />
-                                    <span className="text-white text-sm">
-                                        Join Columns Percentage: {dataset2JoinColumnsValue}%
-                                    </span>
-                                    {errors.dataset2JoinColumnsSliderValue && (
-                                        <p className="text-red-500 text-sm">
-                                            {errors.dataset2JoinColumnsSliderValue[0]}
-                                        </p>
-                                    )}
-                                </>
-                            )}
-                        </div>
+                        {planSelected2 === "Join Columns" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 2 - Join Columns Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset2JoinColumnsValue]}
+                                    onValueChange={handleDataset2JoinColumnsSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  Join Columns Percentage: {dataset2JoinColumnsValue}%
+                </span>
+                                {errors.dataset2JoinColumnsSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset2JoinColumnsSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
                         {/* Dataset 3 Sliders */}
-                        {splitType === "VerticalHorizontal" && (
-                            <>
-                                <div className="flex flex-col w-full mb-10">
-                                    {planSelected3 === "BCNF" && (
-                                        <>
-                                            <h3 className="text-lg text-white">Dataset 3 - BCNF Percentage</h3>
-                                            <Slider
-                                                className="my-4 w-full"
-                                                value={[dataset3BCNFValue]}
-                                                onValueChange={handleDataset3BCNFSliderChange}
-                                                min={0}
-                                                max={100}
-                                                step={1}
-                                            />
-                                            <span className="text-white text-sm">
-                                                BCNF Percentage: {dataset3BCNFValue}%
-                                            </span>
-                                            {errors.dataset3BCNFSliderValue && (
-                                                <p className="text-red-500 text-sm">
-                                                    {errors.dataset3BCNFSliderValue[0]}
-                                                </p>
-                                            )}
-                                        </>
-                                    )}
+                        {splitType === "VerticalHorizontal" && planSelected3 === "BCNF" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 3 - BCNF Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset3BCNFValue]}
+                                    onValueChange={handleDataset3BCNFSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  BCNF Percentage: {dataset3BCNFValue}%
+                </span>
+                                {errors.dataset3BCNFSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset3BCNFSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
-                                    {planSelected3 === "Join Columns" && (
-                                        <>
-                                            <h3 className="text-lg text-white">Dataset 3 - Join Columns Percentage</h3>
-                                            <Slider
-                                                className="my-4 w-full"
-                                                value={[dataset3JoinColumnsValue]}
-                                                onValueChange={handleDataset3JoinColumnsSliderChange}
-                                                min={0}
-                                                max={100}
-                                                step={1}
-                                            />
-                                            <span className="text-white text-sm">
-                                                Join Columns Percentage: {dataset3JoinColumnsValue}%
-                                            </span>
-                                            {errors.dataset3JoinColumnsSliderValue && (
-                                                <p className="text-red-500 text-sm">
-                                                    {errors.dataset3JoinColumnsSliderValue[0]}
-                                                </p>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
+                        {splitType === "VerticalHorizontal" && planSelected3 === "Join Columns" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 3 - Join Columns Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset3JoinColumnsValue]}
+                                    onValueChange={handleDataset3JoinColumnsSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  Join Columns Percentage: {dataset3JoinColumnsValue}%
+                </span>
+                                {errors.dataset3JoinColumnsSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset3JoinColumnsSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
-                                {/* Dataset 4 Sliders */}
-                                <div className="flex flex-col w-full mb-10">
-                                    {planSelected4 === "BCNF" && (
-                                        <>
-                                            <h3 className="text-lg text-white">Dataset 4 - BCNF Percentage</h3>
-                                            <Slider
-                                                className="my-4 w-full"
-                                                value={[dataset4BCNFValue]}
-                                                onValueChange={handleDataset4BCNFSliderChange}
-                                                min={0}
-                                                max={100}
-                                                step={1}
-                                            />
-                                            <span className="text-white text-sm">
-                                                BCNF Percentage: {dataset4BCNFValue}%
-                                            </span>
-                                            {errors.dataset4BCNFSliderValue && (
-                                                <p className="text-red-500 text-sm">
-                                                    {errors.dataset4BCNFSliderValue[0]}
-                                                </p>
-                                            )}
-                                        </>
-                                    )}
+                        {/* Dataset 4 Sliders */}
+                        {splitType === "VerticalHorizontal" && planSelected4 === "BCNF" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 4 - BCNF Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset4BCNFValue]}
+                                    onValueChange={handleDataset4BCNFSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  BCNF Percentage: {dataset4BCNFValue}%
+                </span>
+                                {errors.dataset4BCNFSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset4BCNFSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
+                        )}
 
-                                    {planSelected4 === "Join Columns" && (
-                                        <>
-                                            <h3 className="text-lg text-white">Dataset 4 - Join Columns Percentage</h3>
-                                            <Slider
-                                                className="my-4 w-full"
-                                                value={[dataset4JoinColumnsValue]}
-                                                onValueChange={handleDataset4JoinColumnsSliderChange}
-                                                min={0}
-                                                max={100}
-                                                step={1}
-                                            />
-                                            <span className="text-white text-sm">
-                                                Join Columns Percentage: {dataset4JoinColumnsValue}%
-                                            </span>
-                                            {errors.dataset4JoinColumnsSliderValue && (
-                                                <p className="text-red-500 text-sm">
-                                                    {errors.dataset4JoinColumnsSliderValue[0]}
-                                                </p>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
-                            </>
+                        {splitType === "VerticalHorizontal" && planSelected4 === "Join Columns" && (
+                            <div className="flex flex-col w-full mb-10">
+                                <h3 className="text-lg text-white">Dataset 4 - Join Columns Percentage</h3>
+                                <Slider
+                                    className="my-4 w-full"
+                                    value={[dataset4JoinColumnsValue]}
+                                    onValueChange={handleDataset4JoinColumnsSliderChange}
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                />
+                                <span className="text-white text-sm">
+                  Join Columns Percentage: {dataset4JoinColumnsValue}%
+                </span>
+                                {errors.dataset4JoinColumnsSliderValue && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.dataset4JoinColumnsSliderValue[0]}
+                                    </p>
+                                )}
+                            </div>
                         )}
                     </div>
                 </div>
             </div>
         </FormWrapper>
     );
-
 };
 
-export default React.memo(Step4_StructureForm);
+export default Step4_StructureForm;

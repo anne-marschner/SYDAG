@@ -96,7 +96,7 @@ const Step8_SummaryForm = ({
             title="Summary"
             description="Please review all your entered information before confirming."
         >
-            <div className="pr-6 gap-y-4 gap-x-4 p-2 mt-0 rounded-md h-[700px] max-w-full mx-auto grid grid-cols-2 overflow-y-auto scrollbar-custom">
+            <div className="pr-6 gap-y-4 gap-x-4 p-2 mt-0 rounded-md h-[600px] max-w-full mx-auto grid grid-cols-2 overflow-y-auto scrollbar-custom">
 
                 {/* Step 1: File Upload */}
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
