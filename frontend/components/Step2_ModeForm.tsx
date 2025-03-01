@@ -114,8 +114,8 @@ const Step2_ModeForm = ({
 
     return (
         <FormWrapper
-            title="Select the Mode Type"
-            description="You have the option to upload a JSON or enter the configuration manually"
+            title="Select the Mode"
+            description="You have the option to upload a JSON file containing the configuration parameters or enter the configuration manually."
         >
             {/* Mode toggle group */}
             <ToggleGroup.Root

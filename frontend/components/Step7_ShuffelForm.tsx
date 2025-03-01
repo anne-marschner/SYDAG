@@ -130,7 +130,7 @@ const Step7_ShuffleForm = ({
                 <div className="flex flex-col md:flex-row md:gap-8 w-full">
                     {/* Shuffle Options Toggle for Dataset 1 */}
                     <div className="flex flex-col w-full">
-                        <h3 className="text-lg text-white mb-2">Shuffle Options for Dataset 1</h3>
+                        <h3 className="text-lg text-white mb-2">Dataset 1</h3>
                         <ToggleGroup.Root
                             orientation="vertical"
                             className="flex flex-col gap-3 my-2 w-full"
@@ -169,7 +169,7 @@ const Step7_ShuffleForm = ({
 
                     {/* Shuffle Options Toggle for Dataset 2 */}
                     <div className="flex flex-col w-full">
-                        <h3 className="text-lg text-white mb-2">Shuffle Options for Dataset 2</h3>
+                        <h3 className="text-lg text-white mb-2">Dataset 2</h3>
                         <ToggleGroup.Root
                             orientation="vertical"
                             className="flex flex-col gap-3 my-2 w-full"
@@ -212,7 +212,7 @@ const Step7_ShuffleForm = ({
                     <div className="flex flex-col md:flex-row md:gap-8 w-full mt-8">
                         {/* Shuffle Options Toggle for Dataset 3 */}
                         <div className="flex flex-col w-full">
-                            <h3 className="text-lg text-white mb-2">Shuffle Options for Dataset 3</h3>
+                            <h3 className="text-lg text-white mb-2">Dataset 3</h3>
                             <ToggleGroup.Root
                                 orientation="vertical"
                                 className="flex flex-col gap-3 my-2 w-full"
@@ -251,7 +251,7 @@ const Step7_ShuffleForm = ({
 
                         {/* Shuffle Options Toggle for Dataset 4 */}
                         <div className="flex flex-col w-full">
-                            <h3 className="text-lg text-white mb-2">Shuffle Options for Dataset 4</h3>
+                            <h3 className="text-lg text-white mb-2">Dataset 4</h3>
                             <ToggleGroup.Root
                                 orientation="vertical"
                                 className="flex flex-col gap-3 my-2 w-full"

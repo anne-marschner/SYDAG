@@ -44,7 +44,7 @@ const Step9_Generating = () => {
 
             {/* Loading message */}
             <h4 className="text-2xl font-semibold text-white md:text-3xl mt-4">
-                Generating dataset...
+                Generating datasets...
             </h4>
             <p className="text-sm max-w-md text-neutral-300 md:text-base">
                 Please wait while we create your datasets.

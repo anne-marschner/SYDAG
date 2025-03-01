@@ -7,16 +7,16 @@ const Step0_Start = ({ onStart }: { onStart: () => void }) => {
         <div className="flex flex-col justify-center items-center h-screen text-center">
             <h1 className="text-3xl font-bold text-white mb-4">Welcome to SYDAG</h1>
             <p className="text-neutral-300 mb-8 max-w-lg">
-                This application generates synthetic datasets for data integration. Steps include:
+                This application generates synthetic datasets for data integration. <br /> It includes the following steps:
             </p>
             <ul className="text-neutral-300 text-left mb-8 max-w-lg list-disc list-inside space-y-2">
-                <li><strong>Datasource</strong>: Upload a CSV as the data source.</li>
-                <li><strong>Select Mode</strong>: Use a JSON template or input parameters.</li>
-                <li><strong>Select Split</strong>: Split the dataset horizontally or vertically.</li>
-                <li><strong>Select Structure</strong>: Choose a structure type, like BCNF or Join.</li>
+                <li><strong>Datasource</strong>: Upload a CSV file as the data source.</li>
+                <li><strong>Select Mode</strong>: Use a JSON template or manual input.</li>
+                <li><strong>Select Split</strong>: Split the dataset horizontally and/or vertically.</li>
+                <li><strong>Select Structure</strong>: Choose structural changes.</li>
                 <li><strong>Schema Noise</strong>: Add noise to the schema.</li>
-                <li><strong>Data Noise</strong>: Introduce noise to the data values.</li>
-                <li><strong>Shuffle</strong>: Randomize data order for variability.</li>
+                <li><strong>Data Noise</strong>: Add noise to the data values.</li>
+                <li><strong>Shuffle</strong>: Randomize the data order.</li>
             </ul>
             <Button
                 onClick={onStart}

@@ -420,7 +420,7 @@ const Step5_SchemaNoiseForm = ({
   return (
     <FormWrapper
       title="Select Noise Options for Schema"
-      description="For each dataset, choose whether to add noise to the schema."
+      description="For each dataset, choose whether to add noise to the schema. If enabled, specify the error methods."
     >
       <div className="max-h-[750px] overflow-y-auto scrollbar-custom p-4 space-y-6">
       <div className="flex flex-col w-full h-full max-h-[50vh] p-4 scrollbar-custom">
@@ -462,7 +462,7 @@ const Step5_SchemaNoiseForm = ({
                   </p>
                 )}
 
-                {/* Preserve Key Constraints Checkbox */}
+                {/* Noise to Key Attributes Checkbox */}
                 <div className="flex items-center gap-2 mt-2 custom-label">
                   <Checkbox
                     checked={dataset1KeyEnabled}
@@ -471,7 +471,7 @@ const Step5_SchemaNoiseForm = ({
                     disabled={dataset1DeleteSchemaEnabled}
                   />
                   <label htmlFor="dataset1SchemaKeyNoise" className="text-white">
-                    Preserve attribute name of keys
+                    Add Noise to Key Attributes
                   </label>
                 </div>
                 {errors.dataset1SchemaKeyNoise && (
@@ -565,7 +565,7 @@ const Step5_SchemaNoiseForm = ({
                   </p>
                 )}
 
-                {/* Preserve Key Constraints Checkbox */}
+                {/* Noise to Key Attributes Checkbox */}
                 <div className="flex items-center gap-2 mt-2 custom-label">
                   <Checkbox
                     checked={dataset2KeyEnabled}
@@ -574,7 +574,7 @@ const Step5_SchemaNoiseForm = ({
                     disabled={dataset2DeleteSchemaEnabled}
                   />
                   <label htmlFor="dataset2SchemaKeyNoise" className="text-white">
-                    Preserve attribute name of keys
+                    Add Noise to Key Attributes
                   </label>
                 </div>
                 {errors.dataset2SchemaKeyNoise && (
@@ -672,7 +672,7 @@ const Step5_SchemaNoiseForm = ({
                     </p>
                   )}
 
-                  {/* Preserve Key Constraints Checkbox */}
+                  {/* Noise to Key Attributes Checkbox */}
                   <div className="flex items-center gap-2 mt-2 custom-label">
                     <Checkbox
                       checked={dataset3KeyEnabled}
@@ -681,7 +681,7 @@ const Step5_SchemaNoiseForm = ({
                       disabled={dataset3DeleteSchemaEnabled}
                     />
                     <label htmlFor="dataset3SchemaKeyNoise" className="text-white">
-                      Preserve attribute name of keys
+                      Add Noise to Key Attributes
                     </label>
                   </div>
                   {errors.dataset3SchemaKeyNoise && (
@@ -775,7 +775,7 @@ const Step5_SchemaNoiseForm = ({
                     </p>
                   )}
 
-                  {/* Preserve Key Constraints Checkbox */}
+                  {/* Noise to Key Attributes Checkbox */}
                   <div className="flex items-center gap-2 mt-2 custom-label">
                     <Checkbox
                       checked={dataset4KeyEnabled}
@@ -784,7 +784,7 @@ const Step5_SchemaNoiseForm = ({
                       disabled={dataset4DeleteSchemaEnabled}
                     />
                     <label htmlFor="dataset4SchemaKeyNoise" className="text-white">
-                      Preserve attribute name of keys
+                      Add Noise to Key Attributes
                     </label>
                   </div>
                   {errors.dataset4SchemaKeyNoise && (

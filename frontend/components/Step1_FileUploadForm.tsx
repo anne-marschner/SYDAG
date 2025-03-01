@@ -68,8 +68,8 @@ const Step1_FileUploadForm = ({
 
     return (
         <FormWrapper
-            title="Upload your Datasource"
-            description="Please provide a CSV File"
+            title="Upload your Dataset"
+            description="Please provide a CSV file."
         >
             <div className="w-full flex flex-col gap-10">
                 {/* File Upload Section */}
@@ -148,7 +148,7 @@ const Step1_FileUploadForm = ({
 
                 {/* Quote input field */}
                 <div className="flex flex-col gap-2 custom-label">
-                    <Label htmlFor="quote">Quote</Label>
+                    <Label htmlFor="quote">Quote Character</Label>
                     <Input
                         type="text"
                         name="quote"
@@ -167,7 +167,7 @@ const Step1_FileUploadForm = ({
 
                 {/* Escape input field */}
                 <div className="flex flex-col gap-2 custom-label">
-                    <Label htmlFor="escape">Escape</Label>
+                    <Label htmlFor="escape">Escape Character</Label>
                     <Input
                         type="text"
                         name="escape"

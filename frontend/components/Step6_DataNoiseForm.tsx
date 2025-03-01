@@ -351,7 +351,7 @@ const Step6_DataNoiseForm = ({
   return (
     <FormWrapper
       title="Select Noise Options for Data"
-      description="For each dataset, choose whether to add noise to the data."
+      description="For each dataset, choose whether to add noise to the data. If enabled, specify the error methods."
     >
       <div className="max-h-[750px] overflow-y-auto scrollbar-custom p-4 space-y-6">
         <div className="flex flex-col w-full h-full max-h-[50vh] p-4 scrollbar-custom">
@@ -377,7 +377,7 @@ const Step6_DataNoiseForm = ({
 
             {dataset1Enabled && (
               <>
-                {/* Preserve Key Constraints Checkbox */}
+                {/* Break Key Constraints Checkbox */}
                 <div className="flex items-center gap-2 mt-2 custom-label">
                   <Checkbox
                     checked={dataset1KeyEnabled}
@@ -385,7 +385,7 @@ const Step6_DataNoiseForm = ({
                     id="dataset1DataKeyNoise"
                   />
                   <label htmlFor="dataset1DataKeyNoise" className="text-white">
-                    Preserve Key Constraints
+                    Break Key Constraints
                   </label>
                 </div>
                 {errors.dataset1DataKeyNoise && (
@@ -489,7 +489,7 @@ const Step6_DataNoiseForm = ({
 
             {dataset2Enabled && (
               <>
-                {/* Preserve Key Constraints Checkbox */}
+                {/* Break Key Constraints Checkbox */}
                 <div className="flex items-center gap-2 mt-2 custom-label">
                   <Checkbox
                     checked={dataset2KeyEnabled}
@@ -497,7 +497,7 @@ const Step6_DataNoiseForm = ({
                     id="dataset2DataKeyNoise"
                   />
                   <label htmlFor="dataset2DataKeyNoise" className="text-white">
-                    Preserve Key Constraints
+                    Break Key Constraints
                   </label>
                 </div>
                 {errors.dataset2DataKeyNoise && (
@@ -605,7 +605,7 @@ const Step6_DataNoiseForm = ({
 
               {dataset3Enabled && (
                 <>
-                  {/* Preserve Key Constraints Checkbox */}
+                  {/* Break Key Constraints Checkbox */}
                   <div className="flex items-center gap-2 mt-2 custom-label">
                     <Checkbox
                       checked={dataset3KeyEnabled}
@@ -613,7 +613,7 @@ const Step6_DataNoiseForm = ({
                       id="dataset3DataKeyNoise"
                     />
                     <label htmlFor="dataset3DataKeyNoise" className="text-white">
-                      Preserve Key Constraints
+                      Break Key Constraints
                     </label>
                   </div>
                   {errors.dataset3DataKeyNoise && (
@@ -717,7 +717,7 @@ const Step6_DataNoiseForm = ({
 
               {dataset4Enabled && (
                 <>
-                  {/* Preserve Key Constraints Checkbox */}
+                  {/* Break Key Constraints Checkbox */}
                   <div className="flex items-center gap-2 mt-2 custom-label">
                     <Checkbox
                       checked={dataset4KeyEnabled}
@@ -725,7 +725,7 @@ const Step6_DataNoiseForm = ({
                       id="dataset4DataKeyNoise"
                     />
                     <label htmlFor="dataset4DataKeyNoise" className="text-white">
-                      Preserve Key Constraints
+                      Break Key Constraints
                     </label>
                   </div>
                   {errors.dataset4DataKeyNoise && (

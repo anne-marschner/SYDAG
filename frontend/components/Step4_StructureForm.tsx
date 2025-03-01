@@ -286,7 +286,7 @@ const Step4_StructureForm = ({
     return (
         <FormWrapper
             title="Select Structure Options"
-            description="Choose between 'No Change', 'BCNF' and 'Join Columns' for each dataset."
+            description="Choose between 'No Change', 'Normalize', and 'Join Columns' for each dataset that SYDAG creates."
         >
             {/* Outer scrollable container for everything */}
             <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
@@ -467,7 +467,7 @@ const Step4_StructureForm = ({
                         {/* Dataset 1 Sliders */}
                         {planSelected1 === "BCNF" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset 1 - BCNF Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset 1 - Normalize Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
                                     value={[dataset1BCNFValue]}
@@ -477,7 +477,7 @@ const Step4_StructureForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  BCNF Percentage: {dataset1BCNFValue}%
+                  Normalize Percentage: {dataset1BCNFValue}%
                 </span>
                                 {errors.dataset1BCNFSliderValue && (
                                     <p className="text-red-500 text-sm">
@@ -512,7 +512,7 @@ const Step4_StructureForm = ({
                         {/* Dataset 2 Sliders */}
                         {planSelected2 === "BCNF" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset 2 - BCNF Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset 2 - Normalize Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
                                     value={[dataset2BCNFValue]}
@@ -522,7 +522,7 @@ const Step4_StructureForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  BCNF Percentage: {dataset2BCNFValue}%
+                  Normalize Percentage: {dataset2BCNFValue}%
                 </span>
                                 {errors.dataset2BCNFSliderValue && (
                                     <p className="text-red-500 text-sm">
@@ -557,7 +557,7 @@ const Step4_StructureForm = ({
                         {/* Dataset 3 Sliders */}
                         {splitType === "VerticalHorizontal" && planSelected3 === "BCNF" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset 3 - BCNF Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset 3 - Normalize Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
                                     value={[dataset3BCNFValue]}
@@ -567,7 +567,7 @@ const Step4_StructureForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  BCNF Percentage: {dataset3BCNFValue}%
+                  Normalize Percentage: {dataset3BCNFValue}%
                 </span>
                                 {errors.dataset3BCNFSliderValue && (
                                     <p className="text-red-500 text-sm">
@@ -602,7 +602,7 @@ const Step4_StructureForm = ({
                         {/* Dataset 4 Sliders */}
                         {splitType === "VerticalHorizontal" && planSelected4 === "BCNF" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset 4 - BCNF Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset 4 - Normalize Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
                                     value={[dataset4BCNFValue]}
@@ -612,7 +612,7 @@ const Step4_StructureForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  BCNF Percentage: {dataset4BCNFValue}%
+                  Normalize Percentage: {dataset4BCNFValue}%
                 </span>
                                 {errors.dataset4BCNFSliderValue && (
                                     <p className="text-red-500 text-sm">

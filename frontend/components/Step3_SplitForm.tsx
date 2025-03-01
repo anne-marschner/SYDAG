@@ -94,7 +94,7 @@ const Step3_SplitForm = ({
     return (
         <FormWrapper
             title="Select Split Type"
-            description="Choose between horizontal, vertical, or both splits."
+            description="Choose how to split your input: horizontally, vertically, or both."
         >
             {/* Outer scrollable container */}
             <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
@@ -208,7 +208,7 @@ const Step3_SplitForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Percentage of rows in Dataset 1: {rowDistributionValue}%
+                  Percentage of Rows in Dataset 1: {rowDistributionValue}%
                 </span>
                             </div>
                         </>
@@ -242,7 +242,7 @@ const Step3_SplitForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Percentage of columns in Dataset 1: {columnDistributionValue}%
+                  Percentage of Columns in Dataset 1: {columnDistributionValue}%
                 </span>
                             </div>
                         </>
