@@ -43,15 +43,15 @@ The configuration of SYDAG includes several parameters that the user must adjust
 In the following we provide an overview of all parameters and their effects on the generation. Our explanation follows the grouping of the parameters in the interface. 
 
 ### Input File
-* **csvFile**: An input relation stored as a CSV file. 
+* **csvFile**: An input relation stored as a CSV-file. 
 * **hasHeaders**: Whether the relation has headers. 
-* **separator**:  The characters used as separator in the csv file. 
-* **quote**: The characters used for quotes in the csv file. 
-* **escape**: The characters used as escape sequence in the csv file.
+* **separator**:  The character used as separator in the CSV-file. 
+* **quote**: The character used for quotes in the CSV-file. 
+* **escape**: The character used as escape sequence in the CSV-file.
 
 ### Configuration Type
-* **jsonFile**: A json file that includes all configuration settings. 
-* **mode**: The option of setting the configuration (manual setting or upload of a json file).
+* **jsonFile**: A JSON-file that includes all configuration parameters. 
+* **mode**: The mode of setting the configuration (manual setting or upload of a JSON-file).
 
 ### Split
 * **splitType**: The type of split to be applied to the input relation (horizontal, vertical or both). 
@@ -59,32 +59,32 @@ In the following we provide an overview of all parameters and their effects on t
 * **columnOverlapPercentage**: The percentage of columns that should overlap between the split relations. 
 * **rowDistribution**:  The distribution of the non-overlapping rows between the new relations. This percentage describes how many non-overlapping rows will be part of one of the new relations (0-100). 
 * **columnDistribution**: The distribution of the non-overlapping columns between the new relations. This percentage describes how many non-overlapping columns will be part of one of the new relations (0-100). 
-* **overlapType**: the way the overlapping rows should be picked (as block overlap or random overlap).
+* **overlapType**: The way the overlapping rows should be picked (as block overlap or random overlap).
 
 ### Structure
 For each new Dataset X: 
-* **datasetXStructureType**: the structure change that will be applied to the new datsets (Join of Columns, Normalization to BCNF or no change).
-* **datasetXBCNFSliderValue**: the percentage that determines how many of the possible decomposition steps should be executed (0-100). 
-* **datasetXJoinColumnsSliderValue**: the percentage of overlapping columns to join (0-100).
+* **datasetXStructureType**: The structure change that will be applied to the new datsets (join of columns, normalization to BCNF or no change).
+* **datasetXBCNFSliderValue**: The percentage that determines how many of the possible decomposition steps should be executed (0-100). 
+* **datasetXJoinColumnsSliderValue**: The percentage of overlapping columns to join (0-100).
 
 ### Schema Noise
 For each new Dataset X:
-* **datasetXSchemaNoise**: whether the schema should include errors or not (true or false). 
-* **datasetXSchemaNoiseValue**: the percentage that determines how many of the attributes overlapping with other relations the generator will change. (0-100) 
-* **datasetXSchemaKeyNoise**: whether key columns should also be affected by the noise (true or false). 
-* **datasetXSchemaDeleteSchema**: whether the schema should be deleted (true or false). 
-* **datasetXSchemaMultiselect**: the methods that are chosen for the noise. ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation").
+* **datasetXSchemaNoise**: Whether the schema should include errors or not (true or false). 
+* **datasetXSchemaNoiseValue**: The percentage that determines how many of the attributes overlapping with other relations the generator will change (0-100). 
+* **datasetXSchemaKeyNoise**: Whether key columns should also be affected by the noise (true or false). 
+* **datasetXSchemaDeleteSchema**: Whether the schema should be deleted (true or false). 
+* **datasetXSchemaMultiselect**: The error methods that are chosen ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation").
 
 ### Data Noise
 For each new Dataset X:
-* **dataset1DataNoise**: whether the data should include errors or not (true or false). 
-* **dataset1DataNoiseValue**:  the percentage of rows/ columns to receive noise. (0-100) 
-* **dataset1DataNoiseInside**: percentage that indicates how many of the entries within a for noise selected column or row should receive errors. (0-100) 
-* **datasetXDataMultiselect**:  the methods that are chosen for the noise. ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier").
+* **dataset1DataNoise**: Whether the data should include errors or not (true or false). 
+* **dataset1DataNoiseValue**:  The percentage of rows/ columns to receive noise (0-100).
+* **dataset1DataNoiseInside**: The percentage that indicates how many of the entries within a for noise selected column or row should receive errors (0-100).
+* **datasetXDataMultiselect**:  The eroor methods that are chosen ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier").
 
 ### Shuffle
 For each new Dataset X:
-* **datasetXShuffleOption**: the shuffle option for the new datasets (row shuffle, column shuffle or no change).
+* **datasetXShuffleOption**: The shuffle option for the new datasets (row shuffle, column shuffle or no change).
 
 ### JSON Upload
 In the GUI the user can either set the parameters manually or upload a JSON file that conatains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.
