@@ -87,7 +87,7 @@ For each new Dataset X:
 * **datasetXShuffleOption**: The shuffle option for the new datasets (row shuffle, column shuffle or no change).
 
 ### JSON Upload
-In the GUI the user can either set the parameters manually or upload a JSON file that conatains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.
+In the GUI the user can either set the parameters manually or upload a JSON file that contains the configurations. An example of such a file is given here. The possible values that the user can choose from are written in comments.
 ```
 {
   "splitType": "VerticalHorizontal", 	// "Vertical", "Horizontal", "VerticalHorizontal" 
