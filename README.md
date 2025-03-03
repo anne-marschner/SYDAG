@@ -197,7 +197,7 @@ If you forget to set certain configuration parameters, SYDAG may fail to generat
 You can check several points:
 1. Did you specify the correct separator? If you specify the wrong character, the tool may interpret an entire row as a single entry.
 2. Did you specify error methods? If you enabled noise, you must define which methods SYDAG is allowed to use. If you do not select any methods, SYDAG cannot introduce errors.
-3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier".If you do not select one of these, SYDAG cannot introduce numeric errors.
+3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier". If you do not select one of these, SYDAG cannot introduce numeric errors.
 4. Did you use normalization? If you apply normalization while preserving key constraints, fewer errors than expected may appear in your relations. This happens because SYDAG does not introduce errors in key and foreign key columns in this case. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will result in fewer foreign key columns, allowing more columns to receive noise.
 
 #### When using the JSON file, what value should I assign to the parameters I am not using?
