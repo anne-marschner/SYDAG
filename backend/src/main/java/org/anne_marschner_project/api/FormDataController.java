@@ -37,6 +37,7 @@ public class FormDataController {
 
     private static final String CSV_MIME_TYPE = "text/csv";
     private static final String OUTPUT_PATH_BASE = "src/main/resources";
+    private static final String TEMP_PATH = "temp";
     private static final int BUFFER_SIZE = 1024;
 
     private final Generator generator;
@@ -68,17 +69,21 @@ public class FormDataController {
         }
 
         // Prepare output path and generator parameters
-        String outputPath = OUTPUT_PATH_BASE;
+
         GeneratorParameters params = new GeneratorParameters();
         params.setCsvFile(csvFile);
         params.setFormDataWrapper(formDataWrapper);
+
+        // Cleanup before generating
+        deleteFilesInDirectory(TEMP_PATH);
+        deleteFilesInDirectory(OUTPUT_PATH_BASE);
 
         // Execute generator and build ZIP response
         try {
             String generatorOutputPath = createGeneratorOutputPath(csvFile);
             generator.execute(params, generatorOutputPath);
 
-            Path zipFilePath = createZipFromDirectory(outputPath);
+            Path zipFilePath = createZipFromDirectory(OUTPUT_PATH_BASE);
             return buildZipResponse(zipFilePath);
 
         } catch (Exception e) {
@@ -86,7 +91,8 @@ public class FormDataController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while generating datasets.");
         } finally {
             // Cleanup
-            deleteFilesInDirectory(outputPath);
+            deleteFilesInDirectory(TEMP_PATH);
+            deleteFilesInDirectory(OUTPUT_PATH_BASE);
         }
     }
 
@@ -174,7 +180,7 @@ public class FormDataController {
             File[] files = outputFolder.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    if (!file.isDirectory()) {
+                    if (!file.isDirectory() && !file.getName().equals("application.yml")) {
                         zipSingleFile(zos, file);
                     }
                 }
@@ -221,7 +227,8 @@ public class FormDataController {
             File[] files = directory.listFiles();
             if (files != null) {
                 for (File file : files) {
-                    if (!file.isDirectory()) {
+                    // Exclude application.yml from deletion
+                    if (!file.isDirectory() && !file.getName().equals("application.yml")) {
                         file.delete();
                     }
                 }
