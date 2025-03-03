@@ -191,7 +191,7 @@ You need to install React and Next.js. Please check whether this installation wa
 If you are having trouble building the Docker containers, make sure that you are running VS Code and Docker as an administrator.
 
 #### Why is the generation failing?
-If you forgot to set parameters, SYDAG may not be able to generate a result and will return you to the Summary page. Restart the program and make sure that you have set all the necessary parameters. Pay special attention to the selection of error methods for each individual dataset.
+If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the Summary page. Restart the program and ensure that all necessary parameters are properly configured. Pay particular attention to selecting error methods for each dataset.
 
 #### Why do my generated datasets look different from what I expected?
 You can check several points:
