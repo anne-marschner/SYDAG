@@ -7,10 +7,10 @@
 5. [FAQ](#faq)
 
 ## General Information
-SYDAG is a **Sy**ntehtic **Da**taset **G**eneartor for data integration scenarios.
-Users can apply it to create integration scenarios that are customized to their specific needs. The generator works with relational datamodels. The user must supply SYADG with a relation stored in the form of a CSV file. SYDAG can process this relation to create an integration scenario of multiple datasets and relations.
-The user can choose between varies configuration options to achieve a specific result. 
-We provide a graphical user interface for an easy usage of SYDAG. The output includes the new datasets, a Mapping File, and a key file for each created dataset. The Mappinf File specifies which attributes in the new relations correspond to the original attributes. The key files containin the key and foreign key relationships.
+SYDAG is a **Sy**nthetic **Da**taset **G**enerator for data integration scenarios.
+Users can aplly it to create integration scenarios that are customized to their specific needs. The generator works with relational data models. The user must provide a relation stored as a CSV file. SYDAG processes this relation to create an integration scenario with multiple datasets and relations.
+The user can choose from various configuration options to achieve a specific result.
+We provide a graphical user interface for easy use of SYDAG. The output includes the generated datasets, a mapping file, and a key file for each dataset. The mapping file specifies which attributes in the new relations correspond to the original attributes. The key files contain information about key and foreign key relationships.
 
 ## Technologies
 A list of technologies used within the project:
@@ -30,17 +30,17 @@ Basis of the frontend implementation:
 
 
 ## Installation
-To install SYDAG the user must clone the GitHub repository. It is necessary to install React and Next.js in the frontend folder. Open a terminal in the IDE of your choice (e.g. VSCode) and navigate to 'SYDAG\frontend'. There you need to apply the the following commands:
+To install SYDAG the user must clone the GitHub repository. It is necessary to install React and Next.js in the frontend folder. Open a terminal in the IDE of your choice (e.g. VSCode) and navigate to 'SYDAG/frontend'. There you need to run the the following commands:
 * `npm install --save-exact react@^19.0.0 react-dom@^19.0.0`
 * `npm install --save-exact @types/react@^19.0.0 @types/react-dom@^19.0.0`
 * `npx @next/codemod@canary upgrade latest`
 * `npm install` 
 
-The project uses Docker for fast and easy access. Therefore, users must execute the [Docker Compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. Then SYDAG can be started through the Docker environment.
+The project uses Docker for fast and easy deployment. Therefore, users must execute the [Docker Compose file](https://github.com/anne-marschner/SYDAG/blob/main/docker-compose.yml) to build the application on their device. SYDAG can then be started through the Docker environment.
 
 ## User Instructions
 The configuration of SYDAG includes several parameters that the user must adjust.
-In the following we give an overview over all of the parameters and their effects on the generation. For our explanation we follow the grouping of the parameters in the interface. 
+In the following we provide an overview of all parameters and their effects on the generation. Our explanation follows the grouping of the parameters in the interface. 
 
 ### Input File
 * **csvFile**: An input relation stored as a CSV file. 
@@ -187,17 +187,20 @@ In the GUI the user can either set the parameters manually or upload a JSON file
 
 ## FAQ
 #### Why is the installation not working?
-You need to install React and Next.js. Please check if this installation was successful.  
-If you have problems with building the Docker containers, please check if you are executing VS Code and Docker as an administrator.
+You need to install React and Next.js. Please check whether this installation was successful.  
+If you are having trouble building the Docker containers, make sure that you are running VS Code and Docker as an administrator.
+
+#### Why is the generation failing?
+If you forgot to set parameters, SYDAG may not be able to generate a result and will return you to the Summary page. Restart the program and make sure that you have set all the necessary parameters. Pay special attention to the selection of error methods for each individual dataset.
 
 #### Why do my generated datasets look different from what I expected?
 You can check several points:
-1. Did you specify the correct separator? If you specify the wrong character, it is possible that the tool will read the entries of a whole row as one single entry.
-2. Did you specify error methods? If you chose to enable noise, you must specify what methods SYDAG is allowed to use. If you do not choose methods, SYDAG cannot add errors.
-3. Did you try adding errors to numeric values? If so, you need to chose at least one method that is applied on numeric methods: "changeValue" or "changeValueToOutlier". If you do not chose one of them, SYDAG cannot add numeric errors.
-4. Did you use normalization? If you choose to apply normalization and preserve the key constraints, it is possible that fewer errors than you expected appear in your relations. This happens because, in that case, SYDAG does not add errors to the key and foreign key columns. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will cause fewer foreign-key columns, and therefore more columns remain to receive noise.
+1. Did you specify the correct separator? If you specify the wrong character, the tool may interpret an entire row as a single entry.
+2. Did you specify error methods? If you enabled noise, you must define which methods SYDAG is allowed to use. If you do not select any methods, SYDAG cannot introduce errors.
+3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier".If you do not select one of these, SYDAG cannot introduce numeric errors.
+4. Did you use normalization? If you apply normalization while preserving key constraints, fewer errors than expected may appear in your relations. This happens because SYDAG does not introduce errors in key and foreign key columns in this case. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will result in fewer foreign key columns, allowing more columns to receive noise.
 
 #### When using the JSON file, what value should I assign to the parameters I am not using?
 If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
-Additionally, Split, Structure and Noise can include parameters that are not needed, for example, when the noise is not enabled or the structure is not changed.
-In the JSON file, set the unused booleans to false, the arrays of chosen methods to empty '[]' and the rest of the parameters to null. They will not be used for the generation anyway.
+Additionally, Split, Structure, and Noise can include parameters that are not needed, for example, when the noise is not enabled or the structure is not changed.
+In the JSON file, set the unused booleans to 'false', the arrays of chosen methods to empty '[]' and the rest of the parameters to 'null'. They will not be used for the generation anyway.
