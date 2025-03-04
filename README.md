@@ -201,6 +201,7 @@ You can check several points:
 2. Did you specify error methods? If you enabled noise, you must define which methods SYDAG is allowed to use. If you do not select any methods, SYDAG randomly applies the available error methods.
 3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier". If you do not select one of these, SYDAG uses both methods.
 4. Did you use normalization? If you apply normalization while preserving key constraints, fewer errors than expected may appear in your relations. This happens because SYDAG does not introduce errors in key and foreign key columns in this case. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will result in fewer foreign key columns, allowing more columns to receive noise.
+5. Did you preserve the key constraints? If your key is very large and you chose not to add errors in the key columns, there might be very few columns with errors.
 
 #### When using the JSON file, what value should I assign to the parameters I am not using?
 If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
