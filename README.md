@@ -192,7 +192,7 @@ If you are having trouble building the Docker containers, make sure that you are
 
 #### Why is the generation failing?
 You can check several points:
-1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Restart the program and ensure that all necessary parameters are properly configured.
+1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Join Options for each dataset.
 2. Ensure that the separator, quote, and escape characters are used correctly in the dataset. If there are inconsistencies in the dataset's structure, the file may not be read correctly.
    
 #### Why do my generated datasets look different from what I expected?
