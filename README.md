@@ -203,6 +203,7 @@ You can check several points:
 4. Did you use normalization? If you apply normalization while preserving key constraints, fewer errors than expected may appear in your relations. This happens because SYDAG does not introduce errors in key and foreign key columns in this case. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will result in fewer foreign key columns, allowing more columns to receive noise.
 5. Did you preserve the key constraints? If your key is very large and you chose not to add errors in the key columns, there might be very few columns with errors.
 6. Did you choose "replaceWithTranslation" or "replaceWithSynonyms"? Make sure you are connected to the internet. Otherwise, the generator cannot call the APIs and therefore cannot include any synonyms or translations. SYDAG will use other error methods instead.
+7. Did you use vertical overlap and there are more overlapping columns than expected? The reason is that all key columns are included in the overlap, regardless of your specified percentage. SYDAG must incorporate the key columns in the overlap to create integrable scenarios. Your specified overlap percentage applies only to the non-key columns.
 
 #### When using the JSON file, what value should I assign to the parameters I am not using?
 If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
