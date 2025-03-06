@@ -19,7 +19,7 @@ A list of technologies used within the project:
 * [Datamuse](https://www.datamuse.com/api/): Version 1.1
 * [MyMemory](https://mymemory.translated.net/doc/spec.php)
 * [Java](https://www.oracle.com/java/technologies/downloads/#java21): Version 21
-* [Spring Boot](https://spring.io/projects/spring-boot): Version 3.3.4
+* [Spring Boot](https://spring.io/projects/spring-boot): Version 3.4.3
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
 * [React](https://react.dev/): Version 19.0.0
 * [Next.js](https://nextjs.org/): Version 15.1.5
@@ -192,15 +192,18 @@ If you are having trouble building the Docker containers, make sure that you are
 
 #### Why is the generation failing?
 You can check several points:
-1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the Summary page. Restart the program and ensure that all necessary parameters are properly configured. Pay particular attention to selecting error methods for each dataset.
+1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Join Options for each dataset.
 2. Ensure that the separator, quote, and escape characters are used correctly in the dataset. If there are inconsistencies in the dataset's structure, the file may not be read correctly.
    
 #### Why do my generated datasets look different from what I expected?
 You can check several points:
 1. Did you specify the correct separator? If you specify the wrong character, the tool may interpret an entire row as a single entry.
-2. Did you specify error methods? If you enabled noise, you must define which methods SYDAG is allowed to use. If you do not select any methods, SYDAG cannot introduce errors.
-3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier". If you do not select one of these, SYDAG cannot introduce numeric errors.
+2. Did you specify error methods? If you enabled noise, you must define which methods SYDAG is allowed to use. If you do not select any methods, SYDAG randomly applies the available error methods.
+3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier". If you do not select one of these, SYDAG uses both methods.
 4. Did you use normalization? If you apply normalization while preserving key constraints, fewer errors than expected may appear in your relations. This happens because SYDAG does not introduce errors in key and foreign key columns in this case. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will result in fewer foreign key columns, allowing more columns to receive noise.
+5. Did you preserve the key constraints? If your key is very large and you chose not to add errors in the key columns, there might be very few columns with errors.
+6. Did you choose "replaceWithTranslation" or "replaceWithSynonyms"? Make sure you are connected to the internet. Otherwise, the generator cannot call the APIs and therefore cannot include any synonyms or translations. SYDAG will use other error methods instead.
+7. Did you use vertical overlap and there are more overlapping columns than expected? The reason is that all key columns are included in the overlap, regardless of your specified percentage. SYDAG must incorporate the key columns in the overlap to create integrable scenarios. Your specified overlap percentage applies only to the non-key columns.
 
 #### When using the JSON file, what value should I assign to the parameters I am not using?
 If you do not apply both split types, SYDAG will produce only two new datasets. Therefore, the parameters for the third and fourth datasets will not be used.
