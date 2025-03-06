@@ -19,7 +19,7 @@ A list of technologies used within the project:
 * [Datamuse](https://www.datamuse.com/api/): Version 1.1
 * [MyMemory](https://mymemory.translated.net/doc/spec.php)
 * [Java](https://www.oracle.com/java/technologies/downloads/#java21): Version 21
-* [Spring Boot](https://spring.io/projects/spring-boot): Version 3.3.4
+* [Spring Boot](https://spring.io/projects/spring-boot): Version 3.4.3
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
 * [React](https://react.dev/): Version 19.0.0
 * [Next.js](https://nextjs.org/): Version 15.1.5
