@@ -37,6 +37,12 @@ public class FormDataController {
     private static final String OUTPUT_PATH_BASE = "results";
     private static final String TEMP_PATH = "temp";
     private static final int BUFFER_SIZE = 1024;
+    private static final List<String> ACCEPTED_CSV_MIME_TYPES = Arrays.asList(
+            "text/csv",
+            "application/vnd.ms-excel",
+            "application/csv",
+            "text/plain"
+    );
 
     private final Generator generator;
 
@@ -114,7 +120,9 @@ public class FormDataController {
     private ResponseEntity<?> validateCsvFile(MultipartFile csvFile) {
         if (csvFile == null || csvFile.isEmpty()) {
             return createSingleErrorResponse("CSV file is required");
-        } else if (!CSV_MIME_TYPE.equals(csvFile.getContentType())) {
+        }
+        String contentType = csvFile.getContentType();
+        if (!ACCEPTED_CSV_MIME_TYPES.contains(contentType)) {
             return createSingleErrorResponse("Invalid file type. Only CSV files are accepted.");
         }
         return null;
