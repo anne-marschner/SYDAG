@@ -27,58 +27,19 @@ class CSVToolTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        // create CSV-File with Header
-        String csvContent = "id,name,age\n" +
-                "1,Anne,24\n" +
-                "2,,30\n" +
-                "3,Jonathan,22\n";
-        testFileWithHeader = new MockMultipartFile(
-                "file",
-                "test_with_header.csv",
-                "text/csv",
-                csvContent.getBytes(StandardCharsets.UTF_8)
-        );
+        testFileWithHeader = createMockFile("test_with_header.csv", "id,name,age\n1,Anne,24\n2,,30\n3,Jonathan,22\n");
+        testFileWithoutHeader = createMockFile("test_without_header.csv", "1,Anne,24\n2,,30\n3,Jonathan,22\n");
+        inconsistentFile = createMockFile("inconsistent.csv", "id,name,age\n1,Anne\n2,,24\n");
+        mixedDataFile = createMockFile("mixed_data.csv", "id,amount,date\n1,100.50,2024-10-01\n2,200,2024-10-02\n3,150.75,2024-10-03\n");
+        emptyFile = createMockFile("empty.csv", "");
+    }
 
-        // create CSV-File without Header
-        String csvContentNoHeader = "1,Anne,24\n" +
-                "2,,30\n" +
-                "3,Jonathan,22\n";
-        testFileWithoutHeader = new MockMultipartFile(
+    private MockMultipartFile createMockFile(String fileName, String content) {
+        return new MockMultipartFile(
                 "file",
-                "test_without_header.csv",
+                fileName,
                 "text/csv",
-                csvContentNoHeader.getBytes(StandardCharsets.UTF_8)
-        );
-
-        // create inconsistent CSV-File
-        String csvInconsistentContent = "id,name,age\n" +
-                "1,Anne\n" +
-                "2,,24\n";
-        inconsistentFile = new MockMultipartFile(
-                "file",
-                "inconsistent.csv",
-                "text/csv",
-                csvInconsistentContent.getBytes(StandardCharsets.UTF_8)
-        );
-
-        // create mixed data CSV-File
-        String csvMixedContent = "id,amount,date\n" +
-                "1,100.50,2024-10-01\n" +
-                "2,200,2024-10-02\n" +
-                "3,150.75,2024-10-03\n";
-        mixedDataFile = new MockMultipartFile(
-                "file",
-                "mixed_data.csv",
-                "text/csv",
-                csvMixedContent.getBytes(StandardCharsets.UTF_8)
-        );
-
-        // create empty CSV-File
-        emptyFile = new MockMultipartFile(
-                "file",
-                "empty.csv",
-                "text/csv",
-                new byte[0]
+                content.getBytes(StandardCharsets.UTF_8)
         );
     }
 
