@@ -23,7 +23,7 @@ A list of technologies used within the project:
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
 * [React](https://react.dev/): Version 19.0.0
 * [Next.js](https://nextjs.org/): Version 15.1.5
-* [Docker](https://www.docker.com/products/docker-desktop/)
+* [Docker](https://www.docker.com/products/docker-desktop/): Version 4.38.0
   
 Basis of the frontend implementation:   
 
