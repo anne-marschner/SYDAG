@@ -1,102 +1,111 @@
 "use client";
 import React from "react";
 import FormWrapper from "./FormWrapper";
-import { FormItems } from "@/components/types/formTypes";
+import {FormItems} from "@/components/types/formTypes";
 
 type StepProps = FormItems & {
     goTo: (index: number) => void;
 };
 
 const Step8_SummaryForm = ({
-    // Step 1
-    csvFile,
-    hasHeaders,
-    separator,
-    quote,
-    escape,
+                               // Step 1
+                               csvFile,
+                               hasHeaders,
+                               separator,
+                               quote,
+                               escape,
 
-    // Step 2
-    jsonFile,
-    manualInput,
-    mode,
+                               // Step 2
+                               jsonFile,
+                               manualInput,
+                               mode,
 
-    // Step 3
-    splitType,
-    rowOverlapPercentage,
-    columnOverlapPercentage,
-    rowDistribution,
-    columnDistribution,
-    overlapType,
+                               // Step 3
+                               splitType,
+                               rowOverlapPercentage,
+                               columnOverlapPercentage,
+                               rowDistribution,
+                               columnDistribution,
+                               overlapType,
 
-    // Step 4
-    dataset1StructureType,
-    dataset2StructureType,
-    dataset3StructureType,
-    dataset4StructureType,
+                               // Step 4
+                               dataset1StructureType,
+                               dataset2StructureType,
+                               dataset3StructureType,
+                               dataset4StructureType,
+                               dataset1BCNFSliderValue,
+                               dataset1JoinColumnsSliderValue,
+                               dataset2BCNFSliderValue,
+                               dataset2JoinColumnsSliderValue,
+                               dataset3BCNFSliderValue,
+                               dataset3JoinColumnsSliderValue,
+                               dataset4BCNFSliderValue,
+                               dataset4JoinColumnsSliderValue,
 
-    // Step 5
-    dataset1SchemaNoise,
-    dataset1SchemaNoiseValue,
-    dataset1SchemaKeyNoise,
-    dataset1SchemaDeleteSchema,
-    dataset1SchemaMultiselect,
+                               // Step 5
+                               dataset1SchemaNoise,
+                               dataset1SchemaNoiseValue,
+                               dataset1SchemaKeyNoise,
+                               dataset1SchemaDeleteSchema,
+                               dataset1SchemaMultiselect,
 
-    dataset2SchemaNoise,
-    dataset2SchemaNoiseValue,
-    dataset2SchemaKeyNoise,
-    dataset2SchemaDeleteSchema,
-    dataset2SchemaMultiselect,
+                               dataset2SchemaNoise,
+                               dataset2SchemaNoiseValue,
+                               dataset2SchemaKeyNoise,
+                               dataset2SchemaDeleteSchema,
+                               dataset2SchemaMultiselect,
 
-    dataset3SchemaNoise,
-    dataset3SchemaNoiseValue,
-    dataset3SchemaKeyNoise,
-    dataset3SchemaDeleteSchema,
-    dataset3SchemaMultiselect,
+                               dataset3SchemaNoise,
+                               dataset3SchemaNoiseValue,
+                               dataset3SchemaKeyNoise,
+                               dataset3SchemaDeleteSchema,
+                               dataset3SchemaMultiselect,
 
-    dataset4SchemaNoise,
-    dataset4SchemaNoiseValue,
-    dataset4SchemaKeyNoise,
-    dataset4SchemaDeleteSchema,
-    dataset4SchemaMultiselect,
+                               dataset4SchemaNoise,
+                               dataset4SchemaNoiseValue,
+                               dataset4SchemaKeyNoise,
+                               dataset4SchemaDeleteSchema,
+                               dataset4SchemaMultiselect,
 
-    // Step 6
-    dataset1DataNoise,
-    dataset1DataNoiseValue,
-    dataset1DataKeyNoise,
-    dataset1DataNoiseInside,
-    dataset1DataMultiselect,
+                               // Step 6
+                               dataset1DataNoise,
+                               dataset1DataNoiseValue,
+                               dataset1DataKeyNoise,
+                               dataset1DataNoiseInside,
+                               dataset1DataMultiselect,
 
-    dataset2DataNoise,
-    dataset2DataNoiseValue,
-    dataset2DataKeyNoise,
-    dataset2DataNoiseInside,
-    dataset2DataMultiselect,
+                               dataset2DataNoise,
+                               dataset2DataNoiseValue,
+                               dataset2DataKeyNoise,
+                               dataset2DataNoiseInside,
+                               dataset2DataMultiselect,
 
-    dataset3DataNoise,
-    dataset3DataNoiseValue,
-    dataset3DataKeyNoise,
-    dataset3DataNoiseInside,
-    dataset3DataMultiselect,
+                               dataset3DataNoise,
+                               dataset3DataNoiseValue,
+                               dataset3DataKeyNoise,
+                               dataset3DataNoiseInside,
+                               dataset3DataMultiselect,
 
-    dataset4DataNoise,
-    dataset4DataNoiseValue,
-    dataset4DataKeyNoise,
-    dataset4DataNoiseInside,
-    dataset4DataMultiselect,
+                               dataset4DataNoise,
+                               dataset4DataNoiseValue,
+                               dataset4DataKeyNoise,
+                               dataset4DataNoiseInside,
+                               dataset4DataMultiselect,
 
-    // Step 7
-    dataset1ShuffleOption,
-    dataset2ShuffleOption,
-    dataset3ShuffleOption,
-    dataset4ShuffleOption,
-    goTo,
-}: StepProps) => {
+                               // Step 7
+                               dataset1ShuffleOption,
+                               dataset2ShuffleOption,
+                               dataset3ShuffleOption,
+                               dataset4ShuffleOption,
+                               goTo,
+                           }: StepProps) => {
     return (
         <FormWrapper
             title="Summary"
             description="Please review all your entered information before confirming."
         >
-            <div className="pr-6 gap-y-4 gap-x-4 p-2 mt-0 rounded-md h-[600px] max-w-full mx-auto grid grid-cols-2 overflow-y-auto scrollbar-custom">
+            <div
+                className="pr-6 gap-y-4 gap-x-4 p-2 mt-0 rounded-md h-[600px] max-w-full mx-auto grid grid-cols-2 overflow-y-auto scrollbar-custom">
 
                 {/* Step 1: File Upload */}
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
@@ -109,7 +118,8 @@ const Step8_SummaryForm = ({
                             ) : (
                                 <p className="text-neutral-500 mt-1 text-sm">No CSV file uploaded.</p>
                             )}
-                            <button onClick={() => goTo(0)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(0)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -117,7 +127,8 @@ const Step8_SummaryForm = ({
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Has Headers</h4>
                             <p className="text-neutral-300 mt-1 text-sm">{hasHeaders ? "Yes" : "No"}</p>
-                            <button onClick={() => goTo(0)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(0)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -125,7 +136,8 @@ const Step8_SummaryForm = ({
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Separator</h4>
                             <p className="text-neutral-300 mt-1 text-sm">{separator || "No separator specified."}</p>
-                            <button onClick={() => goTo(0)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(0)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -133,7 +145,8 @@ const Step8_SummaryForm = ({
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Quote</h4>
                             <p className="text-neutral-300 mt-1 text-sm">{quote || "No quote specified."}</p>
-                            <button onClick={() => goTo(0)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(0)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -141,7 +154,8 @@ const Step8_SummaryForm = ({
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Escape</h4>
                             <p className="text-neutral-300 mt-1 text-sm">{escape || "No escape character specified."}</p>
-                            <button onClick={() => goTo(0)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(0)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -166,7 +180,8 @@ const Step8_SummaryForm = ({
                                     )}
                                 </div>
                             )}
-                            <button onClick={() => goTo(1)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(1)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -180,7 +195,8 @@ const Step8_SummaryForm = ({
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Split Type</h4>
                             <p className="text-neutral-300 mt-1 text-sm">{splitType}</p>
-                            <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(2)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -190,7 +206,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Row Overlap</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{rowOverlapPercentage ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -198,7 +215,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Row Distribution</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{rowDistribution ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -206,7 +224,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Overlap Type</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{overlapType || "No overlap type selected."}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -218,7 +237,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Column Overlap</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{columnOverlapPercentage ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -226,7 +246,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Column Distribution</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{columnDistribution ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -234,7 +255,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Overlap Type</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{overlapType || "No overlap type selected."}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -247,7 +269,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Row Overlap</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{rowOverlapPercentage ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -255,7 +278,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Row Distribution</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{rowDistribution ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -264,7 +288,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Column Overlap</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{columnOverlapPercentage ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -272,7 +297,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Column Distribution</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{columnDistribution ?? "No value set"}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -280,7 +306,8 @@ const Step8_SummaryForm = ({
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Overlap Type</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{overlapType || "No overlap type selected."}</p>
-                                    <button onClick={() => goTo(2)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(2)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -296,8 +323,18 @@ const Step8_SummaryForm = ({
                         {/* Dataset 1 Structure */}
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Dataset 1 Structure</h4>
-                            <p className="text-neutral-300 mt-1 text-sm">{dataset1StructureType}</p>
-                            <button onClick={() => goTo(3)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <p className="text-neutral-300 mt-1 text-sm">
+                                {dataset1StructureType}
+                                {dataset1StructureType === "BCNF"
+                                    ? ` (${dataset1BCNFSliderValue}%)`
+                                    : dataset1StructureType === "Join Columns"
+                                        ? ` (${dataset1JoinColumnsSliderValue}%)`
+                                        : ""}
+                            </p>
+                            <button
+                                onClick={() => goTo(3)}
+                                className="text-[#6fe79f] text-xs mt-1 hover:text-green-300"
+                            >
                                 Change
                             </button>
                         </div>
@@ -305,8 +342,18 @@ const Step8_SummaryForm = ({
                         {/* Dataset 2 Structure */}
                         <div className="mb-3">
                             <h4 className="font-semibold text-white text-md">Dataset 2 Structure</h4>
-                            <p className="text-neutral-300 mt-1 text-sm">{dataset2StructureType}</p>
-                            <button onClick={() => goTo(3)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <p className="text-neutral-300 mt-1 text-sm">
+                                {dataset2StructureType}
+                                {dataset2StructureType === "BCNF"
+                                    ? ` (${dataset2BCNFSliderValue}%)`
+                                    : dataset2StructureType === "Join Columns"
+                                        ? ` (${dataset2JoinColumnsSliderValue}%)`
+                                        : ""}
+                            </p>
+                            <button
+                                onClick={() => goTo(3)}
+                                className="text-[#6fe79f] text-xs mt-1 hover:text-green-300"
+                            >
                                 Change
                             </button>
                         </div>
@@ -317,8 +364,18 @@ const Step8_SummaryForm = ({
                                 {/* Dataset 3 Structure */}
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Dataset 3 Structure</h4>
-                                    <p className="text-neutral-300 mt-1 text-sm">{dataset3StructureType}</p>
-                                    <button onClick={() => goTo(3)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <p className="text-neutral-300 mt-1 text-sm">
+                                        {dataset3StructureType}
+                                        {dataset3StructureType === "BCNF"
+                                            ? ` (${dataset3BCNFSliderValue}%)`
+                                            : dataset3StructureType === "Join Columns"
+                                                ? ` (${dataset3JoinColumnsSliderValue}%)`
+                                                : ""}
+                                    </p>
+                                    <button
+                                        onClick={() => goTo(3)}
+                                        className="text-[#6fe79f] text-xs mt-1 hover:text-green-300"
+                                    >
                                         Change
                                     </button>
                                 </div>
@@ -326,8 +383,18 @@ const Step8_SummaryForm = ({
                                 {/* Dataset 4 Structure */}
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Dataset 4 Structure</h4>
-                                    <p className="text-neutral-300 mt-1 text-sm">{dataset4StructureType}</p>
-                                    <button onClick={() => goTo(3)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <p className="text-neutral-300 mt-1 text-sm">
+                                        {dataset4StructureType}
+                                        {dataset4StructureType === "BCNF"
+                                            ? ` (${dataset4BCNFSliderValue}%)`
+                                            : dataset4StructureType === "Join Columns"
+                                                ? ` (${dataset4JoinColumnsSliderValue}%)`
+                                                : ""}
+                                    </p>
+                                    <button
+                                        onClick={() => goTo(3)}
+                                        className="text-[#6fe79f] text-xs mt-1 hover:text-green-300"
+                                    >
                                         Change
                                     </button>
                                 </div>
@@ -335,6 +402,7 @@ const Step8_SummaryForm = ({
                         )}
                     </div>
                 </div>
+
 
                 {/* Step 5: Schema Noise Settings */}
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
@@ -352,11 +420,11 @@ const Step8_SummaryForm = ({
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {`Schema Key Noise: ${dataset1SchemaKeyNoise ? "Enabled" : "Disabled"
-                                    }`}
+                                }`}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {`Delete Schema: ${dataset1SchemaDeleteSchema ? "Enabled" : "Disabled"
-                                    }`}
+                                }`}
                             </p>
 
                             {/* multi-select */}
@@ -385,11 +453,11 @@ const Step8_SummaryForm = ({
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {`Schema Key Noise: ${dataset2SchemaKeyNoise ? "Enabled" : "Disabled"
-                                    }`}
+                                }`}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {`Delete Schema: ${dataset2SchemaDeleteSchema ? "Enabled" : "Disabled"
-                                    }`}
+                                }`}
                             </p>
 
                             {/* multi-select */}
@@ -421,11 +489,11 @@ const Step8_SummaryForm = ({
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {`Schema Key Noise: ${dataset3SchemaKeyNoise ? "Enabled" : "Disabled"
-                                            }`}
+                                        }`}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {`Delete Schema: ${dataset3SchemaDeleteSchema ? "Enabled" : "Disabled"
-                                            }`}
+                                        }`}
                                     </p>
 
                                     {/* multi-select */}
@@ -454,11 +522,11 @@ const Step8_SummaryForm = ({
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {`Schema Key Noise: ${dataset4SchemaKeyNoise ? "Enabled" : "Disabled"
-                                            }`}
+                                        }`}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {`Delete Schema: ${dataset4SchemaDeleteSchema ? "Enabled" : "Disabled"
-                                            }`}
+                                        }`}
                                     </p>
 
                                     {/* multi-select */}
@@ -482,7 +550,6 @@ const Step8_SummaryForm = ({
                 </div>
 
 
-
                 {/* Step 6: Data Noise Settings */}
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
                     <h3 className="font-semibold text-xl text-white mb-3">Step 6: Data Noise Settings</h3>
@@ -500,9 +567,9 @@ const Step8_SummaryForm = ({
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {`Data Noise Inside: ${dataset1DataNoiseInside !== null
-                                        ? `${dataset1DataNoiseInside}%`
-                                        : "No value set"
-                                    }`}
+                                    ? `${dataset1DataNoiseInside}%`
+                                    : "No value set"
+                                }`}
                             </p>
 
                             {/* Multi-Select Summary */}
@@ -533,9 +600,9 @@ const Step8_SummaryForm = ({
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {`Data Noise Inside: ${dataset2DataNoiseInside !== null
-                                        ? `${dataset2DataNoiseInside}%`
-                                        : "No value set"
-                                    }`}
+                                    ? `${dataset2DataNoiseInside}%`
+                                    : "No value set"
+                                }`}
                             </p>
 
                             {/* Multi-Select Summary */}
@@ -569,9 +636,9 @@ const Step8_SummaryForm = ({
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {`Data Noise Inside: ${dataset3DataNoiseInside !== null
-                                                ? `${dataset3DataNoiseInside}%`
-                                                : "No value set"
-                                            }`}
+                                            ? `${dataset3DataNoiseInside}%`
+                                            : "No value set"
+                                        }`}
                                     </p>
 
                                     {/* Multi-Select Summary */}
@@ -602,9 +669,9 @@ const Step8_SummaryForm = ({
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {`Data Noise Inside: ${dataset4DataNoiseInside !== null
-                                                ? `${dataset4DataNoiseInside}%`
-                                                : "No value set"
-                                            }`}
+                                            ? `${dataset4DataNoiseInside}%`
+                                            : "No value set"
+                                        }`}
                                     </p>
 
                                     {/* Multi-Select Summary */}
@@ -627,8 +694,6 @@ const Step8_SummaryForm = ({
                 </div>
 
 
-
-
                 {/* Step 7: Shuffle Options */}
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
                     <h3 className="font-semibold text-xl text-white mb-3">Step 7: Shuffle Options</h3>
@@ -639,7 +704,8 @@ const Step8_SummaryForm = ({
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {dataset1ShuffleOption ? dataset1ShuffleOption : "No options selected."}
                             </p>
-                            <button onClick={() => goTo(6)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(6)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -650,7 +716,8 @@ const Step8_SummaryForm = ({
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {dataset2ShuffleOption ? dataset2ShuffleOption : "No options selected."}
                             </p>
-                            <button onClick={() => goTo(6)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                            <button onClick={() => goTo(6)}
+                                    className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                 Change
                             </button>
                         </div>
@@ -664,7 +731,8 @@ const Step8_SummaryForm = ({
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {dataset3ShuffleOption ? dataset3ShuffleOption : "No options selected."}
                                     </p>
-                                    <button onClick={() => goTo(6)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(6)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
@@ -675,7 +743,8 @@ const Step8_SummaryForm = ({
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {dataset4ShuffleOption ? dataset4ShuffleOption : "No options selected."}
                                     </p>
-                                    <button onClick={() => goTo(6)} className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
+                                    <button onClick={() => goTo(6)}
+                                            className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
                                         Change
                                     </button>
                                 </div>
