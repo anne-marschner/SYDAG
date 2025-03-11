@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Service
 public class Generator {
 
-
+    private static final int THREAD_POOL_SIZE = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
 
     /**
      * Executes the entire data generation process using the parameters provided.
@@ -168,30 +168,32 @@ public class Generator {
             datasets.set(i, applyJoin(datasets.get(i), structureTypes[i], joinPercentages[i], separator));
         }
 
-        // CountDownLatch to synchronize file writing
-        CountDownLatch latch = new CountDownLatch(datasets.size());
-
+        // Use a fixed thread pool to write datasets concurrently
         CSVTool csvTool = new CSVTool();
+        ExecutorService executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        List<Future<?>> futures = new ArrayList<>();
+
         for (int i = 0; i < datasets.size(); i++) {
             final int index = i;
-            new Thread(() -> {
-                try {
-                    writeDataset(csvTool, datasets.get(index), outputPath + "_" + identifier[index], separator, quoteChar, shuffleTypes[index], index, identifier[index]);
-                } finally {
-                    latch.countDown(); // Signal file writing is complete for this dataset
-                }
-            }).start();
+            Future<?> future = executor.submit(() -> writeDataset(csvTool, datasets.get(index), outputPath + "_" + identifier[index],
+                    separator, quoteChar, shuffleTypes[index], index, identifier[index]));
+            futures.add(future);
         }
 
-        try {
-            // Wait for all files to be written
-            latch.await();
-            System.out.println("All files have been written successfully.");
-        } catch (InterruptedException e) {
-            System.err.println("Error waiting for file writing to complete: " + e.getMessage());
+        // Wait for all tasks to finish
+        for (Future<?> f : futures) {
+            try {
+                f.get();
+            } catch (InterruptedException | ExecutionException e) {
+                System.err.println("Error during dataset writing: " + e.getMessage());
+            }
         }
+        executor.shutdown();
 
+        // Write mapping file.
         csvTool.writeMapping(inputRelation, datasets, identifier, outputPath + "_Mapping.txt");
+
+        datasets.clear();
     }
 
 

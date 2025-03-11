@@ -18,4 +18,4 @@ RUN mvn package -DskipTests
 EXPOSE 8080
 
 # Run the application with Spring Boot
-CMD ["java", "-jar", "target/untitled-1.0-SNAPSHOT.jar"]
+CMD ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=90.0", "-jar", "target/untitled-1.0-SNAPSHOT.jar"]

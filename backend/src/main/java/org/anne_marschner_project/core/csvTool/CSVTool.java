@@ -36,74 +36,87 @@ public class CSVTool {
      * @throws IOException if an I/O error occurs or if the file is empty
      */
     public Relation readCSVColumns(MultipartFile file, boolean hasHeader, char separator, char quoteChar, char escapeChar) throws IOException {
-
-        // Check if the file is empty
+        // Use a BufferedReader. Check for emptiness by attempting to read the first line.
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
-            if (reader.readLine() == null) {
+            reader.mark(1024); // mark the current position with an arbitrary read-ahead limit
+            String firstLine = reader.readLine();
+            if (firstLine == null) {
                 throw new IOException("The CSV file is empty.");
             }
-        }
+            reader.reset(); // return to the beginning of the file
 
-        Map<Integer, Attribute> schema = new HashMap<>();
-        Map<Integer, List<String>> data = new HashMap<>();
+            // Set up CSV format with custom separator, quote character, escape character, and if leading white space is ignored
+            CSVFormat csvFormat = CSVFormat.DEFAULT
+                    .withDelimiter(separator)
+                    .withQuote(quoteChar)
+                    .withEscape(escapeChar)
+                    .withIgnoreEmptyLines(true)
+                    .withIgnoreSurroundingSpaces(true);
 
-        // Set up CSV format with custom separator, quote character, escape character, and if leading white space is ignored
-        CSVFormat csvFormat = CSVFormat.DEFAULT
-                .withDelimiter(separator)
-                .withQuote(quoteChar)
-                .withEscape(escapeChar)
-                .withIgnoreEmptyLines(true)
-                .withIgnoreSurroundingSpaces(true);
-
-        // If there is a header, parse with headers
-        if (hasHeader) {
-            csvFormat = csvFormat.withFirstRecordAsHeader();
-        }
-
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
-             CSVParser csvParser = csvFormat.parse(reader)) {
-
-            // Determine the number of columns and headers if present
-            int numberOfColumns;
-            String[] headers = null;
-
+            // If there is a header, parse with headers
             if (hasHeader) {
-                numberOfColumns = csvParser.getHeaderMap().size();
-                headers = csvParser.getHeaderNames().toArray(new String[0]);
-            } else {
-                // Get first record to determine number of columns when there's no header
-                CSVRecord firstRecord = csvParser.iterator().next();
-                numberOfColumns = firstRecord.size();
+                csvFormat = csvFormat.withFirstRecordAsHeader();
+            }
 
-                // Initialize data with values from the first record
+            // Initialize structures for schema and data.
+            Map<Integer, Attribute> schema = new HashMap<>();
+            List<List<String>> columns = new ArrayList<>();
+
+            try (CSVParser csvParser = csvFormat.parse(reader)) {
+                // Determine the number of columns and headers if present
+                int numberOfColumns;
+                String[] headers = null;
+
+                if (hasHeader) {
+                    numberOfColumns = csvParser.getHeaderMap().size();
+                    headers = csvParser.getHeaderNames().toArray(new String[0]);
+                } else {
+                    // Get first record to determine number of columns when there's no header
+                    Iterator<CSVRecord> iterator = csvParser.iterator();
+                    CSVRecord firstRecord = iterator.next();
+                    numberOfColumns = firstRecord.size();
+                    // Initialize lists for each column and add first record's values.
+                    for (int i = 0; i < numberOfColumns; i++) {
+                        List<String> colData = new ArrayList<>();
+                        colData.add(firstRecord.get(i));
+                        columns.add(colData);
+                    }
+                }
+
+                // If headers are not null, initialize columns.
+                if (columns.isEmpty()) {
+                    for (int i = 0; i < numberOfColumns; i++) {
+                        columns.add(new ArrayList<>());
+                    }
+                }
+
+                // Process remaining records.
+                for (CSVRecord record : csvParser) {
+                    for (int i = 0; i < numberOfColumns; i++) {
+                        // If the record has fewer columns, add an empty string.
+                        String value = record.size() > i ? record.get(i) : "";
+                        columns.get(i).add(value);
+                    }
+                }
+
+                // Determine the type of each attribute and add to schema
                 for (int i = 0; i < numberOfColumns; i++) {
-                    data.put(i, new ArrayList<>());
-                    data.get(i).add(firstRecord.get(i)); // Add first record's values directly to data
+                    String columnName = (hasHeader && headers != null) ? headers[i] : null;
+                    Type columnType = Type.determineType(columns.get(i));
+                    schema.put(i, new Attribute(columnName, columnType));
                 }
             }
 
-            // Ensure all columns are initialized
-            for (int i = 0; i < numberOfColumns; i++) {
-                data.putIfAbsent(i, new ArrayList<>());
+            // Convert columns (List<List<String>>) into a Map<Integer, List<String>>.
+            Map<Integer, List<String>> data = new HashMap<>();
+            for (int i = 0; i < columns.size(); i++) {
+                data.put(i, columns.get(i));
             }
 
-            // Read remaining records and populate data
-            for (CSVRecord record : csvParser) {
-                for (int i = 0; i < numberOfColumns; i++) {
-                    data.get(i).add(record.size() > i ? record.get(i) : ""); // Handle missing values with empty strings
-                }
-            }
-
-            // Determine the type of each attribute and add to schema
-            for (int i = 0; i < numberOfColumns; i++) {
-                String columnName = hasHeader ? headers[i] : null;
-                Type columnType = Type.determineType(data.get(i)); // Assuming this method checks data types
-                schema.put(i, new Attribute(columnName, columnType));
-            }
+            return new Relation(schema, data);
         }
-
-        return new Relation(schema, data);
     }
+
 
 
     /**
