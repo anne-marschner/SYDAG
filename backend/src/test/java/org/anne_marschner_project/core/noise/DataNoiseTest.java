@@ -21,8 +21,6 @@ class DataNoiseTest {
         Attribute attribute = new Attribute("Name", Type.STRING);
         List<String> columnValues = new ArrayList<>(Arrays.asList("20", "30", "40", "18"));
         String replacement = dataNoise.chooseNoise(entry, attribute, 3, columnValues);
-
-        System.out.println("Ergebnis:" + replacement);
         assertNotEquals(replacement, entry);
     }
 
@@ -39,9 +37,6 @@ class DataNoiseTest {
         List<String> columnValues = new ArrayList<>(Arrays.asList("20", "30", "40", "18"));
         String replacement1 = dataNoise.chooseNoise(entry1, attribute1, 3, columnValues);
         String replacement2 = dataNoise.chooseNoise(entry2, attribute2, 3, columnValues);
-
-        System.out.println("Ergebnis:" + replacement1);
-        System.out.println("Ergebnis:" + replacement2);
         assertNotEquals(replacement1, entry1);
         assertNotEquals(replacement2, entry2);
     }
@@ -56,7 +51,6 @@ class DataNoiseTest {
         List<String> applicableMethods = new ArrayList<>(Arrays.asList("abbreviateDataEntry", "generateMissingValue",
                 "addRandomPrefix", "replaceWithTranslation", "replaceWithSynonyms"));
         String result = dataNoise.chooseStringNoise(entry, applicableMethods);
-        System.out.println("Ergebnis:" + result);
         assertNotEquals(result, entry);
     }
 
@@ -69,7 +63,6 @@ class DataNoiseTest {
         String entry = "word";
         List<String> applicableMethods = new ArrayList<>(Arrays.asList("abbreviateDataEntry", "generateMissingValue", "addRandomPrefix"));
         String result = dataNoise.chooseStringNoise(entry, applicableMethods);
-        System.out.println("Ergebnis:" + result);
         assertNotEquals(result, entry);
     }
 
@@ -90,7 +83,6 @@ class DataNoiseTest {
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
         String entry = "20";
         String result = dataNoise.chooseNumericNoise(entry, 10, 3);
-        System.out.println(result);
         assertNotEquals(result, entry);
     }
 
@@ -115,6 +107,7 @@ class DataNoiseTest {
 
     @Test
     void testFindApplicableMethods() {
+
         // Set DataNoise Object
         DataNoise dataNoise = new DataNoise();
 
@@ -303,7 +296,7 @@ class DataNoiseTest {
         List<String> selectedNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
 
-        // Mock data
+        // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("String column", Type.STRING));
         schema.put(1, new Attribute("Number column", Type.DOUBLE));
@@ -331,10 +324,7 @@ class DataNoiseTest {
         List<String> resultColumn0 = perturbedRelation.getData().get(0);
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         int changesinColumn0 = 0;
-        System.out.println("Spalte 0:");
         for (int i = 0; i < resultColumn0.size(); i++) {
-            System.out.println(resultColumn0.get(i));
-            System.out.println(originalColumn0.get(i));
             if (!resultColumn0.get(i).equals(originalColumn0.get(i))) {
                 changesinColumn0++;
             }
@@ -346,10 +336,7 @@ class DataNoiseTest {
         List<String> resultColumn1 = perturbedRelation.getData().get(1);
         List<String> originalColumn1 = new ArrayList<>(Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
         int changesinColumn1 = 0;
-        System.out.println("Spalte 1:");
         for (int i = 0; i < resultColumn1.size(); i++) {
-            System.out.println(resultColumn1.get(i));
-            System.out.println(originalColumn1.get(i));
             if (!resultColumn1.get(i).equals(originalColumn1.get(i))) {
                 changesinColumn1++;
             }
@@ -361,10 +348,7 @@ class DataNoiseTest {
         List<String> resultColumn2 = perturbedRelation.getData().get(2);
         List<String> originalColumn2 = new ArrayList<>(Arrays.asList("", "", "", "", "a", "b", "c", "d"));
         int changesinColumn2 = 0;
-        System.out.println("Spalte 2:");
         for (int i = 0; i < resultColumn2.size(); i++) {
-            System.out.println(resultColumn2.get(i));
-            System.out.println(originalColumn2.get(i));
             if (!resultColumn2.get(i).equals(originalColumn2.get(i))) {
                 changesinColumn2++;
             }
@@ -376,10 +360,7 @@ class DataNoiseTest {
         List<String> resultColumn3 = perturbedRelation.getData().get(3);
         List<String> originalColumn3 = new ArrayList<>(Arrays.asList("10", "20", "20", "15", "30", "10", "16", "20"));
         int changesinColumn3 = 0;
-        System.out.println("Spalte 3:");
         for (int i = 0; i < resultColumn3.size(); i++) {
-            System.out.println(resultColumn3.get(i));
-            System.out.println(originalColumn3.get(i));
             if (!resultColumn3.get(i).equals(originalColumn3.get(i))) {
                 changesinColumn3++;
             }
@@ -391,10 +372,7 @@ class DataNoiseTest {
         List<String> resultColumn4 = perturbedRelation.getData().get(4);
         List<String> originalColumn4 = new ArrayList<>(Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         int changesinColumn4 = 0;
-        System.out.println("Spalte 4:");
         for (int i = 0; i < resultColumn4.size(); i++) {
-            System.out.println(resultColumn4.get(i));
-            System.out.println(originalColumn4.get(i));
             if (!resultColumn4.get(i).equals(originalColumn4.get(i))) {
                 changesinColumn4++;
             }
@@ -415,7 +393,7 @@ class DataNoiseTest {
         List<String> selectedNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
 
-        // Mock data
+        // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("String column", Type.STRING));
         schema.put(1, new Attribute("Number column", Type.DOUBLE));
@@ -460,34 +438,22 @@ class DataNoiseTest {
         int changesinRow1 = 0;
         int changesinRow2 = 0;
         int changesinRow3 = 0;
-        System.out.println("Reihe 0:");
         for (int i = 0; i < resultRows.get(0).size(); i++) {
-            System.out.println(resultRows.get(0).get(i));
-            System.out.println(originalRow0.get(i));
             if (!resultRows.get(0).get(i).equals(originalRow0.get(i))) {
                 changesinRow0++;
             }
         }
-        System.out.println("Reihe 1:");
         for (int i = 0; i < resultRows.get(1).size(); i++) {
-            System.out.println(resultRows.get(1).get(i));
-            System.out.println(originalRow1.get(i));
             if (!resultRows.get(1).get(i).equals(originalRow1.get(i))) {
                 changesinRow1++;
             }
         }
-        System.out.println("Reihe 2:");
         for (int i = 0; i < resultRows.get(2).size(); i++) {
-            System.out.println(resultRows.get(2).get(i));
-            System.out.println(originalRow2.get(i));
             if (!resultRows.get(2).get(i).equals(originalRow2.get(i))) {
                 changesinRow2++;
             }
         }
-        System.out.println("Reihe 3:");
         for (int i = 0; i < resultRows.get(3).size(); i++) {
-            System.out.println(resultRows.get(3).get(i));
-            System.out.println(originalRow3.get(i));
             if (!resultRows.get(3).get(i).equals(originalRow3.get(i))) {
                 changesinRow3++;
             }
@@ -513,7 +479,7 @@ class DataNoiseTest {
         List<String> selectedNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
 
-        // Mock data
+        // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("String column", Type.STRING));
         schema.put(1, new Attribute("Number column", Type.DOUBLE));
@@ -558,34 +524,22 @@ class DataNoiseTest {
         int changesinRow1 = 0;
         int changesinRow2 = 0;
         int changesinRow3 = 0;
-        System.out.println("Reihe 0:");
         for (int i = 0; i < resultRows.get(0).size(); i++) {
-            System.out.println(resultRows.get(0).get(i));
-            System.out.println(originalRow0.get(i));
             if (!resultRows.get(0).get(i).equals(originalRow0.get(i))) {
                 changesinRow0++;
             }
         }
-        System.out.println("Reihe 1:");
         for (int i = 0; i < resultRows.get(1).size(); i++) {
-            System.out.println(resultRows.get(1).get(i));
-            System.out.println(originalRow1.get(i));
             if (!resultRows.get(1).get(i).equals(originalRow1.get(i))) {
                 changesinRow1++;
             }
         }
-        System.out.println("Reihe 2:");
         for (int i = 0; i < resultRows.get(2).size(); i++) {
-            System.out.println(resultRows.get(2).get(i));
-            System.out.println(originalRow2.get(i));
             if (!resultRows.get(2).get(i).equals(originalRow2.get(i))) {
                 changesinRow2++;
             }
         }
-        System.out.println("Reihe 3:");
         for (int i = 0; i < resultRows.get(3).size(); i++) {
-            System.out.println(resultRows.get(3).get(i));
-            System.out.println(originalRow3.get(i));
             if (!resultRows.get(3).get(i).equals(originalRow3.get(i))) {
                 changesinRow3++;
             }
@@ -610,7 +564,7 @@ class DataNoiseTest {
         List<String> selectedNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
 
-        // Mock data
+        // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("String column", Type.STRING));
         schema.put(1, new Attribute("Number column", Type.DOUBLE));
@@ -638,10 +592,7 @@ class DataNoiseTest {
         List<String> resultColumn0 = perturbedRelation.getData().get(0);
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         int changesinColumn0 = 0;
-        System.out.println("Spalte 0:");
         for (int i = 0; i < resultColumn0.size(); i++) {
-            System.out.println(resultColumn0.get(i));
-            System.out.println(originalColumn0.get(i));
             if (!resultColumn0.get(i).equals(originalColumn0.get(i))) {
                 changesinColumn0++;
             }
@@ -653,10 +604,7 @@ class DataNoiseTest {
         List<String> resultColumn1 = perturbedRelation.getData().get(1);
         List<String> originalColumn1 = new ArrayList<>(Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
         int changesinColumn1 = 0;
-        System.out.println("Spalte 1:");
         for (int i = 0; i < resultColumn1.size(); i++) {
-            System.out.println(resultColumn1.get(i));
-            System.out.println(originalColumn1.get(i));
             if (!resultColumn1.get(i).equals(originalColumn1.get(i))) {
                 changesinColumn1++;
             }
@@ -668,10 +616,7 @@ class DataNoiseTest {
         List<String> resultColumn2 = perturbedRelation.getData().get(2);
         List<String> originalColumn2 = new ArrayList<>(Arrays.asList("", "", "", "", "a", "b", "c", "d"));
         int changesinColumn2 = 0;
-        System.out.println("Spalte 2:");
         for (int i = 0; i < resultColumn2.size(); i++) {
-            System.out.println(resultColumn2.get(i));
-            System.out.println(originalColumn2.get(i));
             if (!resultColumn2.get(i).equals(originalColumn2.get(i))) {
                 changesinColumn2++;
             }
@@ -683,10 +628,7 @@ class DataNoiseTest {
         List<String> resultColumn3 = perturbedRelation.getData().get(3);
         List<String> originalColumn3 = new ArrayList<>(Arrays.asList("10", "20", "20", "15", "30", "10", "16", "20"));
         int changesinColumn3 = 0;
-        System.out.println("Spalte 3:");
         for (int i = 0; i < resultColumn3.size(); i++) {
-            System.out.println(resultColumn3.get(i));
-            System.out.println(originalColumn3.get(i));
             if (!resultColumn3.get(i).equals(originalColumn3.get(i))) {
                 changesinColumn3++;
             }
@@ -698,10 +640,7 @@ class DataNoiseTest {
         List<String> resultColumn4 = perturbedRelation.getData().get(4);
         List<String> originalColumn4 = new ArrayList<>(Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         int changesinColumn4 = 0;
-        System.out.println("Spalte 4:");
         for (int i = 0; i < resultColumn4.size(); i++) {
-            System.out.println(resultColumn4.get(i));
-            System.out.println(originalColumn4.get(i));
             if (!resultColumn4.get(i).equals(originalColumn4.get(i))) {
                 changesinColumn4++;
             }
@@ -742,8 +681,6 @@ class DataNoiseTest {
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         int changesinColumn0 = 0;
         for (int i = 0; i < resultColumn0.size(); i++) {
-            System.out.println(resultColumn0.get(i));
-            System.out.println(originalColumn0.get(i));
             if (!resultColumn0.get(i).equals(originalColumn0.get(i))) {
                 changesinColumn0++;
             }
@@ -756,8 +693,6 @@ class DataNoiseTest {
         List<String> originalColumn2 = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h"));
         int changesinColumn2 = 0;
         for (int i = 0; i < resultColumn2.size(); i++) {
-            System.out.println(resultColumn2.get(i));
-            System.out.println(originalColumn2.get(i));
             if (!resultColumn2.get(i).equals(originalColumn2.get(i))) {
                 changesinColumn2++;
             }
@@ -800,8 +735,6 @@ class DataNoiseTest {
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         int changesinColumn0 = 0;
         for (int i = 0; i < resultColumn0.size(); i++) {
-            System.out.println(resultColumn0.get(i));
-            System.out.println(originalColumn0.get(i));
             if (!resultColumn0.get(i).equals(originalColumn0.get(i))) {
                 changesinColumn0++;
             }

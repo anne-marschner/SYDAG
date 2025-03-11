@@ -14,32 +14,29 @@ class SchemaNoiseTest {
 
     @Test
     public void testPerturbSchema_HorizontalSplit_NoKeyNoise() throws Exception {
-        // Set Relation
+
+        // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("Identification Number", Type.DOUBLE));
         schema.put(1, new Attribute("Name", Type.STRING));
         schema.put(2, new Attribute("Age of Person", Type.DOUBLE));
         schema.put(3, new Attribute("Height", Type.DOUBLE));
         schema.put(4, new Attribute("hobby", Type.STRING));
-
         Map<Integer, List<String>> data = new HashMap<>();
         data.put(0, Arrays.asList("1", "2", "3", "4", "5"));
         data.put(1, Arrays.asList("Anne", "Jonathan", "Mareike", "Luca", "Milena"));
         data.put(2, Arrays.asList("24", "22", "23", "27", "22"));
         data.put(3, Arrays.asList("1.57", "1.8", "1.6", "1.71", "1.58"));
         data.put(4, Arrays.asList("dancing", "football", "knitting", "running", "fitness"));
-
-        // Set the number of rows that overlap
         int numOfOverlappingRows = 4;
         List<Integer> keyIndices = new ArrayList<>(Arrays.asList(1,2));
-
         Relation sourceRelation = new Relation(schema, data, keyIndices, numOfOverlappingRows);
 
         // Set List for chosen methods and SchemaNoise Object
         List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithTranslation", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
-        // Call method to perturb data
+        // Call method to perturb schema
         Relation perturbedRelation = schemaNoise.perturbSchema(sourceRelation, 100, false, false);
 
         // Test if all 3 non-key columns out of 5 ColumnNames have been changed
@@ -48,75 +45,46 @@ class SchemaNoiseTest {
         assertEquals("Age of Person", schema.get(2).getColumnName());
         assertNotEquals("Height", schema.get(3).getColumnName());
         assertNotEquals("hobby", schema.get(4).getColumnName());
-
-        // Test if shuffleWords was applied first
-        String replacement1 = perturbedRelation.getSchema().get(0).getColumnName();
-        System.out.println(replacement1);
-        String replacement2 = perturbedRelation.getSchema().get(1).getColumnName();
-        System.out.println(replacement2);
-        String replacement3 = perturbedRelation.getSchema().get(2).getColumnName();
-        System.out.println(replacement3);
-        String replacement4 = perturbedRelation.getSchema().get(3).getColumnName();
-        System.out.println(replacement4);
-        String replacement5 = perturbedRelation.getSchema().get(4).getColumnName();
-        System.out.println(replacement5);
     }
 
     @Test
     public void testPerturbSchema_fromHorizontalSplit() throws Exception {
-        // Set Relation
+
+        // Create Relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("Identification Number", Type.DOUBLE));
         schema.put(1, new Attribute("Name", Type.STRING));
         schema.put(2, new Attribute("Age of Person", Type.DOUBLE));
         schema.put(3, new Attribute("Height", Type.DOUBLE));
         schema.put(4, new Attribute("Hobby", Type.STRING));
-
         Map<Integer, List<String>> data = new HashMap<>();
         data.put(0, Arrays.asList("1", "2", "3", "4", "5"));
         data.put(1, Arrays.asList("Anne", "Jonathan", "Mareike", "Luca", "Milena"));
         data.put(2, Arrays.asList("24", "22", "23", "27", "22"));
         data.put(3, Arrays.asList("1.57", "1.8", "1.6", "1.71", "1.58"));
         data.put(4, Arrays.asList("dancing", "football", "knitting", "running", "fitness"));
-
-        // Set the number of rows that overlap
         int numOfOverlappingRows = 4;
         List<Integer> keyIndices = new ArrayList<>(Arrays.asList(1,2));
-
         Relation sourceRelation = new Relation(schema, data, keyIndices, numOfOverlappingRows);
 
         // Set List for chosen methods and SchemaNoise Object
         List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithTranslation", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
-        // Call method to perturb data
+        // Call method to perturb schema
         Relation perturbedRelation = schemaNoise.perturbSchema(sourceRelation, 80, true, false);
 
         // Test if 4 out of 5 ColumnNames have been changed
         List<String> sourceColumnNames = new ArrayList<>(Arrays.asList("Identification Number", "Name", "Age of Person", "Height", "Hobby"));
         int changedColumnsCount = 0;
-
         for (int i = 0; i < 5; i++) {
             String originalColumn = sourceColumnNames.get(i);
             String perturbedColumn = perturbedRelation.getSchema().get(i).getColumnName();
-
             if (!originalColumn.equals(perturbedColumn)) {
                 changedColumnsCount++;
                 System.out.println("Column " + i + " changed from: " + originalColumn + " to: " + perturbedColumn);
             }
         }
-
-        // Test if shuffleWords was applied first
-        String replacement1 = perturbedRelation.getSchema().get(0).getColumnName();
-        System.out.println(replacement1);
-        String replacement2 = perturbedRelation.getSchema().get(1).getColumnName();
-        System.out.println(replacement2);
-        String replacement3 = perturbedRelation.getSchema().get(2).getColumnName();
-        System.out.println(replacement3);
-        String replacement4 = perturbedRelation.getSchema().get(3).getColumnName();
-        System.out.println(replacement4);
-        String replacement5 = perturbedRelation.getSchema().get(4).getColumnName();
-        System.out.println(replacement5);
 
         // Test if exactly 3 column names have been changed
         assertEquals(4, changedColumnsCount);
@@ -125,38 +93,33 @@ class SchemaNoiseTest {
     @Test
     public void testPerturbSchema_fromVerticalSplit() throws Exception {
 
-        // Set Relation
+        // Create Relation
         Map<Integer, Attribute> schema = new HashMap<>();
         schema.put(0, new Attribute("Identification Number", Type.DOUBLE));
         schema.put(1, new Attribute("Name", Type.STRING));
         schema.put(2, new Attribute("Age of Person", Type.DOUBLE));
         schema.put(3, new Attribute("Height", Type.DOUBLE));
         schema.put(4, new Attribute("Hobby", Type.STRING));
-
         Map<Integer, List<String>> data = new HashMap<>();
         data.put(0, Arrays.asList("1", "2", "3", "4", "5"));
         data.put(1, Arrays.asList("Anne", "Jonathan", "Mareike", "Luca", "Milena"));
         data.put(2, Arrays.asList("24", "22", "23", "27", "22"));
         data.put(3, Arrays.asList("1.57", "1.8", "1.6", "1.71", "1.58"));
         data.put(4, Arrays.asList("dancing", "football", "knitting", "running", "fitness"));
-
-        // set the Indices of Columns that overlap
         List<Integer> overlappingColumnsIndices = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
         List<Integer> keyIndices = new ArrayList<>(Arrays.asList(1,2));
-
         Relation sourceRelation = new Relation(schema, data, keyIndices, overlappingColumnsIndices);
 
         // Set List for chosen methods and SchemaNoise Object
         List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithTranslation", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
-        // Call method to perturb data
+        // Call method to perturb schema
         Relation perturbedRelation = schemaNoise.perturbSchema(sourceRelation, 75, true, false);
 
         // Test if 3 out of 5 ColumnNames have been changed
         List<String> sourceColumnNames = new ArrayList<>(Arrays.asList("Identification Number", "Name", "Age of Person", "Height", "Hobby"));
         int changedColumnsCount = 0;
-
         for (int i = 0; i < 5; i++) {
             String originalColumn = sourceColumnNames.get(i);
             String perturbedColumn = perturbedRelation.getSchema().get(i).getColumnName();
@@ -167,18 +130,6 @@ class SchemaNoiseTest {
             }
         }
 
-        // Test if shuffleWords was applied first
-        String replacement1 = perturbedRelation.getSchema().get(0).getColumnName();
-        System.out.println(replacement1);
-        String replacement2 = perturbedRelation.getSchema().get(1).getColumnName();
-        System.out.println(replacement2);
-        String replacement3 = perturbedRelation.getSchema().get(2).getColumnName();
-        System.out.println(replacement3);
-        String replacement4 = perturbedRelation.getSchema().get(3).getColumnName();
-        System.out.println(replacement4);
-        String replacement5 = perturbedRelation.getSchema().get(4).getColumnName();
-        System.out.println(replacement5);
-
         // Test if exactly 3 column names have been changed
         assertEquals(3, changedColumnsCount);
 
@@ -186,23 +137,18 @@ class SchemaNoiseTest {
         assertEquals("Identification Number", perturbedRelation.getSchema().get(0).getColumnName());
     }
 
-
-
     @Test
     public void testChooseNoise_CorrectOrderOfSpecialMethods() throws Exception {
 
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords"));
-
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
-        // Set List with column Names
+        // Set List with column names
         List<String> columnNames = new ArrayList<>(Arrays.asList("name_that can be_shuffled", "ColumnName", "name_that_can_be abbreviated"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -225,18 +171,15 @@ class SchemaNoiseTest {
     @Test
     public void testChooseNoise_RefillEmptyList() throws Exception {
 
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(List.of("abbreviateFirstLetters"));
-
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(List.of("abbreviateFirstLetters"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Hobby", "Name", "Salary of Person"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -256,18 +199,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_OneSpecialMethod() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(List.of("removeVowels"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(List.of("removeVowels"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Hobby", "Nm", "Salary of Person"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -287,18 +228,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_SpecialMethodsCannotBeApplied() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords", "abbreviateRandomLength"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords", "abbreviateRandomLength"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("H", "N", "2"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -315,18 +254,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_ShuffleWordsCannotBeApplied() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
-        // Set List with column Names
+        // Set list with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Hobby", "Name", "234"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -342,18 +279,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_RemoveVowelsCannotBeApplied() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("abbreviateFirstLetters", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Hbby", "Nm prs", "kl js", "HP TS"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -371,18 +306,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_RefillOptionsAfterShuffleMethod() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("shuffleWords", "replaceWithTranslation"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("shuffleWords", "replaceWithTranslation"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("person name", "telephone number", "languages", "the address"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -400,18 +333,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_OnlySpecialMethods() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("removeVowels", "shuffleWords"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Person name", "salary person", "Hobbys", "phone number"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -427,27 +358,21 @@ class SchemaNoiseTest {
         assertEquals("number_phone", replacement4, "The words should have been abbreviated");
     }
 
-
     @Test
     public void testChooseNoise_UseFallback() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithSynonyms", "shuffleWords"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithSynonyms", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("dsopdksp", "shuffle me"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
-
-        System.out.println(replacements.get(0));
-        System.out.println(replacements.get(1));
 
         // Test if all words have been changed correct
         String replacement1 = replacements.get(0);
@@ -458,18 +383,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_reuseShuffleMethodFromBottom() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithSynonyms", "removeVowels", "shuffleWords"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithSynonyms", "removeVowels", "shuffleWords"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Person name", "salary person", "jsde lk", "number"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }
@@ -487,18 +410,16 @@ class SchemaNoiseTest {
 
     @Test
     public void testChooseNoise_reuseVowelMethodFromBottom() throws Exception {
-        // Set List for chosen methods
-        List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithSynonyms", "removeVowels"));
 
         // Set SchemaNoise Object with selected methods
+        List<String> selectedMethods = new ArrayList<>(Arrays.asList("replaceWithSynonyms", "removeVowels"));
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Set List with column Names
         List<String> columnNames = new ArrayList<>(Arrays.asList("Person", "sjeed", "number", "kooo"));
 
-        // Set List for result
+        // Create replacements with chooseNoise
         List<String> replacements = new ArrayList<>();
-
         for (String columnName: columnNames) {
             replacements.add(schemaNoise.chooseNoise(columnName));
         }

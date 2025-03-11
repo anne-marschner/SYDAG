@@ -19,54 +19,47 @@ class NormalizationTest {
         // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         Map<Integer, List<String>> data = new HashMap<>();
-
         schema.put(1, new Attribute("Column1", Type.STRING));
         schema.put(2, new Attribute("Column2", Type.STRING));
         schema.put(4, new Attribute("Column3", Type.STRING));
         schema.put(5, new Attribute("Column4", Type.STRING));
         schema.put(8, new Attribute("Column5", Type.STRING));
-
         data.put(1, Arrays.asList("Thomas", "Sarah", "Peter", "Jasmine", "Mike", "Thomas"));
         data.put(2, Arrays.asList("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"));
         data.put(4, Arrays.asList("14482", "14482", "60329", "01069", "14482", "60329"));
         data.put(5, Arrays.asList("Potsdam", "Potsdam", "Frankfurt", "Dresden", "Potsdam", "Frankfurt"));
         data.put(8, Arrays.asList("Jakobs", "Jakobs", "Feldmann", "Orosz", "Jakobs", "Feldmann"));
-
         List<Integer> keyIndices = new ArrayList<>(Arrays.asList(1,2));
         Integer numOverlappingColumns = 2;
-
         Relation relation = new Relation(schema, data, keyIndices, numOverlappingColumns);
 
+        // Execute normalization
         Normalization normalization = new Normalization();
-        List<Relation> allRelations = normalization.transformToBCNF(relation, ',', '"',0);
+        List<Relation> allRelations = normalization.transformToBCNF(relation, ',', '"', 0);
 
-        // Check if two datasets are returned
-        assertEquals(1, allRelations.size(), "There should be one relations");
+        // Check if one dataset is returned
+        assertEquals(1, allRelations.size(), "There should be exactly one relation after normalization.");
 
-        // Check first relation
-        Relation relation1 = allRelations.get(0);
-        List<List<Object>> expectedData1 = Arrays.asList(
-                Arrays.asList("Thomas", "Sarah", "Peter", "Jasmine", "Mike", "Thomas"),
-                Arrays.asList("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"),
-                Arrays.asList("14482", "14482", "60329", "01069", "14482", "60329"),
-                Arrays.asList("Potsdam", "Potsdam", "Frankfurt", "Dresden", "Potsdam", "Frankfurt"),
-                Arrays.asList("Jakobs", "Jakobs", "Feldmann", "Orosz", "Jakobs", "Feldmann")
+        // Get expected data and real data
+        Map<Integer, List<String>> expectedData = Map.of(
+                1, List.of("Thomas", "Sarah", "Peter", "Jasmine", "Mike", "Thomas"),
+                2, List.of("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"),
+                4, List.of("14482", "14482", "60329", "01069", "14482", "60329"),
+                5, List.of("Potsdam", "Potsdam", "Frankfurt", "Dresden", "Potsdam", "Frankfurt"),
+                8, List.of("Jakobs", "Jakobs", "Feldmann", "Orosz", "Jakobs", "Feldmann")
         );
+        Relation relation1 = allRelations.get(0);
 
-        assertEquals(2, relation1.getNumOfOverlappingRows());
-        assertNull(relation1.getOverlappingColumnsIndices());
-        assertEquals(expectedData1.get(0), relation1.getData().get(1), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(1), relation1.getData().get(2), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(2), relation1.getData().get(4), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(3), relation1.getData().get(5), "The data of the second relation is wrong.");
-        assertEquals(expectedData1.get(4), relation1.getData().get(8), "The data of the second relation is wrong.");
-        System.out.println(relation1.getData().get(1));
-        System.out.println(relation1.getData().get(2));
-        System.out.println(relation1.getData().get(4));
-        System.out.println(relation1.getData().get(5));
-        System.out.println(relation1.getData().get(8));
+        // Check number of overlapping rows and columns
+        assertEquals(2, relation1.getNumOfOverlappingRows(), "Number of overlapping rows is incorrect.");
+        assertNull(relation1.getOverlappingColumnsIndices(), "Overlapping columns should be null.");
+
+        // Compare data
+        for (Integer key : expectedData.keySet()) {
+            assertEquals(expectedData.get(key), relation1.getData().get(key),
+                    "Mismatch in data for column: " + key);
+        }
     }
-
 
     @Test
     void testTransformToBCNF_HorizontalSplit() throws IOException, AlgorithmExecutionException {
@@ -74,63 +67,54 @@ class NormalizationTest {
         // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         Map<Integer, List<String>> data = new HashMap<>();
-
         schema.put(1, new Attribute("Column1", Type.STRING));
         schema.put(2, new Attribute("Column2", Type.STRING));
         schema.put(4, new Attribute("Column3", Type.STRING));
         schema.put(5, new Attribute("Column4", Type.STRING));
         schema.put(8, new Attribute("Column5", Type.STRING));
-
         data.put(1, Arrays.asList("Thomas", "Sarah", "Peter", "Jasmine", "Mike", "Thomas"));
         data.put(2, Arrays.asList("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"));
         data.put(4, Arrays.asList("14482", "14482", "60329", "01069", "14482", "60329"));
         data.put(5, Arrays.asList("Potsdam", "Potsdam", "Frankfurt", "Dresden", "Potsdam", "Frankfurt"));
         data.put(8, Arrays.asList("Jakobs", "Jakobs", "Feldmann", "Orosz", "Jakobs", "Feldmann"));
-
         List<Integer> keyIndices = new ArrayList<>(Arrays.asList(1,2));
         Integer numOverlappingColumns = 2;
-
         Relation relation = new Relation(schema, data, keyIndices, numOverlappingColumns);
 
+        // Execute normalization
         Normalization normalization = new Normalization();
-        List<Relation> allRelations = normalization.transformToBCNF(relation, ',', '"',50);
+        List<Relation> allRelations = normalization.transformToBCNF(relation, ',', '"', 50);
 
         // Check if two datasets are returned
-        assertEquals(2, allRelations.size(), "There should be two relations");
+        assertEquals(2, allRelations.size(), "There should be exactly two relations after normalization.");
 
         // Check first relation
         Relation relation1 = allRelations.get(0);
-        List<List<Object>> expectedData1 = Arrays.asList(
-                Arrays.asList("Thomas", "Sarah", "Peter", "Jasmine", "Mike", "Thomas"),
-                Arrays.asList("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"),
-                Arrays.asList("14482", "14482", "60329", "01069", "14482", "60329")
+        Map<Integer, List<String>> expectedData1 = Map.of(
+                1, List.of("Thomas", "Sarah", "Peter", "Jasmine", "Mike", "Thomas"),
+                2, List.of("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"),
+                4, List.of("14482", "14482", "60329", "01069", "14482", "60329")
         );
-
-        assertEquals(2, relation1.getNumOfOverlappingRows());
-        assertNull(relation1.getOverlappingColumnsIndices());
-        assertEquals(expectedData1.get(0), relation1.getData().get(1), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(1), relation1.getData().get(2), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(2), relation1.getData().get(4), "The data of the first relation is wrong.");
-        System.out.println(relation1.getData().get(1));
-        System.out.println(relation1.getData().get(2));
-        System.out.println(relation1.getData().get(4));
+        assertEquals(2, relation1.getNumOfOverlappingRows(), "Number of overlapping rows in first relation is incorrect.");
+        assertNull(relation1.getOverlappingColumnsIndices(), "Overlapping columns in first relation should be null.");
+        for (Integer key : expectedData1.keySet()) {
+            assertEquals(expectedData1.get(key), relation1.getData().get(key),
+                    "Mismatch in first relation data for column: " + key);
+        }
 
         // Check second relation
         Relation relation2 = allRelations.get(1);
-        List<List<Object>> expectedData2 = Arrays.asList(
-                Arrays.asList("14482", "60329", "01069"),
-                Arrays.asList("Potsdam", "Frankfurt", "Dresden"),
-                Arrays.asList("Jakobs", "Feldmann", "Orosz")
+        Map<Integer, List<String>> expectedData2 = Map.of(
+                4, List.of("14482", "60329", "01069"),
+                5, List.of("Potsdam", "Frankfurt", "Dresden"),
+                8, List.of("Jakobs", "Feldmann", "Orosz")
         );
-
-        assertEquals(1, relation2.getNumOfOverlappingRows());
-        assertNull(relation1.getOverlappingColumnsIndices());
-        assertEquals(expectedData2.get(0), relation2.getData().get(4), "The data of the second relation is wrong.");
-        assertEquals(expectedData2.get(1), relation2.getData().get(5), "The data of the second relation is wrong.");
-        assertEquals(expectedData2.get(2), relation2.getData().get(8), "The data of the second relation is wrong.");
-        System.out.println(relation2.getData().get(4));
-        System.out.println(relation2.getData().get(5));
-        System.out.println(relation2.getData().get(8));
+        assertEquals(1, relation2.getNumOfOverlappingRows(), "Number of overlapping rows in second relation is incorrect.");
+        assertNull(relation2.getOverlappingColumnsIndices(), "Overlapping columns in second relation should be null.");
+        for (Integer key : expectedData2.keySet()) {
+            assertEquals(expectedData2.get(key), relation2.getData().get(key),
+                    "Mismatch in second relation data for column: " + key);
+        }
     }
 
     @Test
@@ -139,62 +123,57 @@ class NormalizationTest {
         // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
         Map<Integer, List<String>> data = new HashMap<>();
-
         schema.put(1, new Attribute("Column1", Type.STRING));
         schema.put(2, new Attribute("Column2", Type.STRING));
         schema.put(4, new Attribute("Column3", Type.STRING));
         schema.put(5, new Attribute("Column4", Type.STRING));
         schema.put(8, new Attribute("Column5", Type.STRING));
-
         data.put(1, Arrays.asList("Thomas", "\"Sarah, Lea\"", "Peter", "Jasmine", "Mike", "Thomas"));
         data.put(2, Arrays.asList("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"));
         data.put(4, Arrays.asList("14482", "14482", "60329", "01069", "14482", "60329"));
         data.put(5, Arrays.asList("Potsdam", "Potsdam", "Frankfurt", "Dresden", "Potsdam", "Frankfurt"));
         data.put(8, Arrays.asList("Jakobs", "Jakobs", "Feldmann", "Orosz", "Jakobs", "Feldmann"));
-
         List<Integer> keyIndices = new ArrayList<>(Arrays.asList(1,2));
         List<Integer> overlappingColumnIndices = new ArrayList<>(Arrays.asList(1,2,5));
-
         Relation relation = new Relation(schema, data, keyIndices, overlappingColumnIndices);
 
+        // Execute Normalization
         Normalization normalization = new Normalization();
         List<Relation> allRelations = normalization.transformToBCNF(relation, ',', '"',100);
 
         // Check if two datasets are returned
-        assertEquals(2, allRelations.size(), "There should be two relations");
+        assertEquals(2, allRelations.size(), "There should be exactly two relations after normalization.");
 
         // Check first relation
         Relation relation1 = allRelations.get(0);
-        List<List<Object>> expectedData1 = Arrays.asList(
-                Arrays.asList("Thomas", "\"Sarah, Lea\"", "Peter", "Jasmine", "Mike", "Thomas"),
-                Arrays.asList("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"),
-                Arrays.asList("14482", "14482", "60329", "01069", "14482", "60329")
+        Map<Integer, List<String>> expectedData1 = Map.of(
+                1, List.of("Thomas", "\"Sarah, Lea\"", "Peter", "Jasmine", "Mike", "Thomas"),
+                2, List.of("Miller", "Miller", "Smith", "Cone", "Cone", "Moore"),
+                4, List.of("14482", "14482", "60329", "01069", "14482", "60329")
         );
-
-        assertEquals(new ArrayList<>(Arrays.asList(1,2)), relation1.getOverlappingColumnsIndices());
-        assertNull(relation1.getNumOfOverlappingRows());
-        assertEquals(expectedData1.get(0), relation1.getData().get(1), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(1), relation1.getData().get(2), "The data of the first relation is wrong.");
-        assertEquals(expectedData1.get(2), relation1.getData().get(4), "The data of the first relation is wrong.");
-        System.out.println(relation1.getData().get(1));
-        System.out.println(relation1.getData().get(2));
-        System.out.println(relation1.getData().get(4));
+        assertEquals(List.of(1, 2), relation1.getOverlappingColumnsIndices(),
+                "Overlapping columns in first relation are incorrect.");
+        assertNull(relation1.getNumOfOverlappingRows(),
+                "Number of overlapping rows in first relation should be null.");
+        for (Integer key : expectedData1.keySet()) {
+            assertEquals(expectedData1.get(key), relation1.getData().get(key),
+                    "Mismatch in first relation data for column: " + key);
+        }
 
         // Check second relation
         Relation relation2 = allRelations.get(1);
-        List<List<Object>> expectedData2 = Arrays.asList(
-                Arrays.asList("14482", "60329", "01069"),
-                Arrays.asList("Potsdam", "Frankfurt", "Dresden"),
-                Arrays.asList("Jakobs", "Feldmann", "Orosz")
+        Map<Integer, List<String>> expectedData2 = Map.of(
+                4, List.of("14482", "60329", "01069"),
+                5, List.of("Potsdam", "Frankfurt", "Dresden"),
+                8, List.of("Jakobs", "Feldmann", "Orosz")
         );
-
-        assertEquals(new ArrayList<>(List.of(5)), relation2.getOverlappingColumnsIndices());
-        assertNull(relation2.getNumOfOverlappingRows());
-        assertEquals(expectedData2.get(0), relation2.getData().get(4), "The data of the second relation is wrong.");
-        assertEquals(expectedData2.get(1), relation2.getData().get(5), "The data of the second relation is wrong.");
-        assertEquals(expectedData2.get(2), relation2.getData().get(8), "The data of the second relation is wrong.");
-        System.out.println(relation2.getData().get(4));
-        System.out.println(relation2.getData().get(5));
-        System.out.println(relation2.getData().get(8));
+        assertEquals(List.of(5), relation2.getOverlappingColumnsIndices(),
+                "Overlapping columns in second relation are incorrect.");
+        assertNull(relation2.getNumOfOverlappingRows(),
+                "Number of overlapping rows in second relation should be null.");
+        for (Integer key : expectedData2.keySet()) {
+            assertEquals(expectedData2.get(key), relation2.getData().get(key),
+                    "Mismatch in second relation data for column: " + key);
+        }
     }
 }

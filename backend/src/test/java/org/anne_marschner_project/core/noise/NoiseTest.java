@@ -17,9 +17,7 @@ class NoiseTest {
         assertNotNull(randomString, "Random string should not be null");
         assertTrue(!randomString.isEmpty() && randomString.length() <= 10, "Random string length should be between 1 and 10");
         assertTrue(randomString.matches("[A-Za-z0-9]+"), "Random string should only contain alphanumeric characters");
-        System.out.println(randomString);
     }
-
 
     @Test
     void testRemoveVowels() {
@@ -29,7 +27,6 @@ class NoiseTest {
         assertEquals("Clmn Nm", result, "Vowels should be removed from the string");
     }
 
-
     @Test
     void testAbbreviateFirstLetters() {
         SchemaNoise schemaNoise = new SchemaNoise();
@@ -38,16 +35,13 @@ class NoiseTest {
         assertEquals("T.I.A.C.N.", result, "First letters of each word should be concatenated and separated by dots");
     }
 
-
     @Test
     void testAbbreviateRandomLength() {
         SchemaNoise schemaNoise = new SchemaNoise();
         String input = "this is a column_name";
         String result = schemaNoise.abbreviateRandomLength(input);
         assertTrue(result.length() <= input.length(), "Abbreviation should not exceed the original string length");
-        System.out.println(result);
     }
-
 
     @Test
     void testAddRandomPrefix() {
@@ -55,9 +49,7 @@ class NoiseTest {
         String input = "ColumnName";
         String result = schemaNoise.addRandomPrefix(input);
         assertTrue(result.matches("[A-Za-z0-9]{1,4}_ColumnName"), "The prefix should be 1 to 4 alphanumeric characters followed by '_Column'");
-        System.out.println(result);
     }
-
 
     @Test
     void testShuffleLetters() {
@@ -67,9 +59,7 @@ class NoiseTest {
         assertNotEquals(input, result, "Shuffled string should not be the same as the original string");
         assertEquals(result.length(), input.length(), "Shuffled string should have the same length as the original");
         assertArrayEquals(result.chars().sorted().toArray(), input.chars().sorted().toArray(), "Shuffled string should contain the same characters as the original");
-        System.out.println(result);
     }
-
 
     @Test
     void testShuffleWords() {
@@ -86,15 +76,13 @@ class NoiseTest {
         assertArrayEquals(originalWords, shuffledWords, "Shuffled result should contain the same words as the original");
     }
 
-
     @Test
-    void testGetSynonymFromAPI() throws Exception {
+    void testGetSynonymFromAPI() {
         SchemaNoise schemaNoise = new SchemaNoise();
         String columName = "number";
         String response = schemaNoise.getSynonymFromAPI(columName);
         assertEquals("identification number", response);
     }
-
 
     @Test
     void testReplaceWithSynonyms() throws Exception {
@@ -104,7 +92,6 @@ class NoiseTest {
         assertEquals("earnings somebody", response);
     }
 
-
     @Test
     void testReplaceWithTranslation() throws Exception {
         SchemaNoise schemaNoise = new SchemaNoise();
@@ -112,7 +99,6 @@ class NoiseTest {
         String response = schemaNoise.replaceWithTranslation(columName, "en", "de");
         assertEquals("Telefonnummer", response);
     }
-
 
     @Test
     void testGenerateMissingValue() {
@@ -122,7 +108,6 @@ class NoiseTest {
         assertEquals("", result);
     }
 
-
     @Test
     void testGeneratePhoneticError() {
         DataNoise dataNoise = new DataNoise();
@@ -130,7 +115,6 @@ class NoiseTest {
         String result = dataNoise.generatePhoneticError(entry);
         assertEquals("Vun", result);
     }
-
 
     @Test
     void testGenerateOCRError() {
@@ -140,7 +124,6 @@ class NoiseTest {
         assertEquals("5and", result);
     }
 
-
     @Test
     void testAbbreviateDataEntry() {
         DataNoise dataNoise = new DataNoise();
@@ -148,39 +131,31 @@ class NoiseTest {
         String result = dataNoise.abbreviateDataEntry(entry);
         assertNotEquals("Number person", result);
         assertNotEquals(entry.length(), result.length());
-        System.out.println(result);
     }
-
 
     @Test
     void testChangeFormat_forDate() {
         DataNoise dataNoise = new DataNoise();
         String entry = "12-08-24";
         String result = dataNoise.changeFormat(entry);
-        System.out.println(result);
         assert result.equals("12 08 24") || result.equals("12.08.24") || result.equals("12_08_24") : "The format should have been changed";
     }
-
 
     @Test
     void testChangeFormat_forName() {
         DataNoise dataNoise = new DataNoise();
         String entry = "A.N. Maler";
         String result = dataNoise.changeFormat(entry);
-        System.out.println(result);
         assert result.equals("A-N- Maler") || result.equals("A_N_ Maler") || result.equals("A N  Maler") : "The format should have been changed";
     }
-
 
     @Test
     void testChangeFormat_forDifferentSymbols() {
         DataNoise dataNoise = new DataNoise();
         String entry = "A.N. Maler-Vogt";
         String result = dataNoise.changeFormat(entry);
-        System.out.println(result);
         assert result.equals("A-N- Maler-Vogt") || result.equals("A_N_ Maler-Vogt") || result.equals("A N  Maler-Vogt") : "The format should have been changed";
     }
-
 
     @Test
     void testChangeValue() {
@@ -189,16 +164,17 @@ class NoiseTest {
         List<String> column = new ArrayList<>(Arrays.asList("10.0", "20.0", "30.0", "40.0", "50.0"));
         List<Double> numericColumn = dataNoise.createListOfDouble(column);
 
-        // Calculate mean and  standard deviation of the list
+        // Calculate mean and standard deviation of the list
         double mean = dataNoise.calculateMean(numericColumn);
         double standardDeviation = dataNoise.calculateStandardDeviation(numericColumn, mean);
 
+        // Execute method
         String result = dataNoise.changeValue(entry, mean, standardDeviation);
 
-        // Test that new Value is different from entry
+        // Test that new value is different from entry
         assertNotEquals(entry, result, "New value should be different.");
 
-        // Test if result is numeric values
+        // Test if result is numeric
         assertDoesNotThrow(() -> Double.parseDouble(result), "Result should be String of numeric value.");
 
         // Test if value is in realistic range
@@ -216,10 +192,11 @@ class NoiseTest {
         List<String> column = new ArrayList<>(Arrays.asList("10.0", "20.0", "30.0", "40.0", "50.0"));
         List<Double> numericColumn = dataNoise.createListOfDouble(column);
 
-        // Calculate mean and  standard deviation of the list
+        // Calculate mean and standard deviation of the list
         double mean = dataNoise.calculateMean(numericColumn);
         double standardDeviation = dataNoise.calculateStandardDeviation(numericColumn, mean);
 
+        // Execute method
         String result = dataNoise.changeValueToOutlier(entry, mean, standardDeviation);
 
         // Test that new Value is different from entry
@@ -231,7 +208,6 @@ class NoiseTest {
         // Test if value is significantly outside realistic range
         double resultValue = Double.parseDouble(result);
         double threshold = 2 * 10.0;  // Differs more than 2 standard deviations
-
         assertTrue(Math.abs(resultValue - mean) > threshold, "The value should differ significantly from mean.");
     }
 
