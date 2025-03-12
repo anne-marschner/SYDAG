@@ -23,6 +23,7 @@ A list of technologies used within the project:
 * [TypeScript](https://www.npmjs.com/package/typescript): Version 5.7.3
 * [React](https://react.dev/): Version 19.0.0
 * [Next.js](https://nextjs.org/): Version 15.1.5
+* [Docker](https://www.docker.com/products/docker-desktop/): Version 4.38.0
   
 Basis of the frontend implementation:   
 
@@ -194,6 +195,7 @@ If you are having trouble building the Docker containers, make sure that you are
 You can check several points:
 1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Join Options for each dataset.
 2. Ensure that the separator, quote, and escape characters are used correctly in the dataset. If there are inconsistencies in the dataset's structure, the file may not be read correctly.
+3. You may need to increase Docker's memory limit. For datasets larger than 25 MB, at least 4 GB of RAM is recommended.
    
 #### Why do my generated datasets look different from what I expected?
 You can check several points:
