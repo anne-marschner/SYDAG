@@ -38,21 +38,21 @@ type StepProps = {
   dataset2DataNoiseValue: number | null;
   dataset2DataKeyNoise: boolean | null;
   dataset2DataNoiseInside: number | null;
-  dataset2DataMultiselect: string[] | null; // NEW
+  dataset2DataMultiselect: string[] | null;
 
   // Dataset 3
   dataset3DataNoise: boolean | null;
   dataset3DataNoiseValue: number | null;
   dataset3DataKeyNoise: boolean | null;
   dataset3DataNoiseInside: number | null;
-  dataset3DataMultiselect: string[] | null; // NEW
+  dataset3DataMultiselect: string[] | null;
 
   // Dataset 4
   dataset4DataNoise: boolean | null;
   dataset4DataNoiseValue: number | null;
   dataset4DataKeyNoise: boolean | null;
   dataset4DataNoiseInside: number | null;
-  dataset4DataMultiselect: string[] | null; // NEW
+  dataset4DataMultiselect: string[] | null;
 
   updateForm: (fieldToUpdate: Partial<FormItems>) => void;
   errors: Record<string, string[]>;
@@ -358,7 +358,7 @@ const Step6_DataNoiseForm = ({
         <div className="flex flex-col md:flex-row md:gap-8 w-full">
           {/* Dataset 1 */}
           <div className="flex flex-col w-full">
-            <h3 className="text-lg text-white mb-2">Dataset 1</h3>
+            <h3 className="text-lg text-white mb-2">Dataset A</h3>
             <div className="flex items-center gap-2 custom-label">
               <Checkbox
                 checked={dataset1Enabled}
@@ -397,14 +397,14 @@ const Step6_DataNoiseForm = ({
                 {/* Multi-Select for Dataset 1 */}
                 <div className="mt-4">
                   <label htmlFor="dataset1DataMultiSelect" className="text-white">
-                    Dataset 1 Error Methods
+                    Dataset A Error Methods
                   </label>
                   <MultiSelect
                     id="dataset1DataMultiSelect"
                     options={frameworksList}
                     onValueChange={handleDataset1MultiselectChange}
                     defaultValue={dataset1Selections}
-                    placeholder="Select methods for Dataset 1"
+                    placeholder="Select methods for Dataset A"
                     variant="inverted"
                     animation={2}
                     maxCount={3}
@@ -470,7 +470,7 @@ const Step6_DataNoiseForm = ({
 
           {/* Dataset 2 */}
           <div className="flex flex-col w-full">
-            <h3 className="text-lg text-white mb-2">Dataset 2</h3>
+            <h3 className="text-lg text-white mb-2">Dataset B</h3>
             <div className="flex items-center gap-2 custom-label">
               <Checkbox
                 checked={dataset2Enabled}
@@ -509,14 +509,14 @@ const Step6_DataNoiseForm = ({
                 {/* Multi-Select for Dataset 2 */}
                 <div className="mt-4">
                   <label htmlFor="dataset2DataMultiSelect" className="text-white">
-                    Dataset 2 Error Methods
+                    Dataset B Error Methods
                   </label>
                   <MultiSelect
                     id="dataset2DataMultiSelect"
                     options={frameworksList}
                     onValueChange={handleDataset2MultiselectChange}
                     defaultValue={dataset2Selections}
-                    placeholder="Select methods for Dataset 2"
+                    placeholder="Select methods for Dataset B"
                     variant="inverted"
                     animation={2}
                     maxCount={3}
