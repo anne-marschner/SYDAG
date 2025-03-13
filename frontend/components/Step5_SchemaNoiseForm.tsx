@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import FormWrapper from "./FormWrapper";
-import { FormItems } from "@/components/types/formTypes"; 
+import { FormItems } from "@/components/types/formTypes";
 import { MultiSelect } from "@/components/ui/multi-select";
 
 const frameworksList = [
@@ -21,75 +21,75 @@ const frameworksList = [
 type StepProps = {
   splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
 
-  // Dataset 1
-  dataset1SchemaNoise: boolean | null;
-  dataset1SchemaNoiseValue: number | null;
-  dataset1SchemaKeyNoise: boolean | null;
-  dataset1SchemaDeleteSchema: boolean | null;
-  dataset1SchemaMultiselect: string[] | null; 
+  // Dataset A
+  datasetASchemaNoise: boolean | null;
+  datasetASchemaNoiseValue: number | null;
+  datasetASchemaKeyNoise: boolean | null;
+  datasetASchemaDeleteSchema: boolean | null;
+  datasetASchemaMultiselect: string[] | null;
 
-  // Dataset 2
-  dataset2SchemaNoise: boolean | null;
-  dataset2SchemaNoiseValue: number | null;
-  dataset2SchemaKeyNoise: boolean | null;
-  dataset2SchemaDeleteSchema: boolean | null;
-  dataset2SchemaMultiselect: string[] | null; 
+  // Dataset B
+  datasetBSchemaNoise: boolean | null;
+  datasetBSchemaNoiseValue: number | null;
+  datasetBSchemaKeyNoise: boolean | null;
+  datasetBSchemaDeleteSchema: boolean | null;
+  datasetBSchemaMultiselect: string[] | null;
 
-  // Dataset 3
-  dataset3SchemaNoise: boolean | null;
-  dataset3SchemaNoiseValue: number | null;
-  dataset3SchemaKeyNoise: boolean | null;
-  dataset3SchemaDeleteSchema: boolean | null;
-  dataset3SchemaMultiselect: string[] | null; 
+  // Dataset C
+  datasetCSchemaNoise: boolean | null;
+  datasetCSchemaNoiseValue: number | null;
+  datasetCSchemaKeyNoise: boolean | null;
+  datasetCSchemaDeleteSchema: boolean | null;
+  datasetCSchemaMultiselect: string[] | null;
 
-  // Dataset 4
-  dataset4SchemaNoise: boolean | null;
-  dataset4SchemaNoiseValue: number | null;
-  dataset4SchemaKeyNoise: boolean | null;
-  dataset4SchemaDeleteSchema: boolean | null;
-  dataset4SchemaMultiselect: string[] | null; 
+  // Dataset D
+  datasetDSchemaNoise: boolean | null;
+  datasetDSchemaNoiseValue: number | null;
+  datasetDSchemaKeyNoise: boolean | null;
+  datasetDSchemaDeleteSchema: boolean | null;
+  datasetDSchemaMultiselect: string[] | null;
 
   updateForm: (fieldToUpdate: Partial<FormItems>) => void;
   errors: Record<string, string[]>;
 };
 
 const Step5_SchemaNoiseForm = ({
-  splitType,
-  updateForm,
-  // Dataset 1
-  dataset1SchemaNoise,
-  dataset1SchemaNoiseValue,
-  dataset1SchemaKeyNoise,
-  dataset1SchemaDeleteSchema,
-  dataset1SchemaMultiselect, 
-  // Dataset 2
-  dataset2SchemaNoise,
-  dataset2SchemaNoiseValue,
-  dataset2SchemaKeyNoise,
-  dataset2SchemaDeleteSchema,
-  dataset2SchemaMultiselect, 
-  // Dataset 3
-  dataset3SchemaNoise,
-  dataset3SchemaNoiseValue,
-  dataset3SchemaKeyNoise,
-  dataset3SchemaDeleteSchema,
-  dataset3SchemaMultiselect, 
-  // Dataset 4
-  dataset4SchemaNoise,
-  dataset4SchemaNoiseValue,
-  dataset4SchemaKeyNoise,
-  dataset4SchemaDeleteSchema,
-  dataset4SchemaMultiselect, 
-  errors,
-}: StepProps) => {
+                                 splitType,
+                                 updateForm,
+                                 // Dataset A
+                                 datasetASchemaNoise,
+                                 datasetASchemaNoiseValue,
+                                 datasetASchemaKeyNoise,
+                                 datasetASchemaDeleteSchema,
+                                 datasetASchemaMultiselect,
+                                 // Dataset B
+                                 datasetBSchemaNoise,
+                                 datasetBSchemaNoiseValue,
+                                 datasetBSchemaKeyNoise,
+                                 datasetBSchemaDeleteSchema,
+                                 datasetBSchemaMultiselect,
+                                 // Dataset C
+                                 datasetCSchemaNoise,
+                                 datasetCSchemaNoiseValue,
+                                 datasetCSchemaKeyNoise,
+                                 datasetCSchemaDeleteSchema,
+                                 datasetCSchemaMultiselect,
+                                 // Dataset D
+                                 datasetDSchemaNoise,
+                                 datasetDSchemaNoiseValue,
+                                 datasetDSchemaKeyNoise,
+                                 datasetDSchemaDeleteSchema,
+                                 datasetDSchemaMultiselect,
+                                 errors,
+                               }: StepProps) => {
   // Helper function to handle mutual exclusivity
   const handleMutualExclusivity = (
-    setKeyEnabled: React.Dispatch<React.SetStateAction<boolean>>,
-    setDeleteEnabled: React.Dispatch<React.SetStateAction<boolean>>,
-    updateKey: (value: boolean) => void,
-    updateDelete: (value: boolean) => void,
-    keyChecked: boolean,
-    deleteChecked: boolean
+      setKeyEnabled: React.Dispatch<React.SetStateAction<boolean>>,
+      setDeleteEnabled: React.Dispatch<React.SetStateAction<boolean>>,
+      updateKey: (value: boolean) => void,
+      updateDelete: (value: boolean) => void,
+      keyChecked: boolean,
+      deleteChecked: boolean
   ) => {
     if (keyChecked) {
       setDeleteEnabled(false);
@@ -100,751 +100,751 @@ const Step5_SchemaNoiseForm = ({
     }
   };
 
-  // Dataset 1 State
-  const [dataset1Enabled, setDataset1Enabled] = useState<boolean>(!!dataset1SchemaNoise);
-  const [dataset1Level, setDataset1Level] = useState<number>(dataset1SchemaNoiseValue ?? 0);
-  const [dataset1KeyEnabled, setDataset1KeyEnabled] = useState<boolean>(!!dataset1SchemaKeyNoise);
-  const [dataset1DeleteSchemaEnabled, setDataset1DeleteSchemaEnabled] = useState<boolean>(
-    !!dataset1SchemaDeleteSchema
+  // Dataset A State
+  const [datasetAEnabled, setDatasetAEnabled] = useState<boolean>(!!datasetASchemaNoise);
+  const [datasetALevel, setDatasetALevel] = useState<number>(datasetASchemaNoiseValue ?? 0);
+  const [datasetAKeyEnabled, setDatasetAKeyEnabled] = useState<boolean>(!!datasetASchemaKeyNoise);
+  const [datasetADeleteSchemaEnabled, setDatasetADeleteSchemaEnabled] = useState<boolean>(
+      !!datasetASchemaDeleteSchema
   );
   // initialize local state from props
-  const [dataset1Selections, setDataset1Selections] = useState<string[]>(
-    dataset1SchemaMultiselect ?? []
+  const [datasetASelections, setDatasetASelections] = useState<string[]>(
+      datasetASchemaMultiselect ?? []
   );
 
-  // Dataset 2 State
-  const [dataset2Enabled, setDataset2Enabled] = useState<boolean>(!!dataset2SchemaNoise);
-  const [dataset2Level, setDataset2Level] = useState<number>(dataset2SchemaNoiseValue ?? 0);
-  const [dataset2KeyEnabled, setDataset2KeyEnabled] = useState<boolean>(!!dataset2SchemaKeyNoise);
-  const [dataset2DeleteSchemaEnabled, setDataset2DeleteSchemaEnabled] = useState<boolean>(
-    !!dataset2SchemaDeleteSchema
-  );
-  
-  const [dataset2Selections, setDataset2Selections] = useState<string[]>(
-    dataset2SchemaMultiselect ?? []
+  // Dataset B State
+  const [datasetBEnabled, setDatasetBEnabled] = useState<boolean>(!!datasetBSchemaNoise);
+  const [datasetBLevel, setDatasetBLevel] = useState<number>(datasetBSchemaNoiseValue ?? 0);
+  const [datasetBKeyEnabled, setDatasetBKeyEnabled] = useState<boolean>(!!datasetBSchemaKeyNoise);
+  const [datasetBDeleteSchemaEnabled, setDatasetBDeleteSchemaEnabled] = useState<boolean>(
+      !!datasetBSchemaDeleteSchema
   );
 
-  // Dataset 3 State
-  const [dataset3Enabled, setDataset3Enabled] = useState<boolean>(!!dataset3SchemaNoise);
-  const [dataset3Level, setDataset3Level] = useState<number>(dataset3SchemaNoiseValue ?? 0);
-  const [dataset3KeyEnabled, setDataset3KeyEnabled] = useState<boolean>(!!dataset3SchemaKeyNoise);
-  const [dataset3DeleteSchemaEnabled, setDataset3DeleteSchemaEnabled] = useState<boolean>(
-    !!dataset3SchemaDeleteSchema
-  );
-  
-  const [dataset3Selections, setDataset3Selections] = useState<string[]>(
-    dataset3SchemaMultiselect ?? []
+  const [datasetBSelections, setDatasetBSelections] = useState<string[]>(
+      datasetBSchemaMultiselect ?? []
   );
 
-  // Dataset 4 State
-  const [dataset4Enabled, setDataset4Enabled] = useState<boolean>(!!dataset4SchemaNoise);
-  const [dataset4Level, setDataset4Level] = useState<number>(dataset4SchemaNoiseValue ?? 0);
-  const [dataset4KeyEnabled, setDataset4KeyEnabled] = useState<boolean>(!!dataset4SchemaKeyNoise);
-  const [dataset4DeleteSchemaEnabled, setDataset4DeleteSchemaEnabled] = useState<boolean>(
-    !!dataset4SchemaDeleteSchema
+  // Dataset C State
+  const [datasetCEnabled, setDatasetCEnabled] = useState<boolean>(!!datasetCSchemaNoise);
+  const [datasetCLevel, setDatasetCLevel] = useState<number>(datasetCSchemaNoiseValue ?? 0);
+  const [datasetCKeyEnabled, setDatasetCKeyEnabled] = useState<boolean>(!!datasetCSchemaKeyNoise);
+  const [datasetCDeleteSchemaEnabled, setDatasetCDeleteSchemaEnabled] = useState<boolean>(
+      !!datasetCSchemaDeleteSchema
   );
-  
-  const [dataset4Selections, setDataset4Selections] = useState<string[]>(
-    dataset4SchemaMultiselect ?? []
+
+  const [datasetCSelections, setDatasetCSelections] = useState<string[]>(
+      datasetCSchemaMultiselect ?? []
+  );
+
+  // Dataset D State
+  const [datasetDEnabled, setDatasetDEnabled] = useState<boolean>(!!datasetDSchemaNoise);
+  const [datasetDLevel, setDatasetDLevel] = useState<number>(datasetDSchemaNoiseValue ?? 0);
+  const [datasetDKeyEnabled, setDatasetDKeyEnabled] = useState<boolean>(!!datasetDSchemaKeyNoise);
+  const [datasetDDeleteSchemaEnabled, setDatasetDDeleteSchemaEnabled] = useState<boolean>(
+      !!datasetDSchemaDeleteSchema
+  );
+
+  const [datasetDSelections, setDatasetDSelections] = useState<string[]>(
+      datasetDSchemaMultiselect ?? []
   );
 
   // DATASET 1
-  const handleDataset1Toggle = (checked: boolean) => {
-    setDataset1Enabled(checked);
+  const handleDatasetAToggle = (checked: boolean) => {
+    setDatasetAEnabled(checked);
     if (!checked) {
-      setDataset1Level(0);
-      setDataset1KeyEnabled(false);
-      setDataset1DeleteSchemaEnabled(false);
+      setDatasetALevel(0);
+      setDatasetAKeyEnabled(false);
+      setDatasetADeleteSchemaEnabled(false);
       // Reset multi-select
-      setDataset1Selections([]);
+      setDatasetASelections([]);
       updateForm({
-        dataset1SchemaNoise: checked,
-        dataset1SchemaNoiseValue: 0,
-        dataset1SchemaKeyNoise: false,
-        dataset1SchemaDeleteSchema: false,
+        datasetASchemaNoise: checked,
+        datasetASchemaNoiseValue: 0,
+        datasetASchemaKeyNoise: false,
+        datasetASchemaDeleteSchema: false,
         // also reset multiselect in parent
-        dataset1SchemaMultiselect: [],
+        datasetASchemaMultiselect: [],
       });
     } else {
-      updateForm({ dataset1SchemaNoise: checked });
+      updateForm({ datasetASchemaNoise: checked });
     }
   };
 
-  const handleDataset1Slider = (value: number[]) => {
+  const handleDatasetASlider = (value: number[]) => {
     const newLevel = value[0];
-    setDataset1Level(newLevel);
-    updateForm({ dataset1SchemaNoiseValue: newLevel });
+    setDatasetALevel(newLevel);
+    updateForm({ datasetASchemaNoiseValue: newLevel });
   };
 
-  const handleDataset1KeyToggle = (checked: boolean) => {
-    setDataset1KeyEnabled(checked);
-    updateForm({ dataset1SchemaKeyNoise: checked });
+  const handleDatasetAKeyToggle = (checked: boolean) => {
+    setDatasetAKeyEnabled(checked);
+    updateForm({ datasetASchemaKeyNoise: checked });
     handleMutualExclusivity(
-      setDataset1KeyEnabled,
-      setDataset1DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset1SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset1SchemaDeleteSchema: val }),
-      checked,
-      dataset1DeleteSchemaEnabled
+        setDatasetAKeyEnabled,
+        setDatasetADeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetASchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetASchemaDeleteSchema: val }),
+        checked,
+        datasetADeleteSchemaEnabled
     );
   };
 
-  const handleDataset1DeleteSchemaToggle = (checked: boolean) => {
-    setDataset1DeleteSchemaEnabled(checked);
-    updateForm({ dataset1SchemaDeleteSchema: checked });
+  const handleDatasetADeleteSchemaToggle = (checked: boolean) => {
+    setDatasetADeleteSchemaEnabled(checked);
+    updateForm({ datasetASchemaDeleteSchema: checked });
     handleMutualExclusivity(
-      setDataset1KeyEnabled,
-      setDataset1DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset1SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset1SchemaDeleteSchema: val }),
-      dataset1KeyEnabled,
-      checked
+        setDatasetAKeyEnabled,
+        setDatasetADeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetASchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetASchemaDeleteSchema: val }),
+        datasetAKeyEnabled,
+        checked
     );
   };
 
   // handle multi-select changes for dataset 1
-  const handleDataset1MultiselectChange = (values: string[]) => {
-    setDataset1Selections(values);
+  const handleDatasetAMultiselectChange = (values: string[]) => {
+    setDatasetASelections(values);
     // Also store in parent form
-    updateForm({ dataset1SchemaMultiselect: values });
+    updateForm({ datasetASchemaMultiselect: values });
   };
 
   // DATASET 2
-  const handleDataset2Toggle = (checked: boolean) => {
-    setDataset2Enabled(checked);
+  const handleDatasetBToggle = (checked: boolean) => {
+    setDatasetBEnabled(checked);
     if (!checked) {
-      setDataset2Level(0);
-      setDataset2KeyEnabled(false);
-      setDataset2DeleteSchemaEnabled(false);
-      setDataset2Selections([]);
+      setDatasetBLevel(0);
+      setDatasetBKeyEnabled(false);
+      setDatasetBDeleteSchemaEnabled(false);
+      setDatasetBSelections([]);
       updateForm({
-        dataset2SchemaNoise: checked,
-        dataset2SchemaNoiseValue: 0,
-        dataset2SchemaKeyNoise: false,
-        dataset2SchemaDeleteSchema: false,
-        dataset2SchemaMultiselect: [],
+        datasetBSchemaNoise: checked,
+        datasetBSchemaNoiseValue: 0,
+        datasetBSchemaKeyNoise: false,
+        datasetBSchemaDeleteSchema: false,
+        datasetBSchemaMultiselect: [],
       });
     } else {
-      updateForm({ dataset2SchemaNoise: checked });
+      updateForm({ datasetBSchemaNoise: checked });
     }
   };
 
-  const handleDataset2Slider = (value: number[]) => {
+  const handleDatasetBSlider = (value: number[]) => {
     const newLevel = value[0];
-    setDataset2Level(newLevel);
-    updateForm({ dataset2SchemaNoiseValue: newLevel });
+    setDatasetBLevel(newLevel);
+    updateForm({ datasetBSchemaNoiseValue: newLevel });
   };
 
-  const handleDataset2KeyToggle = (checked: boolean) => {
-    setDataset2KeyEnabled(checked);
-    updateForm({ dataset2SchemaKeyNoise: checked });
+  const handleDatasetBKeyToggle = (checked: boolean) => {
+    setDatasetBKeyEnabled(checked);
+    updateForm({ datasetBSchemaKeyNoise: checked });
     handleMutualExclusivity(
-      setDataset2KeyEnabled,
-      setDataset2DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset2SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset2SchemaDeleteSchema: val }),
-      checked,
-      dataset2DeleteSchemaEnabled
+        setDatasetBKeyEnabled,
+        setDatasetBDeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetBSchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetBSchemaDeleteSchema: val }),
+        checked,
+        datasetBDeleteSchemaEnabled
     );
   };
 
-  const handleDataset2DeleteSchemaToggle = (checked: boolean) => {
-    setDataset2DeleteSchemaEnabled(checked);
-    updateForm({ dataset2SchemaDeleteSchema: checked });
+  const handleDatasetBDeleteSchemaToggle = (checked: boolean) => {
+    setDatasetBDeleteSchemaEnabled(checked);
+    updateForm({ datasetBSchemaDeleteSchema: checked });
     handleMutualExclusivity(
-      setDataset2KeyEnabled,
-      setDataset2DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset2SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset2SchemaDeleteSchema: val }),
-      dataset2KeyEnabled,
-      checked
+        setDatasetBKeyEnabled,
+        setDatasetBDeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetBSchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetBSchemaDeleteSchema: val }),
+        datasetBKeyEnabled,
+        checked
     );
   };
 
   // handle multi-select changes for dataset 2
-  const handleDataset2MultiselectChange = (values: string[]) => {
-    setDataset2Selections(values);
-    updateForm({ dataset2SchemaMultiselect: values });
+  const handleDatasetBMultiselectChange = (values: string[]) => {
+    setDatasetBSelections(values);
+    updateForm({ datasetBSchemaMultiselect: values });
   };
 
   // DATASET 3
-  const handleDataset3Toggle = (checked: boolean) => {
-    setDataset3Enabled(checked);
+  const handleDatasetCToggle = (checked: boolean) => {
+    setDatasetCEnabled(checked);
     if (!checked) {
-      setDataset3Level(0);
-      setDataset3KeyEnabled(false);
-      setDataset3DeleteSchemaEnabled(false);
-      setDataset3Selections([]);
+      setDatasetCLevel(0);
+      setDatasetCKeyEnabled(false);
+      setDatasetCDeleteSchemaEnabled(false);
+      setDatasetCSelections([]);
       updateForm({
-        dataset3SchemaNoise: checked,
-        dataset3SchemaNoiseValue: 0,
-        dataset3SchemaKeyNoise: false,
-        dataset3SchemaDeleteSchema: false,
-        dataset3SchemaMultiselect: [], 
+        datasetCSchemaNoise: checked,
+        datasetCSchemaNoiseValue: 0,
+        datasetCSchemaKeyNoise: false,
+        datasetCSchemaDeleteSchema: false,
+        datasetCSchemaMultiselect: [],
       });
     } else {
-      updateForm({ dataset3SchemaNoise: checked });
+      updateForm({ datasetCSchemaNoise: checked });
     }
   };
 
-  const handleDataset3Slider = (value: number[]) => {
+  const handleDatasetCSlider = (value: number[]) => {
     const newLevel = value[0];
-    setDataset3Level(newLevel);
-    updateForm({ dataset3SchemaNoiseValue: newLevel });
+    setDatasetCLevel(newLevel);
+    updateForm({ datasetCSchemaNoiseValue: newLevel });
   };
 
-  const handleDataset3KeyToggle = (checked: boolean) => {
-    setDataset3KeyEnabled(checked);
-    updateForm({ dataset3SchemaKeyNoise: checked });
+  const handleDatasetCKeyToggle = (checked: boolean) => {
+    setDatasetCKeyEnabled(checked);
+    updateForm({ datasetCSchemaKeyNoise: checked });
     handleMutualExclusivity(
-      setDataset3KeyEnabled,
-      setDataset3DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset3SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset3SchemaDeleteSchema: val }),
-      checked,
-      dataset3DeleteSchemaEnabled
+        setDatasetCKeyEnabled,
+        setDatasetCDeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetCSchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetCSchemaDeleteSchema: val }),
+        checked,
+        datasetCDeleteSchemaEnabled
     );
   };
 
-  const handleDataset3DeleteSchemaToggle = (checked: boolean) => {
-    setDataset3DeleteSchemaEnabled(checked);
-    updateForm({ dataset3SchemaDeleteSchema: checked });
+  const handleDatasetCDeleteSchemaToggle = (checked: boolean) => {
+    setDatasetCDeleteSchemaEnabled(checked);
+    updateForm({ datasetCSchemaDeleteSchema: checked });
     handleMutualExclusivity(
-      setDataset3KeyEnabled,
-      setDataset3DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset3SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset3SchemaDeleteSchema: val }),
-      dataset3KeyEnabled,
-      checked
+        setDatasetCKeyEnabled,
+        setDatasetCDeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetCSchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetCSchemaDeleteSchema: val }),
+        datasetCKeyEnabled,
+        checked
     );
   };
 
   // handle multi-select changes for dataset 3
-  const handleDataset3MultiselectChange = (values: string[]) => {
-    setDataset3Selections(values);
-    updateForm({ dataset3SchemaMultiselect: values });
+  const handleDatasetCMultiselectChange = (values: string[]) => {
+    setDatasetCSelections(values);
+    updateForm({ datasetCSchemaMultiselect: values });
   };
 
   // DATASET 4
-  const handleDataset4Toggle = (checked: boolean) => {
-    setDataset4Enabled(checked);
+  const handleDatasetDToggle = (checked: boolean) => {
+    setDatasetDEnabled(checked);
     if (!checked) {
-      setDataset4Level(0);
-      setDataset4KeyEnabled(false);
-      setDataset4DeleteSchemaEnabled(false);
-      setDataset4Selections([]);
+      setDatasetDLevel(0);
+      setDatasetDKeyEnabled(false);
+      setDatasetDDeleteSchemaEnabled(false);
+      setDatasetDSelections([]);
       updateForm({
-        dataset4SchemaNoise: checked,
-        dataset4SchemaNoiseValue: 0,
-        dataset4SchemaKeyNoise: false,
-        dataset4SchemaDeleteSchema: false,
-        dataset4SchemaMultiselect: [],
+        datasetDSchemaNoise: checked,
+        datasetDSchemaNoiseValue: 0,
+        datasetDSchemaKeyNoise: false,
+        datasetDSchemaDeleteSchema: false,
+        datasetDSchemaMultiselect: [],
       });
     } else {
-      updateForm({ dataset4SchemaNoise: checked });
+      updateForm({ datasetDSchemaNoise: checked });
     }
   };
 
-  const handleDataset4Slider = (value: number[]) => {
+  const handleDatasetDSlider = (value: number[]) => {
     const newLevel = value[0];
-    setDataset4Level(newLevel);
-    updateForm({ dataset4SchemaNoiseValue: newLevel });
+    setDatasetDLevel(newLevel);
+    updateForm({ datasetDSchemaNoiseValue: newLevel });
   };
 
-  const handleDataset4KeyToggle = (checked: boolean) => {
-    setDataset4KeyEnabled(checked);
-    updateForm({ dataset4SchemaKeyNoise: checked });
+  const handleDatasetDKeyToggle = (checked: boolean) => {
+    setDatasetDKeyEnabled(checked);
+    updateForm({ datasetDSchemaKeyNoise: checked });
     handleMutualExclusivity(
-      setDataset4KeyEnabled,
-      setDataset4DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset4SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset4SchemaDeleteSchema: val }),
-      checked,
-      dataset4DeleteSchemaEnabled
+        setDatasetDKeyEnabled,
+        setDatasetDDeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetDSchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetDSchemaDeleteSchema: val }),
+        checked,
+        datasetDDeleteSchemaEnabled
     );
   };
 
-  const handleDataset4DeleteSchemaToggle = (checked: boolean) => {
-    setDataset4DeleteSchemaEnabled(checked);
-    updateForm({ dataset4SchemaDeleteSchema: checked });
+  const handleDatasetDDeleteSchemaToggle = (checked: boolean) => {
+    setDatasetDDeleteSchemaEnabled(checked);
+    updateForm({ datasetDSchemaDeleteSchema: checked });
     handleMutualExclusivity(
-      setDataset4KeyEnabled,
-      setDataset4DeleteSchemaEnabled,
-      (val: boolean) => updateForm({ dataset4SchemaKeyNoise: val }),
-      (val: boolean) => updateForm({ dataset4SchemaDeleteSchema: val }),
-      dataset4KeyEnabled,
-      checked
+        setDatasetDKeyEnabled,
+        setDatasetDDeleteSchemaEnabled,
+        (val: boolean) => updateForm({ datasetDSchemaKeyNoise: val }),
+        (val: boolean) => updateForm({ datasetDSchemaDeleteSchema: val }),
+        datasetDKeyEnabled,
+        checked
     );
   };
 
   // handle multi-select changes for dataset 4
-  const handleDataset4MultiselectChange = (values: string[]) => {
-    setDataset4Selections(values);
-    updateForm({ dataset4SchemaMultiselect: values });
+  const handleDatasetDMultiselectChange = (values: string[]) => {
+    setDatasetDSelections(values);
+    updateForm({ datasetDSchemaMultiselect: values });
   };
 
   // Effect to reset Datasets 3 and 4 when splitType changes
   useEffect(() => {
     if (splitType !== "VerticalHorizontal") {
-      // Reset Dataset 3
-      setDataset3Enabled(false);
-      setDataset3Level(0);
-      setDataset3KeyEnabled(false);
-      setDataset3DeleteSchemaEnabled(false);
-      setDataset3Selections([]);
+      // Reset Dataset C
+      setDatasetCEnabled(false);
+      setDatasetCLevel(0);
+      setDatasetCKeyEnabled(false);
+      setDatasetCDeleteSchemaEnabled(false);
+      setDatasetCSelections([]);
 
-      // Reset Dataset 4
-      setDataset4Enabled(false);
-      setDataset4Level(0);
-      setDataset4KeyEnabled(false);
-      setDataset4DeleteSchemaEnabled(false);
-      setDataset4Selections([]);
+      // Reset Dataset D
+      setDatasetDEnabled(false);
+      setDatasetDLevel(0);
+      setDatasetDKeyEnabled(false);
+      setDatasetDDeleteSchemaEnabled(false);
+      setDatasetDSelections([]);
 
       // Update form
       updateForm({
-        dataset3SchemaNoise: false,
-        dataset3SchemaNoiseValue: 0,
-        dataset3SchemaKeyNoise: false,
-        dataset3SchemaDeleteSchema: false,
-        dataset3SchemaMultiselect: [],
+        datasetCSchemaNoise: false,
+        datasetCSchemaNoiseValue: 0,
+        datasetCSchemaKeyNoise: false,
+        datasetCSchemaDeleteSchema: false,
+        datasetCSchemaMultiselect: [],
 
-        dataset4SchemaNoise: false,
-        dataset4SchemaNoiseValue: 0,
-        dataset4SchemaKeyNoise: false,
-        dataset4SchemaDeleteSchema: false,
-        dataset4SchemaMultiselect: [],
+        datasetDSchemaNoise: false,
+        datasetDSchemaNoiseValue: 0,
+        datasetDSchemaKeyNoise: false,
+        datasetDSchemaDeleteSchema: false,
+        datasetDSchemaMultiselect: [],
       });
     }
   }, [splitType, updateForm]);
 
   return (
-    <FormWrapper
-      title="Select Noise Options for Schema"
-      description="For each dataset, choose whether to add noise to the schema. If enabled, specify the error methods."
-    >
-      <div className="max-h-[750px] overflow-y-auto scrollbar-custom p-4 space-y-6">
-      <div className="flex flex-col w-full h-full max-h-[50vh] p-4 scrollbar-custom">
-        <div className="flex flex-col md:flex-row md:gap-8 w-full">
-          {/* Dataset 1 Controls */}
-          <div className="flex flex-col w-full">
-            <h3 className="text-lg text-white mb-2">Dataset 1</h3>
-            <div className="flex items-center gap-2 custom-label">
-              <Checkbox
-                checked={dataset1Enabled}
-                onCheckedChange={handleDataset1Toggle}
-                id="dataset1SchemaNoise"
-              />
-              <label htmlFor="dataset1SchemaNoise" className="text-white">
-                Enable Noise
-              </label>
+      <FormWrapper
+          title="Select Noise Options for Schema"
+          description="For each dataset, choose whether to add noise to the schema. If enabled, specify the error methods."
+      >
+        <div className="max-h-[750px] overflow-y-auto scrollbar-custom p-4 space-y-6">
+          <div className="flex flex-col w-full h-full max-h-[50vh] p-4 scrollbar-custom">
+            <div className="flex flex-col md:flex-row md:gap-8 w-full">
+              {/* Dataset A Controls */}
+              <div className="flex flex-col w-full">
+                <h3 className="text-lg text-white mb-2">Dataset A</h3>
+                <div className="flex items-center gap-2 custom-label">
+                  <Checkbox
+                      checked={datasetAEnabled}
+                      onCheckedChange={handleDatasetAToggle}
+                      id="datasetASchemaNoise"
+                  />
+                  <label htmlFor="datasetASchemaNoise" className="text-white">
+                    Enable Noise
+                  </label>
+                </div>
+                {errors.datasetASchemaNoise && (
+                    <p className="text-red-500 text-sm mt-1">{errors.datasetASchemaNoise[0]}</p>
+                )}
+
+                {datasetAEnabled && (
+                    <>
+                      {/* Delete Schema Checkbox */}
+                      <div className="flex items-center gap-2 mt-2 custom-label">
+                        <Checkbox
+                            checked={datasetADeleteSchemaEnabled}
+                            onCheckedChange={handleDatasetADeleteSchemaToggle}
+                            id="datasetADeleteSchema"
+                            disabled={datasetAKeyEnabled}
+                        />
+                        <label htmlFor="datasetADeleteSchema" className="text-white">
+                          Delete Schema
+                        </label>
+                      </div>
+                      {errors.datasetASchemaDeleteSchema && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.datasetASchemaDeleteSchema[0]}
+                          </p>
+                      )}
+
+                      {/* Noise to Key Attributes Checkbox */}
+                      <div className="flex items-center gap-2 mt-2 custom-label">
+                        <Checkbox
+                            checked={datasetAKeyEnabled}
+                            onCheckedChange={handleDatasetAKeyToggle}
+                            id="datasetASchemaKeyNoise"
+                            disabled={datasetADeleteSchemaEnabled}
+                        />
+                        <label htmlFor="datasetASchemaKeyNoise" className="text-white">
+                          Add Noise to Key Attributes
+                        </label>
+                      </div>
+                      {errors.datasetASchemaKeyNoise && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.datasetASchemaKeyNoise[0]}
+                          </p>
+                      )}
+
+                      {/* Multi-Select for Dataset A */}
+                      <div className="mt-4">
+                        <label htmlFor="datasetAMultiSelect" className="text-white">
+                          Dataset A Error Methods
+                        </label>
+                        <MultiSelect
+                            id="datasetAMultiSelect"
+                            options={frameworksList}
+                            onValueChange={handleDatasetAMultiselectChange}
+                            defaultValue={datasetASelections}
+                            placeholder="Select frameworks for Dataset A"
+                            variant="inverted"
+                            animation={2}
+                            maxCount={3}
+                        />
+                        <div className="text-white text-sm mt-2">
+                          Selected: {datasetASelections.join(", ")}
+                        </div>
+                      </div>
+
+                      {/* Noise Percentage Slider */}
+                      <div className="mt-4">
+                        <label htmlFor="datasetASchemaNoiseSlider" className="text-white">
+                          Noise Percentage
+                        </label>
+                        <Slider
+                            id="datasetASchemaNoiseSlider"
+                            className="my-2 w-full"
+                            value={[datasetALevel]}
+                            onValueChange={handleDatasetASlider}
+                            min={0}
+                            max={100}
+                            step={1}
+                            disabled={datasetADeleteSchemaEnabled}
+                        />
+                        <span className="text-white text-sm">
+                    Percentage: {datasetALevel} %
+                  </span>
+                        {errors.datasetASchemaNoiseValue && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.datasetASchemaNoiseValue[0]}
+                            </p>
+                        )}
+                      </div>
+                    </>
+                )}
+              </div>
+
+              {/* Dataset B Controls */}
+              <div className="flex flex-col w-full">
+                <h3 className="text-lg text-white mb-2">Dataset B</h3>
+                <div className="flex items-center gap-2 custom-label">
+                  <Checkbox
+                      checked={datasetBEnabled}
+                      onCheckedChange={handleDatasetBToggle}
+                      id="datasetBSchemaNoise"
+                  />
+                  <label htmlFor="datasetBSchemaNoise" className="text-white">
+                    Enable Noise
+                  </label>
+                </div>
+                {errors.datasetBSchemaNoise && (
+                    <p className="text-red-500 text-sm mt-1">{errors.datasetBSchemaNoise[0]}</p>
+                )}
+
+                {datasetBEnabled && (
+                    <>
+                      {/* Delete Schema Checkbox */}
+                      <div className="flex items-center gap-2 mt-2 custom-label">
+                        <Checkbox
+                            checked={datasetBDeleteSchemaEnabled}
+                            onCheckedChange={handleDatasetBDeleteSchemaToggle}
+                            id="datasetBDeleteSchema"
+                            disabled={datasetBKeyEnabled}
+                        />
+                        <label htmlFor="datasetBDeleteSchema" className="text-white">
+                          Delete Schema
+                        </label>
+                      </div>
+                      {errors.datasetBSchemaDeleteSchema && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.datasetBSchemaDeleteSchema[0]}
+                          </p>
+                      )}
+
+                      {/* Noise to Key Attributes Checkbox */}
+                      <div className="flex items-center gap-2 mt-2 custom-label">
+                        <Checkbox
+                            checked={datasetBKeyEnabled}
+                            onCheckedChange={handleDatasetBKeyToggle}
+                            id="datasetBSchemaKeyNoise"
+                            disabled={datasetBDeleteSchemaEnabled}
+                        />
+                        <label htmlFor="datasetBSchemaKeyNoise" className="text-white">
+                          Add Noise to Key Attributes
+                        </label>
+                      </div>
+                      {errors.datasetBSchemaKeyNoise && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.datasetBSchemaKeyNoise[0]}
+                          </p>
+                      )}
+
+                      {/* Multi-Select for Dataset B */}
+                      <div className="mt-4">
+                        <label htmlFor="datasetBMultiSelect" className="text-white">
+                          Dataset B Error Methods
+                        </label>
+                        <MultiSelect
+                            id="datasetBMultiSelect"
+                            options={frameworksList}
+                            onValueChange={handleDatasetBMultiselectChange}
+                            defaultValue={datasetBSelections}
+                            placeholder="Select frameworks for Dataset B"
+                            variant="inverted"
+                            animation={2}
+                            maxCount={3}
+                        />
+                        <div className="text-white text-sm mt-2">
+                          Selected: {datasetBSelections.join(", ")}
+                        </div>
+                      </div>
+
+                      {/* Noise Percentage Slider */}
+                      <div className="mt-4">
+                        <label htmlFor="datasetBSchemaNoiseSlider" className="text-white">
+                          Noise Percentage
+                        </label>
+                        <Slider
+                            id="datasetBSchemaNoiseSlider"
+                            className="my-2 w-full"
+                            value={[datasetBLevel]}
+                            onValueChange={handleDatasetBSlider}
+                            min={0}
+                            max={100}
+                            step={1}
+                            disabled={datasetBDeleteSchemaEnabled}
+                        />
+                        <span className="text-white text-sm">
+                    Percentage: {datasetBLevel} %
+                  </span>
+                        {errors.datasetBSchemaNoiseValue && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.datasetBSchemaNoiseValue[0]}
+                            </p>
+                        )}
+                      </div>
+                    </>
+                )}
+              </div>
             </div>
-            {errors.dataset1SchemaNoise && (
-              <p className="text-red-500 text-sm mt-1">{errors.dataset1SchemaNoise[0]}</p>
-            )}
 
-            {dataset1Enabled && (
-              <>
-                {/* Delete Schema Checkbox */}
-                <div className="flex items-center gap-2 mt-2 custom-label">
-                  <Checkbox
-                    checked={dataset1DeleteSchemaEnabled}
-                    onCheckedChange={handleDataset1DeleteSchemaToggle}
-                    id="dataset1DeleteSchema"
-                    disabled={dataset1KeyEnabled}
-                  />
-                  <label htmlFor="dataset1DeleteSchema" className="text-white">
-                    Delete Schema
-                  </label>
-                </div>
-                {errors.dataset1SchemaDeleteSchema && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.dataset1SchemaDeleteSchema[0]}
-                  </p>
-                )}
+            {/* Conditionally Render Dataset C and Dataset D Controls */}
+            {splitType === "VerticalHorizontal" && (
+                <div className="flex flex-col md:flex-row md:gap-8 w-full mt-8">
+                  {/* Dataset C Controls */}
+                  <div className="flex flex-col w-full">
+                    <h3 className="text-lg text-white mb-2">Dataset C</h3>
+                    <div className="flex items-center gap-2 custom-label">
+                      <Checkbox
+                          checked={datasetCEnabled}
+                          onCheckedChange={handleDatasetCToggle}
+                          id="datasetCSchemaNoise"
+                      />
+                      <label htmlFor="datasetCSchemaNoise" className="text-white">
+                        Enable Noise
+                      </label>
+                    </div>
+                    {errors.datasetCSchemaNoise && (
+                        <p className="text-red-500 text-sm mt-1">{errors.datasetCSchemaNoise[0]}</p>
+                    )}
 
-                {/* Noise to Key Attributes Checkbox */}
-                <div className="flex items-center gap-2 mt-2 custom-label">
-                  <Checkbox
-                    checked={dataset1KeyEnabled}
-                    onCheckedChange={handleDataset1KeyToggle}
-                    id="dataset1SchemaKeyNoise"
-                    disabled={dataset1DeleteSchemaEnabled}
-                  />
-                  <label htmlFor="dataset1SchemaKeyNoise" className="text-white">
-                    Add Noise to Key Attributes
-                  </label>
-                </div>
-                {errors.dataset1SchemaKeyNoise && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.dataset1SchemaKeyNoise[0]}
-                  </p>
-                )}
+                    {datasetCEnabled && (
+                        <>
+                          {/* Delete Schema Checkbox */}
+                          <div className="flex items-center gap-2 mt-2 custom-label">
+                            <Checkbox
+                                checked={datasetCDeleteSchemaEnabled}
+                                onCheckedChange={handleDatasetCDeleteSchemaToggle}
+                                id="datasetCDeleteSchema"
+                                disabled={datasetCKeyEnabled}
+                            />
+                            <label htmlFor="datasetCDeleteSchema" className="text-white">
+                              Delete Schema
+                            </label>
+                          </div>
+                          {errors.datasetCSchemaDeleteSchema && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {errors.datasetCSchemaDeleteSchema[0]}
+                              </p>
+                          )}
 
-                {/* Multi-Select for Dataset 1 */}
-                <div className="mt-4">
-                  <label htmlFor="dataset1MultiSelect" className="text-white">
-                    Dataset 1 Error Methods
-                  </label>
-                  <MultiSelect
-                    id="dataset1MultiSelect"
-                    options={frameworksList}
-                    onValueChange={handleDataset1MultiselectChange}
-                    defaultValue={dataset1Selections}
-                    placeholder="Select frameworks for Dataset 1"
-                    variant="inverted"
-                    animation={2}
-                    maxCount={3}
-                  />
-                  <div className="text-white text-sm mt-2">
-                    Selected: {dataset1Selections.join(", ")}
+                          {/* Noise to Key Attributes Checkbox */}
+                          <div className="flex items-center gap-2 mt-2 custom-label">
+                            <Checkbox
+                                checked={datasetCKeyEnabled}
+                                onCheckedChange={handleDatasetCKeyToggle}
+                                id="datasetCSchemaKeyNoise"
+                                disabled={datasetCDeleteSchemaEnabled}
+                            />
+                            <label htmlFor="datasetCSchemaKeyNoise" className="text-white">
+                              Add Noise to Key Attributes
+                            </label>
+                          </div>
+                          {errors.datasetCSchemaKeyNoise && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {errors.datasetCSchemaKeyNoise[0]}
+                              </p>
+                          )}
+
+                          {/* Multi-Select for Dataset C */}
+                          <div className="mt-4">
+                            <label htmlFor="datasetCMultiSelect" className="text-white">
+                              Dataset C Error Methods
+                            </label>
+                            <MultiSelect
+                                id="datasetCMultiSelect"
+                                options={frameworksList}
+                                onValueChange={handleDatasetCMultiselectChange}
+                                defaultValue={datasetCSelections}
+                                placeholder="Select frameworks for Dataset C"
+                                variant="inverted"
+                                animation={2}
+                                maxCount={3}
+                            />
+                            <div className="text-white text-sm mt-2">
+                              Selected: {datasetCSelections.join(", ")}
+                            </div>
+                          </div>
+
+                          {/* Noise Percentage Slider */}
+                          <div className="mt-4">
+                            <label htmlFor="datasetCSchemaNoiseSlider" className="text-white">
+                              Noise Percentage
+                            </label>
+                            <Slider
+                                id="datasetCSchemaNoiseSlider"
+                                className="my-2 w-full"
+                                value={[datasetCLevel]}
+                                onValueChange={handleDatasetCSlider}
+                                min={0}
+                                max={100}
+                                step={1}
+                                disabled={datasetCDeleteSchemaEnabled}
+                            />
+                            <span className="text-white text-sm">
+                      Percentage: {datasetCLevel} %
+                    </span>
+                            {errors.datasetCSchemaNoiseValue && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  {errors.datasetCSchemaNoiseValue[0]}
+                                </p>
+                            )}
+                          </div>
+                        </>
+                    )}
+                  </div>
+
+                  {/* Dataset D Controls */}
+                  <div className="flex flex-col w-full">
+                    <h3 className="text-lg text-white mb-2">Dataset D</h3>
+                    <div className="flex items-center gap-2 custom-label">
+                      <Checkbox
+                          checked={datasetDEnabled}
+                          onCheckedChange={handleDatasetDToggle}
+                          id="datasetDSchemaNoise"
+                      />
+                      <label htmlFor="datasetDSchemaNoise" className="text-white">
+                        Enable Noise
+                      </label>
+                    </div>
+                    {errors.datasetDSchemaNoise && (
+                        <p className="text-red-500 text-sm mt-1">{errors.datasetDSchemaNoise[0]}</p>
+                    )}
+
+                    {datasetDEnabled && (
+                        <>
+                          {/* Delete Schema Checkbox */}
+                          <div className="flex items-center gap-2 mt-2 custom-label">
+                            <Checkbox
+                                checked={datasetDDeleteSchemaEnabled}
+                                onCheckedChange={handleDatasetDDeleteSchemaToggle}
+                                id="datasetDDeleteSchema"
+                                disabled={datasetDKeyEnabled}
+                            />
+                            <label htmlFor="datasetDDeleteSchema" className="text-white">
+                              Delete Schema
+                            </label>
+                          </div>
+                          {errors.datasetDSchemaDeleteSchema && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {errors.datasetDSchemaDeleteSchema[0]}
+                              </p>
+                          )}
+
+                          {/* Noise to Key Attributes Checkbox */}
+                          <div className="flex items-center gap-2 mt-2 custom-label">
+                            <Checkbox
+                                checked={datasetDKeyEnabled}
+                                onCheckedChange={handleDatasetDKeyToggle}
+                                id="datasetDSchemaKeyNoise"
+                                disabled={datasetDDeleteSchemaEnabled}
+                            />
+                            <label htmlFor="datasetDSchemaKeyNoise" className="text-white">
+                              Add Noise to Key Attributes
+                            </label>
+                          </div>
+                          {errors.datasetDSchemaKeyNoise && (
+                              <p className="text-red-500 text-sm mt-1">
+                                {errors.datasetDSchemaKeyNoise[0]}
+                              </p>
+                          )}
+
+                          {/* Multi-Select for Dataset D */}
+                          <div className="mt-4">
+                            <label htmlFor="datasetDMultiSelect" className="text-white">
+                              Dataset D Error Methods
+                            </label>
+                            <MultiSelect
+                                id="datasetDMultiSelect"
+                                options={frameworksList}
+                                onValueChange={handleDatasetDMultiselectChange}
+                                defaultValue={datasetDSelections}
+                                placeholder="Select frameworks for Dataset D"
+                                variant="inverted"
+                                animation={2}
+                                maxCount={3}
+                            />
+                            <div className="text-white text-sm mt-2">
+                              Selected: {datasetDSelections.join(", ")}
+                            </div>
+                          </div>
+
+                          {/* Noise Percentage Slider */}
+                          <div className="mt-4">
+                            <label htmlFor="datasetDSchemaNoiseSlider" className="text-white">
+                              Noise Percentage
+                            </label>
+                            <Slider
+                                id="datasetDSchemaNoiseSlider"
+                                className="my-2 w-full"
+                                value={[datasetDLevel]}
+                                onValueChange={handleDatasetDSlider}
+                                min={0}
+                                max={100}
+                                step={1}
+                                disabled={datasetDDeleteSchemaEnabled}
+                            />
+                            <span className="text-white text-sm">
+                      Percentage: {datasetDLevel} %
+                    </span>
+                            {errors.datasetDSchemaNoiseValue && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  {errors.datasetDSchemaNoiseValue[0]}
+                                </p>
+                            )}
+                          </div>
+                        </>
+                    )}
                   </div>
                 </div>
-
-                {/* Noise Percentage Slider */}
-                <div className="mt-4">
-                  <label htmlFor="dataset1SchemaNoiseSlider" className="text-white">
-                    Noise Percentage
-                  </label>
-                  <Slider
-                    id="dataset1SchemaNoiseSlider"
-                    className="my-2 w-full"
-                    value={[dataset1Level]}
-                    onValueChange={handleDataset1Slider}
-                    min={0}
-                    max={100}
-                    step={1}
-                    disabled={dataset1DeleteSchemaEnabled}
-                  />
-                  <span className="text-white text-sm">
-                    Percentage: {dataset1Level} %
-                  </span>
-                  {errors.dataset1SchemaNoiseValue && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.dataset1SchemaNoiseValue[0]}
-                    </p>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Dataset 2 Controls */}
-          <div className="flex flex-col w-full">
-            <h3 className="text-lg text-white mb-2">Dataset 2</h3>
-            <div className="flex items-center gap-2 custom-label">
-              <Checkbox
-                checked={dataset2Enabled}
-                onCheckedChange={handleDataset2Toggle}
-                id="dataset2SchemaNoise"
-              />
-              <label htmlFor="dataset2SchemaNoise" className="text-white">
-                Enable Noise
-              </label>
-            </div>
-            {errors.dataset2SchemaNoise && (
-              <p className="text-red-500 text-sm mt-1">{errors.dataset2SchemaNoise[0]}</p>
-            )}
-
-            {dataset2Enabled && (
-              <>
-                {/* Delete Schema Checkbox */}
-                <div className="flex items-center gap-2 mt-2 custom-label">
-                  <Checkbox
-                    checked={dataset2DeleteSchemaEnabled}
-                    onCheckedChange={handleDataset2DeleteSchemaToggle}
-                    id="dataset2DeleteSchema"
-                    disabled={dataset2KeyEnabled}
-                  />
-                  <label htmlFor="dataset2DeleteSchema" className="text-white">
-                    Delete Schema
-                  </label>
-                </div>
-                {errors.dataset2SchemaDeleteSchema && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.dataset2SchemaDeleteSchema[0]}
-                  </p>
-                )}
-
-                {/* Noise to Key Attributes Checkbox */}
-                <div className="flex items-center gap-2 mt-2 custom-label">
-                  <Checkbox
-                    checked={dataset2KeyEnabled}
-                    onCheckedChange={handleDataset2KeyToggle}
-                    id="dataset2SchemaKeyNoise"
-                    disabled={dataset2DeleteSchemaEnabled}
-                  />
-                  <label htmlFor="dataset2SchemaKeyNoise" className="text-white">
-                    Add Noise to Key Attributes
-                  </label>
-                </div>
-                {errors.dataset2SchemaKeyNoise && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.dataset2SchemaKeyNoise[0]}
-                  </p>
-                )}
-
-                {/* Multi-Select for Dataset 2 */}
-                <div className="mt-4">
-                  <label htmlFor="dataset2MultiSelect" className="text-white">
-                    Dataset 2 Error Methods
-                  </label>
-                  <MultiSelect
-                    id="dataset2MultiSelect"
-                    options={frameworksList}
-                    onValueChange={handleDataset2MultiselectChange}
-                    defaultValue={dataset2Selections}
-                    placeholder="Select frameworks for Dataset 2"
-                    variant="inverted"
-                    animation={2}
-                    maxCount={3}
-                  />
-                  <div className="text-white text-sm mt-2">
-                    Selected: {dataset2Selections.join(", ")}
-                  </div>
-                </div>
-
-                {/* Noise Percentage Slider */}
-                <div className="mt-4">
-                  <label htmlFor="dataset2SchemaNoiseSlider" className="text-white">
-                    Noise Percentage
-                  </label>
-                  <Slider
-                    id="dataset2SchemaNoiseSlider"
-                    className="my-2 w-full"
-                    value={[dataset2Level]}
-                    onValueChange={handleDataset2Slider}
-                    min={0}
-                    max={100}
-                    step={1}
-                    disabled={dataset2DeleteSchemaEnabled}
-                  />
-                  <span className="text-white text-sm">
-                    Percentage: {dataset2Level} %
-                  </span>
-                  {errors.dataset2SchemaNoiseValue && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.dataset2SchemaNoiseValue[0]}
-                    </p>
-                  )}
-                </div>
-              </>
             )}
           </div>
         </div>
-
-        {/* Conditionally Render Dataset 3 and Dataset 4 Controls */}
-        {splitType === "VerticalHorizontal" && (
-          <div className="flex flex-col md:flex-row md:gap-8 w-full mt-8">
-            {/* Dataset 3 Controls */}
-            <div className="flex flex-col w-full">
-              <h3 className="text-lg text-white mb-2">Dataset 3</h3>
-              <div className="flex items-center gap-2 custom-label">
-                <Checkbox
-                  checked={dataset3Enabled}
-                  onCheckedChange={handleDataset3Toggle}
-                  id="dataset3SchemaNoise"
-                />
-                <label htmlFor="dataset3SchemaNoise" className="text-white">
-                  Enable Noise
-                </label>
-              </div>
-              {errors.dataset3SchemaNoise && (
-                <p className="text-red-500 text-sm mt-1">{errors.dataset3SchemaNoise[0]}</p>
-              )}
-
-              {dataset3Enabled && (
-                <>
-                  {/* Delete Schema Checkbox */}
-                  <div className="flex items-center gap-2 mt-2 custom-label">
-                    <Checkbox
-                      checked={dataset3DeleteSchemaEnabled}
-                      onCheckedChange={handleDataset3DeleteSchemaToggle}
-                      id="dataset3DeleteSchema"
-                      disabled={dataset3KeyEnabled}
-                    />
-                    <label htmlFor="dataset3DeleteSchema" className="text-white">
-                      Delete Schema
-                    </label>
-                  </div>
-                  {errors.dataset3SchemaDeleteSchema && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.dataset3SchemaDeleteSchema[0]}
-                    </p>
-                  )}
-
-                  {/* Noise to Key Attributes Checkbox */}
-                  <div className="flex items-center gap-2 mt-2 custom-label">
-                    <Checkbox
-                      checked={dataset3KeyEnabled}
-                      onCheckedChange={handleDataset3KeyToggle}
-                      id="dataset3SchemaKeyNoise"
-                      disabled={dataset3DeleteSchemaEnabled}
-                    />
-                    <label htmlFor="dataset3SchemaKeyNoise" className="text-white">
-                      Add Noise to Key Attributes
-                    </label>
-                  </div>
-                  {errors.dataset3SchemaKeyNoise && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.dataset3SchemaKeyNoise[0]}
-                    </p>
-                  )}
-
-                  {/* Multi-Select for Dataset 3 */}
-                  <div className="mt-4">
-                    <label htmlFor="dataset3MultiSelect" className="text-white">
-                      Dataset 3 Error Methods
-                    </label>
-                    <MultiSelect
-                      id="dataset3MultiSelect"
-                      options={frameworksList}
-                      onValueChange={handleDataset3MultiselectChange}
-                      defaultValue={dataset3Selections}
-                      placeholder="Select frameworks for Dataset 3"
-                      variant="inverted"
-                      animation={2}
-                      maxCount={3}
-                    />
-                    <div className="text-white text-sm mt-2">
-                      Selected: {dataset3Selections.join(", ")}
-                    </div>
-                  </div>
-
-                  {/* Noise Percentage Slider */}
-                  <div className="mt-4">
-                    <label htmlFor="dataset3SchemaNoiseSlider" className="text-white">
-                      Noise Percentage
-                    </label>
-                    <Slider
-                      id="dataset3SchemaNoiseSlider"
-                      className="my-2 w-full"
-                      value={[dataset3Level]}
-                      onValueChange={handleDataset3Slider}
-                      min={0}
-                      max={100}
-                      step={1}
-                      disabled={dataset3DeleteSchemaEnabled}
-                    />
-                    <span className="text-white text-sm">
-                      Percentage: {dataset3Level} %
-                    </span>
-                    {errors.dataset3SchemaNoiseValue && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.dataset3SchemaNoiseValue[0]}
-                      </p>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Dataset 4 Controls */}
-            <div className="flex flex-col w-full">
-              <h3 className="text-lg text-white mb-2">Dataset 4</h3>
-              <div className="flex items-center gap-2 custom-label">
-                <Checkbox
-                  checked={dataset4Enabled}
-                  onCheckedChange={handleDataset4Toggle}
-                  id="dataset4SchemaNoise"
-                />
-                <label htmlFor="dataset4SchemaNoise" className="text-white">
-                  Enable Noise
-                </label>
-              </div>
-              {errors.dataset4SchemaNoise && (
-                <p className="text-red-500 text-sm mt-1">{errors.dataset4SchemaNoise[0]}</p>
-              )}
-
-              {dataset4Enabled && (
-                <>
-                  {/* Delete Schema Checkbox */}
-                  <div className="flex items-center gap-2 mt-2 custom-label">
-                    <Checkbox
-                      checked={dataset4DeleteSchemaEnabled}
-                      onCheckedChange={handleDataset4DeleteSchemaToggle}
-                      id="dataset4DeleteSchema"
-                      disabled={dataset4KeyEnabled}
-                    />
-                    <label htmlFor="dataset4DeleteSchema" className="text-white">
-                      Delete Schema
-                    </label>
-                  </div>
-                  {errors.dataset4SchemaDeleteSchema && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.dataset4SchemaDeleteSchema[0]}
-                    </p>
-                  )}
-
-                  {/* Noise to Key Attributes Checkbox */}
-                  <div className="flex items-center gap-2 mt-2 custom-label">
-                    <Checkbox
-                      checked={dataset4KeyEnabled}
-                      onCheckedChange={handleDataset4KeyToggle}
-                      id="dataset4SchemaKeyNoise"
-                      disabled={dataset4DeleteSchemaEnabled}
-                    />
-                    <label htmlFor="dataset4SchemaKeyNoise" className="text-white">
-                      Add Noise to Key Attributes
-                    </label>
-                  </div>
-                  {errors.dataset4SchemaKeyNoise && (
-                    <p className="text-red-500 text-sm mt-1">
-                      {errors.dataset4SchemaKeyNoise[0]}
-                    </p>
-                  )}
-
-                  {/* Multi-Select for Dataset 4 */}
-                  <div className="mt-4">
-                    <label htmlFor="dataset4MultiSelect" className="text-white">
-                      Dataset 4 Error Methods
-                    </label>
-                    <MultiSelect
-                      id="dataset4MultiSelect"
-                      options={frameworksList}
-                      onValueChange={handleDataset4MultiselectChange}
-                      defaultValue={dataset4Selections}
-                      placeholder="Select frameworks for Dataset 4"
-                      variant="inverted"
-                      animation={2}
-                      maxCount={3}
-                    />
-                    <div className="text-white text-sm mt-2">
-                      Selected: {dataset4Selections.join(", ")}
-                    </div>
-                  </div>
-
-                  {/* Noise Percentage Slider */}
-                  <div className="mt-4">
-                    <label htmlFor="dataset4SchemaNoiseSlider" className="text-white">
-                      Noise Percentage
-                    </label>
-                    <Slider
-                      id="dataset4SchemaNoiseSlider"
-                      className="my-2 w-full"
-                      value={[dataset4Level]}
-                      onValueChange={handleDataset4Slider}
-                      min={0}
-                      max={100}
-                      step={1}
-                      disabled={dataset4DeleteSchemaEnabled}
-                    />
-                    <span className="text-white text-sm">
-                      Percentage: {dataset4Level} %
-                    </span>
-                    {errors.dataset4SchemaNoiseValue && (
-                      <p className="text-red-500 text-sm mt-1">
-                        {errors.dataset4SchemaNoiseValue[0]}
-                      </p>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-      </div>
-    </FormWrapper>
+      </FormWrapper>
   );
 };
 

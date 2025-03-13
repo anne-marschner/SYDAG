@@ -162,62 +162,62 @@ export const Step4Schema = z
         splitType: z.enum(["Horizontal", "Vertical", "VerticalHorizontal"]).nullable(),
 
         // Structure Type selections for all datasets
-        dataset1StructureType: z
+        datasetAStructureType: z
             .enum(["BCNF", "Join Columns", "No Change"])
             .nullable(),
-        dataset2StructureType: z
+        datasetBStructureType: z
             .enum(["BCNF", "Join Columns", "No Change"])
             .nullable(),
-        dataset3StructureType: z
+        datasetCStructureType: z
             .enum(["BCNF", "Join Columns", "No Change"])
             .nullable().optional(),
-        dataset4StructureType: z
+        datasetDStructureType: z
             .enum(["BCNF", "Join Columns", "No Change"])
             .nullable().optional(),
 
-        // Slider values for Dataset 1
-        dataset1BCNFSliderValue: z
+        // Slider values for Dataset A
+        datasetABCNFSliderValue: z
             .number()
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable(),
-        dataset1JoinColumnsSliderValue: z
+        datasetAJoinColumnsSliderValue: z
             .number()
             .min(0, {message: "Join Columns Slider Value must be at least 0%"})
             .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
             .nullable(),
 
-        // Slider values for Dataset 2
-        dataset2BCNFSliderValue: z
+        // Slider values for Dataset B
+        datasetBBCNFSliderValue: z
             .number()
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable(),
-        dataset2JoinColumnsSliderValue: z
+        datasetBJoinColumnsSliderValue: z
             .number()
             .min(0, {message: "Join Columns Slider Value must be at least 0%"})
             .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
             .nullable(),
 
-        // Slider values for Dataset 3
-        dataset3BCNFSliderValue: z
+        // Slider values for Dataset C
+        datasetCBCNFSliderValue: z
             .number()
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable().optional(),
-        dataset3JoinColumnsSliderValue: z
+        datasetCJoinColumnsSliderValue: z
             .number()
             .min(0, {message: "Join Columns Slider Value must be at least 0%"})
             .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
             .nullable().optional(),
 
-        // Slider values for Dataset 4
-        dataset4BCNFSliderValue: z
+        // Slider values for Dataset D
+        datasetDBCNFSliderValue: z
             .number()
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable().optional(),
-        dataset4JoinColumnsSliderValue: z
+        datasetDJoinColumnsSliderValue: z
             .number()
             .min(0, {message: "Join Columns Slider Value must be at least 0%"})
             .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
@@ -255,18 +255,18 @@ export const Step4Schema = z
         // Additional conditional validations based on splitType
         if (data.splitType !== "VerticalHorizontal") {
             // If splitType is not VerticalHorizontal, ensure datasets 3 and 4 are not set
-            if (data.dataset3StructureType !== null) {
+            if (data.datasetCStructureType !== null) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
-                    message: "Dataset 3 structure type should not be set unless splitType is VerticalHorizontal",
-                    path: ["dataset3StructureType"],
+                    message: "Dataset C structure type should not be set unless splitType is VerticalHorizontal",
+                    path: ["datasetCStructureType"],
                 });
             }
-            if (data.dataset4StructureType !== null) {
+            if (data.datasetDStructureType !== null) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
-                    message: "Dataset 4 structure type should not be set unless splitType is VerticalHorizontal",
-                    path: ["dataset4StructureType"],
+                    message: "Dataset D structure type should not be set unless splitType is VerticalHorizontal",
+                    path: ["datasetDStructureType"],
                 });
             }
         }
@@ -276,14 +276,14 @@ export const Step4Schema = z
 // Step 5 Schema
 export const Step5Schema = z
     .object({
-            dataset1SchemaNoise: z.boolean().nullable(),
-            dataset1SchemaNoiseValue: z.number().min(0).max(100).nullable(),
-            dataset1SchemaKeyNoise: z.boolean().nullable(),
-            dataset1SchemaDeleteSchema: z.boolean().nullable(),
-            dataset1SchemaMultiselect: z.array(z.string()).nullable(),
+            datasetASchemaNoise: z.boolean().nullable(),
+            datasetASchemaNoiseValue: z.number().min(0).max(100).nullable(),
+            datasetASchemaKeyNoise: z.boolean().nullable(),
+            datasetASchemaDeleteSchema: z.boolean().nullable(),
+            datasetASchemaMultiselect: z.array(z.string()).nullable(),
 
-            }
-        );
+        }
+    );
 
 
 
@@ -296,10 +296,10 @@ export const Step6Schema = z
 
 // Step 7 Schema
 export const Step7Schema = z.object({
-    dataset1ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
-    dataset2ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
-    dataset3ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
-    dataset4ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+    datasetAShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+    datasetBShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+    datasetCShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+    datasetDShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
 });
 
 export const FormItemsJSONSchema = z
@@ -314,99 +314,99 @@ export const FormItemsJSONSchema = z
         overlapType: z.enum(['Mixed Overlap', 'Block Overlap']).nullable(),
 
         // Step 4 (Datasets Structure)
-        dataset1StructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
-        dataset1BCNFSliderValue: z.number().min(0).max(100).nullable(),
-        dataset1JoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetAStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetABCNFSliderValue: z.number().min(0).max(100).nullable(),
+        datasetAJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
-        dataset2StructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
-        dataset2BCNFSliderValue: z.number().min(0).max(100).nullable(),
-        dataset2JoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetBStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetBBCNFSliderValue: z.number().min(0).max(100).nullable(),
+        datasetBJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
-        dataset3StructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
-        dataset3BCNFSliderValue: z.number().min(0).max(100).nullable(),
-        dataset3JoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetCStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetCBCNFSliderValue: z.number().min(0).max(100).nullable(),
+        datasetCJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
-        dataset4StructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
-        dataset4BCNFSliderValue: z.number().min(0).max(100).nullable(),
-        dataset4JoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetDStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetDBCNFSliderValue: z.number().min(0).max(100).nullable(),
+        datasetDJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
         // Step 5 (Schema Noise)
-        dataset1SchemaNoise: z.boolean().nullable(),
-        dataset1SchemaNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset1SchemaKeyNoise: z.boolean().nullable(),
-        dataset1SchemaDeleteSchema: z.boolean().nullable(),
-        dataset1SchemaMultiselect: z.array(z.string()).nullable(),
+        datasetASchemaNoise: z.boolean().nullable(),
+        datasetASchemaNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetASchemaKeyNoise: z.boolean().nullable(),
+        datasetASchemaDeleteSchema: z.boolean().nullable(),
+        datasetASchemaMultiselect: z.array(z.string()).nullable(),
 
-        dataset2SchemaNoise: z.boolean().nullable(),
-        dataset2SchemaNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset2SchemaKeyNoise: z.boolean().nullable(),
-        dataset2SchemaDeleteSchema: z.boolean().nullable(),
-        dataset2SchemaMultiselect: z.array(z.string()).nullable(),
+        datasetBSchemaNoise: z.boolean().nullable(),
+        datasetBSchemaNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetBSchemaKeyNoise: z.boolean().nullable(),
+        datasetBSchemaDeleteSchema: z.boolean().nullable(),
+        datasetBSchemaMultiselect: z.array(z.string()).nullable(),
 
-        dataset3SchemaNoise: z.boolean().nullable(),
-        dataset3SchemaNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset3SchemaKeyNoise: z.boolean().nullable(),
-        dataset3SchemaDeleteSchema: z.boolean().nullable(),
-        dataset3SchemaMultiselect: z.array(z.string()).nullable(),
+        datasetCSchemaNoise: z.boolean().nullable(),
+        datasetCSchemaNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetCSchemaKeyNoise: z.boolean().nullable(),
+        datasetCSchemaDeleteSchema: z.boolean().nullable(),
+        datasetCSchemaMultiselect: z.array(z.string()).nullable(),
 
-        dataset4SchemaNoise: z.boolean().nullable(),
-        dataset4SchemaNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset4SchemaKeyNoise: z.boolean().nullable(),
-        dataset4SchemaDeleteSchema: z.boolean().nullable(),
-        dataset4SchemaMultiselect: z.array(z.string()).nullable(),
+        datasetDSchemaNoise: z.boolean().nullable(),
+        datasetDSchemaNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetDSchemaKeyNoise: z.boolean().nullable(),
+        datasetDSchemaDeleteSchema: z.boolean().nullable(),
+        datasetDSchemaMultiselect: z.array(z.string()).nullable(),
 
         // Step 6 (Data Noise)
-        dataset1DataNoise: z.boolean().nullable(),
-        dataset1DataNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset1DataKeyNoise: z.boolean().nullable(),
-        dataset1DataNoiseInside: z.number().min(0).max(100).nullable(),
-        dataset1DataMultiselect: z.array(z.string()).nullable(),
+        datasetADataNoise: z.boolean().nullable(),
+        datasetADataNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetADataKeyNoise: z.boolean().nullable(),
+        datasetADataNoiseInside: z.number().min(0).max(100).nullable(),
+        datasetADataMultiselect: z.array(z.string()).nullable(),
 
-        dataset2DataNoise: z.boolean().nullable(),
-        dataset2DataNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset2DataKeyNoise: z.boolean().nullable(),
-        dataset2DataNoiseInside: z.number().min(0).max(100).nullable(),
-        dataset2DataMultiselect: z.array(z.string()).nullable(),
+        datasetBDataNoise: z.boolean().nullable(),
+        datasetBDataNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetBDataKeyNoise: z.boolean().nullable(),
+        datasetBDataNoiseInside: z.number().min(0).max(100).nullable(),
+        datasetBDataMultiselect: z.array(z.string()).nullable(),
 
-        dataset3DataNoise: z.boolean().nullable(),
-        dataset3DataNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset3DataKeyNoise: z.boolean().nullable(),
-        dataset3DataNoiseInside: z.number().min(0).max(100).nullable(),
-        dataset3DataMultiselect: z.array(z.string()).nullable(),
+        datasetCDataNoise: z.boolean().nullable(),
+        datasetCDataNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetCDataKeyNoise: z.boolean().nullable(),
+        datasetCDataNoiseInside: z.number().min(0).max(100).nullable(),
+        datasetCDataMultiselect: z.array(z.string()).nullable(),
 
-        dataset4DataNoise: z.boolean().nullable(),
-        dataset4DataNoiseValue: z.number().min(0).max(100).nullable(),
-        dataset4DataKeyNoise: z.boolean().nullable(),
-        dataset4DataNoiseInside: z.number().min(0).max(100).nullable(),
-        dataset4DataMultiselect: z.array(z.string()).nullable(),
+        datasetDDataNoise: z.boolean().nullable(),
+        datasetDDataNoiseValue: z.number().min(0).max(100).nullable(),
+        datasetDDataKeyNoise: z.boolean().nullable(),
+        datasetDDataNoiseInside: z.number().min(0).max(100).nullable(),
+        datasetDDataMultiselect: z.array(z.string()).nullable(),
 
         // Step 7 (Shuffle Options)
-        dataset1ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
-        dataset2ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
-        dataset3ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
-        dataset4ShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable()
+        datasetAShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+        datasetBShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+        datasetCShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable(),
+        datasetDShuffleOption: z.enum(['Shuffle Columns', 'Shuffle Rows', 'No Change']).nullable()
     })
     .superRefine((data, ctx) => {
         if (data.splitType === "VerticalHorizontal") {
             const requiredFields = [
-                "dataset3StructureType",
-                "dataset4StructureType",
-                "dataset3SchemaNoise",
-                "dataset3SchemaKeyNoise",
-                "dataset3SchemaDeleteSchema",
-                "dataset3SchemaMultiselect",
-                "dataset4SchemaNoise",
-                "dataset4SchemaKeyNoise",
-                "dataset4SchemaDeleteSchema",
-                "dataset4SchemaMultiselect",
-                "dataset3DataNoise",
-                "dataset3DataKeyNoise",
-                "dataset3DataMultiselect",
-                "dataset4DataNoise",
-                "dataset4DataKeyNoise",
-                "dataset4DataMultiselect",
-                "dataset3ShuffleOption",
-                "dataset4ShuffleOption"
+                "datasetCStructureType",
+                "datasetDStructureType",
+                "datasetCSchemaNoise",
+                "datasetCSchemaKeyNoise",
+                "datasetCSchemaDeleteSchema",
+                "datasetCSchemaMultiselect",
+                "datasetDSchemaNoise",
+                "datasetDSchemaKeyNoise",
+                "datasetDSchemaDeleteSchema",
+                "datasetDSchemaMultiselect",
+                "datasetCDataNoise",
+                "datasetCDataKeyNoise",
+                "datasetCDataMultiselect",
+                "datasetDDataNoise",
+                "datasetDDataKeyNoise",
+                "datasetDDataMultiselect",
+                "datasetCShuffleOption",
+                "datasetDShuffleOption"
             ];
 
             requiredFields.forEach((field) => {
@@ -420,16 +420,16 @@ export const FormItemsJSONSchema = z
             });
         } else {
             const optionalFields = [
-                "dataset3BCNFSliderValue",
-                "dataset3JoinColumnsSliderValue",
-                "dataset4BCNFSliderValue",
-                "dataset4JoinColumnsSliderValue",
-                "dataset3SchemaNoiseValue",
-                "dataset4SchemaNoiseValue",
-                "dataset3DataNoiseValue",
-                "dataset3DataNoiseInside",
-                "dataset4DataNoiseValue",
-                "dataset4DataNoiseInside"
+                "datasetCBCNFSliderValue",
+                "datasetCJoinColumnsSliderValue",
+                "datasetDBCNFSliderValue",
+                "datasetDJoinColumnsSliderValue",
+                "datasetCSchemaNoiseValue",
+                "datasetDSchemaNoiseValue",
+                "datasetCDataNoiseValue",
+                "datasetCDataNoiseInside",
+                "datasetDDataNoiseValue",
+                "datasetDDataNoiseInside"
             ];
 
             optionalFields.forEach((field) => {

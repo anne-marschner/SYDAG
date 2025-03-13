@@ -29,74 +29,74 @@ const Step8_SummaryForm = ({
                                overlapType,
 
                                // Step 4
-                               dataset1StructureType,
-                               dataset2StructureType,
-                               dataset3StructureType,
-                               dataset4StructureType,
-                               dataset1BCNFSliderValue,
-                               dataset1JoinColumnsSliderValue,
-                               dataset2BCNFSliderValue,
-                               dataset2JoinColumnsSliderValue,
-                               dataset3BCNFSliderValue,
-                               dataset3JoinColumnsSliderValue,
-                               dataset4BCNFSliderValue,
-                               dataset4JoinColumnsSliderValue,
+                               datasetAStructureType,
+                               datasetBStructureType,
+                               datasetCStructureType,
+                               datasetDStructureType,
+                               datasetABCNFSliderValue,
+                               datasetAJoinColumnsSliderValue,
+                               datasetBBCNFSliderValue,
+                               datasetBJoinColumnsSliderValue,
+                               datasetCBCNFSliderValue,
+                               datasetCJoinColumnsSliderValue,
+                               datasetDBCNFSliderValue,
+                               datasetDJoinColumnsSliderValue,
 
                                // Step 5
-                               dataset1SchemaNoise,
-                               dataset1SchemaNoiseValue,
-                               dataset1SchemaKeyNoise,
-                               dataset1SchemaDeleteSchema,
-                               dataset1SchemaMultiselect,
+                               datasetASchemaNoise,
+                               datasetASchemaNoiseValue,
+                               datasetASchemaKeyNoise,
+                               datasetASchemaDeleteSchema,
+                               datasetASchemaMultiselect,
 
-                               dataset2SchemaNoise,
-                               dataset2SchemaNoiseValue,
-                               dataset2SchemaKeyNoise,
-                               dataset2SchemaDeleteSchema,
-                               dataset2SchemaMultiselect,
+                               datasetBSchemaNoise,
+                               datasetBSchemaNoiseValue,
+                               datasetBSchemaKeyNoise,
+                               datasetBSchemaDeleteSchema,
+                               datasetBSchemaMultiselect,
 
-                               dataset3SchemaNoise,
-                               dataset3SchemaNoiseValue,
-                               dataset3SchemaKeyNoise,
-                               dataset3SchemaDeleteSchema,
-                               dataset3SchemaMultiselect,
+                               datasetCSchemaNoise,
+                               datasetCSchemaNoiseValue,
+                               datasetCSchemaKeyNoise,
+                               datasetCSchemaDeleteSchema,
+                               datasetCSchemaMultiselect,
 
-                               dataset4SchemaNoise,
-                               dataset4SchemaNoiseValue,
-                               dataset4SchemaKeyNoise,
-                               dataset4SchemaDeleteSchema,
-                               dataset4SchemaMultiselect,
+                               datasetDSchemaNoise,
+                               datasetDSchemaNoiseValue,
+                               datasetDSchemaKeyNoise,
+                               datasetDSchemaDeleteSchema,
+                               datasetDSchemaMultiselect,
 
                                // Step 6
-                               dataset1DataNoise,
-                               dataset1DataNoiseValue,
-                               dataset1DataKeyNoise,
-                               dataset1DataNoiseInside,
-                               dataset1DataMultiselect,
+                               datasetADataNoise,
+                               datasetADataNoiseValue,
+                               datasetADataKeyNoise,
+                               datasetADataNoiseInside,
+                               datasetADataMultiselect,
 
-                               dataset2DataNoise,
-                               dataset2DataNoiseValue,
-                               dataset2DataKeyNoise,
-                               dataset2DataNoiseInside,
-                               dataset2DataMultiselect,
+                               datasetBDataNoise,
+                               datasetBDataNoiseValue,
+                               datasetBDataKeyNoise,
+                               datasetBDataNoiseInside,
+                               datasetBDataMultiselect,
 
-                               dataset3DataNoise,
-                               dataset3DataNoiseValue,
-                               dataset3DataKeyNoise,
-                               dataset3DataNoiseInside,
-                               dataset3DataMultiselect,
+                               datasetCDataNoise,
+                               datasetCDataNoiseValue,
+                               datasetCDataKeyNoise,
+                               datasetCDataNoiseInside,
+                               datasetCDataMultiselect,
 
-                               dataset4DataNoise,
-                               dataset4DataNoiseValue,
-                               dataset4DataKeyNoise,
-                               dataset4DataNoiseInside,
-                               dataset4DataMultiselect,
+                               datasetDDataNoise,
+                               datasetDDataNoiseValue,
+                               datasetDDataKeyNoise,
+                               datasetDDataNoiseInside,
+                               datasetDDataMultiselect,
 
                                // Step 7
-                               dataset1ShuffleOption,
-                               dataset2ShuffleOption,
-                               dataset3ShuffleOption,
-                               dataset4ShuffleOption,
+                               datasetAShuffleOption,
+                               datasetBShuffleOption,
+                               datasetCShuffleOption,
+                               datasetDShuffleOption,
                                goTo,
                            }: StepProps) => {
     return (
@@ -320,15 +320,15 @@ const Step8_SummaryForm = ({
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
                     <h3 className="font-semibold text-xl text-white mb-3">Step 4: Dataset Structure</h3>
                     <div className="grid grid-cols-1 gap-4">
-                        {/* Dataset 1 Structure */}
+                        {/* Dataset A Structure */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Dataset 1 Structure</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset A Structure</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset1StructureType}
-                                {dataset1StructureType === "BCNF"
-                                    ? ` (${dataset1BCNFSliderValue}%)`
-                                    : dataset1StructureType === "Join Columns"
-                                        ? ` (${dataset1JoinColumnsSliderValue}%)`
+                                {datasetAStructureType}
+                                {datasetAStructureType === "BCNF"
+                                    ? ` (${datasetABCNFSliderValue}%)`
+                                    : datasetAStructureType === "Join Columns"
+                                        ? ` (${datasetAJoinColumnsSliderValue}%)`
                                         : ""}
                             </p>
                             <button
@@ -339,15 +339,15 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Dataset 2 Structure */}
+                        {/* Dataset B Structure */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Dataset 2 Structure</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset B Structure</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset2StructureType}
-                                {dataset2StructureType === "BCNF"
-                                    ? ` (${dataset2BCNFSliderValue}%)`
-                                    : dataset2StructureType === "Join Columns"
-                                        ? ` (${dataset2JoinColumnsSliderValue}%)`
+                                {datasetBStructureType}
+                                {datasetBStructureType === "BCNF"
+                                    ? ` (${datasetBBCNFSliderValue}%)`
+                                    : datasetBStructureType === "Join Columns"
+                                        ? ` (${datasetBJoinColumnsSliderValue}%)`
                                         : ""}
                             </p>
                             <button
@@ -358,18 +358,18 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Conditionally Render Dataset 3 and Dataset 4 Structures */}
+                        {/* Conditionally Render Dataset C and Dataset D Structures */}
                         {splitType === "VerticalHorizontal" && (
                             <>
-                                {/* Dataset 3 Structure */}
+                                {/* Dataset C Structure */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Dataset 3 Structure</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset C Structure</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset3StructureType}
-                                        {dataset3StructureType === "BCNF"
-                                            ? ` (${dataset3BCNFSliderValue}%)`
-                                            : dataset3StructureType === "Join Columns"
-                                                ? ` (${dataset3JoinColumnsSliderValue}%)`
+                                        {datasetCStructureType}
+                                        {datasetCStructureType === "BCNF"
+                                            ? ` (${datasetCBCNFSliderValue}%)`
+                                            : datasetCStructureType === "Join Columns"
+                                                ? ` (${datasetCJoinColumnsSliderValue}%)`
                                                 : ""}
                                     </p>
                                     <button
@@ -380,15 +380,15 @@ const Step8_SummaryForm = ({
                                     </button>
                                 </div>
 
-                                {/* Dataset 4 Structure */}
+                                {/* Dataset D Structure */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Dataset 4 Structure</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset D Structure</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset4StructureType}
-                                        {dataset4StructureType === "BCNF"
-                                            ? ` (${dataset4BCNFSliderValue}%)`
-                                            : dataset4StructureType === "Join Columns"
-                                                ? ` (${dataset4JoinColumnsSliderValue}%)`
+                                        {datasetDStructureType}
+                                        {datasetDStructureType === "BCNF"
+                                            ? ` (${datasetDBCNFSliderValue}%)`
+                                            : datasetDStructureType === "Join Columns"
+                                                ? ` (${datasetDJoinColumnsSliderValue}%)`
                                                 : ""}
                                     </p>
                                     <button
@@ -410,28 +410,28 @@ const Step8_SummaryForm = ({
                         Step 5: Schema Noise Settings
                     </h3>
                     <div className="grid grid-cols-1 gap-4">
-                        {/* Dataset 1 Schema Noise */}
+                        {/* Dataset A Schema Noise */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Dataset 1 Schema Noise</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset A Schema Noise</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset1SchemaNoise
-                                    ? `Enabled, Value: ${dataset1SchemaNoiseValue}%`
+                                {datasetASchemaNoise
+                                    ? `Enabled, Value: ${datasetASchemaNoiseValue}%`
                                     : "Disabled"}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Schema Key Noise: ${dataset1SchemaKeyNoise ? "Enabled" : "Disabled"
+                                {`Schema Key Noise: ${datasetASchemaKeyNoise ? "Enabled" : "Disabled"
                                 }`}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Delete Schema: ${dataset1SchemaDeleteSchema ? "Enabled" : "Disabled"
+                                {`Delete Schema: ${datasetASchemaDeleteSchema ? "Enabled" : "Disabled"
                                 }`}
                             </p>
 
                             {/* multi-select */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 Multi-Select:
-                                {dataset1SchemaMultiselect && dataset1SchemaMultiselect.length > 0
-                                    ? ` ${dataset1SchemaMultiselect.join(", ")}`
+                                {datasetASchemaMultiselect && datasetASchemaMultiselect.length > 0
+                                    ? ` ${datasetASchemaMultiselect.join(", ")}`
                                     : " None selected"}
                             </p>
 
@@ -443,28 +443,28 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Dataset 2 Schema Noise */}
+                        {/* Dataset B Schema Noise */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Dataset 2 Schema Noise</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset B Schema Noise</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset2SchemaNoise
-                                    ? `Enabled, Value: ${dataset2SchemaNoiseValue}%`
+                                {datasetBSchemaNoise
+                                    ? `Enabled, Value: ${datasetBSchemaNoiseValue}%`
                                     : "Disabled"}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Schema Key Noise: ${dataset2SchemaKeyNoise ? "Enabled" : "Disabled"
+                                {`Schema Key Noise: ${datasetBSchemaKeyNoise ? "Enabled" : "Disabled"
                                 }`}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Delete Schema: ${dataset2SchemaDeleteSchema ? "Enabled" : "Disabled"
+                                {`Delete Schema: ${datasetBSchemaDeleteSchema ? "Enabled" : "Disabled"
                                 }`}
                             </p>
 
                             {/* multi-select */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 Multi-Select:
-                                {dataset2SchemaMultiselect && dataset2SchemaMultiselect.length > 0
-                                    ? ` ${dataset2SchemaMultiselect.join(", ")}`
+                                {datasetBSchemaMultiselect && datasetBSchemaMultiselect.length > 0
+                                    ? ` ${datasetBSchemaMultiselect.join(", ")}`
                                     : " None selected"}
                             </p>
 
@@ -476,31 +476,31 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Conditionally Render Dataset 3 and Dataset 4 Schema Noise */}
+                        {/* Conditionally Render Dataset C and Dataset D Schema Noise */}
                         {splitType === "VerticalHorizontal" && (
                             <>
-                                {/* Dataset 3 Schema Noise */}
+                                {/* Dataset C Schema Noise */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Dataset 3 Schema Noise</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset C Schema Noise</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset3SchemaNoise
-                                            ? `Enabled, Value: ${dataset3SchemaNoiseValue}%`
+                                        {datasetCSchemaNoise
+                                            ? `Enabled, Value: ${datasetCSchemaNoiseValue}%`
                                             : "Disabled"}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Schema Key Noise: ${dataset3SchemaKeyNoise ? "Enabled" : "Disabled"
+                                        {`Schema Key Noise: ${datasetCSchemaKeyNoise ? "Enabled" : "Disabled"
                                         }`}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Delete Schema: ${dataset3SchemaDeleteSchema ? "Enabled" : "Disabled"
+                                        {`Delete Schema: ${datasetCSchemaDeleteSchema ? "Enabled" : "Disabled"
                                         }`}
                                     </p>
 
                                     {/* multi-select */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         Multi-Select:
-                                        {dataset3SchemaMultiselect && dataset3SchemaMultiselect.length > 0
-                                            ? ` ${dataset3SchemaMultiselect.join(", ")}`
+                                        {datasetCSchemaMultiselect && datasetCSchemaMultiselect.length > 0
+                                            ? ` ${datasetCSchemaMultiselect.join(", ")}`
                                             : " None selected"}
                                     </p>
 
@@ -512,28 +512,28 @@ const Step8_SummaryForm = ({
                                     </button>
                                 </div>
 
-                                {/* Dataset 4 Schema Noise */}
+                                {/* Dataset D Schema Noise */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Dataset 4 Schema Noise</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset D Schema Noise</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset4SchemaNoise
-                                            ? `Enabled, Value: ${dataset4SchemaNoiseValue}%`
+                                        {datasetDSchemaNoise
+                                            ? `Enabled, Value: ${datasetDSchemaNoiseValue}%`
                                             : "Disabled"}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Schema Key Noise: ${dataset4SchemaKeyNoise ? "Enabled" : "Disabled"
+                                        {`Schema Key Noise: ${datasetDSchemaKeyNoise ? "Enabled" : "Disabled"
                                         }`}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Delete Schema: ${dataset4SchemaDeleteSchema ? "Enabled" : "Disabled"
+                                        {`Delete Schema: ${datasetDSchemaDeleteSchema ? "Enabled" : "Disabled"
                                         }`}
                                     </p>
 
                                     {/* multi-select */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         Multi-Select:
-                                        {dataset4SchemaMultiselect && dataset4SchemaMultiselect.length > 0
-                                            ? ` ${dataset4SchemaMultiselect.join(", ")}`
+                                        {datasetDSchemaMultiselect && datasetDSchemaMultiselect.length > 0
+                                            ? ` ${datasetDSchemaMultiselect.join(", ")}`
                                             : " None selected"}
                                     </p>
 
@@ -554,28 +554,28 @@ const Step8_SummaryForm = ({
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
                     <h3 className="font-semibold text-xl text-white mb-3">Step 6: Data Noise Settings</h3>
                     <div className="grid grid-cols-1 gap-4">
-                        {/* Dataset 1 Data Noise */}
+                        {/* Dataset A Data Noise */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Dataset 1 Data Noise</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset A Data Noise</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset1DataNoise
-                                    ? `Enabled, Value: ${dataset1DataNoiseValue}%`
+                                {datasetADataNoise
+                                    ? `Enabled, Value: ${datasetADataNoiseValue}%`
                                     : "Disabled"}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Data Key Noise: ${dataset1DataKeyNoise ? "Enabled" : "Disabled"}`}
+                                {`Data Key Noise: ${datasetADataKeyNoise ? "Enabled" : "Disabled"}`}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Data Noise Inside: ${dataset1DataNoiseInside !== null
-                                    ? `${dataset1DataNoiseInside}%`
+                                {`Data Noise Inside: ${datasetADataNoiseInside !== null
+                                    ? `${datasetADataNoiseInside}%`
                                     : "No value set"
                                 }`}
                             </p>
 
                             {/* Multi-Select Summary */}
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset1DataMultiselect && dataset1DataMultiselect.length > 0
-                                    ? `Multi-Select: ${dataset1DataMultiselect.join(", ")}`
+                                {datasetADataMultiselect && datasetADataMultiselect.length > 0
+                                    ? `Multi-Select: ${datasetADataMultiselect.join(", ")}`
                                     : "Multi-Select: None selected"}
                             </p>
 
@@ -587,28 +587,28 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Dataset 2 Data Noise */}
+                        {/* Dataset B Data Noise */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Dataset 2 Data Noise</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset B Data Noise</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset2DataNoise
-                                    ? `Enabled, Value: ${dataset2DataNoiseValue}%`
+                                {datasetBDataNoise
+                                    ? `Enabled, Value: ${datasetBDataNoiseValue}%`
                                     : "Disabled"}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Data Key Noise: ${dataset2DataKeyNoise ? "Enabled" : "Disabled"}`}
+                                {`Data Key Noise: ${datasetBDataKeyNoise ? "Enabled" : "Disabled"}`}
                             </p>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {`Data Noise Inside: ${dataset2DataNoiseInside !== null
-                                    ? `${dataset2DataNoiseInside}%`
+                                {`Data Noise Inside: ${datasetBDataNoiseInside !== null
+                                    ? `${datasetBDataNoiseInside}%`
                                     : "No value set"
                                 }`}
                             </p>
 
                             {/* Multi-Select Summary */}
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset2DataMultiselect && dataset2DataMultiselect.length > 0
-                                    ? `Multi-Select: ${dataset2DataMultiselect.join(", ")}`
+                                {datasetBDataMultiselect && datasetBDataMultiselect.length > 0
+                                    ? `Multi-Select: ${datasetBDataMultiselect.join(", ")}`
                                     : "Multi-Select: None selected"}
                             </p>
 
@@ -620,31 +620,31 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Conditionally Render Dataset 3 and Dataset 4 Data Noise */}
+                        {/* Conditionally Render Dataset C and Dataset D Data Noise */}
                         {splitType === "VerticalHorizontal" && (
                             <>
-                                {/* Dataset 3 Data Noise */}
+                                {/* Dataset C Data Noise */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Dataset 3 Data Noise</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset C Data Noise</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset3DataNoise
-                                            ? `Enabled, Value: ${dataset3DataNoiseValue}%`
+                                        {datasetCDataNoise
+                                            ? `Enabled, Value: ${datasetCDataNoiseValue}%`
                                             : "Disabled"}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Data Key Noise: ${dataset3DataKeyNoise ? "Enabled" : "Disabled"}`}
+                                        {`Data Key Noise: ${datasetCDataKeyNoise ? "Enabled" : "Disabled"}`}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Data Noise Inside: ${dataset3DataNoiseInside !== null
-                                            ? `${dataset3DataNoiseInside}%`
+                                        {`Data Noise Inside: ${datasetCDataNoiseInside !== null
+                                            ? `${datasetCDataNoiseInside}%`
                                             : "No value set"
                                         }`}
                                     </p>
 
                                     {/* Multi-Select Summary */}
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset3DataMultiselect && dataset3DataMultiselect.length > 0
-                                            ? `Multi-Select: ${dataset3DataMultiselect.join(", ")}`
+                                        {datasetCDataMultiselect && datasetCDataMultiselect.length > 0
+                                            ? `Multi-Select: ${datasetCDataMultiselect.join(", ")}`
                                             : "Multi-Select: None selected"}
                                     </p>
 
@@ -656,28 +656,28 @@ const Step8_SummaryForm = ({
                                     </button>
                                 </div>
 
-                                {/* Dataset 4 Data Noise */}
+                                {/* Dataset D Data Noise */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Dataset 4 Data Noise</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset D Data Noise</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset4DataNoise
-                                            ? `Enabled, Value: ${dataset4DataNoiseValue}%`
+                                        {datasetDDataNoise
+                                            ? `Enabled, Value: ${datasetDDataNoiseValue}%`
                                             : "Disabled"}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Data Key Noise: ${dataset4DataKeyNoise ? "Enabled" : "Disabled"}`}
+                                        {`Data Key Noise: ${datasetDDataKeyNoise ? "Enabled" : "Disabled"}`}
                                     </p>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {`Data Noise Inside: ${dataset4DataNoiseInside !== null
-                                            ? `${dataset4DataNoiseInside}%`
+                                        {`Data Noise Inside: ${datasetDDataNoiseInside !== null
+                                            ? `${datasetDDataNoiseInside}%`
                                             : "No value set"
                                         }`}
                                     </p>
 
                                     {/* Multi-Select Summary */}
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset4DataMultiselect && dataset4DataMultiselect.length > 0
-                                            ? `Multi-Select: ${dataset4DataMultiselect.join(", ")}`
+                                        {datasetDDataMultiselect && datasetDDataMultiselect.length > 0
+                                            ? `Multi-Select: ${datasetDDataMultiselect.join(", ")}`
                                             : "Multi-Select: None selected"}
                                     </p>
 
@@ -698,11 +698,11 @@ const Step8_SummaryForm = ({
                 <div className="bg-neutral-900 mb-5 border border-neutral-600 rounded-lg p-4">
                     <h3 className="font-semibold text-xl text-white mb-3">Step 7: Shuffle Options</h3>
                     <div className="grid grid-cols-1 gap-4">
-                        {/* Dataset 1 Shuffle Option */}
+                        {/* Dataset A Shuffle Option */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Shuffle Option for Dataset 1</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset A Shuffle Option</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset1ShuffleOption ? dataset1ShuffleOption : "No options selected."}
+                                {datasetAShuffleOption ? datasetAShuffleOption : "No options selected."}
                             </p>
                             <button onClick={() => goTo(6)}
                                     className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
@@ -710,11 +710,11 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Dataset 2 Shuffle Option */}
+                        {/* Dataset B Shuffle Option */}
                         <div className="mb-3">
-                            <h4 className="font-semibold text-white text-md">Shuffle Option for Dataset 2</h4>
+                            <h4 className="font-semibold text-white text-md">Dataset B Shuffle Option</h4>
                             <p className="text-neutral-300 mt-1 text-sm">
-                                {dataset2ShuffleOption ? dataset2ShuffleOption : "No options selected."}
+                                {datasetBShuffleOption ? datasetBShuffleOption : "No options selected."}
                             </p>
                             <button onClick={() => goTo(6)}
                                     className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
@@ -722,14 +722,14 @@ const Step8_SummaryForm = ({
                             </button>
                         </div>
 
-                        {/* Conditionally Render Dataset 3 and Dataset 4 Shuffle Options */}
+                        {/* Conditionally Render Dataset C and Dataset D Shuffle Options */}
                         {splitType === "VerticalHorizontal" && (
                             <>
-                                {/* Dataset 3 Shuffle Option */}
+                                {/* Dataset C Shuffle Option */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Shuffle Option for Dataset 3</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset C Shuffle Option</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset3ShuffleOption ? dataset3ShuffleOption : "No options selected."}
+                                        {datasetCShuffleOption ? datasetCShuffleOption : "No options selected."}
                                     </p>
                                     <button onClick={() => goTo(6)}
                                             className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">
@@ -737,11 +737,11 @@ const Step8_SummaryForm = ({
                                     </button>
                                 </div>
 
-                                {/* Dataset 4 Shuffle Option */}
+                                {/* Dataset D Shuffle Option */}
                                 <div className="mb-3">
-                                    <h4 className="font-semibold text-white text-md">Shuffle Option for Dataset 4</h4>
+                                    <h4 className="font-semibold text-white text-md">Dataset D Shuffle Option</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        {dataset4ShuffleOption ? dataset4ShuffleOption : "No options selected."}
+                                        {datasetDShuffleOption ? datasetDShuffleOption : "No options selected."}
                                     </p>
                                     <button onClick={() => goTo(6)}
                                             className="text-[#6fe79f] text-xs mt-1 hover:text-green-300">

@@ -72,230 +72,230 @@ public class FormDataWrapper {
 
     // --------------- Step 4: Structure ------------------
     // Dataset 1
-    @NotBlank(message = "Dataset1 structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "Dataset1 structure type must be 'BCNF', 'Join Columns', or 'No Change'")
-    private String dataset1StructureType;
+    @NotBlank(message = "datasetA structure type cannot be blank")
+    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetA structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    private String datasetAStructureType;
 
-    @Min(value = 0, message = "Dataset1 BCNF slider value must be at least 0")
-    @Max(value = 100, message = "Dataset1 BCNF slider value cannot exceed 100")
-    private Integer dataset1BCNFSliderValue;
+    @Min(value = 0, message = "datasetA BCNF slider value must be at least 0")
+    @Max(value = 100, message = "datasetA BCNF slider value cannot exceed 100")
+    private Integer datasetABCNFSliderValue;
 
-    @Min(value = 0, message = "Dataset1 Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "Dataset1 Join Columns slider value cannot exceed 100")
-    private Integer dataset1JoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetA Join Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetA Join Columns slider value cannot exceed 100")
+    private Integer datasetAJoinColumnsSliderValue;
 
     // Dataset 2
-    @NotBlank(message = "Dataset2 structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "Dataset2 structure type must be 'BCNF', 'Join Columns', or 'No Change'")
-    private String dataset2StructureType;
+    @NotBlank(message = "datasetB structure type cannot be blank")
+    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetB structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    private String datasetBStructureType;
 
-    @Min(value = 0, message = "Dataset2 BCNF slider value must be at least 0")
-    @Max(value = 100, message = "Dataset2 BCNF slider value cannot exceed 100")
-    private Integer dataset2BCNFSliderValue;
+    @Min(value = 0, message = "datasetB BCNF slider value must be at least 0")
+    @Max(value = 100, message = "datasetB BCNF slider value cannot exceed 100")
+    private Integer datasetBBCNFSliderValue;
 
-    @Min(value = 0, message = "Dataset2 Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "Dataset2 Join Columns slider value cannot exceed 100")
-    private Integer dataset2JoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetB Join Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetB Join Columns slider value cannot exceed 100")
+    private Integer datasetBJoinColumnsSliderValue;
 
     // Dataset 3
-    @NotBlank(message = "Dataset3 structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "Dataset3 structure type must be 'BCNF', 'Join Columns', or 'No Change'")
-    private String dataset3StructureType;
+    @NotBlank(message = "datasetC structure type cannot be blank")
+    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetC structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    private String datasetCStructureType;
 
-    @Min(value = 0, message = "Dataset3 BCNF slider value must be at least 0")
-    @Max(value = 100, message = "Dataset3 BCNF slider value cannot exceed 100")
-    private Integer dataset3BCNFSliderValue;
+    @Min(value = 0, message = "datasetC BCNF slider value must be at least 0")
+    @Max(value = 100, message = "datasetC BCNF slider value cannot exceed 100")
+    private Integer datasetCBCNFSliderValue;
 
-    @Min(value = 0, message = "Dataset3 Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "Dataset3 Join Columns slider value cannot exceed 100")
-    private Integer dataset3JoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetC Join Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetC Join Columns slider value cannot exceed 100")
+    private Integer datasetCJoinColumnsSliderValue;
 
     // Dataset 4
-    @NotBlank(message = "Dataset4 structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "Dataset4 structure type must be 'BCNF', 'Join Columns', or 'No Change'")
-    private String dataset4StructureType;
+    @NotBlank(message = "datasetD structure type cannot be blank")
+    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetD structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    private String datasetDStructureType;
 
-    @Min(value = 0, message = "Dataset4 BCNF slider value must be at least 0")
-    @Max(value = 100, message = "Dataset4 BCNF slider value cannot exceed 100")
-    private Integer dataset4BCNFSliderValue;
+    @Min(value = 0, message = "datasetD BCNF slider value must be at least 0")
+    @Max(value = 100, message = "datasetD BCNF slider value cannot exceed 100")
+    private Integer datasetDBCNFSliderValue;
 
-    @Min(value = 0, message = "Dataset4 Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "Dataset4 Join Columns slider value cannot exceed 100")
-    private Integer dataset4JoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetD Join Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetD Join Columns slider value cannot exceed 100")
+    private Integer datasetDJoinColumnsSliderValue;
 
     // --------------- Step 5: Schema Noise ------------------
     // Dataset 1
-    @NotNull(message = "Dataset1 schema noise flag cannot be null")
-    private Boolean dataset1SchemaNoise;
+    @NotNull(message = "datasetA schema noise flag cannot be null")
+    private Boolean datasetASchemaNoise;
 
-    @NotNull(message = "Dataset1 schema noise value cannot be null")
-    @Min(value = 0, message = "Dataset1 schema noise value must be at least 0")
-    @Max(value = 100, message = "Dataset1 schema noise value cannot exceed 100")
-    private Integer dataset1SchemaNoiseValue;
+    @NotNull(message = "datasetA schema noise value cannot be null")
+    @Min(value = 0, message = "datasetA schema noise value must be at least 0")
+    @Max(value = 100, message = "datasetA schema noise value cannot exceed 100")
+    private Integer datasetASchemaNoiseValue;
 
-    @NotNull(message = "Dataset1 schema key noise flag cannot be null")
-    private Boolean dataset1SchemaKeyNoise;
+    @NotNull(message = "datasetA schema key noise flag cannot be null")
+    private Boolean datasetASchemaKeyNoise;
 
-    @NotNull(message = "Dataset1 delete schema flag cannot be null")
-    private Boolean dataset1SchemaDeleteSchema;
+    @NotNull(message = "datasetA delete schema flag cannot be null")
+    private Boolean datasetASchemaDeleteSchema;
 
     // Dataset 2
-    @NotNull(message = "Dataset2 schema noise flag cannot be null")
-    private Boolean dataset2SchemaNoise;
+    @NotNull(message = "datasetB schema noise flag cannot be null")
+    private Boolean datasetBSchemaNoise;
 
-    @NotNull(message = "Dataset2 schema noise value cannot be null")
-    @Min(value = 0, message = "Dataset2 schema noise value must be at least 0")
-    @Max(value = 100, message = "Dataset2 schema noise value cannot exceed 100")
-    private Integer dataset2SchemaNoiseValue;
+    @NotNull(message = "datasetB schema noise value cannot be null")
+    @Min(value = 0, message = "datasetB schema noise value must be at least 0")
+    @Max(value = 100, message = "datasetB schema noise value cannot exceed 100")
+    private Integer datasetBSchemaNoiseValue;
 
-    @NotNull(message = "Dataset2 schema key noise flag cannot be null")
-    private Boolean dataset2SchemaKeyNoise;
+    @NotNull(message = "datasetB schema key noise flag cannot be null")
+    private Boolean datasetBSchemaKeyNoise;
 
-    @NotNull(message = "Dataset2 delete schema flag cannot be null")
-    private Boolean dataset2SchemaDeleteSchema;
+    @NotNull(message = "datasetB delete schema flag cannot be null")
+    private Boolean datasetBSchemaDeleteSchema;
 
     // Dataset 3
-    @NotNull(message = "Dataset3 schema noise flag cannot be null")
-    private Boolean dataset3SchemaNoise;
+    @NotNull(message = "datasetC schema noise flag cannot be null")
+    private Boolean datasetCSchemaNoise;
 
-    @NotNull(message = "Dataset3 schema noise value cannot be null")
-    @Min(value = 0, message = "Dataset3 schema noise value must be at least 0")
-    @Max(value = 100, message = "Dataset3 schema noise value cannot exceed 100")
-    private Integer dataset3SchemaNoiseValue;
+    @NotNull(message = "datasetC schema noise value cannot be null")
+    @Min(value = 0, message = "datasetC schema noise value must be at least 0")
+    @Max(value = 100, message = "datasetC schema noise value cannot exceed 100")
+    private Integer datasetCSchemaNoiseValue;
 
-    @NotNull(message = "Dataset3 schema key noise flag cannot be null")
-    private Boolean dataset3SchemaKeyNoise;
+    @NotNull(message = "datasetC schema key noise flag cannot be null")
+    private Boolean datasetCSchemaKeyNoise;
 
-    @NotNull(message = "Dataset3 delete schema flag cannot be null")
-    private Boolean dataset3SchemaDeleteSchema;
+    @NotNull(message = "datasetC delete schema flag cannot be null")
+    private Boolean datasetCSchemaDeleteSchema;
 
     // Dataset 4
-    @NotNull(message = "Dataset4 schema noise flag cannot be null")
-    private Boolean dataset4SchemaNoise;
+    @NotNull(message = "datasetD schema noise flag cannot be null")
+    private Boolean datasetDSchemaNoise;
 
-    @NotNull(message = "Dataset4 schema noise value cannot be null")
-    @Min(value = 0, message = "Dataset4 schema noise value must be at least 0")
-    @Max(value = 100, message = "Dataset4 schema noise value cannot exceed 100")
-    private Integer dataset4SchemaNoiseValue;
+    @NotNull(message = "datasetD schema noise value cannot be null")
+    @Min(value = 0, message = "datasetD schema noise value must be at least 0")
+    @Max(value = 100, message = "datasetD schema noise value cannot exceed 100")
+    private Integer datasetDSchemaNoiseValue;
 
-    @NotNull(message = "Dataset4 schema key noise flag cannot be null")
-    private Boolean dataset4SchemaKeyNoise;
+    @NotNull(message = "datasetD schema key noise flag cannot be null")
+    private Boolean datasetDSchemaKeyNoise;
 
-    @NotNull(message = "Dataset4 delete schema flag cannot be null")
-    private Boolean dataset4SchemaDeleteSchema;
+    @NotNull(message = "datasetD delete schema flag cannot be null")
+    private Boolean datasetDSchemaDeleteSchema;
 
     // --------------- Step 6: Data Noise ------------------
     // Dataset 1
-    @NotNull(message = "Dataset1 data noise flag cannot be null")
-    private Boolean dataset1DataNoise;
+    @NotNull(message = "datasetA data noise flag cannot be null")
+    private Boolean datasetADataNoise;
 
-    @NotNull(message = "Dataset1 data noise value cannot be null")
-    @Min(value = 0, message = "Dataset1 data noise value must be at least 0")
-    @Max(value = 100, message = "Dataset1 data noise value cannot exceed 100")
-    private Integer dataset1DataNoiseValue;
+    @NotNull(message = "datasetA data noise value cannot be null")
+    @Min(value = 0, message = "datasetA data noise value must be at least 0")
+    @Max(value = 100, message = "datasetA data noise value cannot exceed 100")
+    private Integer datasetADataNoiseValue;
 
-    @NotNull(message = "Dataset1 data key noise flag cannot be null")
-    private Boolean dataset1DataKeyNoise;
+    @NotNull(message = "datasetA data key noise flag cannot be null")
+    private Boolean datasetADataKeyNoise;
 
-    @NotNull(message = "Dataset1 data noise inside value cannot be null")
-    @Min(value = 0, message = "Dataset1 data noise inside value must be at least 0")
-    @Max(value = 100, message = "Dataset1 data noise inside value cannot exceed 100")
-    private Integer dataset1DataNoiseInside;
+    @NotNull(message = "datasetA data noise inside value cannot be null")
+    @Min(value = 0, message = "datasetA data noise inside value must be at least 0")
+    @Max(value = 100, message = "datasetA data noise inside value cannot exceed 100")
+    private Integer datasetADataNoiseInside;
 
     // Dataset 2
-    @NotNull(message = "Dataset2 data noise flag cannot be null")
-    private Boolean dataset2DataNoise;
+    @NotNull(message = "datasetB data noise flag cannot be null")
+    private Boolean datasetBDataNoise;
 
-    @NotNull(message = "Dataset2 data noise value cannot be null")
-    @Min(value = 0, message = "Dataset2 data noise value must be at least 0")
-    @Max(value = 100, message = "Dataset2 data noise value cannot exceed 100")
-    private Integer dataset2DataNoiseValue;
+    @NotNull(message = "datasetB data noise value cannot be null")
+    @Min(value = 0, message = "datasetB data noise value must be at least 0")
+    @Max(value = 100, message = "datasetB data noise value cannot exceed 100")
+    private Integer datasetBDataNoiseValue;
 
-    @NotNull(message = "Dataset2 data key noise flag cannot be null")
-    private Boolean dataset2DataKeyNoise;
+    @NotNull(message = "datasetB data key noise flag cannot be null")
+    private Boolean datasetBDataKeyNoise;
 
-    @NotNull(message = "Dataset2 data noise inside value cannot be null")
-    @Min(value = 0, message = "Dataset2 data noise inside value must be at least 0")
-    @Max(value = 100, message = "Dataset2 data noise inside value cannot exceed 100")
-    private Integer dataset2DataNoiseInside;
+    @NotNull(message = "datasetB data noise inside value cannot be null")
+    @Min(value = 0, message = "datasetB data noise inside value must be at least 0")
+    @Max(value = 100, message = "datasetB data noise inside value cannot exceed 100")
+    private Integer datasetBDataNoiseInside;
 
     // Dataset 3
-    @NotNull(message = "Dataset3 data noise flag cannot be null")
-    private Boolean dataset3DataNoise;
+    @NotNull(message = "datasetC data noise flag cannot be null")
+    private Boolean datasetCDataNoise;
 
-    @NotNull(message = "Dataset3 data noise value cannot be null")
-    @Min(value = 0, message = "Dataset3 data noise value must be at least 0")
-    @Max(value = 100, message = "Dataset3 data noise value cannot exceed 100")
-    private Integer dataset3DataNoiseValue;
+    @NotNull(message = "datasetC data noise value cannot be null")
+    @Min(value = 0, message = "datasetC data noise value must be at least 0")
+    @Max(value = 100, message = "datasetC data noise value cannot exceed 100")
+    private Integer datasetCDataNoiseValue;
 
-    @NotNull(message = "Dataset3 data key noise flag cannot be null")
-    private Boolean dataset3DataKeyNoise;
+    @NotNull(message = "datasetC data key noise flag cannot be null")
+    private Boolean datasetCDataKeyNoise;
 
-    @NotNull(message = "Dataset3 data noise inside value cannot be null")
-    @Min(value = 0, message = "Dataset3 data noise inside value must be at least 0")
-    @Max(value = 100, message = "Dataset3 data noise inside value cannot exceed 100")
-    private Integer dataset3DataNoiseInside;
+    @NotNull(message = "datasetC data noise inside value cannot be null")
+    @Min(value = 0, message = "datasetC data noise inside value must be at least 0")
+    @Max(value = 100, message = "datasetC data noise inside value cannot exceed 100")
+    private Integer datasetCDataNoiseInside;
 
     // Dataset 4
-    @NotNull(message = "Dataset4 data noise flag cannot be null")
-    private Boolean dataset4DataNoise;
+    @NotNull(message = "datasetD data noise flag cannot be null")
+    private Boolean datasetDDataNoise;
 
-    @NotNull(message = "Dataset4 data noise value cannot be null")
-    @Min(value = 0, message = "Dataset4 data noise value must be at least 0")
-    @Max(value = 100, message = "Dataset4 data noise value cannot exceed 100")
-    private Integer dataset4DataNoiseValue;
+    @NotNull(message = "datasetD data noise value cannot be null")
+    @Min(value = 0, message = "datasetD data noise value must be at least 0")
+    @Max(value = 100, message = "datasetD data noise value cannot exceed 100")
+    private Integer datasetDDataNoiseValue;
 
-    @NotNull(message = "Dataset4 data key noise flag cannot be null")
-    private Boolean dataset4DataKeyNoise;
+    @NotNull(message = "datasetD data key noise flag cannot be null")
+    private Boolean datasetDDataKeyNoise;
 
-    @NotNull(message = "Dataset4 data noise inside value cannot be null")
-    @Min(value = 0, message = "Dataset4 data noise inside value must be at least 0")
-    @Max(value = 100, message = "Dataset4 data noise inside value cannot exceed 100")
-    private Integer dataset4DataNoiseInside;
+    @NotNull(message = "datasetD data noise inside value cannot be null")
+    @Min(value = 0, message = "datasetD data noise inside value must be at least 0")
+    @Max(value = 100, message = "datasetD data noise inside value cannot exceed 100")
+    private Integer datasetDDataNoiseInside;
 
     // --------------- Step 7: Shuffle Options ------------------
-    @NotBlank(message = "Dataset1 shuffle option cannot be blank")
-    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "Dataset1 shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
-    private String dataset1ShuffleOption;
+    @NotBlank(message = "datasetA shuffle option cannot be blank")
+    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "datasetA shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
+    private String datasetAShuffleOption;
 
-    @NotBlank(message = "Dataset2 shuffle option cannot be blank")
-    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "Dataset2 shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
-    private String dataset2ShuffleOption;
+    @NotBlank(message = "datasetB shuffle option cannot be blank")
+    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "datasetB shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
+    private String datasetBShuffleOption;
 
-    @NotBlank(message = "Dataset3 shuffle option cannot be blank")
-    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "Dataset3 shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
-    private String dataset3ShuffleOption;
+    @NotBlank(message = "datasetC shuffle option cannot be blank")
+    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "datasetC shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
+    private String datasetCShuffleOption;
 
-    @NotBlank(message = "Dataset4 shuffle option cannot be blank")
-    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "Dataset4 shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
-    private String dataset4ShuffleOption;
+    @NotBlank(message = "datasetD shuffle option cannot be blank")
+    @Pattern(regexp = "Shuffle Columns|Shuffle Rows|No Change", message = "datasetD shuffle option must be 'Shuffle Columns', 'Shuffle Rows', or 'No Change'")
+    private String datasetDShuffleOption;
 
     // --------------- Selected Methods ------------------
     // Schema Methods
-    @NotNull(message = "Selected schema methods for dataset1 cannot be null")
-    private List<String> dataset1SchemaMultiselect;
+    @NotNull(message = "Selected schema methods for datasetA cannot be null")
+    private List<String> datasetASchemaMultiselect;
 
-    @NotNull(message = "Selected schema methods for dataset2 cannot be null")
-    private List<String> dataset2SchemaMultiselect;
+    @NotNull(message = "Selected schema methods for datasetB cannot be null")
+    private List<String> datasetBSchemaMultiselect;
 
-    @NotNull(message = "Selected schema methods for dataset3 cannot be null")
-    private List<String> dataset3SchemaMultiselect;
+    @NotNull(message = "Selected schema methods for datasetC cannot be null")
+    private List<String> datasetCSchemaMultiselect;
 
-    @NotNull(message = "Selected schema methods for dataset4 cannot be null")
-    private List<String> dataset4SchemaMultiselect;
+    @NotNull(message = "Selected schema methods for datasetD cannot be null")
+    private List<String> datasetDSchemaMultiselect;
 
     // String Methods
-    @NotNull(message = "Selected string methods for dataset1 cannot be null")
-    private List<String> dataset1DataMultiselect;
+    @NotNull(message = "Selected string methods for datasetA cannot be null")
+    private List<String> datasetADataMultiselect;
 
-    @NotNull(message = "Selected string methods for dataset2 cannot be null")
-    private List<String> dataset2DataMultiselect;
+    @NotNull(message = "Selected string methods for datasetB cannot be null")
+    private List<String> datasetBDataMultiselect;
 
-    @NotNull(message = "Selected string methods for dataset3 cannot be null")
-    private List<String> dataset3DataMultiselect;
+    @NotNull(message = "Selected string methods for datasetC cannot be null")
+    private List<String> datasetCDataMultiselect;
 
-    @NotNull(message = "Selected string methods for dataset4 cannot be null")
-    private List<String> dataset4DataMultiselect;
+    @NotNull(message = "Selected string methods for datasetD cannot be null")
+    private List<String> datasetDDataMultiselect;
 
     // --------------- Output Path ------------------
     @NotBlank(message = "File path output cannot be blank")
@@ -304,46 +304,44 @@ public class FormDataWrapper {
     // --------------- Conditional Validations ------------------
 
     // Schema Noise Validations
-    @AssertTrue(message = "Dataset1 schema noise value must be provided when dataset1SchemaNoise is true")
-    public boolean isDataset1SchemaNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset1SchemaNoise) || (dataset1SchemaNoiseValue != null && dataset1SchemaNoiseValue >= 0 && dataset1SchemaNoiseValue <= 100);
+    @AssertTrue(message = "datasetA schema noise value must be provided when datasetASchemaNoise is true")
+    public boolean isdatasetASchemaNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetASchemaNoise) || (datasetASchemaNoiseValue != null && datasetASchemaNoiseValue >= 0 && datasetASchemaNoiseValue <= 100);
     }
 
-    @AssertTrue(message = "Dataset2 schema noise value must be provided when dataset2SchemaNoise is true")
-    public boolean isDataset2SchemaNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset2SchemaNoise) || (dataset2SchemaNoiseValue != null && dataset2SchemaNoiseValue >= 0 && dataset2SchemaNoiseValue <= 100);
+    @AssertTrue(message = "datasetB schema noise value must be provided when datasetBSchemaNoise is true")
+    public boolean isdatasetBSchemaNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetBSchemaNoise) || (datasetBSchemaNoiseValue != null && datasetBSchemaNoiseValue >= 0 && datasetBSchemaNoiseValue <= 100);
     }
 
-    @AssertTrue(message = "Dataset3 schema noise value must be provided when dataset3SchemaNoise is true")
-    public boolean isDataset3SchemaNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset3SchemaNoise) || (dataset3SchemaNoiseValue != null && dataset3SchemaNoiseValue >= 0 && dataset3SchemaNoiseValue <= 100);
+    @AssertTrue(message = "datasetC schema noise value must be provided when datasetCSchemaNoise is true")
+    public boolean isdatasetCSchemaNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetCSchemaNoise) || (datasetCSchemaNoiseValue != null && datasetCSchemaNoiseValue >= 0 && datasetCSchemaNoiseValue <= 100);
     }
 
-    @AssertTrue(message = "Dataset4 schema noise value must be provided when dataset4SchemaNoise is true")
-    public boolean isDataset4SchemaNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset4SchemaNoise) || (dataset4SchemaNoiseValue != null && dataset4SchemaNoiseValue >= 0 && dataset4SchemaNoiseValue <= 100);
+    @AssertTrue(message = "datasetD schema noise value must be provided when datasetDSchemaNoise is true")
+    public boolean isdatasetDSchemaNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetDSchemaNoise) || (datasetDSchemaNoiseValue != null && datasetDSchemaNoiseValue >= 0 && datasetDSchemaNoiseValue <= 100);
     }
 
     // Data Noise Validations
-    @AssertTrue(message = "Dataset1 data noise value must be provided when dataset1DataNoise is true")
-    public boolean isDataset1DataNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset1DataNoise) || (dataset1DataNoiseValue != null && dataset1DataNoiseValue >= 0 && dataset1DataNoiseValue <= 100);
+    @AssertTrue(message = "datasetA data noise value must be provided when datasetADataNoise is true")
+    public boolean isdatasetADataNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetADataNoise) || (datasetADataNoiseValue != null && datasetADataNoiseValue >= 0 && datasetADataNoiseValue <= 100);
     }
 
-    @AssertTrue(message = "Dataset2 data noise value must be provided when dataset2DataNoise is true")
-    public boolean isDataset2DataNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset2DataNoise) || (dataset2DataNoiseValue != null && dataset2DataNoiseValue >= 0 && dataset2DataNoiseValue <= 100);
+    @AssertTrue(message = "datasetB data noise value must be provided when datasetBDataNoise is true")
+    public boolean isdatasetBDataNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetBDataNoise) || (datasetBDataNoiseValue != null && datasetBDataNoiseValue >= 0 && datasetBDataNoiseValue <= 100);
     }
 
-    @AssertTrue(message = "Dataset3 data noise value must be provided when dataset3DataNoise is true")
-    public boolean isDataset3DataNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset3DataNoise) || (dataset3DataNoiseValue != null && dataset3DataNoiseValue >= 0 && dataset3DataNoiseValue <= 100);
+    @AssertTrue(message = "datasetC data noise value must be provided when datasetCDataNoise is true")
+    public boolean isdatasetCDataNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetCDataNoise) || (datasetCDataNoiseValue != null && datasetCDataNoiseValue >= 0 && datasetCDataNoiseValue <= 100);
     }
 
-    @AssertTrue(message = "Dataset4 data noise value must be provided when dataset4DataNoise is true")
-    public boolean isDataset4DataNoiseValueValid() {
-        return !Boolean.TRUE.equals(dataset4DataNoise) || (dataset4DataNoiseValue != null && dataset4DataNoiseValue >= 0 && dataset4DataNoiseValue <= 100);
+    @AssertTrue(message = "datasetD data noise value must be provided when datasetDDataNoise is true")
+    public boolean isdatasetDDataNoiseValueValid() {
+        return !Boolean.TRUE.equals(datasetDDataNoise) || (datasetDDataNoiseValue != null && datasetDDataNoiseValue >= 0 && datasetDDataNoiseValue <= 100);
     }
-
-    // Add additional conditional validations as needed
 }
