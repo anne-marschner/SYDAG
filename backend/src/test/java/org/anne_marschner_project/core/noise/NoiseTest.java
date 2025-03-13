@@ -48,7 +48,7 @@ class NoiseTest {
         SchemaNoise schemaNoise = new SchemaNoise();
         String input = "ColumnName";
         String result = schemaNoise.addRandomPrefix(input);
-        assertTrue(result.matches("[A-Za-z0-9]{1,4}_ColumnName"), "The prefix should be 1 to 4 alphanumeric characters followed by '_Column'");
+        assertTrue(result.matches("[A-Za-z0-9]{1,4}_ColumnName"), "The prefix should be 1 to 4 alphanumeric characters followed by '_ColumnName'");
     }
 
     @Test
