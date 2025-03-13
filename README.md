@@ -78,9 +78,9 @@ For each new Dataset X:
 
 ### Data Noise
 For each new Dataset X:
-* **dataset1DataNoise**: Whether the data should include errors or not (true or false). 
-* **dataset1DataNoiseValue**:  The percentage of rows/ columns to receive noise (0-100).
-* **dataset1DataNoiseInside**: The percentage that indicates how many of the entries within a for noise selected column or row should receive errors (0-100).
+* **datasetXDataNoise**: Whether the data should include errors or not (true or false). 
+* **datasetXDataNoiseValue**:  The percentage of rows/ columns to receive noise (0-100).
+* **datasetXDataNoiseInside**: The percentage that indicates how many of the entries within a for noise selected column or row should receive errors (0-100).
 * **datasetXDataMultiselect**:  The eroor methods that are chosen ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier").
 
 ### Shuffle
