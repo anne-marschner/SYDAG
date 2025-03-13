@@ -98,90 +98,90 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "columnDistribution": 0,		// 0 to 100
   "overlapType": "Mixed Overlap",	// "Mixed Overlap", "Block Overlap"
 
-  "dataset1StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
-  "dataset1BCNFSliderValue": 0,		// 0 to 100
-  "dataset1JoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetAStructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "datasetABCNFSliderValue": 0,		// 0 to 100
+  "datasetAJoinColumnsSliderValue": 0,	// 0 to 100
 
-  "dataset2StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
-  "dataset2BCNFSliderValue": 0,		// 0 to 100
-  "dataset2JoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetBStructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "datasetBBCNFSliderValue": 0,		// 0 to 100
+  "datasetBJoinColumnsSliderValue": 0,	// 0 to 100
 
-  "dataset3StructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
-  "dataset3BCNFSliderValue": 0,		// 0 to 100
-  "dataset3JoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetCStructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "datasetCBCNFSliderValue": 0,		// 0 to 100
+  "datasetCJoinColumnsSliderValue": 0,	// 0 to 100
 
-  "dataset4StructureType": "No Change", // "No Change", "BCNF", "Join Columns"
-  "dataset4BCNFSliderValue": 0,		// 0 to 100
-  "dataset4JoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetDStructureType": "No Change", // "No Change", "BCNF", "Join Columns"
+  "datasetDBCNFSliderValue": 0,		// 0 to 100
+  "datasetDJoinColumnsSliderValue": 0,	// 0 to 100
 
-  "dataset1SchemaNoise": false,		// false, true
-  "dataset1SchemaNoiseValue": 0,	// 0 to 100
-  "dataset1SchemaKeyNoise": false,	// false, true
-  "dataset1SchemaDeleteSchema": false,	// false, true
-  "dataset1SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+  "datasetASchemaNoise": false,		// false, true
+  "datasetASchemaNoiseValue": 0,	// 0 to 100
+  "datasetASchemaKeyNoise": false,	// false, true
+  "datasetASchemaDeleteSchema": false,	// false, true
+  "datasetASchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
                                         "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
-  "dataset2SchemaNoise": false,		// false, true
-  "dataset2SchemaNoiseValue": 0,	// 0 to 100
-  "dataset2SchemaKeyNoise": false,	// false, true
-  "dataset2SchemaDeleteSchema": false,	// false, true
-  "dataset2SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+  "datasetBSchemaNoise": false,		// false, true
+  "datasetBSchemaNoiseValue": 0,	// 0 to 100
+  "datasetBSchemaKeyNoise": false,	// false, true
+  "datasetBSchemaDeleteSchema": false,	// false, true
+  "datasetBSchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
                                         "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
-  "dataset3SchemaNoise": false,		// false, true
-  "dataset3SchemaNoiseValue": 0,	// 0 to 100
-  "dataset3SchemaKeyNoise": false,	// false, true
-  "dataset3SchemaDeleteSchema": false,	// false, true
-  "dataset3SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+  "datasetCSchemaNoise": false,		// false, true
+  "datasetCSchemaNoiseValue": 0,	// 0 to 100
+  "datasetCSchemaKeyNoise": false,	// false, true
+  "datasetCSchemaDeleteSchema": false,	// false, true
+  "datasetCSchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
                                         "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
-  "dataset4SchemaNoise": false,		// false, true
-  "dataset4SchemaNoiseValue": 0,	// 0 to 100
-  "dataset4SchemaKeyNoise": false,	// false, true
-  "dataset4SchemaDeleteSchema": false,	// false, true
-  "dataset4SchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
+  "datasetDSchemaNoise": false,		// false, true
+  "datasetDSchemaNoiseValue": 0,	// 0 to 100
+  "datasetDSchemaKeyNoise": false,	// false, true
+  "datasetDSchemaDeleteSchema": false,	// false, true
+  "datasetDSchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
                                         "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
 
-  "dataset1DataNoise": false,		// false, true
-  "dataset1DataNoiseValue": 0,		// 0 to 100
-  "dataset1DataKeyNoise": false,	// false, true
-  "dataset1DataNoiseInside": 0,		// 0 to 100
-  "dataset1DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+  "datasetADataNoise": false,		// false, true
+  "datasetADataNoiseValue": 0,		// 0 to 100
+  "datasetADataKeyNoise": false,	// false, true
+  "datasetADataNoiseInside": 0,		// 0 to 100
+  "datasetADataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
                                         "generateRandomString", "changeValue", "changeValueToOutlier" 
 
-  "dataset2DataNoise": false,		// false, true
-  "dataset2DataNoiseValue": 0,		// 0 to 100
-  "dataset2DataKeyNoise": false,	// false, true
-  "dataset2DataNoiseInside": 0,		// 0 to 100
-  "dataset2DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+  "datasetBDataNoise": false,		// false, true
+  "datasetBDataNoiseValue": 0,		// 0 to 100
+  "datasetBDataKeyNoise": false,	// false, true
+  "datasetBDataNoiseInside": 0,		// 0 to 100
+  "datasetBDataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
                                         "generateRandomString", "changeValue", "changeValueToOutlier" 
 
-  "dataset3DataNoise": false,		// false, true
-  "dataset3DataNoiseValue": 0,		// 0 to 100
-  "dataset3DataKeyNoise": false,	// false, true
-  "dataset3DataNoiseInside": 0,		// 0 to 100
-  "dataset3DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+  "datasetCDataNoise": false,		// false, true
+  "datasetCDataNoiseValue": 0,		// 0 to 100
+  "datasetCDataKeyNoise": false,	// false, true
+  "datasetCDataNoiseInside": 0,		// 0 to 100
+  "datasetCDataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
                                         "generateRandomString", "changeValue", "changeValueToOutlier" 
 
-  "dataset4DataNoise": false,		// false, true
-  "dataset4DataNoiseValue": 0,		// 0 to 100
-  "dataset4DataKeyNoise": false,	// false, true
-  "dataset4DataNoiseInside": 0,		// 0 to 100
-  "dataset4DataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
+  "datasetDDataNoise": false,		// false, true
+  "datasetDDataNoiseValue": 0,		// 0 to 100
+  "datasetDDataKeyNoise": false,	// false, true
+  "datasetDDataNoiseInside": 0,		// 0 to 100
+  "datasetDDataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
                                         "generateRandomString", "changeValue", "changeValueToOutlier" 
 
-  "dataset1ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
-  "dataset2ShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
-  "dataset3ShuffleOption": "No Change",	// "No Change", "Shuffle Rows", "Shuffle Columns"
-  "dataset4ShuffleOption": "No Change"	// "No Change", "Shuffle Rows", "Shuffle Columns"
+  "datasetAShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
+  "datasetBShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
+  "datasetCShuffleOption": "No Change",	// "No Change", "Shuffle Rows", "Shuffle Columns"
+  "datasetDShuffleOption": "No Change"	// "No Change", "Shuffle Rows", "Shuffle Columns"
 }
 ```
 
