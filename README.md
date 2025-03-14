@@ -28,6 +28,7 @@ A list of technologies used within the project:
 Basis of the frontend implementation:   
 
 * [Multi-step form](https://github.com/Marcosfitzsimons/multi-step-form?tab=readme-ov-file#author)
+* [Multi-select-component](https://github.com/sersavan/shadcn-multi-select-component?utm_source=chatgpt.com)
 
 GUI image sources:
 * [sucess.png](https://github.com/Marcosfitzsimons/multi-step-form/blob/master/public/assets/success.png)
