@@ -37,6 +37,7 @@ GUI image sources:
 * [horizontal.svg](https://www.svgrepo.com/svg/323581/vertical-flip)
 * [vertical.svg](https://www.svgrepo.com/svg/322555/horizontal-flip)
 * [verticalHorizontal.svg](https://www.svgrepo.com/svg/86754/move-object)
+* [favicon.ico](https://github.com/Marcosfitzsimons/multi-step-form/blob/master/public/favicon.ico)
 
 ## Installation
 To install SYDAG the user must clone the GitHub repository. It is necessary to install React and Next.js in the frontend folder. Open a terminal in the IDE of your choice (e.g. VSCode) and navigate to 'SYDAG/frontend'. There you need to run the the following commands:
