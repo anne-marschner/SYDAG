@@ -428,7 +428,7 @@ const Step8_SummaryForm = ({
                             </p>
 
                             <p className="text-neutral-300 mt-1 text-sm">
-                                Multi-Select:
+                                Methods:
                                 {datasetASchemaMultiselect && datasetASchemaMultiselect.length > 0
                                     ? ` ${datasetASchemaMultiselect.join(", ")}`
                                     : " None selected"}
@@ -460,7 +460,7 @@ const Step8_SummaryForm = ({
                             </p>
 
                             <p className="text-neutral-300 mt-1 text-sm">
-                                Multi-Select:
+                                Methods:
                                 {datasetBSchemaMultiselect && datasetBSchemaMultiselect.length > 0
                                     ? ` ${datasetBSchemaMultiselect.join(", ")}`
                                     : " None selected"}
@@ -495,7 +495,7 @@ const Step8_SummaryForm = ({
                                     </p>
 
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        Multi-Select:
+                                        Methods:
                                         {datasetCSchemaMultiselect && datasetCSchemaMultiselect.length > 0
                                             ? ` ${datasetCSchemaMultiselect.join(", ")}`
                                             : " None selected"}
@@ -527,7 +527,7 @@ const Step8_SummaryForm = ({
                                     </p>
 
                                     <p className="text-neutral-300 mt-1 text-sm">
-                                        Multi-Select:
+                                        Methods:
                                         {datasetDSchemaMultiselect && datasetDSchemaMultiselect.length > 0
                                             ? ` ${datasetDSchemaMultiselect.join(", ")}`
                                             : " None selected"}
@@ -570,8 +570,8 @@ const Step8_SummaryForm = ({
 
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {datasetADataMultiselect && datasetADataMultiselect.length > 0
-                                    ? `Multi-Select: ${datasetADataMultiselect.join(", ")}`
-                                    : "Multi-Select: None selected"}
+                                    ? `Methods: ${datasetADataMultiselect.join(", ")}`
+                                    : "Methods: None selected"}
                             </p>
 
                             <button
@@ -602,8 +602,8 @@ const Step8_SummaryForm = ({
 
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {datasetBDataMultiselect && datasetBDataMultiselect.length > 0
-                                    ? `Multi-Select: ${datasetBDataMultiselect.join(", ")}`
-                                    : "Multi-Select: None selected"}
+                                    ? `Methods: ${datasetBDataMultiselect.join(", ")}`
+                                    : "Methods: None selected"}
                             </p>
 
                             <button
@@ -637,8 +637,8 @@ const Step8_SummaryForm = ({
 
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {datasetCDataMultiselect && datasetCDataMultiselect.length > 0
-                                            ? `Multi-Select: ${datasetCDataMultiselect.join(", ")}`
-                                            : "Multi-Select: None selected"}
+                                            ? `Methods: ${datasetCDataMultiselect.join(", ")}`
+                                            : "Methods: None selected"}
                                     </p>
 
                                     <button
@@ -669,8 +669,8 @@ const Step8_SummaryForm = ({
 
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {datasetDDataMultiselect && datasetDDataMultiselect.length > 0
-                                            ? `Multi-Select: ${datasetDDataMultiselect.join(", ")}`
-                                            : "Multi-Select: None selected"}
+                                            ? `Methods: ${datasetDDataMultiselect.join(", ")}`
+                                            : "Methods: None selected"}
                                     </p>
 
                                     <button
