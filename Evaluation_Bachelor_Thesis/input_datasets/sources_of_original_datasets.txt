@@ -1,0 +1,11 @@
+Y. Reich and S. Fenves, Pittsburgh Bridges, UCI Machine Learning Repository, 
+last accessed 10-March-2025. URL: http://archive.ics.uci.edu/dataset/18/pittsburgh+bridges
+
+H. Rahman, Diabetes Dataset, 
+last accessed 10-March-2025. URL: https://www.kaggle.com/datasets/hasibur013/diabetes-dataset
+
+I. Ramzan, Remote Work & Mental Health, 
+last accessed 10-March-2025. URL: https://www.kaggle.com/datasets/iramshahzadi9/remote-work-and-mental-health
+
+V. Khorasani, Gym Members Exercise Dataset, 
+last accessed 10-March-2025. URL: https://www.kaggle.com/datasets/valakhorasani/gym-members-exercise-dataset

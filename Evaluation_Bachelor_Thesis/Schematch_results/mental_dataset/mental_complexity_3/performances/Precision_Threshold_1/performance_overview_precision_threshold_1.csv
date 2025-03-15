@@ -1,0 +1,2 @@
+MatchStep\Matcher,DistinctCountMatcher(),JaccardInstanceMatcher()___nGramTokenizer(n=2),LevenshteinMatcher()
+MatchingStepLine1,0.055681817,0.052350428,0.052350428

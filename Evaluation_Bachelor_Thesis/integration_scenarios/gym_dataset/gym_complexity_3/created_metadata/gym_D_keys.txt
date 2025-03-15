@@ -1,0 +1,10 @@
+Relation D1: 
+Foreign Key: Column 3, Column 5, Column 6;
+Primary Key: Column 2, Column 3, Column 4;
+
+Relation D2: 
+Primary Key: Column 1, Column 2, Column 3;
+
+Relation D3: 
+Primary Key: Column 4, Column 5, Column 6;
+

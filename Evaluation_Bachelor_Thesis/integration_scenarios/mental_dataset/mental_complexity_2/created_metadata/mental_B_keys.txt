@@ -1,0 +1,3 @@
+Relation B1: 
+Primary Key: Column 1;
+

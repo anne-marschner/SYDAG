@@ -1,0 +1,7 @@
+Relation A1: 
+Foreign Key: Column 1, Column 2;
+Primary Key: Column 3;
+
+Relation A2: 
+Primary Key: Column 3, Column 6;
+

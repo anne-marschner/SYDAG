@@ -1,0 +1,60 @@
+Input_column1_"Employee_ID" corresponds to: 
+A1_column1_"Employee_ID"; B1_column1_"Employee_ID"; 
+
+Input_column2_"Age" corresponds to: 
+A1_column2_"Age"; B1_column2_"Age"; 
+
+Input_column3_"Gender" corresponds to: 
+B1_column3_"Gender"; 
+
+Input_column4_"Job_Role" corresponds to: 
+A1_column3_"Job_Role"; B1_column4_"Job_Role"; 
+
+Input_column5_"Industry" corresponds to: 
+A1_column4_"Industry"; B1_column5_"Industry"; 
+
+Input_column6_"Years_of_Experience" corresponds to: 
+A1_column5_"Years_of_Experience"; B1_column6_"Years_of_Experience"; 
+
+Input_column7_"Work_Location" corresponds to: 
+A1_column6_"Work_Location"; B1_column7_"Work_Location"; 
+
+Input_column8_"Hours_Worked_Per_Week" corresponds to: 
+A1_column7_"Hours_Worked_Per_Week"; B1_column8_"Hours_Worked_Per_Week"; 
+
+Input_column9_"Number_of_Virtual_Meetings" corresponds to: 
+A1_column8_"Number_of_Virtual_Meetings"; B1_column9_"Number_of_Virtual_Meetings"; 
+
+Input_column10_"Work_Life_Balance_Rating" corresponds to: 
+A1_column9_"Work_Life_Balance_Rating"; B1_column10_"Work_Life_Balance_Rating"; 
+
+Input_column11_"Stress_Level" corresponds to: 
+A1_column10_"Stress_Level"; B1_column11_"Stress_Level"; 
+
+Input_column12_"Mental_Health_Condition" corresponds to: 
+A1_column11_"Mental_Health_Condition"; 
+
+Input_column13_"Access_to_Mental_Health_Resources" corresponds to: 
+A1_column12_"Access_to_Mental_Health_Resources"; B1_column12_"Access_to_Mental_Health_Resources"; 
+
+Input_column14_"Productivity_Change" corresponds to: 
+A1_column13_"Productivity_Change"; B1_column13_"Productivity_Change"; 
+
+Input_column15_"Social_Isolation_Rating" corresponds to: 
+A1_column14_"Social_Isolation_Rating"; B1_column14_"Social_Isolation_Rating"; 
+
+Input_column16_"Satisfaction_with_Remote_Work" corresponds to: 
+A1_column15_"Satisfaction_with_Remote_Work"; B1_column15_"Satisfaction_with_Remote_Work"; 
+
+Input_column17_"Company_Support_for_Remote_Work" corresponds to: 
+A1_column16_"Company_Support_for_Remote_Work"; B1_column16_"Company_Support_for_Remote_Work"; 
+
+Input_column18_"Physical_Activity" corresponds to: 
+A1_column17_"Physical_Activity"; B1_column17_"Physical_Activity"; 
+
+Input_column19_"Sleep_Quality" corresponds to: 
+A1_column18_"Sleep_Quality"; B1_column18_"Sleep_Quality"; 
+
+Input_column20_"Region" corresponds to: 
+A1_column19_"Region"; B1_column19_"Region"; 
+

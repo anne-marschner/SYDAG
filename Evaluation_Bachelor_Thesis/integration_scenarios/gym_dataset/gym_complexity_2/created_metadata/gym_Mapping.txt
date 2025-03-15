@@ -1,0 +1,45 @@
+Input_column1_"Age" corresponds to: 
+A2_column1_"Age"; B1_column1_"Ag"; 
+
+Input_column2_"Gender" corresponds to: 
+A3_column1_"Gender"; B1_column2_"xR_Gender"; 
+
+Input_column3_"Weight (kg)" corresponds to: 
+A1_column1_"Weight (kg)"; A2_column2_"Weight (kg)"; A3_column2_"Weight (kg)"; B1_column3_"Wei(k"; 
+
+Input_column4_"Height (m)" corresponds to: 
+A1_column2_"Height (m)"; A3_column3_"Height (m)"; B1_column4_"He(m"; 
+
+Input_column5_"Max_BPM" corresponds to: 
+A1_column3_"Max_BPM"; A3_column4_"Max_BPM"; B1_column5_"MB"; 
+
+Input_column6_"Avg_BPM" corresponds to: 
+A1_column4_"Avg_BPM"; A3_column5_"Avg_BPM"; B1_column6_"Avg_BPM"; 
+
+Input_column7_"Resting_BPM" corresponds to: 
+A1_column5_"Resting_BPM"; A3_column6_"Resting_BPM"; B1_column7_"w_Resting_BPM"; 
+
+Input_column8_"Session_Duration (hours)" corresponds to: 
+A3_column7_"Session_Duration (hours)"; B1_column8_"Session_Duration (hours)"; 
+
+Input_column9_"Calories_Burned" corresponds to: 
+A1_column6_"Calories_Burned"; A3_column8_"Calories_Burned"; B1_column9_"Calories_Burned"; 
+
+Input_column10_"Workout_Type" corresponds to: 
+A3_column9_"Workout_Type"; B1_column10_"t87_Workout_Type"; 
+
+Input_column11_"Fat_Percentage" corresponds to: 
+A1_column7_"Fat_Percentage"; A2_column3_"Fat_Percentage"; B1_column11_"Fat_Percentage"; 
+
+Input_column12_"Water_Intake (liters)" corresponds to: 
+A1_column8_"Water_Intake (liters)"; B1_column12_"Water_Intake (liters)"; 
+
+Input_column13_"Workout_Frequency (days/week)" corresponds to: 
+A3_column10_"Workout_Frequency (days/week)"; B1_column13_"Workout_Frequency (days/week)"; 
+
+Input_column14_"Experience_Level" corresponds to: 
+A3_column11_"Experience_Level"; B1_column14_"N_Experience_Level"; 
+
+Input_column15_"BMI" corresponds to: 
+A3_column12_"BMI"; B1_column15_"BMI"; 
+

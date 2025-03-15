@@ -1,0 +1,78 @@
+{
+
+  "splitType": "Horizontal",
+  "rowOverlapPercentage": 35,
+  "columnOverlapPercentage": null,
+  "rowDistribution": 40,
+  "columnDistribution": null,
+  "overlapType": "Mixed Overlap",
+
+  "datasetAStructureType": "BCNF",
+  "datasetABCNFSliderValue": 30,
+  "datasetAJoinColumnsSliderValue": null,
+
+  "datasetBStructureType": "Join Columns",
+  "datasetBBCNFSliderValue": null,
+  "datasetBJoinColumnsSliderValue": 20,
+
+  "datasetCStructureType": null,
+  "datasetCBCNFSliderValue": null,
+  "datasetCJoinColumnsSliderValue": null,
+
+  "datasetDStructureType": null,
+  "datasetDBCNFSliderValue": null,
+  "datasetDJoinColumnsSliderValue": null,
+
+  "datasetASchemaNoise": true,
+  "datasetASchemaNoiseValue": 70,
+  "datasetASchemaKeyNoise": false,
+  "datasetASchemaDeleteSchema": false,
+  "datasetASchemaMultiselect": ["generateRandomString", "replaceWithSynonyms", "replaceWithTranslation"],
+
+  "datasetBSchemaNoise": true,
+  "datasetBSchemaNoiseValue": 60,
+  "datasetBSchemaKeyNoise": true,
+  "datasetBSchemaDeleteSchema": false,
+  "datasetBSchemaMultiselect": ["abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix"],
+
+  "datasetCSchemaNoise": false,
+  "datasetCSchemaNoiseValue": null,
+  "datasetCSchemaKeyNoise": false,
+  "datasetCSchemaDeleteSchema": false,
+  "datasetCSchemaMultiselect": [],
+
+  "datasetDSchemaNoise": false,
+  "datasetDSchemaNoiseValue": null,
+  "datasetDSchemaKeyNoise": false,
+  "datasetDSchemaDeleteSchema": false,
+  "datasetDSchemaMultiselect": [],
+
+  "datasetADataNoise": true,
+  "datasetADataNoiseValue": 50,
+  "datasetADataKeyNoise": false,
+  "datasetADataNoiseInside": 25,
+  "datasetADataMultiselect": ["generateOCRError", "abbreviateDataEntry", "changeFormat", "generatePhoneticError", "mapColumn", "replaceWithSynonyms", "generateRandomString", "changeValue"],
+
+  "datasetBDataNoise": true,
+  "datasetBDataNoiseValue": 100,
+  "datasetBDataKeyNoise": false,
+  "datasetBDataNoiseInside": 40,
+  "datasetBDataMultiselect": ["generateTypingError", "shuffleWords", "generateMissingValue", "addRandomPrefix", "generatePhoneticError", "changeValue", "changeValueToOutlier"],
+
+  "datasetCDataNoise": false,
+  "datasetCDataNoiseValue": null,
+  "datasetCDataKeyNoise": false,
+  "datasetCDataNoiseInside": null,
+  "datasetCDataMultiselect": [],
+
+  "datasetDDataNoise": false,
+  "datasetDDataNoiseValue": null,
+  "datasetDDataKeyNoise": false,
+  "datasetDDataNoiseInside": null,
+  "datasetDDataMultiselect": [],
+
+  "datasetAShuffleOption": "Shuffle Columns",
+  "datasetBShuffleOption": "Shuffle Rows",
+  "datasetCShuffleOption": null,
+  "datasetDShuffleOption": null
+}

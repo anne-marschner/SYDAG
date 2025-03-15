@@ -1,0 +1,27 @@
+Input_column1_"Pregnancies" corresponds to: 
+A1_column1_"Pregnancies"; B1_column1_"Pregnancies"; 
+
+Input_column2_"Glucose" corresponds to: 
+A1_column2_"Glucose"; B1_column2_"Glucose"; 
+
+Input_column3_"BloodPressure" corresponds to: 
+A1_column3_"BloodPressure"; B1_column3_"BloodPressure"; 
+
+Input_column4_"SkinThickness" corresponds to: 
+A1_column4_"SkinThickness"; B1_column4_"SkinThickness"; 
+
+Input_column5_"Insulin" corresponds to: 
+A1_column5_"Insulin"; B1_column5_"Insulin"; 
+
+Input_column6_"BMI" corresponds to: 
+A1_column6_"BMI"; B1_column6_"BMI"; 
+
+Input_column7_"DiabetesPedigreeFunction" corresponds to: 
+A1_column7_"DiabetesPedigreeFunction"; B1_column7_"DiabetesPedigreeFunction"; 
+
+Input_column8_"Age" corresponds to: 
+A1_column8_"Age"; B1_column8_"Age"; 
+
+Input_column9_"Outcome" corresponds to: 
+A1_column9_"Outcome"; B1_column9_"Outcome"; 
+

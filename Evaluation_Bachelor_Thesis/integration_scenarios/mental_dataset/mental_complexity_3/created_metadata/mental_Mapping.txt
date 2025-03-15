@@ -1,0 +1,60 @@
+Input_column1_"Employee_ID" corresponds to: 
+A1_column4_"Employee_ID"; B1_column6_"Employee_ID"; 
+
+Input_column2_"Age" corresponds to: 
+A1_column3_"Age"; A2_column8_"Age"; A3_column7_"Age"; A4_column10_"Age"; B1_column9_"Age"; B2_column6_"Age"; 
+
+Input_column3_"Gender" corresponds to: 
+A1_column7_"Gender"; A2_column3_"Gender"; A3_column1_"Gender"; A4_column4_"Gender"; 
+
+Input_column4_"Job_Role" corresponds to: 
+B1_column4_"Job_Role"; B2_column9_"Job_Role"; 
+
+Input_column5_"Industry" corresponds to: 
+A1_column8_"Industry"; A2_column2_"Industry"; A3_column4_"Industry"; A4_column1_"4kLUm6dYdq"; B1_column5_"industriousness"; B2_column10_"1f"; 
+
+Input_column6_"Years_of_Experience" corresponds to: 
+B1_column11_"Years_of_Experience"; B2_column8_"Years_of_Experience"; 
+
+Input_column7_"Work_Location" corresponds to: 
+A4_column7_"Work_Location"; B2_column13_"do work situating"; 
+
+Input_column8_"Hours_Worked_Per_Week" corresponds to: 
+A1_column1_"Hours_Worked_Per_Week"; A2_column4_"Hours_Worked_Per_Week"; A4_column8_"Hours_Worked_Per_Week"; B1_column3_"Hours_Worked_Per_Week"; B2_column5_"Hours_Worked_Per_Week"; 
+
+Input_column9_"Number_of_Virtual_Meetings" corresponds to: 
+A1_column9_"Number_of_Virtual_Meetings"; A3_column9_"Number_of_Virtual_Meetings"; A4_column6_"Number_of_Virtual_Meetings"; 
+
+Input_column10_"Work_Life_Balance_Rating" corresponds to: 
+A1_column10_"Work_Life_Balance_Rating"; A2_column1_"Work_Life_Balance_Rating"; A3_column5_"Work_Life_Balance_Rating"; A4_column11_"Work_Life_Balance_Rating"; 
+
+Input_column11_"Stress_Level" corresponds to: 
+A1_column6_"tenseness horizontal surface"; A3_column8_"Stress_Level"; A4_column2_"BELASTUNG STUFEI"; B1_column2_"Stress_Level"; B2_column3_"Stress_Level"; 
+
+Input_column12_"Mental_Health_Condition" corresponds to: 
+A3_column3_"Mental_Health_Condition"; 
+
+Input_column13_"Access_to_Mental_Health_Resources" corresponds to: 
+A4_column12_"Zugang zu Ressourcen für psychische Gesundheit"; B1_column8_"Access_to_Mental_Health_Resources"; B2_column11_"Access_to_Mental_Health_Resources"; 
+
+Input_column14_"Productivity_Change" corresponds to: 
+A4_column3_"Productivity_Change"; 
+
+Input_column15_"Social_Isolation_Rating" corresponds to: 
+A1_column5_"Social_Isolation_Rating"; A2_column7_"Social_Isolation_Rating"; A3_column2_"Social_Isolation_Rating"; B1_column7_"Social_Isolation_Rating"; B2_column7_"Social_Isolation_Rating"; 
+
+Input_column16_"Satisfaction_with_Remote_Work" corresponds to: 
+A2_column6_"Satisfaction_with_Remote_Work"; 
+
+Input_column17_"Company_Support_for_Remote_Work" corresponds to: 
+A1_column2_"Company_Support_for_Remote_Work"; A2_column5_"Company_Support_for_Remote_Work"; A3_column6_"Company_Support_for_Remote_Work"; A4_column9_"Company_Support_for_Remote_Work"; B1_column1_"vX7Wu"; B2_column1_"keep company financial backing  remote control do work"; 
+
+Input_column18_"Physical_Activity" corresponds to: 
+B1_column10_"Physical_Activity"; B2_column12_"Physical_Activity"; 
+
+Input_column19_"Sleep_Quality" corresponds to: 
+B2_column4_"Sleep_Quality"; 
+
+Input_column20_"Region" corresponds to: 
+A4_column5_"neighborhood"; B2_column2_"DHIHOrvRCC"; 
+

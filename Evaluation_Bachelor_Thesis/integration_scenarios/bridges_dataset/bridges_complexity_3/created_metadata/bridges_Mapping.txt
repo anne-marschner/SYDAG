@@ -1,0 +1,39 @@
+Input_column1 corresponds to: 
+A1_column3; B1_column1; D1_column1; 
+
+Input_column2 corresponds to: 
+B1_column2; D1_column2; 
+
+Input_column3 corresponds to: 
+A1_column1; A2_column3; B1_column3; D1_column3; 
+
+Input_column4 corresponds to: 
+A1_column4; A2_column7; B1_column4; C1_column1; 
+
+Input_column5 corresponds to: 
+B1_column5; C1_column2; D1_column4; 
+
+Input_column6 corresponds to: 
+B1_column6; D1_column5; 
+
+Input_column7 corresponds to: 
+A1_column5; A2_column4; B1_column7; C1_column3; D1_column6; 
+
+Input_column8 corresponds to: 
+A2_column5; B1_column8; D1_column7; 
+
+Input_column9 corresponds to: 
+A2_column2; B1_column9; C1_column4; D1_column8; 
+
+Input_column10 corresponds to: 
+A1_column2; A2_column6; D1_column9; 
+
+Input_column11 corresponds to: 
+B1_column10; C1_column5; 
+
+Input_column12 corresponds to: 
+A2_column1; D1_column10; 
+
+Input_column13 corresponds to: 
+B1_column11; C1_column6; D1_column11; 
+

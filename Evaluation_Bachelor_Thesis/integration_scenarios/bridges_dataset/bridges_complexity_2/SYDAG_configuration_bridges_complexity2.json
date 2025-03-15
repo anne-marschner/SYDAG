@@ -1,0 +1,78 @@
+{
+
+  "splitType": "Vertical",
+  "rowOverlapPercentage": null,
+  "columnOverlapPercentage": 50,
+  "rowDistribution": null,
+  "columnDistribution": 35,
+  "overlapType": "Block Overlap",
+
+  "datasetAStructureType": "BCNF",
+  "datasetABCNFSliderValue": 30,
+  "datasetAJoinColumnsSliderValue": null,
+
+  "datasetBStructureType": "No Change",
+  "datasetBBCNFSliderValue": null,
+  "datasetBJoinColumnsSliderValue": null,
+
+  "datasetCStructureType": null,
+  "datasetCBCNFSliderValue": null,
+  "datasetCJoinColumnsSliderValue": null,
+
+  "datasetDStructureType": null,
+  "datasetDBCNFSliderValue": null,
+  "datasetDJoinColumnsSliderValue": null,
+
+  "datasetASchemaNoise": false,
+  "datasetASchemaNoiseValue": null,
+  "datasetASchemaKeyNoise": false,
+  "datasetASchemaDeleteSchema": false,
+  "datasetASchemaMultiselect": [],
+
+  "datasetBSchemaNoise": false,
+  "datasetBSchemaNoiseValue": null,
+  "datasetBSchemaKeyNoise": false,
+  "datasetBSchemaDeleteSchema": false,
+  "datasetBSchemaMultiselect": [],
+
+  "datasetCSchemaNoise": false,
+  "datasetCSchemaNoiseValue": null,
+  "datasetCSchemaKeyNoise": false,
+  "datasetCSchemaDeleteSchema": false,
+  "datasetCSchemaMultiselect": [],
+
+  "datasetDSchemaNoise": false,
+  "datasetDSchemaNoiseValue": null,
+  "datasetDSchemaKeyNoise": false,
+  "datasetDSchemaDeleteSchema": false,
+  "datasetDSchemaMultiselect": [],
+
+  "datasetADataNoise": true,
+  "datasetADataNoiseValue": 60,
+  "datasetADataKeyNoise": false,
+  "datasetADataNoiseInside": 20,
+  "datasetADataMultiselect": ["replaceWithSynonyms", "addRandomPrefix", "generateMissingValue", "shuffleWords", "generateTypingError", "changeValueToOutlier"],
+
+  "datasetBDataNoise": true,
+  "datasetBDataNoiseValue": 30,
+  "datasetBDataKeyNoise": false,
+  "datasetBDataNoiseInside": 40,
+  "datasetBDataMultiselect": ["generateTypingError", "generatePhoneticError", "changeFormat", "shuffleWords", "replaceWithSynonyms", "changeValue", "changeValueToOutlier"],
+
+  "datasetCDataNoise": false,
+  "datasetCDataNoiseValue": null,
+  "datasetCDataKeyNoise": false,
+  "datasetCDataNoiseInside": null,
+  "datasetCDataMultiselect": [],
+
+  "datasetDDataNoise": false,
+  "datasetDDataNoiseValue": null,
+  "datasetDDataKeyNoise": false,
+  "datasetDDataNoiseInside": null,
+  "datasetDDataMultiselect": [],
+
+  "datasetAShuffleOption": "No Change",
+  "datasetBShuffleOption": "No Change",
+  "datasetCShuffleOption": null,
+  "datasetDShuffleOption": null
+}

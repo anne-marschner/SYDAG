@@ -1,0 +1,78 @@
+{
+
+  "splitType": "VerticalHorizontal",
+  "rowOverlapPercentage": 50,
+  "columnOverlapPercentage": 20,
+  "rowDistribution": 70,
+  "columnDistribution": 30,
+  "overlapType": "Mixed Overlap",
+
+  "datasetAStructureType": "Join Columns",
+  "datasetABCNFSliderValue": null,
+  "datasetAJoinColumnsSliderValue": 30,
+
+  "datasetBStructureType": "No Change",
+  "datasetBBCNFSliderValue": null,
+  "datasetBJoinColumnsSliderValue": null,
+
+  "datasetCStructureType": "BCNF",
+  "datasetCBCNFSliderValue": 40,
+  "datasetCJoinColumnsSliderValue": null,
+
+  "datasetDStructureType": "BCNF",
+  "datasetDBCNFSliderValue": 60,
+  "datasetDJoinColumnsSliderValue": null,
+
+  "datasetASchemaNoise": false,
+  "datasetASchemaNoiseValue": null,
+  "datasetASchemaKeyNoise": false,
+  "datasetASchemaDeleteSchema": false,
+  "datasetASchemaMultiselect": [],
+
+  "datasetBSchemaNoise": true,
+  "datasetBSchemaNoiseValue": null,
+  "datasetBSchemaKeyNoise": false,
+  "datasetBSchemaDeleteSchema": true,
+  "datasetBSchemaMultiselect": [],
+
+  "datasetCSchemaNoise": true,
+  "datasetCSchemaNoiseValue": 50,
+  "datasetCSchemaKeyNoise": true,
+  "datasetCSchemaDeleteSchema": false,
+  "datasetCSchemaMultiselect": ["abbreviateFirstLetters", "generateRandomString", "replaceWithSynonyms", "replaceWithTranslation", "addRandomPrefix"],
+
+  "datasetDSchemaNoise": true,
+  "datasetDSchemaNoiseValue": 40,
+  "datasetDSchemaKeyNoise": true,
+  "datasetDSchemaDeleteSchema": false,
+  "datasetDSchemaMultiselect": ["abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix"],
+
+  "datasetADataNoise": true,
+  "datasetADataNoiseValue": 30,
+  "datasetADataKeyNoise": true,
+  "datasetADataNoiseInside": 10,
+  "datasetADataMultiselect": ["shuffleWords", "generateOCRError", "addRandomPrefix", "replaceWithSynonyms", "generateRandomString", "generatePhoneticError", "abbreviateDataEntry", "changeValue"],
+
+  "datasetBDataNoise": true,
+  "datasetBDataNoiseValue": 50,
+  "datasetBDataKeyNoise": true,
+  "datasetBDataNoiseInside": 10,
+  "datasetBDataMultiselect": ["changeFormat", "generateMissingValue",  "generateRandomString", "abbreviateDataEntry", "generateRandomString", "changeValue"],
+
+  "datasetCDataNoise": false,
+  "datasetCDataNoiseValue": null,
+  "datasetCDataKeyNoise": false,
+  "datasetCDataNoiseInside": null,
+  "datasetCDataMultiselect": [],
+
+  "datasetDDataNoise": true,
+  "datasetDDataNoiseValue": 80,
+  "datasetDDataKeyNoise": false,
+  "datasetDDataNoiseInside": 20,
+  "datasetDDataMultiselect": ["generateTypingError", "generatePhoneticError", "changeFormat", "shuffleWords", "replaceWithSynonyms", "changeValueToOutlier"],
+
+  "datasetAShuffleOption": "Shuffle Rows",
+  "datasetBShuffleOption": "No Change",
+  "datasetCShuffleOption": "Shuffle Columns",
+  "datasetDShuffleOption": "Shuffle Rows"
+}

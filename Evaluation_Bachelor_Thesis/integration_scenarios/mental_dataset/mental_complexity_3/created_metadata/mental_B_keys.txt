@@ -1,0 +1,7 @@
+Relation B1: 
+Foreign Key: Column 9, Column 4, Column 11, Column 3, Column 2, Column 8, Column 7;
+Primary Key: Column 6;
+
+Relation B2: 
+Primary Key: Column 6, Column 9, Column 8, Column 5, Column 3, Column 11, Column 7;
+

@@ -1,0 +1,13 @@
+Relation A1: 
+Foreign Key: Column 3, Column 7, Column 8, Column 1, Column 10, Column 5, Column 2;
+Primary Key: Column 4;
+
+Relation A2: 
+Primary Key: Column 8, Column 3, Column 2, Column 4, Column 1, Column 7, Column 5;
+
+Relation A3: 
+Primary Key: Column 7, Column 1, Column 4, Column 9, Column 5, Column 8, Column 2, Column 6;
+
+Relation A4: 
+Primary Key: Column 10, Column 4, Column 8, Column 6, Column 11, Column 9;
+

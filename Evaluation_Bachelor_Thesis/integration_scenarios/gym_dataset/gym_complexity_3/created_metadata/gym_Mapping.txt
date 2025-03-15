@@ -1,0 +1,45 @@
+Input_column1_"Age" corresponds to: 
+B1_column1; D1_column1_"Ag"; D3_column1_"Age"; 
+
+Input_column2_"Gender" corresponds to: 
+B1_column2; C1_column6_"G."; C2_column2_"Gender"; D3_column2_"G."; 
+
+Input_column3_"Weight (kg)" corresponds to: 
+B1_column3; C1_column4_"Weight (kg)"; C2_column3_"Weight (kg)"; D1_column2_"Weight (kg)"; D3_column3_"Weight (kg)"; 
+
+Input_column4_"Height (m)" corresponds to: 
+A1_column1_"Height (m)"; D1_column3_"Height (m)"; D2_column1_"He(m"; D3_column4_"Height (m)"; 
+
+Input_column5_"Max_BPM" corresponds to: 
+B1_column4; D1_column4_"Max_BPM"; D3_column5_"MaBP"; 
+
+Input_column6_"Avg_BPM" corresponds to: 
+A1_column2_"Avg_BPM"; B1_column5; C1_column2_"Avg_BPM"; C2_column6_"A.B."; D1_column5_"Avg_BPM"; D2_column2_"Avg_BPM"; D3_column6_"Avg_BPM"; 
+
+Input_column7_"Resting_BPM" corresponds to: 
+B1_column6; C1_column3_"Resting_BPM"; 
+
+Input_column8_"Session_Duration (hours)" corresponds to: 
+A1_column3_"Session_Duration (hours);Resting_BPM"; B1_column7; C2_column5_"8w_Session_Duration (hours)"; 
+
+Input_column9_"Calories_Burned" corresponds to: 
+A1_column4_"Calories_Burned"; B1_column8; C1_column5_"Verbrannte Kalorien "; C2_column1_"Calories_Burned"; D1_column6_"Calories_Burned"; D2_column3_"T7Q_Calories_Burned"; 
+
+Input_column10_"Workout_Type" corresponds to: 
+A1_column5_"Workout_Type"; D2_column4_"Workout_Type"; 
+
+Input_column11_"Fat_Percentage" corresponds to: 
+A1_column6_"Fat_Percentage"; D1_column7_"F.P."; 
+
+Input_column12_"Water_Intake (liters)" corresponds to: 
+B1_column9; D1_column8_"wKJ_Water_Intake (liters)"; 
+
+Input_column13_"Workout_Frequency (days/week)" corresponds to: 
+B1_column10; D3_column7_"Workout_Frequency (days/week)"; 
+
+Input_column14_"Experience_Level" corresponds to: 
+B1_column11; C2_column4_"go through horizontal surface"; 
+
+Input_column15_"BMI" corresponds to: 
+A1_column7_"BMI"; B1_column12; C1_column1_"Kx2HyaGxl"; D3_column8_"87U_BMI"; 
+

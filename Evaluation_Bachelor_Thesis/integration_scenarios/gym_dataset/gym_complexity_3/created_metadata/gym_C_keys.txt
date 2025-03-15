@@ -1,0 +1,7 @@
+Relation C1: 
+Foreign Key: Column 6, Column 2, Column 5;
+Primary Key: Column 4, Column 2, Column 3;
+
+Relation C2: 
+Primary Key: Column 2, Column 6, Column 1;
+
