@@ -167,8 +167,8 @@ class SplitTest {
         assertTrue(rightRelation.getSchema().containsKey(0)); // ID
         assertTrue(rightRelation.getSchema().containsKey(1)); // Name
 
-        // Check that column overlap is correct (50% of non-key columns)
-        int totalNonKeyColumns = 3; // Age, Salary, Department (columns 2, 3, 4)
+        // Check that column overlap is correct
+        int totalNonKeyColumns = 3;
         int expectedOverlapColumns = (int) Math.round(0.5 * totalNonKeyColumns);
         Set<Integer> leftColumnSet = new HashSet<>(leftRelation.getSchema().keySet());
         Set<Integer> rightColumnSet = new HashSet<>(rightRelation.getSchema().keySet());
@@ -316,8 +316,8 @@ class SplitTest {
         assertTrue(leftRelation.getSchema().containsKey(0)); // ID
         assertTrue(rightRelation.getSchema().containsKey(0)); // ID
 
-        // Check that column overlap is correct (50% of non-key columns)
-        int totalNonKeyColumns = 4; // Age, Salary, Department (columns 2, 3, 4)
+        // Check that column overlap is correct
+        int totalNonKeyColumns = 4;
         int expectedOverlapColumns = (int) Math.round(0.3 * totalNonKeyColumns);
         Set<Integer> leftColumnSet = new HashSet<>(leftRelation.getSchema().keySet());
         Set<Integer> rightColumnSet = new HashSet<>(rightRelation.getSchema().keySet());

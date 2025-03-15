@@ -27,23 +27,25 @@ public class CSVTool {
     /**
      * Reads a CSV file and converts it into a Relation object.
      *
-     * @param file  the CSV file to be read
-     * @param hasHeader whether the CSV file contains a header row
-     * @param separator the character used to separate values in the CSV file
-     * @param quoteChar the character used for quoted values in the CSV file
-     * @param escapeChar the escape character used in the CSV file
-     * @return a Relation object containing the data and schema from the CSV file
-     * @throws IOException if an I/O error occurs or if the file is empty
+     * @param file  the CSV file to be read.
+     * @param hasHeader whether the CSV file contains a header row.
+     * @param separator the character used to separate values in the CSV file.
+     * @param quoteChar the character used for quoted values in the CSV file.
+     * @param escapeChar the escape character used in the CSV file.
+     * @return a Relation object containing the data and schema from the CSV file.
+     * @throws IOException if an I/O error occurs or if the file is empty.
      */
     public Relation readCSVColumns(MultipartFile file, boolean hasHeader, char separator, char quoteChar, char escapeChar) throws IOException {
-        // Use a BufferedReader. Check for emptiness by attempting to read the first line.
+
+        // Read the CSV file
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
-            reader.mark(1024); // mark the current position with an arbitrary read-ahead limit
+            reader.mark(1024);
             String firstLine = reader.readLine();
             if (firstLine == null) {
                 throw new IOException("The CSV file is empty.");
             }
-            reader.reset(); // return to the beginning of the file
+            // return to the beginning of the file
+            reader.reset();
 
             // Set up CSV format with custom separator, quote character, escape character, and if leading white space is ignored
             CSVFormat csvFormat = CSVFormat.DEFAULT
@@ -58,12 +60,12 @@ public class CSVTool {
                 csvFormat = csvFormat.withFirstRecordAsHeader();
             }
 
-            // Initialize structures for schema and data.
+            // Initialize structures for schema and data
             Map<Integer, Attribute> schema = new HashMap<>();
             List<List<String>> columns = new ArrayList<>();
 
             try (CSVParser csvParser = csvFormat.parse(reader)) {
-                // Determine the number of columns and headers if present
+                // Determine the number of columns
                 int numberOfColumns;
                 String[] headers = null;
 
@@ -75,25 +77,25 @@ public class CSVTool {
                     Iterator<CSVRecord> iterator = csvParser.iterator();
                     CSVRecord firstRecord = iterator.next();
                     numberOfColumns = firstRecord.size();
-                    // Initialize lists for each column and add first record's values.
+                    // Initialize lists for each column
                     for (int i = 0; i < numberOfColumns; i++) {
-                        List<String> colData = new ArrayList<>();
-                        colData.add(firstRecord.get(i));
-                        columns.add(colData);
+                        List<String> columnData = new ArrayList<>();
+                        columnData.add(firstRecord.get(i));
+                        columns.add(columnData);
                     }
                 }
 
-                // If headers are not null, initialize columns.
+                // If headers are not null, initialize columns
                 if (columns.isEmpty()) {
                     for (int i = 0; i < numberOfColumns; i++) {
                         columns.add(new ArrayList<>());
                     }
                 }
 
-                // Process remaining records.
+                // Process remaining records
                 for (CSVRecord record : csvParser) {
                     for (int i = 0; i < numberOfColumns; i++) {
-                        // If the record has fewer columns, add an empty string.
+                        // If the record has fewer columns add an empty string
                         String value = record.size() > i ? record.get(i) : "";
                         columns.get(i).add(value);
                     }
@@ -107,7 +109,7 @@ public class CSVTool {
                 }
             }
 
-            // Convert columns (List<List<String>>) into a Map<Integer, List<String>>.
+            // Convert columns into a Map
             Map<Integer, List<String>> data = new HashMap<>();
             for (int i = 0; i < columns.size(); i++) {
                 data.put(i, columns.get(i));
@@ -122,13 +124,13 @@ public class CSVTool {
     /**
      * Writes a Relation object to a CSV file with optional column or row shuffling.
      *
-     * @param relation    the Relation object containing data and schema to be written
-     * @param filePath    the path to the CSV file to be created
-     * @param separator   the character used to separate values in the CSV file
-     * @param shuffleType the type of shuffling to apply ("Shuffle Columns", "Shuffle Rows", or none)
-     * @return A List of the column indices in correct order
-     * @throws IOException if an I/O error occurs
-     * @throws IllegalArgumentException if the relation, schema, or data is null or empty
+     * @param relation    the Relation object containing data and schema to be written.
+     * @param filePath    the path to the CSV file to be created.
+     * @param separator   the character used to separate values in the CSV file.
+     * @param shuffleType the type of shuffling to apply ("Shuffle Columns", "Shuffle Rows", or "No Change").
+     * @return A List of the column indices in correct order.
+     * @throws IOException if an I/O error occurs.
+     * @throws IllegalArgumentException if the relation, schema, or data is null or empty.
      */
     public List<Integer> writeCSV(Relation relation, String filePath, char separator, char quoteChar, String shuffleType) throws IOException {
 
@@ -159,12 +161,12 @@ public class CSVTool {
     /**
      * Writes a CSV file with columns shuffled.
      *
-     * @param relation   the Relation object containing data and schema to be written
-     * @param filePath   the path to the CSV file to be created
-     * @param separator  the character used to separate values in the CSV file
-     * @param quoteChar  the character used to quote values in the CSV file
-     * @return A List of the column indices in correct order
-     * @throws IOException if an I/O error occurs
+     * @param relation   the Relation object containing data and schema to be written.
+     * @param filePath   the path to the CSV file to be created.
+     * @param separator  the character used to separate values in the CSV file.
+     * @param quoteChar  the character used to quote values in the CSV file.
+     * @return A List of the column indices in correct order.
+     * @throws IOException if an I/O error occurs.
      */
     public List<Integer> writeShuffledColumns(Relation relation, String filePath, char separator, char quoteChar) throws IOException {
 
@@ -172,17 +174,16 @@ public class CSVTool {
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
 
-        // Get the number of rows from first column in the relation (assuming all columns have the same row count)
+        // Get the number of rows from first column in the relation
         int numberOfRows = data.values().iterator().next().size();
 
         // Collect the column indices from the data map and shuffle them
         List<Integer> columnIndices = new ArrayList<>(data.keySet());
         Collections.shuffle(columnIndices);
-        System.out.println(columnIndices);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
-            // If Header exists write them in the first row of the CSV
+            // If headers exist write them in the first row of the CSV
             if (relation.getSchema().entrySet().iterator().next().getValue().getColumnName() != null) {
                 for (int listIndex = 0; listIndex < columnIndices.size(); listIndex++) {
                     int colIndex = columnIndices.get(listIndex);
@@ -193,10 +194,12 @@ public class CSVTool {
                     }
                     writer.write(columnName != null ? columnName : "");
                     if (listIndex < columnIndices.size() - 1) {
-                        writer.write(separator); // divide columns
+                        // Divide attributes with separator
+                        writer.write(separator);
                     }
                 }
-                writer.newLine(); // New line after header row
+                // Add new line after header row
+                writer.newLine();
             }
 
             // Write data in CSV File
@@ -209,10 +212,12 @@ public class CSVTool {
                     }
                     writer.write(value != null ? value : "");
                     if (listIndex < columnIndices.size() - 1) {
-                        writer.write(separator); // divide columns
+                        // Divide column entries with separator
+                        writer.write(separator);
                     }
                 }
-                writer.newLine(); // new line after each row
+                // Add new line after each row
+                writer.newLine();
             }
         }
         return columnIndices;
@@ -222,12 +227,12 @@ public class CSVTool {
     /**
      * Writes a CSV file with rows shuffled.
      *
-     * @param relation   the Relation object containing data and schema to be written
-     * @param filePath   the path to the CSV file to be created
-     * @param separator  the character used to separate values in the CSV file
-     * @param quoteChar  the character used to quote values in the CSV file
-     * @return A List of the column indices in correct order
-     * @throws IOException if an I/O error occurs
+     * @param relation   the Relation object containing data and schema to be written.
+     * @param filePath   the path to the CSV file to be created.
+     * @param separator  the character used to separate values in the CSV file.
+     * @param quoteChar  the character used to quote values in the CSV file.
+     * @return A List of the column indices in correct order.
+     * @throws IOException if an I/O error occurs.
      */
     public List<Integer> writeShuffledRows(Relation relation, String filePath, char separator, char quoteChar) throws IOException {
 
@@ -235,7 +240,7 @@ public class CSVTool {
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
 
-        // Get the number of rows from first column in the relation (assuming all columns have the same row count)
+        // Get the number of rows from first column in the relation
         int numberOfRows = data.values().iterator().next().size();
 
         // Collect row indices and shuffle them
@@ -244,11 +249,10 @@ public class CSVTool {
 
         // Collect the column indices
         List<Integer> columnIndices = new ArrayList<>(data.keySet());
-        System.out.println(columnIndices);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
-            // If Header exists write them in the first row of the CSV
+            // If headers exist write them in the first row of the CSV
             if (relation.getSchema().entrySet().iterator().next().getValue().getColumnName() != null) {
                 for (int listIndex = 0; listIndex < columnIndices.size(); listIndex++) {
                     int colIndex = columnIndices.get(listIndex);
@@ -259,10 +263,12 @@ public class CSVTool {
                     }
                     writer.write(columnName != null ? columnName : "");
                     if (listIndex < columnIndices.size() - 1) {
-                        writer.write(separator); // divide columns
+                        // Divide attributes with separator
+                        writer.write(separator);
                     }
                 }
-                writer.newLine(); // New line after header row
+                // Add new line after header row
+                writer.newLine();
             }
 
             // Write data in CSV File
@@ -275,10 +281,12 @@ public class CSVTool {
                     }
                     writer.write(value != null ? value : "");
                     if (listIndex < columnIndices.size() - 1) {
-                        writer.write(separator); // divide columns
+                        // Divide column entries with separator
+                        writer.write(separator);
                     }
                 }
-                writer.newLine(); // new line after each row
+                // Add new line after each row
+                writer.newLine();
             }
         }
         return columnIndices;
@@ -288,12 +296,12 @@ public class CSVTool {
     /**
      * Writes a CSV file in the original order of rows and columns.
      *
-     * @param relation   the Relation object containing data and schema to be written
-     * @param filePath   the path to the CSV file to be created
-     * @param separator  the character used to separate values in the CSV file
-     * @param quoteChar  the character used to quote values in the CSV file
-     * @return A List of the column indices in correct order
-     * @throws IOException if an I/O error occurs
+     * @param relation   the Relation object containing data and schema to be written.
+     * @param filePath   the path to the CSV file to be created.
+     * @param separator  the character used to separate values in the CSV file.
+     * @param quoteChar  the character used to quote values in the CSV file.
+     * @return A List of the column indices in correct order.
+     * @throws IOException if an I/O error occurs.
      */
     public List<Integer> writeInOrder(Relation relation, String filePath, char separator, char quoteChar) throws IOException {
 
@@ -301,16 +309,15 @@ public class CSVTool {
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
 
-        // Get the number of rows from first column in the relation (assuming all columns have the same row count)
+        // Get the number of rows from first column in the relation
         int numberOfRows = data.values().iterator().next().size();
 
         // Collect the column indices from the data map
         List<Integer> columnIndices = new ArrayList<>(data.keySet());
-        System.out.println(columnIndices);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
 
-            // If Header exists write them in the first row of the CSV
+            // If headers exist write them in the first row of the CSV
             if (relation.getSchema().entrySet().iterator().next().getValue().getColumnName() != null) {
                 for (int listIndex = 0; listIndex < columnIndices.size(); listIndex++) {
                     int colIndex = columnIndices.get(listIndex);
@@ -321,10 +328,12 @@ public class CSVTool {
                     }
                     writer.write(columnName != null ? columnName : "");
                     if (listIndex < columnIndices.size() - 1) {
-                        writer.write(separator); // divide columns
+                        // Divide attributes with separator
+                        writer.write(separator);
                     }
                 }
-                writer.newLine(); // New line after header row
+                // Add new line after header row
+                writer.newLine();
             }
 
             // Write data in CSV File
@@ -337,10 +346,12 @@ public class CSVTool {
                     }
                     writer.write(value != null ? value : "");
                     if (listIndex < columnIndices.size() - 1) {
-                        writer.write(separator); // divide columns
+                        // Divide attributes with separator
+                        writer.write(separator);
                     }
                 }
-                writer.newLine(); // new line after each row
+                // Add new line after each row
+                writer.newLine();
             }
         }
         return columnIndices;
@@ -348,29 +359,29 @@ public class CSVTool {
 
 
     /**
-     * Writes information about BCNF relations, including foreign and primary keys, to an output file.
+     * Writes information about relations, including foreign and primary keys, to an output file.
      *
-     * @param dataset     The list of Relation objects in a dataset representing BCNF relations.
+     * @param dataset     The list of Relation objects in a dataset.
      * @param columnOrder The list of lists of the indices representing the current order of the columns.
      * @param filepath    The file path where the information will be saved.
      */
     public void writeKeyFile(Dataset dataset, List<List<Integer>> columnOrder, String identifier, String filepath) {
 
-        // Write Information of Relations in a File
+        // Write information of relations in a file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
             for (int j = 1; j <= dataset.getRelations().size(); j++) {
 
-                // Write Index of Relation:
+                // Write index of relation:
                 writer.write("Relation " + identifier + j + ": \n");
                 Relation relation = dataset.getRelations().get(j-1);
 
-                // Create Map to access according Column index (index summary still refers to all columns of relation)
+                // Create translation Map to access corresponding column index (index summary still refers to all columns of relation)
                 Map<Integer, Integer> translation = new HashMap<>();
                 for(int i = 1; i <= relation.getData().keySet().size(); i++) {
                     translation.put(columnOrder.get(j - 1).get(i - 1), i);
                 }
 
-                // Write Foreign Key
+                // Write foreign keys
                 List<Integer> foreignKeys = relation.getForeignKeyIndices();
                 if (!foreignKeys.isEmpty()) {
                     writer.write("Foreign Key: ");
@@ -383,7 +394,7 @@ public class CSVTool {
                     writer.write(";\n");
                 }
 
-                // write Primary Key
+                // write primary keys
                 List<Integer> primaryKeys = relation.getKeyIndices();
                 if (!primaryKeys.isEmpty()) {
                     writer.write("Primary Key: ");
@@ -404,10 +415,10 @@ public class CSVTool {
 
 
     /**
-     * Writes a mapping of input relation columns to their corresponding columns in multiple datasets to a text file.
+     * Writes a mapping of input relation columns to their corresponding columns in multiple datasets to a txt file.
      *
-     * @param inputRelation the {@code Relation} object representing the input relation whose columns are being mapped.
-     * @param datasets      a list of {@code Dataset} objects containing relations to which the input relation is mapped.
+     * @param inputRelation the Relation object representing the input relation whose columns are being mapped.
+     * @param datasets      a list of Dataset objects containing relations to which the input relation is mapped.
      * @param identifier    an array of unique identifiers for the datasets, used in the mapping to distinguish datasets.
      * @param filepath      the path to the file where the generated mapping will be written.
      *
@@ -415,7 +426,7 @@ public class CSVTool {
      */
     public void writeMapping(Relation inputRelation, List<Dataset> datasets, String[] identifier, String filepath) {
 
-        // Create a Map that holds the original columns as key and their Mapping as value
+        // Create a Map that holds the original columns as key and their mapping as value
         Map<Integer, String> mapping = new HashMap<>();
         for (Map.Entry<Integer, Attribute> entry : inputRelation.getSchema().entrySet()) {
             int columnNumber = entry.getKey() + 1;
@@ -437,19 +448,19 @@ public class CSVTool {
                 Relation relation = datasets.get(i).getRelations().get(j);
                 List<Integer> columnIndices = new ArrayList<>(relation.getSchema().keySet());
 
-                // Create Translation to actual column number
+                // Create translation to actual column number
                 Map<Integer, Integer> translation = new HashMap<>();
                 for (int k = 1; k <= columnIndices.size(); k++) {
                     translation.put(columnOrder.get(k - 1), k);
                 }
 
-                // Add number and name of column to Mapping
+                // Add number and name of column to mapping
                 for (int k = 0; k < columnIndices.size(); k++) {
                     Integer originalColumnIndex = columnIndices.get(k);
                     Integer newColumnIndex = translation.get(originalColumnIndex);
                     int relationNumber = j + 1;
 
-                    // Build the addition string
+                    // Build the additional string
                     StringBuilder addition = new StringBuilder().append(identifier[i]).append(relationNumber).append("_column").append(newColumnIndex);
                     String columnName = relation.getSchema().get(originalColumnIndex).getColumnName();
                     if (columnName != null) {
@@ -457,7 +468,7 @@ public class CSVTool {
                     }
                     addition.append("; ");
 
-                    // Append the addition to the existing value in the mapping
+                    // Append the additional string to the existing value in the mapping
                     mapping.put(originalColumnIndex, mapping.get(originalColumnIndex) + addition);
                 }
             }

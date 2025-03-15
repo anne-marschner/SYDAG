@@ -9,7 +9,7 @@ import {
     Step7Schema,
 } from '@/utils/formValidation/formSchemas/formSchemas';
 
-// Mapping step index to the corresponding Zod schema
+// Mapping of step index to the corresponding schema
 const stepSchemas: { [key: number]: z.ZodSchema } = {
     0: Step1Schema,
     1: Step2Schema,

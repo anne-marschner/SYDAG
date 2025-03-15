@@ -4,6 +4,7 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
 
+// Define the types for the props 
 type StepProps = {
     splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
 
@@ -18,7 +19,6 @@ type StepProps = {
 
 type ShuffleType = "Shuffle Columns" | "Shuffle Rows" | "No Change" | null;
 
-// Main functional component for selecting shuffle options
 const Step7_ShuffleForm = ({
                                splitType,
                                updateForm,
@@ -28,7 +28,7 @@ const Step7_ShuffleForm = ({
                                datasetDShuffleOption,
                                errors,
                            }: StepProps) => {
-    // State management for the selected shuffle options
+    // States of datasets shuffle options
     const [shuffleOptionSelected1, setShuffleOptionSelected1] = useState<ShuffleType>(
         datasetAShuffleOption
     );
@@ -102,7 +102,7 @@ const Step7_ShuffleForm = ({
     );
 
     /**
-     * Effect to reset Datasets 3 and 4 when splitType changes away from "VerticalHorizontal".
+     * Effect to reset Datasets C and D when splitType changes away from "VerticalHorizontal".
      */
     useEffect(() => {
         if (splitType !== "VerticalHorizontal") {

@@ -8,7 +8,7 @@ type FormWrapperProps = {
     children: ReactNode; 
 };
 
-// Define animation variants for the form container using Framer Motion
+// Define animation variants for the form container
 const formVariants = {
     hidden: {
         opacity: 0,
@@ -37,20 +37,16 @@ const FormWrapper = ({title, description, children}: FormWrapperProps) => {
             animate="visible"
             exit="exit"
         >
-            {/* The header section of the form, containing the title and description. */}
             <div className="flex flex-col gap-2">
-                {/* The form title, styled with a larger font size and white color for contrast. */}
                 <h2 className="text-xl font-semibold text-white md:text-2xl">
-                    {title} {/* Displays the title passed as a prop. */}
+                    {title}
                 </h2>
 
-                {/* A brief description of the form section, styled with smaller font size and neutral color. */}
                 <p className="text-sm text-neutral-300 md:text-base">
-                    {description} {/* Displays the description passed as a prop. */}
+                    {description}
                 </p>
 
             </div>
-            {/* Rendering the children (form content or components) passed into the FormWrapper. */}
             {children}
 
         </motion.div>

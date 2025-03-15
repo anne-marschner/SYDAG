@@ -9,6 +9,7 @@ import vertical from "../public/assets/vertical.svg";
 import horizontal from "../public/assets/horizontal.svg";
 import verticalHorizontal from "../public/assets/verticalHorizontal.svg";
 
+// Define the types for the props 
 type StepProps = {
     splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
     rowOverlapPercentage: number | null;
@@ -96,9 +97,9 @@ const Step3_SplitForm = ({
             title="Select Split Type"
             description="Choose how to split your input: horizontally, vertically, or both."
         >
-            {/* Outer scrollable container */}
+            {/* Begin scrollable container */}
             <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
-                {/* Split Type ToggleGroup */}
+                {/* Split Type toggle group */}
                 <ToggleGroup.Root
                     orientation="horizontal"
                     className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-8"
@@ -144,7 +145,7 @@ const Step3_SplitForm = ({
                     <p className="text-red-500 text-sm">{errors.splitType[0]}</p>
                 )}
 
-                {/* Overlap Type Toggle Group */}
+                {/* Overlap Type toggle group */}
                 {(planSelected === "Horizontal" || planSelected === "VerticalHorizontal") && (
                     <div className="flex flex-col w-full">
                         <h3 className="text-lg text-white mb-2">Overlap Type</h3>
@@ -178,7 +179,7 @@ const Step3_SplitForm = ({
                     </div>
                 )}
 
-                {/* Sliders Section */}
+                {/* Sliders */}
                 <div className="flex flex-col space-y-6">
                     {(planSelected === "Horizontal" || planSelected === "VerticalHorizontal") && (
                         <>

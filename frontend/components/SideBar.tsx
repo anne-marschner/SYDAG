@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Define the type for props passed into the `SideBar` component.
+// Define the type for props passed into the `SideBar` component
 type NavProps = {
     currentStepIndex: number;
     goTo: (index: number) => void;
@@ -35,7 +35,6 @@ const SideBar = ({ currentStepIndex, goTo }: NavProps) => {
                                 }`}
                             >
                                 <span>{step.label}</span>
-                                {/* Underline */}
                                 {currentStepIndex === index && (
                                     <span
                                         className="absolute left-0 bottom-0 h-1 w-full transition-all duration-300"

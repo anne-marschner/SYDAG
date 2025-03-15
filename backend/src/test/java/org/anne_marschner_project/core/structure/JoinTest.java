@@ -43,7 +43,7 @@ class JoinTest {
         List<String> joinedData = result.getData().get(2);
         assertEquals(Arrays.asList("A;X", "B;Y", "C;Z"), joinedData, "Data names not correct");
 
-        // Check if second row was removed
+        // Check if third row was removed
         assertFalse(result.getData().containsKey(6), "The third column should have been removed");
     }
 

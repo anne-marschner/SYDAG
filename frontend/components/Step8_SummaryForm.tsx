@@ -265,7 +265,7 @@ const Step8_SummaryForm = ({
 
                         {splitType === "VerticalHorizontal" && (
                             <>
-                                {/* Horizontal Related Fields */}
+                                {/* Horizontal Fields */}
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Row Overlap</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{rowOverlapPercentage ?? "No value set"}</p>
@@ -284,7 +284,7 @@ const Step8_SummaryForm = ({
                                     </button>
                                 </div>
 
-                                {/* Vertical Related Fields */}
+                                {/* Vertical Fields */}
                                 <div className="mb-3">
                                     <h4 className="font-semibold text-white text-md">Column Overlap</h4>
                                     <p className="text-neutral-300 mt-1 text-sm">{columnOverlapPercentage ?? "No value set"}</p>
@@ -427,7 +427,6 @@ const Step8_SummaryForm = ({
                                 }`}
                             </p>
 
-                            {/* multi-select */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 Multi-Select:
                                 {datasetASchemaMultiselect && datasetASchemaMultiselect.length > 0
@@ -460,7 +459,6 @@ const Step8_SummaryForm = ({
                                 }`}
                             </p>
 
-                            {/* multi-select */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 Multi-Select:
                                 {datasetBSchemaMultiselect && datasetBSchemaMultiselect.length > 0
@@ -496,7 +494,6 @@ const Step8_SummaryForm = ({
                                         }`}
                                     </p>
 
-                                    {/* multi-select */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         Multi-Select:
                                         {datasetCSchemaMultiselect && datasetCSchemaMultiselect.length > 0
@@ -529,7 +526,6 @@ const Step8_SummaryForm = ({
                                         }`}
                                     </p>
 
-                                    {/* multi-select */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         Multi-Select:
                                         {datasetDSchemaMultiselect && datasetDSchemaMultiselect.length > 0
@@ -572,7 +568,6 @@ const Step8_SummaryForm = ({
                                 }`}
                             </p>
 
-                            {/* Multi-Select Summary */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {datasetADataMultiselect && datasetADataMultiselect.length > 0
                                     ? `Multi-Select: ${datasetADataMultiselect.join(", ")}`
@@ -605,7 +600,6 @@ const Step8_SummaryForm = ({
                                 }`}
                             </p>
 
-                            {/* Multi-Select Summary */}
                             <p className="text-neutral-300 mt-1 text-sm">
                                 {datasetBDataMultiselect && datasetBDataMultiselect.length > 0
                                     ? `Multi-Select: ${datasetBDataMultiselect.join(", ")}`
@@ -641,7 +635,6 @@ const Step8_SummaryForm = ({
                                         }`}
                                     </p>
 
-                                    {/* Multi-Select Summary */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {datasetCDataMultiselect && datasetCDataMultiselect.length > 0
                                             ? `Multi-Select: ${datasetCDataMultiselect.join(", ")}`
@@ -674,7 +667,6 @@ const Step8_SummaryForm = ({
                                         }`}
                                     </p>
 
-                                    {/* Multi-Select Summary */}
                                     <p className="text-neutral-300 mt-1 text-sm">
                                         {datasetDDataMultiselect && datasetDDataMultiselect.length > 0
                                             ? `Multi-Select: ${datasetDDataMultiselect.join(", ")}`

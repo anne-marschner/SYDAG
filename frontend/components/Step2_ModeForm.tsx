@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { FormItemsJSONSchema } from "@/utils/formValidation/formSchemas/formSchemas";
 import { z } from "zod";
 
+// Define the types for the props 
 type StepProps = {
     mode: "UploadJson" | "Manual" | null;
     jsonFile: File | null;
@@ -75,7 +76,7 @@ const Step2_ModeForm = ({
 
             setFileError(null);
 
-            // Update the form with the File reference
+            // Update the form with the file reference
             updateForm({ jsonFile: file });
 
             // Read the file and parse it
@@ -88,8 +89,7 @@ const Step2_ModeForm = ({
                         const jsonData = JSON.parse(text);
                         const parsedData = await FormItemsJSONSchema.parseAsync(jsonData);
 
-                        // If we have formData, merge it so we preserve older fields (e.g. csvFile, hasHeaders, etc.)
-                        // If formData is undefined, just update with parsedData alone.
+                        // If we have formData merge it to preserve older fields
                         if (formData) {
                             updateForm({ ...formData, ...parsedData });
                         } else {
@@ -177,7 +177,7 @@ const Step2_ModeForm = ({
                         )}
                     </div>
 
-                    {/* Download JSON Template link */}
+                    {/* Download JSON Template */}
                     <a
                         href="resources/template.json"
                         download="json-template.json"

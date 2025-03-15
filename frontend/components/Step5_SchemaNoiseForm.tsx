@@ -6,6 +6,7 @@ import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
 import { MultiSelect } from "@/components/ui/multi-select";
 
+// Multi-select options
 const frameworksList = [
   { value: "generateRandomString", label: "generateRandomString" },
   { value: "abbreviateFirstLetters", label: "abbreviateFirstLetters" },
@@ -18,6 +19,7 @@ const frameworksList = [
   { value: "removeVowels", label: "removeVowels" }
 ];
 
+// Define the types for the props 
 type StepProps = {
   splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
 
@@ -82,7 +84,7 @@ const Step5_SchemaNoiseForm = ({
                                  datasetDSchemaMultiselect,
                                  errors,
                                }: StepProps) => {
-  // Helper function to handle mutual exclusivity
+  // Helper function for exclusivity
   const handleMutualExclusivity = (
       setKeyEnabled: React.Dispatch<React.SetStateAction<boolean>>,
       setDeleteEnabled: React.Dispatch<React.SetStateAction<boolean>>,
@@ -107,7 +109,6 @@ const Step5_SchemaNoiseForm = ({
   const [datasetADeleteSchemaEnabled, setDatasetADeleteSchemaEnabled] = useState<boolean>(
       !!datasetASchemaDeleteSchema
   );
-  // initialize local state from props
   const [datasetASelections, setDatasetASelections] = useState<string[]>(
       datasetASchemaMultiselect ?? []
   );
@@ -148,21 +149,19 @@ const Step5_SchemaNoiseForm = ({
       datasetDSchemaMultiselect ?? []
   );
 
-  // DATASET 1
+  // Dataset A
   const handleDatasetAToggle = (checked: boolean) => {
     setDatasetAEnabled(checked);
     if (!checked) {
       setDatasetALevel(0);
       setDatasetAKeyEnabled(false);
       setDatasetADeleteSchemaEnabled(false);
-      // Reset multi-select
       setDatasetASelections([]);
       updateForm({
         datasetASchemaNoise: checked,
         datasetASchemaNoiseValue: 0,
         datasetASchemaKeyNoise: false,
         datasetASchemaDeleteSchema: false,
-        // also reset multiselect in parent
         datasetASchemaMultiselect: [],
       });
     } else {
@@ -202,14 +201,13 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // handle multi-select changes for dataset 1
+  // handle multi-select changes for dataset A
   const handleDatasetAMultiselectChange = (values: string[]) => {
     setDatasetASelections(values);
-    // Also store in parent form
     updateForm({ datasetASchemaMultiselect: values });
   };
 
-  // DATASET 2
+  // Dataset B
   const handleDatasetBToggle = (checked: boolean) => {
     setDatasetBEnabled(checked);
     if (!checked) {
@@ -261,13 +259,13 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // handle multi-select changes for dataset 2
+  // handle multi-select changes for dataset B
   const handleDatasetBMultiselectChange = (values: string[]) => {
     setDatasetBSelections(values);
     updateForm({ datasetBSchemaMultiselect: values });
   };
 
-  // DATASET 3
+  // Dataset C
   const handleDatasetCToggle = (checked: boolean) => {
     setDatasetCEnabled(checked);
     if (!checked) {
@@ -319,13 +317,13 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // handle multi-select changes for dataset 3
+  // handle multi-select changes for dataset C
   const handleDatasetCMultiselectChange = (values: string[]) => {
     setDatasetCSelections(values);
     updateForm({ datasetCSchemaMultiselect: values });
   };
 
-  // DATASET 4
+  // Dataset D
   const handleDatasetDToggle = (checked: boolean) => {
     setDatasetDEnabled(checked);
     if (!checked) {
@@ -377,13 +375,13 @@ const Step5_SchemaNoiseForm = ({
     );
   };
 
-  // handle multi-select changes for dataset 4
+  // handle multi-select changes for dataset D
   const handleDatasetDMultiselectChange = (values: string[]) => {
     setDatasetDSelections(values);
     updateForm({ datasetDSchemaMultiselect: values });
   };
 
-  // Effect to reset Datasets 3 and 4 when splitType changes
+  // Effect to reset Datasets C and D when splitType changes
   useEffect(() => {
     if (splitType !== "VerticalHorizontal") {
       // Reset Dataset C

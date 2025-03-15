@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { FormItems } from "@/components/types/formTypes";
 import { Toggle } from "@/components/ui/toggle";
 
-
+// Define the types for the props 
 type StepProps = {
     csvFile: File | null;
     hasHeaders: boolean | null;
@@ -72,7 +72,7 @@ const Step1_FileUploadForm = ({
             description="Please provide a CSV file."
         >
             <div className="w-full flex flex-col gap-10">
-                {/* File Upload Section */}
+                {/* File Upload */}
                 <div className="flex flex-col gap-2 custom-label">
                     <Label htmlFor="file">CSV File </Label>
 

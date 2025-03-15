@@ -13,9 +13,9 @@ public class CustomRelationalInputGenerator implements RelationalInputGenerator 
 
 
     /**
-     * Constructs a new CustomRelationalInputGenerator with a specified {@link RelationalInput}.
+     * Constructs a new CustomRelationalInputGenerator with a specified RelationalInput.
      *
-     * @param relationalInput the {@link RelationalInput} to be used by this generator.
+     * @param relationalInput the RelationalInput to be used by this generator.
      */
     public CustomRelationalInputGenerator(RelationalInput relationalInput) {
         this.relationalInput = relationalInput;
@@ -23,10 +23,10 @@ public class CustomRelationalInputGenerator implements RelationalInputGenerator 
 
 
     /**
-     * Returns the predefined {@link RelationalInput} instance.
+     * Returns the predefined RelationalInput instance.
      * In this use case we do not need to return a copy.
      *
-     * @return the {@link RelationalInput} instance specified at construction.
+     * @return the RelationalInput instance specified at construction.
      */
     @Override
     public RelationalInput generateNewCopy() {

@@ -37,7 +37,7 @@ class SchemaNoiseTest {
         SchemaNoise schemaNoise = new SchemaNoise(selectedMethods);
 
         // Call method to perturb schema
-        Relation perturbedRelation = schemaNoise.perturbSchema(sourceRelation, 100, false, false);
+        schemaNoise.perturbSchema(sourceRelation, 100, false, false);
 
         // Test if all 3 non-key columns out of 5 ColumnNames have been changed
         assertNotEquals("Identification Number", schema.get(0).getColumnName());
@@ -82,11 +82,8 @@ class SchemaNoiseTest {
             String perturbedColumn = perturbedRelation.getSchema().get(i).getColumnName();
             if (!originalColumn.equals(perturbedColumn)) {
                 changedColumnsCount++;
-                System.out.println("Column " + i + " changed from: " + originalColumn + " to: " + perturbedColumn);
             }
         }
-
-        // Test if exactly 3 column names have been changed
         assertEquals(4, changedColumnsCount);
     }
 
@@ -123,14 +120,10 @@ class SchemaNoiseTest {
         for (int i = 0; i < 5; i++) {
             String originalColumn = sourceColumnNames.get(i);
             String perturbedColumn = perturbedRelation.getSchema().get(i).getColumnName();
-
             if (!originalColumn.equals(perturbedColumn)) {
                 changedColumnsCount++;
-                System.out.println("Column " + i + " changed from: " + originalColumn + " to: " + perturbedColumn);
             }
         }
-
-        // Test if exactly 3 column names have been changed
         assertEquals(3, changedColumnsCount);
 
         // Test if Index that does not overlap stayed the same
@@ -187,12 +180,8 @@ class SchemaNoiseTest {
         // Test if all three words have been changed with the same method
         String replacement1 = replacements.get(0);
         assertEquals("H.", replacement1, "The words should have been abbreviated");
-
-        // Test if removeVowels was applied second
         String replacement2 = replacements.get(1);
         assertEquals("N.", replacement2, "The words should have been abbreviated");
-
-        // Test if other method was applied last
         String replacement3 = replacements.get(2);
         assertEquals("S.O.P.", replacement3, "The words should have been abbreviated");
     }
@@ -216,12 +205,8 @@ class SchemaNoiseTest {
         // Test if all words with vowels have been changed with the same method
         String replacement1 = replacements.get(0);
         assertEquals("Hbby", replacement1, "The vowels should have been removed");
-
-        // Test if removeVowels was applied second
         String replacement2 = replacements.get(1);
-        assertNotEquals("Nm", replacement2, "The word should have been changed");
-
-        // Test if other method was applied last
+        assertNotEquals("Nm", replacement2, "The vowels should have been removed");
         String replacement3 = replacements.get(2);
         assertEquals("Slry f Prsn", replacement3, "The vowels should have been removed");
     }
@@ -326,9 +311,9 @@ class SchemaNoiseTest {
         String replacement2 = replacements.get(1);
         assertEquals("Telefonnummer", replacement2, "The words should have been translated");
         String replacement3 = replacements.get(2);
-        assertEquals("Sprachen", replacement3, "The words should have been shuffled");
+        assertEquals("Sprachen", replacement3, "The words should have been translated");
         String replacement4 = replacements.get(3);
-        assertEquals("address_the", replacement4, "The words should have been translated");
+        assertEquals("address_the", replacement4, "The words should have been shuffled");
     }
 
     @Test
@@ -349,13 +334,13 @@ class SchemaNoiseTest {
 
         // Test if all words have been changed correct
         String replacement1 = replacements.get(0);
-        assertEquals("name_Person", replacement1, "The words should have been abbreviated");
+        assertEquals("name_Person", replacement1, "The words should have been shuffled");
         String replacement2 = replacements.get(1);
-        assertEquals("slry prsn", replacement2, "The words should have been translated");
+        assertEquals("slry prsn", replacement2, "The vowels should have been removed");
         String replacement3 = replacements.get(2);
-        assertEquals("Hbbys", replacement3, "The words should have been abbreviated");
+        assertEquals("Hbbys", replacement3, "The vowels should have been removed");
         String replacement4 = replacements.get(3);
-        assertEquals("number_phone", replacement4, "The words should have been abbreviated");
+        assertEquals("number_phone", replacement4, "The words should have been shuffled");
     }
 
     @Test
@@ -426,12 +411,12 @@ class SchemaNoiseTest {
 
         // Test if all words have been changed correct
         String replacement1 = replacements.get(0);
-        assertEquals("Prsn", replacement1, "The words should have been shuffled");
+        assertEquals("Prsn", replacement1, "The vowels should have been removed");
         String replacement2 = replacements.get(1);
         assertEquals("sjd", replacement2, "The words vowels should have been removed");
         String replacement3 = replacements.get(2);
-        assertEquals("identification number", replacement3, "The words should have been shuffled");
+        assertEquals("identification number", replacement3, "The words should have been replaced with a synonym");
         String replacement4 = replacements.get(3);
-        assertEquals("k", replacement4, "The words should have been replaced with synonyme");
+        assertEquals("k", replacement4, "The vowels should have been removed");
     }
 }

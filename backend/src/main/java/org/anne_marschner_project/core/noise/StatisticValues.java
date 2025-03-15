@@ -1,7 +1,9 @@
 package org.anne_marschner_project.core.noise;
 
+import org.anne_marschner_project.core.data.Relation;
+
 /**
- * The StatisticValues class represents basic statistical values calculated for a data set,
+ * The StatisticValues class represents basic statistical values calculated for a column of a {@link Relation},
  * specifically the mean and standard deviation.
  */
 public class StatisticValues {
@@ -13,8 +15,8 @@ public class StatisticValues {
     /**
      * Constructs a StatisticValues instance with specified mean and standard deviation values.
      *
-     * @param mean the mean value of the data set
-     * @param standardDeviation the standard deviation of the data set
+     * @param mean the mean value of the column.
+     * @param standardDeviation the standard deviation of the column.
      */
     public StatisticValues (double mean, double standardDeviation) {
         this.mean = mean;
@@ -23,9 +25,9 @@ public class StatisticValues {
 
 
     /**
-     * Returns the mean value of the data set.
+     * Returns the mean value of a column.
      *
-     * @return the mean value
+     * @return the mean value.
      */
     public double getMean() {
         return mean;
@@ -33,9 +35,9 @@ public class StatisticValues {
 
 
     /**
-     * Returns the standard deviation of the data set.
+     * Returns the standard deviation of the column.
      *
-     * @return the standard deviation value
+     * @return the standard deviation value.
      */
     public double getStandardDeviation() {
         return standardDeviation;

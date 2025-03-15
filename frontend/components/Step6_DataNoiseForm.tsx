@@ -23,6 +23,7 @@ const frameworksList = [
   { value: "mapColumn", label: "mapColumn" }
 ];
 
+// Define the types for the props 
 type StepProps = {
   splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
 
@@ -87,7 +88,7 @@ const Step6_DataNoiseForm = ({
                                datasetDDataMultiselect,
                                errors,
                              }: StepProps) => {
-  // DATASET 1 STATE
+  // Dataset A State
   const [datasetAEnabled, setDatasetAEnabled] = useState<boolean>(!!datasetADataNoise);
   const [datasetALevel, setDatasetALevel] = useState<number>(datasetADataNoiseValue ?? 0);
   const [datasetAKeyEnabled, setDatasetAKeyEnabled] = useState<boolean>(!!datasetADataKeyNoise);
@@ -95,12 +96,11 @@ const Step6_DataNoiseForm = ({
       datasetADataNoiseInside ?? 0
   );
 
-  // multi-select local state
   const [datasetASelections, setDatasetASelections] = useState<string[]>(
       datasetADataMultiselect ?? []
   );
 
-  // DATASET 2 STATE
+  // Dataset B State
   const [datasetBEnabled, setDatasetBEnabled] = useState<boolean>(!!datasetBDataNoise);
   const [datasetBLevel, setDatasetBLevel] = useState<number>(datasetBDataNoiseValue ?? 0);
   const [datasetBKeyEnabled, setDatasetBKeyEnabled] = useState<boolean>(!!datasetBDataKeyNoise);
@@ -112,7 +112,7 @@ const Step6_DataNoiseForm = ({
       datasetBDataMultiselect ?? []
   );
 
-  // DATASET 3 STATE
+  // Dataset C State
   const [datasetCEnabled, setDatasetCEnabled] = useState<boolean>(!!datasetCDataNoise);
   const [datasetCLevel, setDatasetCLevel] = useState<number>(datasetCDataNoiseValue ?? 0);
   const [datasetCKeyEnabled, setDatasetCKeyEnabled] = useState<boolean>(!!datasetCDataKeyNoise);
@@ -124,7 +124,7 @@ const Step6_DataNoiseForm = ({
       datasetCDataMultiselect ?? []
   );
 
-  // DATASET 4 STATE
+  // Dataset D State
   const [datasetDEnabled, setDatasetDEnabled] = useState<boolean>(!!datasetDDataNoise);
   const [datasetDLevel, setDatasetDLevel] = useState<number>(datasetDDataNoiseValue ?? 0);
   const [datasetDKeyEnabled, setDatasetDKeyEnabled] = useState<boolean>(!!datasetDDataKeyNoise);
@@ -136,14 +136,13 @@ const Step6_DataNoiseForm = ({
       datasetDDataMultiselect ?? []
   );
 
-  // DATASET 1 HANDLERS
+  // Dataset A Handlers
   const handleDatasetAToggle = (checked: boolean) => {
     setDatasetAEnabled(checked);
     if (!checked) {
       setDatasetALevel(0);
       setDatasetAKeyEnabled(false);
       setDatasetADataNoiseInsideState(0);
-      // Reset multi-select
       setDatasetASelections([]);
 
       updateForm({
@@ -175,13 +174,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ datasetADataNoiseInside: newValue });
   };
 
-  // handle multi-select changes for dataset 1
+  // handle multi-select changes for dataset A
   const handleDatasetAMultiselectChange = (values: string[]) => {
     setDatasetASelections(values);
     updateForm({ datasetADataMultiselect: values });
   };
 
-  // DATASET 2 HANDLERS
+  // Dataset B Handlers
   const handleDatasetBToggle = (checked: boolean) => {
     setDatasetBEnabled(checked);
     if (!checked) {
@@ -219,13 +218,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ datasetBDataNoiseInside: newValue });
   };
 
-  // handle multi-select changes for dataset 2
+  // handle multi-select changes for dataset B
   const handleDatasetBMultiselectChange = (values: string[]) => {
     setDatasetBSelections(values);
     updateForm({ datasetBDataMultiselect: values });
   };
 
-  // DATASET 3 HANDLERS
+  // Dataset C Handlers
   const handleDatasetCToggle = (checked: boolean) => {
     setDatasetCEnabled(checked);
     if (!checked) {
@@ -263,13 +262,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ datasetCDataNoiseInside: newValue });
   };
 
-  // handle multi-select changes for dataset 3
+  // handle multi-select changes for dataset C
   const handleDatasetCMultiselectChange = (values: string[]) => {
     setDatasetCSelections(values);
     updateForm({ datasetCDataMultiselect: values });
   };
 
-  // DATASET 4 HANDLERS
+  // Dataset D Handlers
   const handleDatasetDToggle = (checked: boolean) => {
     setDatasetDEnabled(checked);
     if (!checked) {
@@ -307,13 +306,13 @@ const Step6_DataNoiseForm = ({
     updateForm({ datasetDDataNoiseInside: newValue });
   };
 
-  // handle multi-select changes for dataset 4
+  // handle multi-select changes for dataset D
   const handleDatasetDMultiselectChange = (values: string[]) => {
     setDatasetDSelections(values);
     updateForm({ datasetDDataMultiselect: values });
   };
 
-  // Reset Datasets 3 and 4 if splitType != "VerticalHorizontal"
+  // Reset Datasets C and D if splitType != "VerticalHorizontal"
   useEffect(() => {
     if (splitType !== "VerticalHorizontal") {
       // Reset Dataset C

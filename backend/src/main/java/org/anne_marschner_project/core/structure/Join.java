@@ -9,13 +9,12 @@ import java.util.*;
 
 /**
  * The Join class provides functionality to join columns within a given {@link Relation}.
- * This class is useful for joining data by combining columns into a multivalued attribute.
  */
 public class Join {
 
 
     /**
-     * Joins specified columns of a Relation based on the given percentage of columns to join and separator.
+     * Joins specified columns of a Relation based on the given percentage of columns to join.
      *
      * @param relation       The Relation object containing the schema and data.
      * @param joinPercentage The percentage of columns to join from the overlapping columns.
@@ -24,7 +23,7 @@ public class Join {
      */
     public Relation joinColumns(Relation relation, Integer joinPercentage, char separator) {
 
-        // Get schema and data from Relation
+        // Get schema and data from relation
         Map<Integer, Attribute> schema = relation.getSchema();
 
         // Determine the indices of the columns that are eligible for joining
@@ -55,7 +54,7 @@ public class Join {
 
     /**
      * Executes the joining process on the Relation object by joining a specified number
-     * of columns from the given list of columns, using a specified separator.
+     * of columns.
      *
      * @param relation          The Relation to perform joins on.
      * @param numOfColumnsToJoin The number of columns to join based on the percentage.

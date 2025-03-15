@@ -9,25 +9,21 @@ import java.util.function.Predicate;
 
 /**
  * The DataNoise class is responsible for introducing noise into data.
- * It can apply noise to rows or columns of a given {@link Relation} by modifying values based on
- * numeric and string manipulation methods.
+ * It can apply noise to rows or columns of a given {@link Relation}.
  */
 public class DataNoise extends Noise {
 
-    // List of noise methods selected by the user.
-    private List<String> selectedStringMethods;
-    private List<String> selectedNumericMethods;
+    private List<String> selectedStringMethods;     // List of noise methods for alphanumeric entries selected by the user
+    private List<String> selectedNumericMethods;    // List of noise methods for numeric entries selected by the user
     private final List<String> existingNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
-
-    // Map to store precomputed statistical values for columns, minimizing recalculations.
-    Map<Integer, StatisticValues> statisticValuesOfColumns = new HashMap<>();
+    Map<Integer, StatisticValues> statisticValuesOfColumns = new HashMap<>();     // Map to store precomputed statistical values for columns
 
 
     /**
      * Constructs a DataNoise instance with specific noise methods for string and numeric data.
      *
-     * @param selectedStringMethods List of string manipulation methods to be used for noise.
-     * @param selectedNumericMethods List of numeric manipulation methods to be used for noise.
+     * @param selectedStringMethods List of alphanumeric error methods to be used for noise.
+     * @param selectedNumericMethods List of numeric error methods to be used for noise.
      */
     public DataNoise (List<String> selectedStringMethods, List<String> selectedNumericMethods) {
         this.selectedStringMethods = selectedStringMethods;
@@ -46,10 +42,11 @@ public class DataNoise extends Noise {
 
     /**
      * Determines the type of perturbation (row-based or column-based) and applies noise
-     * to the {@link Relation} based on the type.
+     * to the Relation based on the type.
      *
      * @param relation The Relation to be perturbed.
-     * @param noisePercentage The percentage of data to apply noise to.
+     * @param noisePercentage The percentage of columns/ rows to apply noise to.
+     * @param noiseInsidePercentage The percentage of entries within a column/ row to receive noise.
      * @param dataNoiseInKeys Whether keys in the data can receive noise.
      * @return The perturbed Relation.
      * @throws Exception If noise cannot be applied.
@@ -61,15 +58,15 @@ public class DataNoise extends Noise {
             return relation;
         }
 
-        // Determine whether Rows or Columns or both will de perturbed
+        // Determine whether rows or columns or both will de perturbed
         if (relation.getOverlappingColumnsIndices() == null) {
-            // Due to horizontal Splitting, the rows should be perturbed
+            // Due to horizontal splitting, the rows should be perturbed
             return perturbRowData(relation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys, false);
         } else if (relation.getNumOfOverlappingRows() == null) {
-            //  Due to vertical Splitting, the columns should be perturbed
+            //  Due to vertical splitting, the columns should be perturbed
             return perturbColumnData(relation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys);
         } else {
-            // Both splittings have been applied, so we add noise to columns and strings
+            // Both splittings have been applied, so we add noise to columns and rows
             Relation perturbedColumnRelation = perturbColumnData(relation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys);
             return perturbRowData(perturbedColumnRelation, noisePercentage, noiseInsidePercentage, dataNoiseInKeys, true);
         }
@@ -81,6 +78,7 @@ public class DataNoise extends Noise {
      *
      * @param relation The Relation to be perturbed.
      * @param noisePercentage The percentage of rows to apply noise to.
+     * @param noiseInsidePercentage The percentage of entries within a row to receive noise.
      * @param dataNoiseInKeys Whether keys in the data can receive noise.
      * @param columnPerturbation Whether the data already includes noise in columns.
      * @return The perturbed Relation.
@@ -88,7 +86,7 @@ public class DataNoise extends Noise {
      */
     public Relation perturbRowData(Relation relation, int noisePercentage, int noiseInsidePercentage ,boolean dataNoiseInKeys, boolean columnPerturbation) throws Exception {
 
-        // Get schema, data and number of Row Overlap from Relation
+        // Get schema, data and number of row overlap from relation
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
         Integer numOfOverlappingRows = relation.getNumOfOverlappingRows();
@@ -105,7 +103,7 @@ public class DataNoise extends Noise {
         // Get the column indices of the entries that are allowed to be perturbed
         List<Integer> selectableIndices = new ArrayList<>(data.keySet());
 
-        // Remove Keys if they shall not receive noise
+        // Remove keys if they shall not receive noise
         if (!dataNoiseInKeys) {
             selectableIndices.removeAll(relation.getKeyIndices());
             selectableIndices.removeAll(relation.getForeignKeyIndices());
@@ -117,7 +115,7 @@ public class DataNoise extends Noise {
             selectableIndices.removeAll(relation.getOverlappingColumnsIndices());
         }
 
-        // Get the rows of each index in indicesToPerturb (Loop through all rows that should be perturbed)
+        // Loop through all rows that should be perturbed
         for (int rowIndex : indicesToPerturb) {
 
             // Determine the number of values that can be perturbed
@@ -131,12 +129,9 @@ public class DataNoise extends Noise {
             for (int i = 0; i < numOfErrors; i++) {
                 int columnIndex = selectableIndices.get(i);
                 String entry = data.get(columnIndex).get(rowIndex);
-                System.out.println("Original: " + entry);
                 String replacement = chooseNoise(entry, schema.get(columnIndex), columnIndex, data.get(columnIndex));
-                System.out.println("Replacement: " + replacement);
                 data.get(columnIndex).set(rowIndex, replacement);
             }
-            System.out.println("Row got chosen for Noise: " + rowIndex);
         }
         return relation;
     }
@@ -147,29 +142,30 @@ public class DataNoise extends Noise {
      *
      * @param relation The Relation to be perturbed.
      * @param noisePercentage The percentage of columns to apply noise to.
+     * @param noiseInsidePercentage The percentage of entries within a column to receive noise.
      * @param dataNoiseInKeys Whether keys in the data can receive noise.
      * @return The perturbed Relation.
      * @throws Exception If noise cannot be applied.
      */
     public Relation perturbColumnData(Relation relation, int noisePercentage, int noiseInsidePercentage, boolean dataNoiseInKeys) throws Exception {
 
-        // Get schema, data and overlapping columns indices from Relation
+        // Get schema, data and overlapping columns indices from relation
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
         List<Integer> candidateColumnsIndices = new ArrayList<>(relation.getOverlappingColumnsIndices());
 
-        // Remove Keys if they shall not receive noise
+        // Remove keys if they shall not receive noise
         if (!dataNoiseInKeys) {
             candidateColumnsIndices.removeAll(relation.getKeyIndices());
             candidateColumnsIndices.removeAll(relation.getForeignKeyIndices());
             candidateColumnsIndices.removeAll(relation.getKeysBeforeNormalization());
         }
 
-        // Create Lists of indices of the Types
+        // Create Lists of indices of the types
         List<Integer> numericIndices = new ArrayList<>();
         List<Integer> stringIndices = new ArrayList<>();
 
-        // Go through all indices from overlappingColumnsIndices and add to correct Type list
+        // Go through all indices from overlappingColumnsIndices and add to correct type list
         for (Integer index: candidateColumnsIndices) {
             Type attributeType = schema.get(index).getDataType();
             if (attributeType.equals(Type.DOUBLE)) {
@@ -201,8 +197,8 @@ public class DataNoise extends Noise {
      *
      * @param data The data to perturb.
      * @param numNumericPerturbation The number of numeric columns to perturb.
-     * @param numericIndices Indices of columns containing numeric data.
-     * @param noiseInsidePercentage The noise percentage for column perturbation.
+     * @param numericIndices Indices of the columns containing numeric data.
+     * @param noiseInsidePercentage The percentage of entries within a column to receive noise.
      * @return Data with numeric noise applied.
      */
     public Map<Integer, List<String>> perturbNumericColumnData(Map<Integer, List<String>> data, int numNumericPerturbation, List<Integer> numericIndices, int noiseInsidePercentage) {
@@ -210,19 +206,18 @@ public class DataNoise extends Noise {
         // Shuffle the lists of column indices to randomize which ones will be perturbed
         Collections.shuffle(numericIndices);
 
-        // Add Noise in correct number of Columns (numNumericPerturbation)
+        // Add noise in correct number of columns (numNumericPerturbation)
         for (int i = 0; i < numNumericPerturbation; i++) {
 
             // Get the first column that will be perturbed
             int colIndex = numericIndices.get(i);
             List<String> column = data.get(colIndex);
-            System.out.println("Column got numeric noise " + colIndex);
 
             // Calculate mean, standard deviation and number of errors that will be added in column entries
             List<Double> numericColumn = createListOfDouble(column);
             double mean = calculateMean(numericColumn);
             double standardDeviation = calculateStandardDeviation(numericColumn, mean);
-            int numOfErrors = (int) Math.round((double) (numericColumn.size() * noiseInsidePercentage) / 100); //chooseNumberOfErrors(numericColumn.size(), noisePercentage);
+            int numOfErrors = (int) Math.round((double) (numericColumn.size() * noiseInsidePercentage) / 100);
 
             // Filter indices of Double values
             List<Integer> doubleIndices = new ArrayList<>();
@@ -247,12 +242,12 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Applies string-based noise to selected string columns.
+     * Applies alphanumeric-based noise to selected alphanumeric columns.
      *
      * @param data The data to perturb.
-     * @param numStringPerturbation The number of string columns to perturb.
-     * @param stringIndices Indices of columns containing string data.
-     * @param noiseInsidePercentage The noise percentage for column perturbation.
+     * @param numStringPerturbation The number of alphanumeric columns to perturb.
+     * @param stringIndices Indices of columns containing alphanumeric data.
+     * @param noiseInsidePercentage The percentage of entries within a column to receive noise.
      * @return Data with string noise applied.
      * @throws Exception If noise cannot be applied.
      */
@@ -267,7 +262,6 @@ public class DataNoise extends Noise {
             // Get the first column that will be perturbed
             int colIndex = stringIndices.get(i);
             List<String> column = data.get(colIndex);
-            System.out.println("Column got string noise " + colIndex);
 
             // Randomly decide whether mapColumns will be applied (only method that is applied to a column, not to an entry)
             if (Math.random() < 1.0 / selectedStringMethods.size() && selectedStringMethods.contains("mapColumn")) {
@@ -276,7 +270,7 @@ public class DataNoise extends Noise {
             }
 
             // Calculate number of errors that will be added in column entries
-            int numOfErrors = (int) Math.round((double) (column.size() * noiseInsidePercentage) / 100); //chooseNumberOfErrors(column.size(), noisePercentage);
+            int numOfErrors = (int) Math.round((double) (column.size() * noiseInsidePercentage) / 100);
 
             // Choose numOfErrors unique indices from the column to receive noise
             Set<Integer> indicesToModify = pickUniqueRandomIndices(column.size(), numOfErrors);
@@ -298,9 +292,9 @@ public class DataNoise extends Noise {
      * Determines the type of noise to apply based on the data type and selected methods for row perturbation.
      *
      * @param entry The data entry to be perturbed.
-     * @param attribute The attribute of the entry.
+     * @param attribute The attribute of the entry's column.
      * @param columnIndex The column index of the entry.
-     * @param columnValues All values in the column containing the entry.
+     * @param columnValues All values in the entry's column.
      * @return The perturbed data entry.
      * @throws Exception If noise cannot be applied.
      */
@@ -323,7 +317,7 @@ public class DataNoise extends Noise {
                 statisticValuesOfColumns.put(columnIndex, new StatisticValues(mean, standardDeviation));
             }
 
-            // Check if it really is a Double value (since DOUBLE columns can include some String values)
+            // Check if it really is a Double value (since DOUBLE columns can include some alphanumeric values)
             try {
                 Double.parseDouble(entry);
                 return chooseNumericNoise(entry, mean, standardDeviation);
@@ -331,7 +325,7 @@ public class DataNoise extends Noise {
                 return chooseNumericNoise("0", mean, standardDeviation);
             }
         } else {
-            // For String Entry: find applicable Methods and apply one
+            // For alphanumeric entry: find applicable Methods and apply one
             List<String> applicableMethods = findApplicableMethods(entry);
             return chooseStringNoise(entry, applicableMethods);
         }
@@ -339,7 +333,7 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Randomly selects a numeric noise method and applies it to a given entry in column perturbation.
+     * Randomly selects a numeric noise method and applies it to a given entry.
      *
      * @param entry The numeric data entry.
      * @param mean The mean value of the column for noise calculation.
@@ -359,17 +353,17 @@ public class DataNoise extends Noise {
             selectedMethod = selectedNumericMethods.get(random.nextInt(selectedNumericMethods.size()));
         }
 
-        // apply method
+        // Apply method
         return applyNumericMethod(selectedMethod, entry, mean, standardDeviation);
     }
 
 
     /**
-     * Randomly selects a string noise method and applies it to a given entry in column perturbation.
+     * Randomly selects an alphanumeric noise method and applies it to a given entry.
      *
-     * @param entry The string data entry.
-     * @param applicableMethods List of applicable string noise methods.
-     * @return The perturbed string entry.
+     * @param entry The alphanumeric data entry.
+     * @param applicableMethods List of applicable alphanumeric noise methods.
+     * @return The perturbed alphanumeric entry.
      * @throws Exception If noise cannot be applied.
      */
     public String chooseStringNoise(String entry, List<String> applicableMethods) throws Exception {
@@ -413,11 +407,11 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Applies a selected string noise method to a string entry.
+     * Applies a selected alphanumeric noise method to an alphanumeric entry.
      *
-     * @param selectedMethod The string noise method to apply.
-     * @param entry The string data entry to modify.
-     * @return The perturbed string entry.
+     * @param selectedMethod The alphanumeric noise method to apply.
+     * @param entry The alphanumeric data entry to modify.
+     * @return The perturbed alphanumeric entry.
      * @throws Exception If the selected method encounters an error.
      */
     private String applyStringMethod(String selectedMethod, String entry) throws Exception {
@@ -444,29 +438,29 @@ public class DataNoise extends Noise {
      * @param numToPerturb The total number of columns to perturb.
      * @param numOverlappingColumns The number of overlapping columns.
      * @param numOfNumericColumns The number of numeric columns in the data.
-     * @param numOfStringColumns The number of string columns in the data.
+     * @param numOfStringColumns The number of alphanumeric columns in the data.
      * @return The number of numeric columns to perturb.
      */
     public int calculateNumOfNumericPerturbation(int numToPerturb ,int numOverlappingColumns, int numOfNumericColumns, int numOfStringColumns) {
 
-        // Get number of String and Numeric Methods
+        // Get number of alphanumeric and numeric Methods
         int numOfStringMethods = selectedStringMethods.size();
         int numOfNumericMethods = selectedNumericMethods.size();
 
-        // If only Numeric Methods were selected, choose as many numeric columns as possible
+        // If only numeric methods were selected, choose as many numeric columns as possible
         if (numOfStringMethods == 0) {
             return Math.min(numOfNumericColumns, numToPerturb);
         }
 
-        // If only String Methods were selected, choose as little numeric columns as possible
+        // If only alphanumeric methods were selected, choose as little numeric columns as possible
         if (numOfNumericMethods == 0) {
             return numToPerturb - Math.min(numOfStringColumns, numToPerturb);
         }
 
-        // Calculate the ratio of numeric Columns in the Overlapping Columns
+        // Calculate the ratio of numeric Columns in the overlapping columns
         double percentageOfNumericColumns = (double) numOfNumericColumns / numOverlappingColumns;
 
-        // Calculate the proposed ratio of numeric Columns in the Noise Columns
+        // Calculate the proposed ratio of numeric columns in the noisy columns
         int proposedNumericPerturbation = (int) Math.ceil(numToPerturb * percentageOfNumericColumns);
 
         // Adjust ratio if needed to make sure each numeric method can be applied
@@ -474,10 +468,10 @@ public class DataNoise extends Noise {
             proposedNumericPerturbation = Math.min(numOfNumericColumns, numOfNumericMethods);
         }
 
-        // Calculate the ratio of String Columns in the Noise Columns
+        // Calculate the ratio of alphanumeric columns in the noisy columns
         int proposedStringPerturbation = numToPerturb - proposedNumericPerturbation;
 
-        // Adjust ratio if needed to make sure each string method can be applied
+        // Adjust ratio if needed to make sure each alphanumeric method can be applied
         if (proposedStringPerturbation < numOfStringMethods) {
             proposedStringPerturbation = Math.min(numOfStringColumns, numOfStringMethods);
 
@@ -499,14 +493,14 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Checks if a given string is a double value.
+     * Checks if a given String is a Double value.
      *
      * @param string The object to check.
      * @return True if the object is a double, otherwise false.
      */
     public boolean isDouble(String string) {
         try {
-            Double.valueOf(string); // Try to convert to Double
+            Double.valueOf(string);         // Try to convert to Double
         } catch (NumberFormatException e) {
             return false;
         }
@@ -515,7 +509,7 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Selects a unique set of random indices based on Floyd's algorithm.
+     * Selects a unique set of random indices.
      *
      * @param N The range of indices.
      * @param k The number of unique indices to select.
@@ -538,17 +532,16 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Finds applicable noise methods for a string entry based on its characteristics.
+     * Finds applicable noise methods for an alphanumeric entry based on its characteristics.
      *
-     * @param entry The string entry.
+     * @param entry The alphanumeric entry.
      * @return A list of applicable noise methods.
      */
     public List<String> findApplicableMethods(String entry) {
 
-        // Check if entry is empty string ""
-        // generateMissingValue returns: "-" and generateRandomString returns a random string
+        // Check if entry is empty string
         if (entry.isEmpty()) {
-            return Arrays.asList("generateMissingValue", "generateRandomString");
+            return Arrays.asList("generateMissingValue", "generateRandomString");  // generateMissingValue returns: "-" in case of empty input String
         }
 
         // Add the methods that can always be applied
@@ -576,9 +569,9 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Checks if any character in a string entry matches a given condition.
+     * Checks if any character in an alphanumeric entry matches a given condition.
      *
-     * @param entry The string data entry to check.
+     * @param entry The alphanumeric data entry to check.
      * @param condition The condition to test each character against.
      * @return True if at least one character in the entry matches the condition, otherwise false.
      */
@@ -597,9 +590,9 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Checks if a string entry contains characters that match any keyboard similarity defined above.
+     * Checks if an alphanumeric entry contains characters that match any keyboard similarity defined above.
      *
-     * @param entry The string data entry to check.
+     * @param entry The alphanumeric data entry to check.
      * @param map The map of keyboard similarity pairs.
      * @return True if the entry contains characters matching keyboard similarities, otherwise false.
      */
@@ -609,9 +602,9 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Checks if a string entry contains characters that match any phonetic similarity defined above.
+     * Checks if an alphanumeric entry contains characters that match any phonetic similarity defined above.
      *
-     * @param entry The string data entry to check.
+     * @param entry The alphanumeric data entry to check.
      * @param map The map of phonetic similarity pairs.
      * @return True if the entry contains characters matching phonetic similarities, otherwise false.
      */
@@ -621,9 +614,9 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Checks if a string entry contains characters that match any OCR similarity defined above.
+     * Checks if an alphanumeric entry contains characters that match any OCR similarity defined above.
      *
-     * @param entry The string data entry to check.
+     * @param entry The alphanumeric data entry to check.
      * @param map The map of OCR similarity pairs.
      * @return True if the entry contains characters matching OCR similarities, otherwise false.
      */
@@ -633,9 +626,9 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Checks if a string entry contains any format characters listed in a format list above.
+     * Checks if an alphanumeric entry contains any format characters listed in a format list above.
      *
-     * @param entry The string data entry to check.
+     * @param entry The alphanumeric data entry to check.
      * @param list The list of format-related characters to match.
      * @return True if the entry contains characters from the list, otherwise false.
      */
@@ -645,10 +638,10 @@ public class DataNoise extends Noise {
 
 
     /**
-     * Attempts to apply a list of string noise methods to an entry until a valid replacement is found.
+     * Attempts to apply a list of alphanumeric noise methods to an entry until a valid replacement is found.
      *
-     * @param entry The string data entry to perturb.
-     * @param methods A list of string noise methods to attempt.
+     * @param entry The alphanumeric data entry to perturb.
+     * @param methods A list of alphanumeric noise methods to attempt.
      * @return A perturbed version of the entry, or null if no valid replacement is found.
      * @throws Exception If any method in the list encounters an error.
      */

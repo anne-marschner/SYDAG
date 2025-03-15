@@ -47,12 +47,12 @@ public class FormDataController {
     @PostMapping(value = "/runSYDAG", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<StreamingResponseBody> handleFormSubmit(@RequestPart("parameters") FormDataWrapper formDataWrapper, BindingResult bindingResult, @RequestPart(value = "csvFile", required = false) MultipartFile csvFile) throws IOException {
 
-        // Check for binding errors.
+        // Check for binding errors
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(null);
         }
 
-        // Validate CSV file.
+        // Validate CSV file
         ResponseEntity<?> fileValidationResponse = validateCsvFile(csvFile);
         if (fileValidationResponse != null) {
             return ResponseEntity.badRequest().body(null);
@@ -62,14 +62,14 @@ public class FormDataController {
         params.setCsvFile(csvFile);
         params.setFormDataWrapper(formDataWrapper);
 
-        // Clean directories before execution.
+        // Clean directories before execution
         cleanupDirectories(TEMP_PATH, OUTPUT_PATH_BASE);
 
         try {
             String generatorOutputPath = createGeneratorOutputPath(csvFile);
             generator.execute(params, generatorOutputPath);
 
-            // Build the streaming response by reading from the results directory on-the-fly.
+            // Build the streaming response by reading from the results directory
             StreamingResponseBody stream = outputStream -> {
                 try (ZipOutputStream zos = new ZipOutputStream(outputStream)) {
                     File directory = new File(OUTPUT_PATH_BASE);
@@ -94,7 +94,7 @@ public class FormDataController {
                     logger.error("Error streaming zip file", e);
                     throw e;
                 } finally {
-                    // Clean up temporary directories after streaming completes.
+                    // Clean up temporary directories after streaming is complete
                     cleanupDirectories(TEMP_PATH, OUTPUT_PATH_BASE);
                 }
             };
@@ -125,7 +125,7 @@ public class FormDataController {
     }
 
     /**
-     * Creates a single-message error response.
+     * Creates an error response.
      */
     private ResponseEntity<Map<String, Object>> createSingleErrorResponse(String errorMessage) {
         Map<String, Object> errorResponse = new HashMap<>();
@@ -143,7 +143,7 @@ public class FormDataController {
     }
 
     /**
-     * Deletes all non-directory files (excluding application.yml) within the specified directory.
+     * Deletes all non-directory files within the specified directory.
      */
     private void cleanupDirectory(String directoryPath) {
         File directory = new File(directoryPath);
@@ -162,7 +162,7 @@ public class FormDataController {
     }
 
     /**
-     * Utility method to clean up multiple directories.
+     * Method to clean up multiple directories.
      */
     private void cleanupDirectories(String... directories) {
         for (String dir : directories) {

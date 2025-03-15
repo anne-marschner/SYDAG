@@ -17,13 +17,12 @@ public class KeyFinder {
 
 
     /**
-     * Identifies the indices of key columns in the provided {@link Relation} using the HyUCCAlgorithm.
-     * The key columns uniquely identify each row within the relation.
+     * Identifies the indices of key columns in the provided Relation using the HyUCC-Algorithm.
      *
-     * @param relation the relation to analyze for key columns
-     * @param relationName the name of the relation for identification purposes
-     * @return a list of integers representing the indices of the key columns within the relation schema
-     * @throws AlgorithmExecutionException if an error occurs while executing the HyUCC-Algorithm
+     * @param relation the relation to analyze for key columns.
+     * @param relationName the name of the relation for identification.
+     * @return a list of integers representing the indices of the key columns within the relation schema.
+     * @throws AlgorithmExecutionException if an error occurs while executing the HyUCC-Algorithm.
      */
     public List<Integer> findKeyIndices(Relation relation, String relationName) throws AlgorithmExecutionException {
 
@@ -44,7 +43,7 @@ public class KeyFinder {
         hyucc.execute();
         System.out.println("UCCs were found successfully and sent to Result Receiver.");
 
-        // Get the UCC with the smallest amount of columns since it represents the key (should be the first one in the list)
+        // Get the UCC with the smallest amount of columns since it represents the key
         List<Set<ColumnIdentifier>> allUCCs = uccReceiver.getAllUCCs();
         List<Integer> keyColumns = new ArrayList<>();
 

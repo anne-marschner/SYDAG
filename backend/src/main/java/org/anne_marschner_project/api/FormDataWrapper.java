@@ -71,7 +71,7 @@ public class FormDataWrapper {
     private String overlapType;
 
     // --------------- Step 4: Structure ------------------
-    // Dataset 1
+    // Dataset A
     @NotBlank(message = "datasetA structure type cannot be blank")
     @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetA structure type must be 'BCNF', 'Join Columns', or 'No Change'")
     private String datasetAStructureType;
@@ -84,7 +84,7 @@ public class FormDataWrapper {
     @Max(value = 100, message = "datasetA Join Columns slider value cannot exceed 100")
     private Integer datasetAJoinColumnsSliderValue;
 
-    // Dataset 2
+    // Dataset B
     @NotBlank(message = "datasetB structure type cannot be blank")
     @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetB structure type must be 'BCNF', 'Join Columns', or 'No Change'")
     private String datasetBStructureType;
@@ -97,7 +97,7 @@ public class FormDataWrapper {
     @Max(value = 100, message = "datasetB Join Columns slider value cannot exceed 100")
     private Integer datasetBJoinColumnsSliderValue;
 
-    // Dataset 3
+    // Dataset C
     @NotBlank(message = "datasetC structure type cannot be blank")
     @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetC structure type must be 'BCNF', 'Join Columns', or 'No Change'")
     private String datasetCStructureType;
@@ -110,7 +110,7 @@ public class FormDataWrapper {
     @Max(value = 100, message = "datasetC Join Columns slider value cannot exceed 100")
     private Integer datasetCJoinColumnsSliderValue;
 
-    // Dataset 4
+    // Dataset D
     @NotBlank(message = "datasetD structure type cannot be blank")
     @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetD structure type must be 'BCNF', 'Join Columns', or 'No Change'")
     private String datasetDStructureType;
@@ -124,7 +124,7 @@ public class FormDataWrapper {
     private Integer datasetDJoinColumnsSliderValue;
 
     // --------------- Step 5: Schema Noise ------------------
-    // Dataset 1
+    // Dataset A
     @NotNull(message = "datasetA schema noise flag cannot be null")
     private Boolean datasetASchemaNoise;
 
@@ -139,7 +139,7 @@ public class FormDataWrapper {
     @NotNull(message = "datasetA delete schema flag cannot be null")
     private Boolean datasetASchemaDeleteSchema;
 
-    // Dataset 2
+    // Dataset B
     @NotNull(message = "datasetB schema noise flag cannot be null")
     private Boolean datasetBSchemaNoise;
 
@@ -154,7 +154,7 @@ public class FormDataWrapper {
     @NotNull(message = "datasetB delete schema flag cannot be null")
     private Boolean datasetBSchemaDeleteSchema;
 
-    // Dataset 3
+    // Dataset C
     @NotNull(message = "datasetC schema noise flag cannot be null")
     private Boolean datasetCSchemaNoise;
 
@@ -169,7 +169,7 @@ public class FormDataWrapper {
     @NotNull(message = "datasetC delete schema flag cannot be null")
     private Boolean datasetCSchemaDeleteSchema;
 
-    // Dataset 4
+    // Dataset D
     @NotNull(message = "datasetD schema noise flag cannot be null")
     private Boolean datasetDSchemaNoise;
 
@@ -185,7 +185,7 @@ public class FormDataWrapper {
     private Boolean datasetDSchemaDeleteSchema;
 
     // --------------- Step 6: Data Noise ------------------
-    // Dataset 1
+    // Dataset A
     @NotNull(message = "datasetA data noise flag cannot be null")
     private Boolean datasetADataNoise;
 
@@ -202,7 +202,7 @@ public class FormDataWrapper {
     @Max(value = 100, message = "datasetA data noise inside value cannot exceed 100")
     private Integer datasetADataNoiseInside;
 
-    // Dataset 2
+    // Dataset B
     @NotNull(message = "datasetB data noise flag cannot be null")
     private Boolean datasetBDataNoise;
 
@@ -219,7 +219,7 @@ public class FormDataWrapper {
     @Max(value = 100, message = "datasetB data noise inside value cannot exceed 100")
     private Integer datasetBDataNoiseInside;
 
-    // Dataset 3
+    // Dataset C
     @NotNull(message = "datasetC data noise flag cannot be null")
     private Boolean datasetCDataNoise;
 
@@ -236,7 +236,7 @@ public class FormDataWrapper {
     @Max(value = 100, message = "datasetC data noise inside value cannot exceed 100")
     private Integer datasetCDataNoiseInside;
 
-    // Dataset 4
+    // Dataset D
     @NotNull(message = "datasetD data noise flag cannot be null")
     private Boolean datasetDDataNoise;
 

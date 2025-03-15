@@ -5,6 +5,7 @@ import FormWrapper from "./FormWrapper";
 import { FormItems } from "@/components/types/formTypes";
 import { Slider } from "@/components/ui/slider";
 
+// Define the types for the props 
 type StepProps = {
     splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
 
@@ -28,6 +29,7 @@ type StepProps = {
     // Slider values for Dataset D
     datasetDBCNFSliderValue: number | null;
     datasetDJoinColumnsSliderValue: number | null;
+
     updateForm: (fieldToUpdate: Partial<FormItems>) => void;
     errors: Record<string, string[]>;
 };
@@ -51,7 +53,7 @@ const Step4_StructureForm = ({
                                  datasetDJoinColumnsSliderValue,
                                  errors,
                              }: StepProps) => {
-    // State for selected structure type per dataset
+    // State for selected structure type of each dataset
     const [planSelectedA, setPlanSelectedA] = useState<StructureType | null>(datasetAStructureType);
     const [planSelectedB, setPlanSelectedB] = useState<StructureType | null>(datasetBStructureType);
     const [planSelectedC, setPlanSelectedC] = useState<StructureType | null>(datasetCStructureType);
@@ -87,7 +89,6 @@ const Step4_StructureForm = ({
                 setPlanSelectedA(selected as StructureType);
                 updateForm({ datasetAStructureType: selected as StructureType });
 
-                // Reset sliders if not relevant
                 if (selected !== "BCNF") {
                     setDatasetABCNFValue(0);
                     updateForm({ datasetABCNFSliderValue: 0 });
@@ -259,10 +260,7 @@ const Step4_StructureForm = ({
     }, [splitType, updateForm]);
 
     /**
-     * A. Count how many sliders are visible
-     *    Each dataset can have either BCNF or Join Columns => A slider
-     *    If it's "No Change", 0 sliders
-     * B. Multiply that count by A00 for the container height
+     * Count how many sliders are visible.
      */
     let visibleSlidersCount = 0;
 
@@ -288,9 +286,9 @@ const Step4_StructureForm = ({
             title="Select Structure Options"
             description="Choose between 'No Change', 'Normalize to BCNF', and 'Join Columns' for each dataset that SYDAG creates."
         >
-            {/* Outer scrollable container for everything */}
+            {/* Begin outer scrollable container for everything */}
             <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
-                {/* Main Flex Container for Dataset Controls */}
+                {/* Begin Container for Dataset Controls */}
                 <div className="flex flex-col md:flex-row md:gap-8 w-full">
                     {/* Dataset A Controls */}
                     <div className="flex flex-col w-full md:w-1/2 lg:w-1/2 mb-4">
@@ -454,12 +452,8 @@ const Step4_StructureForm = ({
                     )}
                 </div>
 
-                {/* 2. Sliders Section - dynamic height based on how many are visible */}
+                {/* Sliders */}
                 <div className="flex flex-col w-full space-y-3.5">
-                    {/**
-                     * Count how many "BCNF" or "Join Columns" are selected across all visible datasets
-                     * Each is 1 slider => multiply by 100
-                     */}
                     <div
                         className="overflow-hidden transition-all duration-300"
                         style={{ height: `${sliderContainerHeight}px` }}

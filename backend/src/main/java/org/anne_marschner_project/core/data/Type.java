@@ -4,15 +4,16 @@ import java.util.List;
 
 /**
  * Represents the data types for values in a column.
- * The two possible types are STRING for non-numeric values and DOUBLE for numeric values.
+ * The two possible types are STRING for alphanumeric values and DOUBLE for numeric values.
  */
 public enum Type {
-    STRING, // All values that are not numbers
-    DOUBLE; // All values that are numbers
+
+    STRING, // All values that are alphanumeric
+    DOUBLE; // All values that are numeric
 
 
     /**
-     * Determines the {@link Type} of a column based on the values in that column.
+     * Determines the Type of a column based on the values in that column.
      * The method analyzes a list of column values and returns either {@link Type#STRING} or {@link Type#DOUBLE}.
      * The decision is based on the ratio of numeric to non-numeric values in the list.
      *
@@ -21,7 +22,7 @@ public enum Type {
      */
     public static Type determineType(List<String> columnValues) {
 
-        // / Counts for number of DOUBLE and STRING values
+        // Counts for number of DOUBLE and STRING values
         int doubleCount = 0;
         int stringCount = 0;
         int totalCount = columnValues.size();

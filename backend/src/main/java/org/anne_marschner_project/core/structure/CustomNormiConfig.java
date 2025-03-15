@@ -2,7 +2,6 @@ package org.anne_marschner_project.core.structure;
 
 /**
  * The CustomNormiConfig class represents a configuration for files for the Normalize algorithm.
- * It allows users to specify properties to control how the input file is read and parsed.
  */
 public class CustomNormiConfig {
 

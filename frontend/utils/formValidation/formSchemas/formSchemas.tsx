@@ -224,7 +224,7 @@ export const Step4Schema = z
             .nullable().optional(),
     })
     .superRefine((data, ctx) => {
-        // Conditional validation for Datasets 1 and 2
+        // Conditional validation for Datasets A and B
         const datasets = [1, 2, 3, 4];
         datasets.forEach((dataset) => {
             const structureType = data[`dataset${dataset}StructureType` as keyof typeof data];
@@ -254,7 +254,7 @@ export const Step4Schema = z
 
         // Additional conditional validations based on splitType
         if (data.splitType !== "VerticalHorizontal") {
-            // If splitType is not VerticalHorizontal, ensure datasets 3 and 4 are not set
+            // If splitType is not VerticalHorizontal, ensure datasets C and D are not set
             if (data.datasetCStructureType !== null) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
@@ -305,7 +305,7 @@ export const Step7Schema = z.object({
 export const FormItemsJSONSchema = z
     .object({
 
-        // Step 3
+        // Step 3 (Split)
         splitType: z.enum(['Horizontal', 'Vertical', 'VerticalHorizontal']),
         rowOverlapPercentage: z.number().min(0).max(100).nullable(),
         columnOverlapPercentage: z.number().min(0).max(100).nullable(),

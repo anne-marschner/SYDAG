@@ -31,7 +31,7 @@ const Step10_SuccessMessage: React.FC<Step10_SuccessMessageProps> = ({ downloadU
 
     const refresh = () => window.location.reload();
 
-    //Handles the download of the ZIP file.
+    // Handles the download of the ZIP file
     const handleDownload = () => {
         if (!downloadUrl) {
             alert("Download link is not available.");

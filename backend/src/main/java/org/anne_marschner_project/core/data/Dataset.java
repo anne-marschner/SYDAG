@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a dataset that contains a list of relations.
+ * Represents a dataset that contains a list of {@link Relation}.
  * The Dataset class is used to store and manage multiple relations.
  */
 public class Dataset {
@@ -14,6 +14,7 @@ public class Dataset {
 
     /**
      * Constructs an empty Dataset with no relations.
+     *
      * Initializes the relations list as an empty ArrayList.
      */
     public Dataset() {
@@ -24,7 +25,7 @@ public class Dataset {
     /**
      * Constructs a Dataset with a specified list of relations.
      *
-     * @param relations the list of relations to be included in the dataset
+     * @param relations the list of relations to be included in the dataset.
      */
     public Dataset(List<Relation> relations) {
         this.relations = relations;
@@ -34,7 +35,7 @@ public class Dataset {
     /**
      * Returns the list of relations contained in this dataset.
      *
-     * @return a list of {@link Relation} objects
+     * @return a list of Relation objects.
      */
     public List<Relation> getRelations() {
         return relations;
@@ -44,7 +45,7 @@ public class Dataset {
     /**
      * Sets the list of relations for this dataset.
      *
-     * @param relations the list of {@link Relation} objects to be set
+     * @param relations the list of Relation objects to be set.
      */
     public void setRelations(List<Relation> relations) {
         this.relations = relations;

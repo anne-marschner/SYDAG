@@ -20,22 +20,18 @@ export type FormItems = {
     overlapType: "Mixed Overlap" | "Block Overlap" | null;
 
     // Step 4
-    // Dataset A
     datasetAStructureType: "BCNF" | "Join Columns" | "No Change" | null;
     datasetABCNFSliderValue: number | null;
     datasetAJoinColumnsSliderValue: number | null;
 
-    // Dataset B
     datasetBStructureType: "BCNF" | "Join Columns" | "No Change" | null;
     datasetBBCNFSliderValue: number | null;
     datasetBJoinColumnsSliderValue: number | null;
 
-    // Dataset C
     datasetCStructureType: "BCNF" | "Join Columns" | "No Change" | null;
     datasetCBCNFSliderValue: number | null;
     datasetCJoinColumnsSliderValue: number | null;
 
-    // Dataset D
     datasetDStructureType: "BCNF" | "Join Columns" | "No Change" | null;
     datasetDBCNFSliderValue: number | null;
     datasetDJoinColumnsSliderValue: number | null;
@@ -66,28 +62,24 @@ export type FormItems = {
     datasetDSchemaMultiselect: string[] | null; 
 
     // Step 6
-    // Data Noise for Dataset A
     datasetADataNoise: boolean | null;
     datasetADataNoiseValue: number | null;
     datasetADataKeyNoise: boolean | null;
     datasetADataNoiseInside: number | null;
     datasetADataMultiselect: string[] | null;
 
-    // Data Noise for Dataset B
     datasetBDataNoise: boolean | null;
     datasetBDataNoiseValue: number | null;
     datasetBDataKeyNoise: boolean | null;
     datasetBDataNoiseInside: number | null;
     datasetBDataMultiselect: string[] | null;
 
-    // Data Noise for Dataset C
     datasetCDataNoise: boolean | null;
     datasetCDataNoiseValue: number | null;
     datasetCDataKeyNoise: boolean | null;
     datasetCDataNoiseInside: number | null;
     datasetCDataMultiselect: string[] | null;
 
-    // Data Noise for Dataset D
     datasetDDataNoise: boolean | null;
     datasetDDataNoiseValue: number | null;
     datasetDDataKeyNoise: boolean | null;

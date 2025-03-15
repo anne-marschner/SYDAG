@@ -20,9 +20,9 @@ public class CustomUCCResultReceiver implements UniqueColumnCombinationResultRec
 
 
     /**
-     * Receives a {@link UniqueColumnCombination} result, logs it, and stores it in a list.
+     * Receives a UniqueColumnCombination result, logs it, and stores it in a list.
      *
-     * @param uniqueColumnCombination the unique column combination to be stored
+     * @param uniqueColumnCombination the unique column combination to be stored.
      */
     @Override
     public void receiveResult(UniqueColumnCombination uniqueColumnCombination) {
@@ -35,11 +35,11 @@ public class CustomUCCResultReceiver implements UniqueColumnCombinationResultRec
 
 
     /**
-     * Determines if a given {@link UniqueColumnCombination} is accepted by this receiver.
+     * Determines if a given UniqueColumnCombination is accepted by this receiver.
      * In this implementation, all UCCs are accepted.
      *
-     * @param uniqueColumnCombination the unique column combination to be checked
-     * @return {@code true}, indicating that the result is accepted
+     * @param uniqueColumnCombination the unique column combination to be checked.
+     * @return true, indicating that the result is accepted.
      */
     @Override
     public Boolean acceptedResult(UniqueColumnCombination uniqueColumnCombination) {
@@ -50,7 +50,7 @@ public class CustomUCCResultReceiver implements UniqueColumnCombinationResultRec
     /**
      * Retrieves all unique column combinations (UCCs) collected by this receiver.
      *
-     * @return a list of sets of {@link ColumnIdentifier} objects representing unique column combinations
+     * @return a list of sets of ColumnIdentifier objects representing unique column combinations.
      */
     public List<Set<ColumnIdentifier>> getAllUCCs() {
         return allUCCs;

@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 
 export function useMultistepForm(totalSteps: number, hasIntroScreen = false) {
-    // Initialize currentStepIndex based on whether there's an intro screen
+    // Initialize currentStepIndex
     const [currentStepIndex, setCurrentStepIndex] = useState(hasIntroScreen ? -1 : 0);
 
     /**
@@ -20,7 +20,6 @@ export function useMultistepForm(totalSteps: number, hasIntroScreen = false) {
     const previousStep = useCallback(() => {
         setCurrentStepIndex((prevIndex) => {
             const newIndex = prevIndex - 1;
-            // If there's an intro screen, don't allow going back beyond -1
             const minIndex = hasIntroScreen ? -1 : 0;
             return newIndex >= minIndex ? newIndex : prevIndex;
         });
@@ -36,10 +35,9 @@ export function useMultistepForm(totalSteps: number, hasIntroScreen = false) {
     }, [hasIntroScreen, totalSteps]);
 
     /**
-     * Function to start the form from the intro screen (if applicable).
+     * Function to start the form from the intro screen.
      */
     const startForm = useCallback(() => {
-        // If there's an intro screen, start at step 0; otherwise, ensure it's already at step 0
         setCurrentStepIndex(hasIntroScreen ? 0 : 0);
     }, [hasIntroScreen]);
 

@@ -104,7 +104,6 @@ class DataNoiseTest {
         }
     }
 
-
     @Test
     void testFindApplicableMethods() {
 
@@ -145,6 +144,7 @@ class DataNoiseTest {
 
     @Test
     void testCalculateNumOfNumericPerturbation_NoAdjustmentNeeded() {
+        // Case: no adjustments needed
         int numToPerturb = 8;
         int numOverlappingColumns = 10;
         int numOfNumericColumns = 4;
@@ -156,10 +156,9 @@ class DataNoiseTest {
         assertEquals(4, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_AdjustNumeric() {
-        // Case: more numeric Methods chosen than numeric columns in proposed ratio (would be 1 but now 2)
+        // Case: more numeric Methods chosen than numeric columns in proposed ratio
         int numToPerturb = 6;
         int numOverlappingColumns = 20;
         int numOfNumericColumns = 3;
@@ -171,10 +170,9 @@ class DataNoiseTest {
         assertEquals(2, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_AdjustString() {
-        // Case: more String Methods chosen than string columns in proposed ratio (would be 1 but now 4)
+        // Case: more String Methods chosen than string columns in proposed ratio
         int numToPerturb = 6;
         int numOverlappingColumns = 40;
         int numOfNumericColumns = 25;
@@ -186,10 +184,9 @@ class DataNoiseTest {
         assertEquals(2, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_AdjustBoth() {
-        // Case: more Methods chosen than columns exist and both are adjusted (ratio shifted to String but numeric is kept)
+        // Case: more Methods chosen than columns exist and both are adjusted
         int numToPerturb = 4;
         int numOverlappingColumns = 40;
         int numOfNumericColumns = 5;
@@ -201,10 +198,9 @@ class DataNoiseTest {
         assertEquals(2, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_TooManyMethods() {
-        // Case: more Methods chosen than columns exist (ratio shifted to String but numeric is kept)
+        // Case: more Methods chosen than columns exist
         int numToPerturb = 4;
         int numOverlappingColumns = 40;
         int numOfNumericColumns = 35;
@@ -216,10 +212,9 @@ class DataNoiseTest {
         assertEquals(1, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_TwoMethodsChosen() {
-        // Only two rows will be perturbed (one of each)
+        // Case: only two rows will be perturbed (one of each)
         int numToPerturb = 2;
         int numOverlappingColumns = 40;
         int numOfNumericColumns = 35;
@@ -231,9 +226,9 @@ class DataNoiseTest {
         assertEquals(1, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_OnlyStringMethods() {
+        // Case: only string methods chosen
         int numToPerturb = 10;
         int numOverlappingColumns = 40;
         int numOfNumericColumns = 34;
@@ -245,9 +240,9 @@ class DataNoiseTest {
         assertEquals(4, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_OnlyNumericMethods() {
+        // Case: only numeric methods chosen
         int numToPerturb = 10;
         int numOverlappingColumns = 20;
         int numOfNumericColumns = 7;
@@ -259,9 +254,9 @@ class DataNoiseTest {
         assertEquals(7, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_NoNumericColumns() {
+        // Case: no numeric columns exist
         int numToPerturb = 10;
         int numOverlappingColumns = 10;
         int numOfNumericColumns = 0;
@@ -273,9 +268,9 @@ class DataNoiseTest {
         assertEquals(0, result);
     }
 
-
     @Test
     void testCalculateNumOfNumericPerturbation_NoStringColumns() {
+        // Case: no string columns exist
         int numToPerturb = 3;
         int numOverlappingColumns = 10;
         int numOfNumericColumns = 10;
@@ -286,7 +281,6 @@ class DataNoiseTest {
         int result = dataNoise.calculateNumOfNumericPerturbation(numToPerturb ,numOverlappingColumns, numOfNumericColumns, numOfStringColumns);
         assertEquals(3, result);
     }
-
 
     @Test
     void testPerturbData_VerticalSplit() throws Exception {
@@ -320,7 +314,7 @@ class DataNoiseTest {
         // Apply method
         Relation perturbedRelation = dataNoise.perturbData(sourceRelation, noisePercentage, noiseInsidePercentage,true);
 
-        // 1 or 2 values should have been changed
+        // Column 1: 1 or 2 values should have been changed
         List<String> resultColumn0 = perturbedRelation.getData().get(0);
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         int changesinColumn0 = 0;
@@ -332,7 +326,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn0 <= 2, "Too many values changed");
         assertTrue(changesinColumn0 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 2: 1 or 2 values should have been changed
         List<String> resultColumn1 = perturbedRelation.getData().get(1);
         List<String> originalColumn1 = new ArrayList<>(Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
         int changesinColumn1 = 0;
@@ -344,7 +338,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn1 <= 2, "Too many values changed");
         assertTrue(changesinColumn1 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 3: 1 or 2 values should have been changed
         List<String> resultColumn2 = perturbedRelation.getData().get(2);
         List<String> originalColumn2 = new ArrayList<>(Arrays.asList("", "", "", "", "a", "b", "c", "d"));
         int changesinColumn2 = 0;
@@ -356,7 +350,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn2 <= 2, "Too many values changed");
         assertTrue(changesinColumn2 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 4: 1 or 2 values should have been changed
         List<String> resultColumn3 = perturbedRelation.getData().get(3);
         List<String> originalColumn3 = new ArrayList<>(Arrays.asList("10", "20", "20", "15", "30", "10", "16", "20"));
         int changesinColumn3 = 0;
@@ -368,7 +362,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn3 <= 2, "Too many values changed");
         assertTrue(changesinColumn3 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        //  Column 5: 1 or 2 values should have been changed
         List<String> resultColumn4 = perturbedRelation.getData().get(4);
         List<String> originalColumn4 = new ArrayList<>(Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         int changesinColumn4 = 0;
@@ -380,7 +374,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn4 <= 2, "Too many values changed");
         assertTrue(changesinColumn4 >= 1, "Not enough values changed");
 
-        // Column 5 should stay the same
+        // Column 6 should stay the same
         List<String> column5 = perturbedRelation.getData().get(5);
         assertEquals(Arrays.asList("1", "2", "hi", "3.5", "3", "2.5", "3.4", "bye"), column5, "Column should not be changed");
     }
@@ -588,7 +582,7 @@ class DataNoiseTest {
         // Apply method
         Relation perturbedRelation = dataNoise.perturbColumnData(sourceRelation, noisePercentage, noiseInsidePercentage,true);
 
-        // 1 or 2 values should have been changed
+        // Column 1: 1 or 2 values should have been changed
         List<String> resultColumn0 = perturbedRelation.getData().get(0);
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         int changesinColumn0 = 0;
@@ -600,7 +594,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn0 <= 2, "Too many values changed");
         assertTrue(changesinColumn0 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 2: 1 or 2 values should have been changed
         List<String> resultColumn1 = perturbedRelation.getData().get(1);
         List<String> originalColumn1 = new ArrayList<>(Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
         int changesinColumn1 = 0;
@@ -612,7 +606,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn1 <= 2, "Too many values changed");
         assertTrue(changesinColumn1 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 3: 1 or 2 values should have been changed
         List<String> resultColumn2 = perturbedRelation.getData().get(2);
         List<String> originalColumn2 = new ArrayList<>(Arrays.asList("", "", "", "", "a", "b", "c", "d"));
         int changesinColumn2 = 0;
@@ -624,7 +618,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn2 <= 2, "Too many values changed");
         assertTrue(changesinColumn2 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 4: 1 or 2 values should have been changed
         List<String> resultColumn3 = perturbedRelation.getData().get(3);
         List<String> originalColumn3 = new ArrayList<>(Arrays.asList("10", "20", "20", "15", "30", "10", "16", "20"));
         int changesinColumn3 = 0;
@@ -636,7 +630,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn3 <= 2, "Too many values changed");
         assertTrue(changesinColumn3 >= 1, "Not enough values changed");
 
-        // 1 or 2 values should have been changed
+        // Column 5: 1 or 2 values should have been changed
         List<String> resultColumn4 = perturbedRelation.getData().get(4);
         List<String> originalColumn4 = new ArrayList<>(Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         int changesinColumn4 = 0;
@@ -648,7 +642,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn4 <= 2, "Too many values changed");
         assertTrue(changesinColumn4 >= 1, "Not enough values changed");
 
-        // Column 5 should stay the same
+        // Column 6 should stay the same
         List<String> column5 = perturbedRelation.getData().get(5);
         assertEquals(Arrays.asList("1", "2", "hi", "3.5", "3", "2.5", "3.4", "bye"), column5, "Column should not be changed");
     }
@@ -661,7 +655,7 @@ class DataNoiseTest {
         List<String> selectedNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
 
-        // Mock data
+        // Create relation
         Map<Integer, List<String>> data = new HashMap<>();
         data.put(0, Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         data.put(1, Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
@@ -676,7 +670,7 @@ class DataNoiseTest {
         // Apply method
         Map<Integer, List<String>> result = dataNoise.perturbStringColumnData(data, numStringPerturbation, stringIndices, noiseInsidePercentage);
 
-        // 2 or 3 values should have been changed
+        // Column 1: 2 or 3 values should have been changed
         List<String> resultColumn0 = result.get(0);
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("la lo", "lu le", "le li", "li lo", "lo lu", "mo mu", "wo wu", "to tu"));
         int changesinColumn0 = 0;
@@ -688,7 +682,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn0 <= 3, "Too many values changed");
         assertTrue(changesinColumn0 >= 2, "Not enough values changed");
 
-        // 2 or 3 values should have been changed
+        // Column 3: 2 or 3 values should have been changed
         List<String> resultColumn2 = result.get(2);
         List<String> originalColumn2 = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h"));
         int changesinColumn2 = 0;
@@ -700,7 +694,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn2 <= 3, "Too many values changed");
         assertTrue(changesinColumn2 >= 2, "Not enough values changed");
 
-        // Column 1 and 3 should stay the same
+        // Column 2 and 4 should stay the same
         List<String> column1 = result.get(1);
         assertEquals(Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"), column1, "Column should not be changed");
         List<String> column3 = result.get(3);
@@ -716,7 +710,7 @@ class DataNoiseTest {
         List<String> selectedNumericMethods = new ArrayList<>(Arrays.asList("changeValue", "changeValueToOutlier"));
         DataNoise dataNoise = new DataNoise(selectedStringMethods, selectedNumericMethods);
 
-        // Mock data
+        // Create Relation
         Map<Integer, List<String>> data = new HashMap<>();
         data.put(0, Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         data.put(1, Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
@@ -730,7 +724,7 @@ class DataNoiseTest {
         // Apply method
         Map<Integer, List<String>> result = dataNoise.perturbNumericColumnData(data, numNumericPerturbation, numericIndices, noiseInsidePercentage);
 
-        // 2 or 3 values should have been changed
+        // Column 1: 2 or 3 values should have been changed
         List<String> resultColumn0 = result.get(0);
         List<String> originalColumn0 = new ArrayList<>(Arrays.asList("1.0", "2.0", "hi", "3.5", "3.0", "2.5", "3.4", "bye"));
         int changesinColumn0 = 0;
@@ -742,7 +736,7 @@ class DataNoiseTest {
         assertTrue(changesinColumn0 <= 3, "Too many values changed");
         assertTrue(changesinColumn0 >= 2, "Not enough values changed");
 
-        // 2 or 3 values should have been changed
+        // Column 2: 2 or 3 values should have been changed
         List<String> resultColumn1 = result.get(1);
         List<String> originalColumn1 = new ArrayList<>(Arrays.asList("10.5", "20", "20.0", "15.2", "30", "10.8", "16.9", "20"));
         int changesinColumn1 = 0;

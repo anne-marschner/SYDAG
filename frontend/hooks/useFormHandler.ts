@@ -45,7 +45,7 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                 return;
             }
 
-            // Logic to jump to the last step if UploadJson is chosen at step 1
+            // Jump to the last step if UploadJson is chosen
             if (currentStepIndex === 1) {
                 if (formData.mode === 'UploadJson' && formData.jsonFile) {
                     goTo(totalSteps - 1);
@@ -79,7 +79,7 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                         const jsonFileContent = await formData.jsonFile.text();
                         const jsonFileData = JSON.parse(jsonFileContent);
 
-                        // Omit actual files from the JSON portion
+                        // Omit actual files from the JSON
                         const { csvFile, jsonFile, ...rest } = formData;
 
                         // Merge the uploaded JSON data with existing form fields
@@ -88,7 +88,7 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                             ...jsonFileData,
                         };
                     } else {
-                        // No JSON file uploaded; just remove file objects from final JSON
+                        // If no JSON file uploaded, remove file objects from final JSON
                         const { csvFile, jsonFile, ...rest } = formData;
                         jsonParameters = rest;
                     }
@@ -123,7 +123,7 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                         const blob = await response.blob();
                         setDownloadBlob(blob);
 
-                        // Create a URL for the blob
+                        // Create an URL for the blob
                         const url = window.URL.createObjectURL(blob);
                         setDownloadUrl(url);
 
@@ -139,13 +139,13 @@ export function useFormHandler(initialValues: FormItems, totalSteps: number) {
                 } catch (error) {
                     setErrors((prevErrors) => ({
                         ...prevErrors,
-                        network: ['A network error occurred. Please try again.'],
+                        network: ['A network error occurred.'],
                     }));
                 } finally {
                     setIsGenerating(false);
                 }
             } else {
-                // Otherwise, go to the next step
+                // Go to the next step
                 nextStep();
             }
         },

@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 /**
  * The Generator class combines various processes, such as reading, splitting,
  * normalizing, and adding noise to data, to generate datasets that simulate real-world scenarios
- * with schema and data perturbations. The class also handles writing the final datasets to CSV files.
+ * with schema and data perturbations.
  */
 @Service
 public class Generator {
@@ -31,10 +31,10 @@ public class Generator {
     private static final int THREAD_POOL_SIZE = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
 
     /**
-     * Executes the entire data generation process using the parameters provided.
+     * Executes the entire dataset generation process using the parameters provided.
      *
      * @param params The parameters encapsulated in a GeneratorParameters object.
-     * @param outputPath the path for the output datasets and metadata
+     * @param outputPath the path for the output datasets and metadata.
      */
     public void execute(GeneratorParameters params, String outputPath) {
 
@@ -135,40 +135,41 @@ public class Generator {
         String[] shuffleTypes = {datasetAShuffleOption, datasetBShuffleOption, datasetCShuffleOption, datasetDShuffleOption};
         String[] identifier = {"A", "B", "C", "D"};
 
-        // Begin processing
+        // -------------------- Begin processing -----------------------
+
         // Read information from file into relation
         Relation inputRelation = readInput(csvFile, hasHeaders, separator, quoteChar, escapeChar);
 
-        // Set key indices for the input relation
+        // Set key indices of the input relation
         setKeyIndices(inputRelation);
 
-        // Split Relation according to selected direction
+        // Split relation
         List<Relation> splitDataset = splitRelation(inputRelation, columnOverlapPercentage, rowOverlapPercentage, columnDistribution, rowDistribution, splitType, overlapType);
 
-        // Apply BCNF
+        // Apply normalization to BCNF on each created dataset
         List<Dataset> datasets = new ArrayList<>();
         for (int i = 0; i < splitDataset.size(); i++) {
             datasets.add(applyNormalization(splitDataset.get(i), structureTypes[i], separator, quoteChar, normalizePercentages[i]));
         }
 
-        // Add Schema Noise to the datasets
+        // Add Schema Noise to the created datasets
         for (int i = 0; i < datasets.size(); i++) {
             datasets.set(i, addSchemaNoise(datasets.get(i), hasHeaders, selectedSchemaMethods.get(i), schemaNoisePercentages[i],
                     schemaNoiseInKeys[i], schemaNoise[i], deleteSchema[i]));
         }
 
-        // Add Data Noise to datasets
+        // Add Data Noise to the created datasets
         for (int i = 0; i < datasets.size(); i++) {
             datasets.set(i, addDataNoise(datasets.get(i), selectedStringMethods.get(i), selectedNumericMethods.get(i),
                     dataNoisePercentages[i], noiseInsidePercentage[i], dataNoiseInKeys[i], dataNoise[i]));
         }
 
-        // Apply Join
+        // Apply Join on each created dataset
         for (int i = 0; i < datasets.size(); i++) {
             datasets.set(i, applyJoin(datasets.get(i), structureTypes[i], joinPercentages[i], separator));
         }
 
-        // Use a fixed thread pool to write datasets concurrently
+        // Write created datasets and their keys (use fixed thread pool to write concurrently)
         CSVTool csvTool = new CSVTool();
         ExecutorService executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         List<Future<?>> futures = new ArrayList<>();
@@ -190,7 +191,7 @@ public class Generator {
         }
         executor.shutdown();
 
-        // Write mapping file.
+        // Write mapping file
         csvTool.writeMapping(inputRelation, datasets, identifier, outputPath + "_Mapping.txt");
 
         datasets.clear();
@@ -198,20 +199,20 @@ public class Generator {
 
 
     /**
-     * Extracts the list of methods related to string operations from the provided list.
+     * Extracts the methods for alphanumeric entries from the provided list.
      *
-     * @param allChosenMethods the list of all selected methods
-     * @return a list of methods that are categorized as string-related methods
+     * @param allChosenMethods the list of all selected methods.
+     * @return a list of methods that are categorized as alphanumeric methods.
      */
     public List<String> extractStringMethods(List<String> allChosenMethods) {
 
-        // Define the String Methods
+        // Define the alphanumeric methods
         Set<String> stringMethods = Set.of(
                 "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue",
                 "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
                 "generateRandomString", "mapColumn"
         );
-        // Filter the entries that are String methods
+        // Filter the alphanumeric methods
         return allChosenMethods.stream()
                 .filter(stringMethods::contains)
                 .collect(Collectors.toList());
@@ -219,18 +220,18 @@ public class Generator {
 
 
     /**
-     * Extracts a list of methods related to numeric operations from the provided list.
+     * Extracts the methods for numeric entries from the provided list.
      *
-     * @param allChosenMethods the list of all selected methods
-     * @return a list of methods that are categorized as numeric-related methods
+     * @param allChosenMethods the list of all selected methods.
+     * @return a list of methods that are categorized as numeric methods.
      */
     public List<String> extractNumericMethods(List<String> allChosenMethods) {
 
-        // Define the String Methods
+        // Define the numeric Methods
         Set<String> stringMethods = Set.of(
                 "changeValue", "changeValueToOutlier"
         );
-        // Filter the entries that are String methods
+        // Filter the numeric methods
         return allChosenMethods.stream()
                 .filter(stringMethods::contains)
                 .collect(Collectors.toList());
@@ -238,14 +239,14 @@ public class Generator {
 
 
     /**
-     * Reads input data from a CSV file and creates a {@link Relation} object.
+     * Reads the input data from a CSV file and creates a Relation object.
      *
      * @param csvFile    The CSV file to read.
      * @param hasHeaders Indicates if the CSV file has headers.
      * @param separator  The separator used in the CSV file.
      * @param quoteChar  The quote Character used in the CSV file.
      * @param escapeChar  The escape Character used in the CSV file.
-     * @return A {@link Relation} object representing the CSV data, or null if an error occurs.
+     * @return A Relation object representing the CSV data, or null if an error occurs.
      */
     public Relation readInput(MultipartFile csvFile, boolean hasHeaders, char separator, char quoteChar, char escapeChar) {
         try {
@@ -259,17 +260,15 @@ public class Generator {
 
 
     /**
-     * Sets the primary key indices for a given {@link Relation}.
+     * Sets the primary key indices of a given Relation.
      *
-     * @param relation The {@link Relation} for which key indices are determined.
+     * @param relation The Relation for which key indices are determined.
      */
     private void setKeyIndices(Relation relation) {
         try {
             KeyFinder keyFinder = new KeyFinder();
             List<Integer> keyIndices = keyFinder.findKeyIndices(relation, "input");
             relation.setKeyIndices(keyIndices);
-            System.out.println("Key indices: ");
-            keyIndices.forEach(System.out::println);
         } catch (AlgorithmExecutionException e) {
             System.err.println("Error finding keys: " + e.getMessage());
         }
@@ -277,13 +276,13 @@ public class Generator {
 
 
     /**
-     * Splits a {@link Relation} into two relations based on the specified overlap and split type.
+     * Splits a Relation into two relations based on the specified overlap and split type.
      *
-     * @param relation               The {@link Relation} to be split.
+     * @param relation               The Relation to be split.
      * @param columnOverlapPercentage Percentage of columns to overlap in the split.
      * @param rowOverlapPercentage    Percentage of rows to overlap in the split.
-     * @param splitType               The split type ("Vertical" or "Horizontal").
-     * @return A list of {@link Relation} objects after the split.
+     * @param splitType               The split type ("Vertical","Horizontal"or "VerticalHorizontal").
+     * @return A list of Relation objects after the split.
      */
     private List<Relation> splitRelation(Relation relation, Integer columnOverlapPercentage, Integer rowOverlapPercentage, Integer columnDistribution, Integer rowDistribution, String splitType, String overlapType) {
 
@@ -310,13 +309,13 @@ public class Generator {
 
 
     /**
-     * Applies BCNF normalization to a given {@link Relation} and stores the results in a {@link Dataset}.
+     * Applies normalization to a given Relation and stores the results in a Dataset.
      *
-     * @param relation        The {@link Relation} to be normalized.
+     * @param relation        The Relation to be normalized.
      * @param structureType   The structure type ("BCNF", "Join Columns" or "No Change").
      * @param separator       The separator for the CSV file.
      * @param quoteChar       The quote character for the CSV file.
-     * @return A {@link Dataset} containing the BCNF-normalized relations.
+     * @return A Dataset containing normalized or the original relations.
      */
     private Dataset applyNormalization(Relation relation, String structureType, char separator, char quoteChar, Integer normalizePercentage) {
         try {
@@ -336,7 +335,7 @@ public class Generator {
 
 
     /**
-     * Adds schema noise to a dataset, optionally targeting key columns.
+     * Adds schema noise to a dataset.
      *
      * @param dataset              The dataset to which schema noise is added.
      * @param hasHeaders           Indicates if the dataset has headers.
@@ -345,7 +344,7 @@ public class Generator {
      * @param schemaNoiseInKeys    If true, applies schema noise to key columns.
      * @param schemaNoise          If true, enables schema noise addition.
      * @param deleteSchema         If true, schema is deleted.
-     * @return A new {@link Dataset} with schema noise added.
+     * @return A Dataset with schema noise or the original Dataset.
      */
     private Dataset addSchemaNoise(Dataset dataset, boolean hasHeaders, List<String> selectedSchemaMethods, Integer schemaNoisePercentage,
                                    boolean schemaNoiseInKeys, boolean schemaNoise, boolean deleteSchema) {
@@ -368,15 +367,15 @@ public class Generator {
 
 
     /**
-     * Adds data noise to a dataset, optionally targeting key columns, using specified string and numeric methods.
+     * Adds data noise to a dataset.
      *
      * @param dataset              The dataset to which data noise is added.
-     * @param selectedStringMethods The list of string manipulation methods for data noise.
-     * @param selectedNumericMethods The list of numeric manipulation methods for data noise.
+     * @param selectedStringMethods The list of alphanumeric error methods for data noise.
+     * @param selectedNumericMethods The list of numeric error methods for data noise.
      * @param dataNoisePercentage   The percentage of data noise to apply.
      * @param dataNoiseInKeys       If true, applies data noise to key columns.
      * @param dataNoise             If true, enables data noise addition.
-     * @return A new {@link Dataset} with data noise added.
+     * @return A Dataset with data noise or the original Dataset.
      */
     private Dataset addDataNoise(Dataset dataset, List<String> selectedStringMethods, List<String> selectedNumericMethods,
                                  Integer dataNoisePercentage, Integer noiseInsidePercentage, boolean dataNoiseInKeys, boolean dataNoise) {
@@ -399,11 +398,11 @@ public class Generator {
 
 
     /**
-     * Applies a join operation to the dataset if specified by structure type.
+     * Applies a join operation to the dataset if specified by the structure type.
      *
      * @param dataset        The dataset to which the join is applied.
      * @param structureType  The structure type ("BCNF", "Join Columns" or "No Change").
-     * @return A new {@link Dataset} after the join is applied.
+     * @return A Dataset with applied joins or the original Dataset.
      */
     private Dataset applyJoin(Dataset dataset, String structureType, Integer joinPercentage, char separator) {
         Dataset joinedDataset = new Dataset();
@@ -418,7 +417,7 @@ public class Generator {
 
 
     /**
-     * Writes a {@link Dataset} to one or more CSV files and applies specified shuffling.
+     * Writes a Dataset to one or more CSV files and applies specified shuffling.
      *
      * @param dataset        The dataset to write to CSV.
      * @param filepathOutput The base path for the output files.
@@ -429,16 +428,16 @@ public class Generator {
      */
     private void writeDataset(CSVTool csvTool, Dataset dataset, String filepathOutput, char separator, char quoteChar, String shuffleType, int datasetNumber, String identifier) {
         try {
-            // Save order of Column Indices
+            // List to save the order of the column indices
             List<List<Integer>> columnOrder = new ArrayList<>();
 
-            // Write Dataset in CSV
+            // Write Dataset in CSV file
             for (int i = 1; i <= dataset.getRelations().size(); i++) {
                 String outputFilepath = filepathOutput + i + ".csv";
                 columnOrder.add(csvTool.writeCSV(dataset.getRelations().get(i - 1), outputFilepath, separator, quoteChar, shuffleType));
             }
 
-            // Write Keys for dataset in txt file
+            // Write keys of dataset in txt file
             csvTool.writeKeyFile(dataset, columnOrder, identifier, filepathOutput + "_keys.txt");
             csvTool.getColumnOrders().put(datasetNumber, columnOrder);
         } catch (IOException e) {

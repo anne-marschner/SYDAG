@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The IndexSummary class summarizes key metadata about a relation's structure.
+ * The IndexSummary class summarizes metadata about a relation's structure.
  * Specifically which columns serve as keys and foreign keys, as well as which columns are included in the relation.
  */
 public class IndexSummary {

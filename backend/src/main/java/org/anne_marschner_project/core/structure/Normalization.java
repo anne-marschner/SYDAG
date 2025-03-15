@@ -22,37 +22,37 @@ import java.util.regex.Pattern;
 
 /**
  * The Normalization class provides functionality to normalize database relations to
- * Boyce-Codd Normal Form (BCNF). It uses the Normalize algorithm to identify the BCNF.
+ * Boyce-Codd Normal Form (BCNF). It uses the Normalize algorithm.
  */
 public class Normalization {
 
     /**
-     * Transforms a given {@link Relation} to BCNF by normalizing its data.
+     * Transforms a given Relation to BCNF by normalizing it.
      *
-     * @param relation        The original {@link Relation} to normalize.
+     * @param relation        The original Relation to normalize.
      * @param separator       The column separator for the CSV file.
      * @param quoteChar       The quote character for the CSV file.
      * @param normalizePercentage The percentage indicating the degree of normalization to apply.
-     * @return A list of {@link Relation} objects in BCNF.
+     * @return A list of Relation objects.
      * @throws IOException                   If an I/O error occurs during file operations.
      * @throws AlgorithmExecutionException   If an error occurs in the Normalize algorithm execution.
      */
     public List<Relation> transformToBCNF(Relation relation, char separator, char quoteChar, Integer normalizePercentage) throws IOException, AlgorithmExecutionException {
 
-        // create temporary csv file
+        // Create temporary CSV file
         Path tempFilepath = Files.createTempFile("temp", ".csv");
         tempFilepath.toFile().deleteOnExit();
 
-        // Write Data of Relation that should be normalized into CSV as Normalize needs CSV as Input
+        // Write data of relation that should be normalized into CSV as Normalize needs CSV as Input
         new CSVTool().writeCSV(relation,String.valueOf(tempFilepath), separator, quoteChar, "No Change");
 
-        // Apply Normalization to receive information about which indices should form which new relation
+        // Apply Normalization to receive information about which indices form BCNF-compliant relations
         List<IndexSummary> indicesBCNF = normalize(String.valueOf(tempFilepath), separator);
 
-        // Translate indices of BCNF Relations into column indices of original relation
+        // Translate indices of BCNF relations into column indices of original relation
         List<IndexSummary> indicesRelations = getRelationIndices(indicesBCNF, relation);
 
-        // Choose the relations that will be built by using the given percentage
+        // Choose the number of decomposition steps that will be performed by using the given percentage
         List<IndexSummary> indicesPickedRelations = chooseDegreeOfNormalization(indicesRelations, normalizePercentage);
 
         // Create the new relations and return them
@@ -65,13 +65,13 @@ public class Normalization {
      *
      * @param inputFilepath The file path of the input CSV file.
      * @param separator     The column separator for the CSV file.
-     * @return A list of {@link IndexSummary} objects containing the indices of columns in each new BCNF relation.
+     * @return A list of IndexSummary objects containing the column indices of BCNF-compliant relations.
      * @throws AlgorithmExecutionException If an error occurs during Normalize execution.
      * @throws FileNotFoundException       If the specified input file is not found.
      */
     public List<IndexSummary> normalize(String inputFilepath, char separator) throws AlgorithmExecutionException, FileNotFoundException {
 
-        // Configuration for Normalize
+        // Configure Normalize
         CustomNormiConfig conf = new CustomNormiConfig(inputFilepath, separator);
 
         Normi normi = new Normi();
@@ -88,6 +88,7 @@ public class Normalization {
         normi.setResultReceiver(resultReceiver);
         normi.setIsHumanInTheLoop(conf.isHumanInTheLoop);
 
+        // Execute Normalize
         normi.execute();
 
         // Get the result from Normalize
@@ -97,30 +98,29 @@ public class Normalization {
 
 
     /**
-     * Extracts column indices for BCNF relations from Normalize results.
+     * Extracts the column indices of BCNF-compliant relations from Normalize results.
      *
-     * @param results The list of {@link Result} objects from Normalize.
-     * @return A list of {@link IndexSummary} objects containing the indices for each BCNF relation.
+     * @param results The list of Result objects from Normalize.
+     * @return A list of IndexSummary objects each containing the indices of a BCNF-compliant relation.
      */
     public List<IndexSummary> getBCNFIndices(List<Result> results) {
 
-        // Patterns to extract information
+        // Set patterns to extract information
         Pattern bracketPattern = Pattern.compile("\\[(.*?)\\]");
         Pattern columnPattern = Pattern.compile("column(\\d+)");
         Pattern foreignKeyPattern = Pattern.compile("ForeignKey\\s+-\\s+(.*?);");
         Pattern primaryKeyPattern = Pattern.compile("PrimaryKey\\s+-\\s+(.*?);");
 
-        // Lists to save the column indices and key indices of each new Relation
+        // Set list to save the column indices and key indices of each relation
         List<IndexSummary> indicesOfAllRelations = new ArrayList<>();
 
         for (Result result : results) {
-            System.out.println(result.toString());
-            // add new List for relation
+            // Create lists for indices of relation
             List<Integer> indicesOfRelation = new ArrayList<>();
             List<Integer> indicesOfForeignKeys = new ArrayList<>();
             List<Integer> indicesOfKeys = new ArrayList<>();
 
-            // Extract indices from the part inside brackets
+            // Extract all indices of the relation
             Matcher bracketMatcher = bracketPattern.matcher(result.toString());
             if (bracketMatcher.find()) {
                 // Get content of inner bracket
@@ -133,7 +133,8 @@ public class Normalization {
                     indicesOfRelation.add(number);
                 }
             }
-            // Extract indices from the ForeignKey section
+
+            // Extract foreign key indices of the relation
             Matcher foreignKeyMatcher = foreignKeyPattern.matcher(result.toString());
             if (foreignKeyMatcher.find()) {
                 // Get content after "ForeignKey - " and before ";"
@@ -147,7 +148,7 @@ public class Normalization {
                 }
             }
 
-            // Extract indices from the PrimaryKey section
+            // Extract primary key indices of the relation
             Matcher primaryKeyMatcher = primaryKeyPattern.matcher(result.toString());
             if (primaryKeyMatcher.find()) {
                 // Get content after "PrimaryKey - "
@@ -161,6 +162,7 @@ public class Normalization {
                 }
             }
 
+            // Create IndexSummary object out of all index lists of the relation
             indicesOfAllRelations.add(new IndexSummary(indicesOfRelation, indicesOfKeys, indicesOfForeignKeys));
         }
         return indicesOfAllRelations;
@@ -170,13 +172,13 @@ public class Normalization {
     /**
      * Maps BCNF column indices back to their original relation indices.
      *
-     * @param indicesBCNF The list of {@link IndexSummary} objects with BCNF indices.
-     * @param relation    The original {@link Relation} object.
-     * @return A list of {@link IndexSummary} objects with column indices for each new relation.
+     * @param indicesBCNF The list of IndexSummary objects of BCNF-compliant relations.
+     * @param relation    The original Relation object.
+     * @return A list of IndexSummary objects with correct column indices for each new relation.
      */
     public List<IndexSummary> getRelationIndices(List<IndexSummary> indicesBCNF, Relation relation) {
 
-        // Create List for the indices of the Columns in the original relation
+        // Create List for the indices of the columns in the original relation
         List<Integer> originalIndices = new ArrayList<>(relation.getSchema().keySet());
         Collections.sort(originalIndices);
         List<IndexSummary> indicesRelations = new ArrayList<>();
@@ -187,28 +189,28 @@ public class Normalization {
             translation.put(i + 1, originalIndices.get(i)); // +1 since BCNF indices start at 1 not at 0
         }
 
-        // Loop all BCNF Relations and get the matching column indices from the original relation
+        // Loop all BCNF-compliant relations
         for (IndexSummary indexSummary: indicesBCNF) {
             List<Integer> columnIndices = new ArrayList<>();
             List<Integer> keyIndices = new ArrayList<>();
             List<Integer> foreignKeyIndices = new ArrayList<>();
 
-            // Get the matching indices of all columns in relation
+            // Get the matching indices of all columns in the relation
             for (Integer index: indexSummary.getColumnIndices()) {
                 columnIndices.add(translation.get(index));
             }
 
-            // Get the matching indices of the keys in relation
+            // Get the matching indices of the keys in the relation
             for (Integer index: indexSummary.getKeyIndices()) {
                 keyIndices.add(translation.get(index));
             }
 
-            // Get the matching indices of the foreign keys in relation
+            // Get the matching indices of the foreign keys in the relation
             for (Integer index: indexSummary.getForeignKeys()) {
                 foreignKeyIndices.add(translation.get(index));
             }
 
-            // Add the found indices into new List
+            // Add the found indices into an IndexSummary object
             indicesRelations.add(new IndexSummary(columnIndices, keyIndices, foreignKeyIndices));
         }
         return indicesRelations;
@@ -218,13 +220,13 @@ public class Normalization {
     /**
      * Selects a subset of decomposed relations up to the specified degree of normalization.
      *
-     * @param indicesRelations    A list of IndexSummary objects representing decomposed relations of indices.
+     * @param indicesRelations    A list of IndexSummary objects representing the indices of all decomposed relations.
      * @param normalizePercentage The percentage indicating the degree of normalization to apply.
-     * @return A list of IndexSummary objects of the chosen decompositions.
+     * @return A list of IndexSummary objects of the chosen decomposed relations.
      */
     public  List<IndexSummary> chooseDegreeOfNormalization(List<IndexSummary> indicesRelations, Integer normalizePercentage) {
 
-        // Find number of decomposition steps by calculating the given percentage of the possible decomposition steps
+        // Find number of decomposition steps to apply by calculating the given percentage of the possible decomposition steps
         int numOfSteps = (int) Math.round((normalizePercentage / 100.0) * (indicesRelations.size() - 1));
         if (numOfSteps == indicesRelations.size() - 1) {
             return indicesRelations;
@@ -232,12 +234,12 @@ public class Normalization {
 
         List<IndexSummary> chosenRelations = new ArrayList<>();
 
-        // add the first numOfSteps of IndexSummarys
+        // Add the first numOfSteps of IndexSummarys
         for (int i = 0; i < numOfSteps; i++) {
             chosenRelations.add(indicesRelations.get(i));
         }
 
-        // Combine remaining entries in a shared IndexSummary
+        // Combine the remaining entries in a shared IndexSummary
         IndexSummary mergedSummary = indicesRelations.get(numOfSteps);
         for (int i = numOfSteps + 1; i < indicesRelations.size(); i++) {
             mergedSummary.addColumnIndices(indicesRelations.get(i).getColumnIndices());
@@ -251,34 +253,34 @@ public class Normalization {
 
 
     /**
-     * Creates a list of new {@link Relation} objects for each BCNF-compliant grouping of attributes.
+     * Creates a list of new Relation objects out of the given IndexSummary objects.
      *
-     * @param relation      The original {@link Relation} to be normalized.
-     * @param indicesRelations   A list of {@link IndexSummary} objects containing indices for each new BCNF relation.
-     * @return A list of {@link Relation} objects in BCNF.
+     * @param relation      The original Relation to be normalized.
+     * @param indicesRelations   A list of IndexSummary objects containing indices of each BCNF-compliant relation that should be created.
+     * @return A list of Relation objects.
      */
     public List<Relation> createBCNFDatasets(Relation relation, List<IndexSummary> indicesRelations) {
 
         // Create List to save new relations
         List<Relation> relations = new ArrayList<>();
 
-        // create new relations for each new relation that Normalize found
+        // Create new relations out of each IndexSummary object, which describes a relation
         for (IndexSummary indicesOfRelation: indicesRelations) {
 
             // Create new data and schema
             Map<Integer, Attribute> schema = new HashMap<>();
             Map<Integer, List<String>> data = new HashMap<>();
 
-            // Add Attribute and Column at each index of relation
+            // Add attribute and column at each index of relation
             for (Integer index: indicesOfRelation.getColumnIndices()) {
                 schema.put(index, new Attribute(relation.getSchema().get(index).getColumnName(), relation.getSchema().get(index).getDataType()));
                 data.put(index, new ArrayList<>(relation.getData().get(index)));
             }
 
-            // Get key Indices of new Relation
+            // Get key Indices of new relation
             List<Integer> keyIndices = indicesOfRelation.getKeyIndices();
 
-            // Get foreign key indices of new Relation
+            // Get foreign key indices of new relation
             List<Integer> foreignKeyIndices = indicesOfRelation.getForeignKeys();
 
             // Get remaining overlapping columns
@@ -292,7 +294,7 @@ public class Normalization {
             relations.add(createdRelation);
         }
 
-        // Clean each new relation/ relation (remove redundant Records)
+        // Clean each new relation (remove redundant records)
         List<Relation> cleanedRelations = new ArrayList<>();
         for (Relation relationToClean : relations) {
             cleanedRelations.add(removeDuplicateRows(relationToClean));
@@ -303,21 +305,21 @@ public class Normalization {
 
 
     /**
-     * Removes duplicate rows from a given {@link Relation} object, keeping only unique rows.
+     * Removes duplicate rows from a given Relation object, keeping only unique rows.
      *
-     * @param relation The {@link Relation} object from which duplicate rows are removed.
-     * @return A new {@link Relation} object with unique rows only.
+     * @param relation The Relation object from which duplicate rows are removed.
+     * @return A new Relation object with unique rows only.
      */
     public Relation removeDuplicateRows(Relation relation) {
 
         // Determine the number of rows
         int numRows = relation.getData().values().iterator().next().size();
 
-        // Set to store unique rows as strings for quick comparison
+        // Create Set to store unique rows as strings
         Set<String> uniqueRows = new HashSet<>();
         List<Integer> rowsToKeep = new ArrayList<>();
 
-        // Counter for remaining overlapping rows
+        // Set counter for remaining overlapping rows
         Integer remainingOverlappingRows = (relation.getNumOfOverlappingRows() != null) ? 0 : null;
 
         // Iterate over each row
@@ -329,8 +331,8 @@ public class Normalization {
             }
             String rowKey = rowRepresentation.toString();
 
-            // If this row representation is not in uniqueRows, it is unique
-            if (uniqueRows.add(rowKey)) { // add returns false if element is already present
+            // If the row representation is not in uniqueRows, it is unique
+            if (uniqueRows.add(rowKey)) {
                 rowsToKeep.add(rowIndex); // Keep this row
 
                 // Check if the row is within the overlapping rows range
@@ -340,7 +342,7 @@ public class Normalization {
             }
         }
 
-        // Create new data for the resulting Relation without duplicate rows
+        // Create new data for the resulting relation without duplicate rows
         Map<Integer, List<String>> newData = new HashMap<>();
         for (Map.Entry<Integer, List<String>> entry : relation.getData().entrySet()) {
             Integer columnIndex = entry.getKey();

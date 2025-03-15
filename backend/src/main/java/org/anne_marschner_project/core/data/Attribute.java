@@ -14,7 +14,7 @@ public class Attribute {
      * Constructs an Attribute with a specified column name and data type.
      *
      * @param columnName the name of the column represented by this attribute
-     * @param dataType   the data type of the column, represented by the {@link Type} enum
+     * @param dataType   the data type of the column, represented by the Type enum
      */
     public Attribute(String columnName, Type dataType) {
         this.columnName = columnName;
@@ -34,7 +34,7 @@ public class Attribute {
     /**
      * Returns the data type of the attribute.
      *
-     * @return the {@link Type} of the attribute
+     * @return the Type of the attribute
      */
     public Type getDataType() {
         return type;

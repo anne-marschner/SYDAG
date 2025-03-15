@@ -13,11 +13,10 @@ import java.util.stream.Collectors;
 
 /**
  * The Noise class provides various methods to generate and apply noise to data.
- * This class is designed to create simulated data entry errors or variations.
  */
 public class Noise {
 
-    // Final Strings for Noise Generation
+    // Helper for Noise Generation
     private final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private final String SYNONYME_API_URL = "https://api.datamuse.com/words?rel_syn=";
     private final String TRANSLATION_API_URL = "https://api.mymemory.translated.net/get?q=";
@@ -74,7 +73,7 @@ public class Noise {
     /**
      * Generates a random alphanumeric string of random length between 1 and 10.
      *
-     * @return a randomly generated string
+     * @return a randomly generated string.
      */
     public String generateRandomString() {
 
@@ -83,7 +82,7 @@ public class Noise {
         // Chose random length between 1 and 10
         int length = random.nextInt(10) + 1;
 
-        // StringBuilder for random String
+        // Use StringBuilder for random String
         StringBuilder randomString = new StringBuilder(length);
 
         // Fill String with random letters or numbers
@@ -99,8 +98,8 @@ public class Noise {
     /**
      * Removes all vowels from the provided text.
      *
-     * @param entry the input string from which vowels are removed
-     * @return the resulting string without vowels
+     * @param entry the input string from which vowels are removed.
+     * @return the resulting string without vowels.
      */
     public String removeVowels(String entry) {
         return entry.replaceAll("[aeiouAEIOU]", "");
@@ -110,12 +109,12 @@ public class Noise {
     /**
      * Abbreviates a string by taking the first letter of each word, separated by periods.
      *
-     * @param entry the input string to abbreviate
-     * @return the abbreviation of the first letters of each word, in uppercase
+     * @param entry the input string to abbreviate.
+     * @return the abbreviation of the first letters of each word, in uppercase.
      */
     public String abbreviateFirstLetters(String entry) {
 
-        // Separate String into words with whitespace or "_" or "-" as separator
+        // Separate the String into words using whitespace or "_" or "-" as separator
         String[] words = entry.split("[\\s-_]+");
 
         StringBuilder abbreviation = new StringBuilder();
@@ -134,18 +133,18 @@ public class Noise {
     /**
      * Abbreviates each word in the string to a random length between 1 and 2/3 of the word's length.
      *
-     * @param entry the input string to abbreviate
-     * @return a string of concatenated word abbreviations
+     * @param entry the input string to abbreviate.
+     * @return a string of concatenated word abbreviations.
      */
     public String abbreviateRandomLength(String entry) {
 
-        // Separate String into words with whitespace or "_" or "-" as separator
+        // Separate String into words using whitespace or "_" or "-" as separator
         String[] words = entry.split("[\\s-_]+");
 
         StringBuilder abbreviation = new StringBuilder();
         Random random = new Random();
 
-        // Append a part with random length of each word to the StringBuilder
+        // Append a part of random length of each word to the StringBuilder
         for (String word : words) {
 
             // Bound is the index of the last letter that should be included in abbreviation
@@ -156,7 +155,7 @@ public class Noise {
                 // Calculate random bound if word has more than one letter (2/3 is the limit)
                 bound = random.nextInt((int) Math.ceil(word.length() / 1.5));
             } else {
-                // Bound is clear is word only has one letter
+                // Bound is clear if word only has one letter
                 bound = 0;
             }
 
@@ -175,8 +174,8 @@ public class Noise {
     /**
      * Adds a random alphanumeric prefix of length 1 to 4 to the input string.
      *
-     * @param entry the input string to which a prefix is added
-     * @return the input string prefixed with a random alphanumeric string
+     * @param entry the input string to which a prefix is added.
+     * @return the input string prefixed with a random alphanumeric string.
      */
     public String addRandomPrefix(String entry) {
 
@@ -200,22 +199,21 @@ public class Noise {
     /**
      * Shuffles the letters in a string while avoiding the original order.
      *
-     * @param entry the input string to shuffle
-     * @return a new string with shuffled letters
+     * @param entry the input string to shuffle.
+     * @return a new string with shuffled letters.
      */
     public String shuffleLetters(String entry) {
 
-        // If word has only one character it cannot be shuffled
+        // If the word has only one character it cannot be shuffled
         if (entry.length() <= 1) {
             return entry;
         }
 
-        // Convert String to a List<Character> using Stream
+        // Convert the String to a List<Character> using Stream
         List<Character> charList = entry.chars()
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.toList());
 
-        // Create a StringBuilder and append shuffled characters
         StringBuilder shuffled;
 
         do {
@@ -237,8 +235,8 @@ public class Noise {
     /**
      * Shuffles the words in the string, separated by whitespace, hyphens, or underscores.
      *
-     * @param entry the input string to shuffle
-     * @return a new string with shuffled words
+     * @param entry the input string to shuffle.
+     * @return a new string with shuffled words.
      */
     public String shuffleWords(String entry) {
 
@@ -277,13 +275,12 @@ public class Noise {
 
 
     /**
-     * Replaces each word in the input string with a synonym retrieved from the Datamuse API.
+     * Replaces each word in the input string with a synonym.
      *
-     * @param entry the input string to replace with synonyms
-     * @return the string with words replaced by their synonyms
-     * @throws Exception if there is an issue accessing the Datamuse API
+     * @param entry the input string to replace with synonyms.
+     * @return the string with words replaced by their synonyms.
      */
-    public String replaceWithSynonyms(String entry) throws Exception {
+    public String replaceWithSynonyms(String entry) {
 
         // Remove all special characters and put words into array
         String cleanedEntry = entry.replaceAll("[^a-zA-Z\\s-_]", "");
@@ -308,13 +305,12 @@ public class Noise {
     /**
      * Retrieves a synonym for a word using the Datamuse API.
      *
-     * @param word the word for which to find a synonym
-     * @return a synonym of the word, or an empty string if none is found
-     * @throws Exception if there is an issue accessing the API
+     * @param word the word for which to find a synonym.
+     * @return a synonym of the word, or an empty string if none is found.
      */
     public String getSynonymFromAPI(String word) {
 
-        // Get Synonyms for word from Datamuse API
+        // Set correct url
         String urlString = SYNONYME_API_URL + word;
 
         try {
@@ -322,10 +318,10 @@ public class Noise {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            // Check if the response code is OK (200)
+            // Check if the response code is OK
             int responseCode = conn.getResponseCode();
             if (responseCode != HttpURLConnection.HTTP_OK) {
-                return "";  // Return "entry" if API does not respond with 200
+                return "";
             }
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -344,8 +340,8 @@ public class Noise {
 
             // Check if the array is not empty
             if (jsonArray.isArray() && jsonArray.size() > 0) {
-                // Get the last synonym in the array
-                JsonNode lastSynonym = jsonArray.get(jsonArray.size() - 1); // Get last element
+                // Get a synonym
+                JsonNode lastSynonym = jsonArray.get(jsonArray.size() - 1);
                 return lastSynonym.get("word").asText(); // Return the word
             } else {
                 return ""; // If no synonyms were found return empty string
@@ -360,15 +356,15 @@ public class Noise {
     /**
      * Translates a string from a source language to a target language using the MyMemory API.
      *
-     * @param text the text to translate
-     * @param sourceLang the source language code (e.g., "en" for English)
-     * @param targetLang the target language code (e.g., "de" for German)
-     * @return the translated text
-     * @throws Exception if there is an issue accessing the MyMemory API
+     * @param text the text to translate.
+     * @param sourceLang the source language code.
+     * @param targetLang the target language code.
+     * @return the translated text.
+     * @throws Exception if there is an issue accessing the MyMemory API.
      */
     public String replaceWithTranslation(String text, String sourceLang, String targetLang) throws Exception {
 
-        // Set URL for Translation
+        // Set URL for translation
         String urlString = TRANSLATION_API_URL + URLEncoder.encode(text, "UTF-8")
                 + "&langpair=" + sourceLang + "|" + targetLang;
 
@@ -400,7 +396,6 @@ public class Noise {
 
     /**
      * Generates a missing value representation for the input entry.
-     * If the entry is empty, returns a dash ("-"); otherwise, returns an empty string.
      *
      * @param entry The input entry to check.
      * @return A dash if entry is empty, otherwise an empty string.
@@ -415,16 +410,14 @@ public class Noise {
 
 
     /**
-     * Introduces a phonetic error in the entry by replacing a randomly chosen character
-     * with a phonetically similar character based on a predefined map.
-     * If no replacement is possible, the original entry is returned.
+     * Introduces a phonetic error in the entry by replacing a randomly chosen character.
      *
      * @param entry The input string to modify.
      * @return The modified string with a phonetic error, or the original entry if no errors can be introduced.
      */
     public String generatePhoneticError(String entry) {
 
-        // Create List of all possible positions for phonetic Error
+        // Create List of all possible positions for a phonetic error
         List<Integer> possibleErrorPositions = new ArrayList<>();
         for (int i = 0; i < entry.length(); i++) {
             char originalLetter = entry.charAt(i);
@@ -434,16 +427,16 @@ public class Noise {
             }
         }
 
-        // Check if a phonetic Error can be included
+        // Check if a phonetic error can be included
         if (possibleErrorPositions.isEmpty()) {
             return entry;
         }
 
-        // Choose a random position for the Error
+        // Choose a random position for the error
         Random random = new Random();
         int errorPosition = possibleErrorPositions.get(random.nextInt(possibleErrorPositions.size()));
 
-        // Add Error to String
+        // Add an error to the String
         StringBuilder replacement = new StringBuilder();
         for (int i = 0; i < entry.length(); i++) {
             char originalLetter = entry.charAt(i);
@@ -462,15 +455,14 @@ public class Noise {
 
 
     /**
-     * Introduces an OCR error in the input by randomly replacing a character with a visually similar one
-     * based on a predefined OCR similarity map. If no replacement is possible, the original entry is returned.
+     * Introduces an OCR error in the input by randomly replacing a character.
      *
      * @param input The input string to modify.
      * @return The modified string with an OCR error, or the original input if no errors can be introduced.
      */
     public String generateOCRError(String input) {
 
-        // Create list of the possible positions of OCR Error
+        // Create list of the possible positions of OCR error
         List<Integer> possibleErrorPositions = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
             char letter = input.charAt(i);
@@ -479,16 +471,16 @@ public class Noise {
             }
         }
 
-        // Check if an OCR Error can be included
+        // Check if an OCR error can be included
         if (possibleErrorPositions.isEmpty()) {
             return input;
         }
 
-        // Choose a random position for the OCR Error
+        // Choose a random position for the OCR error
         Random random = new Random();
         int errorPosition = possibleErrorPositions.get(random.nextInt(possibleErrorPositions.size()));
 
-        // Add the OCR Error
+        // Add the OCR error
         StringBuilder replacement = new StringBuilder(input);
         char originalChar = input.charAt(errorPosition);
         char errorChar = ocrSimilarities.get(originalChar);
@@ -500,14 +492,13 @@ public class Noise {
 
     /**
      * Abbreviates a given data entry by retaining a portion of each word and appending a period.
-     * The abbreviation retains a random length of each word up to two-thirds of the word length.
      *
      * @param entry The input string to abbreviate.
      * @return The abbreviated string representation.
      */
     public String abbreviateDataEntry(String entry) {
 
-        // Separate String into words with whitespace or "_" or "-" as separator
+        // Separate the String into words using whitespace or "_" or "-" as separator
         String[] words = entry.split("[\\s-_]+");
 
         StringBuilder abbreviation = new StringBuilder();
@@ -516,7 +507,7 @@ public class Noise {
         // Append a part with random length of each word to the StringBuilder
         for (String word : words) {
 
-            // Bound is the index of the last letter that should be included in abbreviation
+            // Bound is the index of the last letter that should be included in the abbreviation
             int bound;
 
             // Calculate how many letters of the word should be kept
@@ -524,11 +515,11 @@ public class Noise {
                 // Calculate random bound if word has more than one letter (2/3 is the limit)
                 bound = random.nextInt((int) Math.ceil(word.length() / 1.5));
             } else {
-                // Bound is clear is word only has one letter
+                // Bound is clear if word only has one letter
                 bound = 0;
             }
 
-            // Add the letters to abbreviation (up to index "bound")
+            // Add the letters to the abbreviation (up to index "bound")
             if (bound > 0) {
                 abbreviation.append(Character.toUpperCase(word.charAt(0))).append(word, 1, bound + 1).append(".");
             } else {
@@ -542,7 +533,6 @@ public class Noise {
 
     /**
      * Alters the format of the input entry by replacing certain symbols with random, predefined alternatives.
-     * For example, replaces hyphens with underscores or other symbols based on a predefined set.
      *
      * @param entry The input string to modify.
      * @return The modified string with altered symbols, or the original entry if no replacements are made.
@@ -554,7 +544,7 @@ public class Noise {
         String replacementSymbol = null;
         String oldSymbol = null;
 
-        // Search for all Symbols that can be replaced
+        // Search for all symbols that can be replaced
         for (int i = 0; i < result.length(); i++) {
             String current = String.valueOf(result.charAt(i));
 
@@ -562,7 +552,7 @@ public class Noise {
                 // Check if current symbol can be replaced
                 for (String symbol : replaceableSymbols) {
                     if (current.equals(symbol)) {
-                        // Choose random Character that is different from the one that should be replaced
+                        // Choose random character that is different from the one that should be replaced
                         do {
                             replacementSymbol = replaceableSymbols[random.nextInt(replaceableSymbols.length)];
                         } while (replacementSymbol.equals(current));
@@ -582,14 +572,13 @@ public class Noise {
 
     /**
      * Introduces typing errors by replacing letters in the entry with characters close to them on the keyboard.
-     * Symbols not found in the keyboard similarity map are preserved in their original positions.
      *
      * @param entry The input string to modify.
      * @return The modified string with typing errors, or the original entry if no modifications are possible.
      */
     public String generateTypingError(String entry) {
 
-        // List for symbols that are not part of the keyboardSimilarities Map
+        // Set list for symbols that are not part of the keyboardSimilarities Map
         Map<Integer, Character> otherSymbols = new HashMap<>();
         StringBuilder filteredWord = new StringBuilder();
         int length = entry.length();
@@ -598,13 +587,13 @@ public class Noise {
         for (int i = 0; i < length; i++) {
             char symbol = entry.charAt(i);
             if (!keyboardSimilarities.containsKey(Character.toLowerCase(symbol))) {
-                otherSymbols.put(i, symbol); // Save position and symbol
+                otherSymbols.put(i, symbol);
             } else {
-                filteredWord.append(symbol); // Add letter
+                filteredWord.append(symbol);
             }
         }
 
-        // Calculate length of filtered word
+        // Calculate length of the filtered word
         length = filteredWord.length();
 
         // If no modification can be made return original entry
@@ -615,7 +604,7 @@ public class Noise {
         // Get random number of typing errors that will be included
         int typoCount = decideNumberOfTypos(length);
 
-        // Include the given number of Typing Errors into filteredWord
+        // Include the given number of typing errors into filteredWord
         char[] wordWithTypos = addTypos(filteredWord, typoCount, length);
 
         // Build modified word from filtered word and excluded symbols
@@ -642,7 +631,7 @@ public class Noise {
 
 
     /**
-     * Introduces a given number of typing errors in the filtered word by replacing letters with keyboard-adjacent ones.
+     * Introduces a given number of typing errors in the filtered word by replacing letters.
      *
      * @param filteredWord The modified entry with only letters eligible for typos.
      * @param typoCount The number of typing errors to introduce.
@@ -656,7 +645,7 @@ public class Noise {
         char[] wordArray = filteredWord.toString().toCharArray();
         Random random = new Random();
 
-        // Include Errors
+        // Include errors
         for (int i = 0; i < typoCount; i++) {
 
             // Choose position that has not been changed yet
@@ -684,7 +673,7 @@ public class Noise {
      * Reconstructs the original entry with typing errors by combining the modified entry and special symbols.
      *
      * @param wordArray The character array of the modified entry with typing errors.
-     * @param otherSymbols A map of positions and characters for non-keyboard symbols.
+     * @param otherSymbols A map of positions and characters of the non-keyboard symbols.
      * @return The final entry string with typos and preserved symbols.
      */
     private String buildFinalString (char[] wordArray, Map<Integer, Character> otherSymbols) {
@@ -693,13 +682,11 @@ public class Noise {
 
         int originalIndex = 0;
 
-        // Gehe durch alle Indizes des Strings und füge die Zeichen ein
+        // Loop all indices of the string and add preserved symbols
         for (int i = 0; i < wordArray.length + otherSymbols.size(); i++) {
             if (otherSymbols.containsKey(i)) {
-                // Falls ein spezielles Symbol an diesem Index ist, füge es hinzu
                 finalString.append(otherSymbols.get(i));
             } else {
-                // Ansonsten füge das nächste Zeichen des originalen Strings hinzu
                 if (originalIndex < wordArray.length) {
                     finalString.append(wordArray[originalIndex]);
                     originalIndex++;
@@ -718,7 +705,7 @@ public class Noise {
      * @param entry The original numeric value as a string.
      * @param mean The mean of the distribution.
      * @param standardDeviation The standard deviation of the distribution.
-     * @return A new value as a string or "0" if no unique value can be generated within five attempts.
+     * @return A new value or "0" if no unique value can be generated within five attempts.
      */
     public String changeValue(String entry, double mean, double standardDeviation) {
 
@@ -729,15 +716,15 @@ public class Noise {
         int attempts = 0;
 
         do {
-            // Create a random Gaussian value
-            double gaussian = random.nextGaussian();  // Random value from standard normal distribution (mean 0, std dev 1)
+            // Create a random Gaussian value (mean 0, std dev 1)
+            double gaussian = random.nextGaussian();
 
             // Scale and shift the gaussian value to match the mean and standard deviation of the data
             newValue = mean + gaussian * standardDeviation;
 
-            // Check if the original entry contains decimal points
+            // Check if the original entry contains decimal places
             if (!entry.contains(".")) {
-                // Round to nearest integer if no decimal points
+                // Round to nearest integer if no decimal places
                 newValue = Math.round(newValue);
             } else {
                 // Otherwise round to 2 decimal places
@@ -752,7 +739,7 @@ public class Noise {
 
         } while (newValue == entryValue);
 
-        // If newValue is a whole number, return it as an integer (no decimal point)
+        // If newValue is a whole number, return it without decimal places
         if (newValue % 1 == 0) {
             return String.valueOf((int) newValue);
         } else {
@@ -783,9 +770,9 @@ public class Noise {
             double factor = 3 + random.nextDouble() * 2;
             outlierValue = mean + factor * standardDeviation;
 
-            // Check if the original entry contains decimal points
+            // Check if the original entry contains decimal places
             if (!entry.contains(".")) {
-                // Round to nearest integer if no decimal points
+                // Round to nearest integer if no decimal places
                 outlierValue = Math.round(outlierValue);
             } else {
                 // Otherwise round to 2 decimal places
@@ -800,7 +787,7 @@ public class Noise {
 
         } while (outlierValue == entryValue);
 
-        // If newValue is a whole number, return it as an integer (no decimal point)
+        // If newValue is a whole number, return it without decimal places
         if (outlierValue % 1 == 0) {
             return String.valueOf((int) outlierValue);
         } else {
@@ -869,9 +856,8 @@ public class Noise {
     /**
      * Maps the unique values of an input column to a sequence of numeric strings ("0", "1", ..., "n").
      *
-     * @param inputColumn the input list of strings to be mapped
-     * @return a new list where each entry from the input list is replaced by its corresponding
-     *         numeric mapping
+     * @param inputColumn the input list of strings to be mapped.
+     * @return a new list where each entry from the input list is replaced by its corresponding numeric mapping.
      */
     public List<String> mapColumn(List<String> inputColumn) {
 
