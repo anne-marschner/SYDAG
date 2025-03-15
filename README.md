@@ -12,7 +12,7 @@ Users can apply it to create integration scenarios that are customized to their 
 The user can choose from various configuration options to achieve a specific result.
 We provide a graphical user interface for easy use of SYDAG. The output includes the generated datasets, a mapping file, and a key file for each dataset. The mapping file specifies which attributes in the new relations correspond to the original attributes. The key files contain information about key and foreign key relationships.
 
-## Technologies
+## Technologies and Sources
 A list of technologies used within the project:
 * [Normalize](https://hpi.de/naumann/projects/data-profiling-and-analytics/metanome-data-profiling/algorithms.html): Version 1.2 
 * [HyUCC](https://hpi.de/naumann/projects/data-profiling-and-analytics/metanome-data-profiling/algorithms.html): Version 1.2
@@ -28,7 +28,16 @@ A list of technologies used within the project:
 Basis of the frontend implementation:   
 
 * [Multi-step form](https://github.com/Marcosfitzsimons/multi-step-form?tab=readme-ov-file#author)
+* [Multi-select-component](https://github.com/sersavan/shadcn-multi-select-component?utm_source=chatgpt.com)
 
+GUI image sources:
+* [sucess.png](https://github.com/Marcosfitzsimons/multi-step-form/blob/master/public/assets/success.png)
+* [json-file.svg](https://www.svgrepo.com/svg/74933/json-file)
+* [typing.svg](https://www.svgrepo.com/svg/476114/typing)
+* [horizontal.svg](https://www.svgrepo.com/svg/323581/vertical-flip)
+* [vertical.svg](https://www.svgrepo.com/svg/322555/horizontal-flip)
+* [verticalHorizontal.svg](https://www.svgrepo.com/svg/86754/move-object)
+* [favicon.ico](https://github.com/Marcosfitzsimons/multi-step-form/blob/master/public/favicon.ico)
 
 ## Installation
 To install SYDAG the user must clone the GitHub repository. It is necessary to install React and Next.js in the frontend folder. Open a terminal in the IDE of your choice (e.g. VSCode) and navigate to 'SYDAG/frontend'. There you need to run the the following commands:
