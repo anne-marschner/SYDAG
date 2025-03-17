@@ -83,14 +83,14 @@ For each new Dataset X:
 * **datasetXSchemaNoiseValue**: The percentage that determines how many of the attributes overlapping with other relations the generator will change (0-100). 
 * **datasetXSchemaKeyNoise**: Whether key columns should also be affected by the noise (true or false). 
 * **datasetXSchemaDeleteSchema**: Whether the schema should be deleted (true or false). 
-* **datasetXSchemaMultiselect**: The error methods that are chosen ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation").
+* **datasetXSchemaMultiselect**: The error methods that are chosen ("generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength", "addRandomPrefix", "shuffleLetters", "shuffleWords", "replaceWithSynonyms", "replaceWithTranslation", "removeVowels").
 
 ### Data Noise
 For each new Dataset X:
 * **datasetXDataNoise**: Whether the data should include errors or not (true or false). 
 * **datasetXDataNoiseValue**:  The percentage of rows/ columns to receive noise (0-100).
 * **datasetXDataNoiseInside**: The percentage that indicates how many of the entries within a for noise selected column or row should receive errors (0-100).
-* **datasetXDataMultiselect**:  The eroor methods that are chosen ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "changeValue", "changeValueToOutlier").
+* **datasetXDataMultiselect**:  The eroor methods that are chosen ("replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation", "shuffleWords", "generateMissingValue", "generatePhoneticError", "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError", "generateRandomString", "mapColumn", "changeValue", "changeValueToOutlier").
 
 ### Shuffle
 For each new Dataset X:
@@ -128,28 +128,32 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "datasetASchemaKeyNoise": false,	// false, true
   "datasetASchemaDeleteSchema": false,	// false, true
   "datasetASchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
-                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+                                        "addRandomPrefix", "shuffleLetters",  "shuffleWords",
+                                        "replaceWithSynonyms", "replaceWithTranslation", "removeVowels"
 
   "datasetBSchemaNoise": false,		// false, true
   "datasetBSchemaNoiseValue": 0,	// 0 to 100
   "datasetBSchemaKeyNoise": false,	// false, true
   "datasetBSchemaDeleteSchema": false,	// false, true
   "datasetBSchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
-                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+                                        "addRandomPrefix", "shuffleLetters",  "shuffleWords",
+                                        "replaceWithSynonyms", "replaceWithTranslation", "removeVowels"
 
   "datasetCSchemaNoise": false,		// false, true
   "datasetCSchemaNoiseValue": 0,	// 0 to 100
   "datasetCSchemaKeyNoise": false,	// false, true
   "datasetCSchemaDeleteSchema": false,	// false, true
   "datasetCSchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
-                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+                                        "addRandomPrefix", "shuffleLetters",  "shuffleWords",
+                                        "replaceWithSynonyms", "replaceWithTranslation", "removeVowels"
 
   "datasetDSchemaNoise": false,		// false, true
   "datasetDSchemaNoiseValue": 0,	// 0 to 100
   "datasetDSchemaKeyNoise": false,	// false, true
   "datasetDSchemaDeleteSchema": false,	// false, true
   "datasetDSchemaMultiselect": [],	// "generateRandomString", "abbreviateFirstLetters", "abbreviateRandomLength",
-                                        "addRandomPrefix", "shuffleLetters", "replaceWithSynonyms", "replaceWithTranslation"
+                                        "addRandomPrefix", "shuffleLetters",  "shuffleWords",
+                                        "replaceWithSynonyms", "replaceWithTranslation", "removeVowels"
 
   "datasetADataNoise": false,		// false, true
   "datasetADataNoiseValue": 0,		// 0 to 100
@@ -158,7 +162,7 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "datasetADataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "generateRandomString", "mapColumn", "changeValue", "changeValueToOutlier" 
 
   "datasetBDataNoise": false,		// false, true
   "datasetBDataNoiseValue": 0,		// 0 to 100
@@ -167,7 +171,7 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "datasetBDataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "generateRandomString", "mapColumn", "changeValue", "changeValueToOutlier" 
 
   "datasetCDataNoise": false,		// false, true
   "datasetCDataNoiseValue": 0,		// 0 to 100
@@ -176,7 +180,7 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "datasetCDataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "generateRandomString", "mapColumn", "changeValue", "changeValueToOutlier" 
 
   "datasetDDataNoise": false,		// false, true
   "datasetDDataNoiseValue": 0,		// 0 to 100
@@ -185,7 +189,7 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "datasetDDataMultiselect": [],	// "replaceWithSynonyms", "addRandomPrefix", "replaceWithTranslation",
                                         "shuffleWords", "generateMissingValue", "generatePhoneticError",
                                         "generateOCRError", "abbreviateDataEntry", "changeFormat", "generateTypingError",
-                                        "generateRandomString", "changeValue", "changeValueToOutlier" 
+                                        "generateRandomString", "mapColumn", "changeValue", "changeValueToOutlier" 
 
   "datasetAShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
   "datasetBShuffleOption": "No Change", // "No Change", "Shuffle Rows", "Shuffle Columns"
