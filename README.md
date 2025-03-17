@@ -73,7 +73,7 @@ In the following we provide an overview of all parameters and their effects on t
 
 ### Structure
 For each new Dataset X: 
-* **datasetXStructureType**: The structure change that will be applied to the new datsets (join of columns, normalization to BCNF or no change).
+* **datasetXStructureType**: The structure change that will be applied to the datset (join of columns, normalization to BCNF or no change).
 * **datasetXBCNFSliderValue**: The percentage that determines how many of the possible decomposition steps should be executed (0-100). 
 * **datasetXJoinColumnsSliderValue**: The percentage of overlapping columns to join (0-100).
 
