@@ -206,7 +206,7 @@ If you are having trouble building the Docker containers, make sure that you are
 
 #### Why is the generation failing?
 You can check several points:
-1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Join Options for each dataset.
+1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Join options for each dataset.
 2. Ensure that the separator, quote, and escape characters are used correctly in the dataset. If there are inconsistencies in the dataset's structure, the file may not be read correctly.
 3. You may need to increase Docker's memory limit. For datasets larger than 25 MB, at least 4 GB of RAM is recommended.
    
@@ -217,7 +217,7 @@ You can check several points:
 3. Did you try adding errors to numeric values? If so, you need to choose at least one method that is applied on numeric values: "changeValue" or "changeValueToOutlier". If you do not select one of these, SYDAG uses both methods.
 4. Did you use normalization? If you apply normalization while preserving key constraints, fewer errors than expected may appear in your relations. This happens because SYDAG does not introduce errors in key and foreign key columns in this case. You can either choose a higher percentage of data noise, which will cause more of the non-key columns to receive noise, or choose a smaller percentage of normalization. That will result in fewer foreign key columns, allowing more columns to receive noise.
 5. Did you preserve the key constraints? If your key is very large and you chose not to add errors in the key columns, there might be very few columns with errors.
-6. Did you choose "replaceWithTranslation" or "replaceWithSynonyms"? Make sure you are connected to the internet. Otherwise, the generator cannot call the APIs and therefore cannot include any synonyms or translations. SYDAG will use other error methods instead.
+6. Did you choose "replaceWithTranslation" or "replaceWithSynonyms"? Make sure you are connected to the Internet. Otherwise, the generator cannot call the APIs and therefore cannot include any synonyms or translations. SYDAG will use other error methods instead.
 7. Did you use vertical overlap and there are more overlapping columns than expected? The reason is that all key columns are included in the overlap, regardless of your specified percentage. SYDAG must incorporate the key columns in the overlap to create integrable scenarios. Your specified overlap percentage applies only to the non-key columns.
 
 #### When using the JSON file, what value should I assign to the parameters I am not using?
