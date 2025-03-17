@@ -32,7 +32,7 @@ public class CustomRelationalInput implements RelationalInput {
         this.relation = relation;
         this.relationName = relationName;
         this.currentRowIndex = 0;
-        this.numRows = relation.getData().values().iterator().next().size(); // Annahme: alle Spalten sind gleich lang
+        this.numRows = relation.getData().values().iterator().next().size();
 
         // Use indices as column names
         this.columnNames = relation.getSchema().keySet().stream()
