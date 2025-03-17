@@ -122,7 +122,7 @@ public class DataNoise extends Noise {
             int numOfValues = selectableIndices.size();
 
             // Calculate number of errors that will be added in row entries
-            int numOfErrors = (int) Math.round((double) (numOfValues * noiseInsidePercentage) / 100); //chooseNumberOfErrors(numOfValues, noisePercentage)
+            int numOfErrors = (int) Math.round((double) (numOfValues * noiseInsidePercentage) / 100);
 
             // Add noise into numOfErrors random entries
             Collections.shuffle(selectableIndices);
