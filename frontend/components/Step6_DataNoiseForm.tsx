@@ -17,6 +17,7 @@ const frameworksList = [
   { value: "generateOCRError", label: "generateOCRError" },
   { value: "changeFormat", label: "changeFormat" },
   { value: "generateTypingError", label: "generateTypingError" },
+  { value: "abbreviateDataEntry", label: "abbreviateDataEntry" },
   { value: "generateRandomString", label: "generateRandomString" },
   { value: "changeValue", label: "changeValue" },
   { value: "changeValueToOutlier", label: "changeValueToOutlier" },
