@@ -209,7 +209,7 @@ const Step3_SplitForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Percentage of Rows in Dataset 1: {rowDistributionValue}%
+                  Percentage of Rows in Dataset A: {rowDistributionValue}%
                 </span>
                             </div>
                         </>
@@ -243,7 +243,7 @@ const Step3_SplitForm = ({
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Percentage of Columns in Dataset 1: {columnDistributionValue}%
+                  Percentage of Columns in Dataset A: {columnDistributionValue}%
                 </span>
                             </div>
                         </>
