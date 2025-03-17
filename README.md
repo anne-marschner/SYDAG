@@ -65,8 +65,8 @@ In the following we provide an overview of all parameters and their effects on t
 
 ### Split
 * **splitType**: The type of split to be applied to the input relation (horizontal, vertical or both). 
-* **rowOverlapPercentage**: The percentage of rows that should overlap between the split relations. 
-* **columnOverlapPercentage**: The percentage of columns that should overlap between the split relations. 
+* **rowOverlapPercentage**: The percentage of rows that should overlap between the split relations (0-100). 
+* **columnOverlapPercentage**: The percentage of columns that should overlap between the split relations (0-100). 
 * **rowDistribution**:  The distribution of the non-overlapping rows between the new relations. This percentage describes how many non-overlapping rows will be part of one of the new relations (0-100). 
 * **columnDistribution**: The distribution of the non-overlapping columns between the new relations. This percentage describes how many non-overlapping columns will be part of one of the new relations (0-100). 
 * **overlapType**: The way the overlapping rows should be picked (as block overlap or random overlap).
