@@ -7,21 +7,21 @@
   "columnDistribution": 30,
   "overlapType": "Mixed Overlap",
 
-  "datasetAStructureType": "Join Columns",
+  "datasetAStructureType": "Merge Columns",
   "datasetABCNFSliderValue": null,
-  "datasetAJoinColumnsSliderValue": 30,
+  "datasetAMergeColumnsSliderValue": 30,
 
   "datasetBStructureType": "No Change",
   "datasetBBCNFSliderValue": null,
-  "datasetBJoinColumnsSliderValue": null,
+  "datasetBMergeColumnsSliderValue": null,
 
   "datasetCStructureType": "BCNF",
   "datasetCBCNFSliderValue": 40,
-  "datasetCJoinColumnsSliderValue": null,
+  "datasetCMergeColumnsSliderValue": null,
 
   "datasetDStructureType": "BCNF",
   "datasetDBCNFSliderValue": 60,
-  "datasetDJoinColumnsSliderValue": null,
+  "datasetDMergeColumnsSliderValue": null,
 
   "datasetASchemaNoise": false,
   "datasetASchemaNoiseValue": null,

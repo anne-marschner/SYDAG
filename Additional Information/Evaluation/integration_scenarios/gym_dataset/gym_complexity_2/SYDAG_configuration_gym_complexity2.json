@@ -9,19 +9,19 @@
 
   "datasetAStructureType": "BCNF",
   "datasetABCNFSliderValue": 25,
-  "datasetAJoinColumnsSliderValue": null,
+  "datasetAMergeColumnsSliderValue": null,
 
   "datasetBStructureType": "No Change",
   "datasetBBCNFSliderValue": null,
-  "datasetBJoinColumnsSliderValue": null,
+  "datasetBMergeColumnsSliderValue": null,
 
   "datasetCStructureType": null,
   "datasetCBCNFSliderValue": null,
-  "datasetCJoinColumnsSliderValue": null,
+  "datasetCMergeColumnsSliderValue": null,
 
   "datasetDStructureType": null,
   "datasetDBCNFSliderValue": null,
-  "datasetDJoinColumnsSliderValue": null,
+  "datasetDMergeColumnsSliderValue": null,
 
   "datasetASchemaNoise": false,
   "datasetASchemaNoiseValue": null,
