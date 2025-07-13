@@ -20,21 +20,21 @@ export type FormItems = {
     overlapType: "Mixed Overlap" | "Block Overlap" | null;
 
     // Step 4
-    datasetAStructureType: "BCNF" | "Join Columns" | "No Change" | null;
+    datasetAStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
     datasetABCNFSliderValue: number | null;
-    datasetAJoinColumnsSliderValue: number | null;
+    datasetAMergeColumnsSliderValue: number | null;
 
-    datasetBStructureType: "BCNF" | "Join Columns" | "No Change" | null;
+    datasetBStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
     datasetBBCNFSliderValue: number | null;
-    datasetBJoinColumnsSliderValue: number | null;
+    datasetBMergeColumnsSliderValue: number | null;
 
-    datasetCStructureType: "BCNF" | "Join Columns" | "No Change" | null;
+    datasetCStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
     datasetCBCNFSliderValue: number | null;
-    datasetCJoinColumnsSliderValue: number | null;
+    datasetCMergeColumnsSliderValue: number | null;
 
-    datasetDStructureType: "BCNF" | "Join Columns" | "No Change" | null;
+    datasetDStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
     datasetDBCNFSliderValue: number | null;
-    datasetDJoinColumnsSliderValue: number | null;
+    datasetDMergeColumnsSliderValue: number | null;
 
     // Step 5
     datasetASchemaNoise: boolean | null;

@@ -56,10 +56,10 @@ public class Generator {
         String datasetBStructureType = formDataWrapper.getDatasetBStructureType();
         String datasetCStructureType = formDataWrapper.getDatasetCStructureType();
         String datasetDStructureType = formDataWrapper.getDatasetDStructureType();
-        Integer joinPercentageA = formDataWrapper.getDatasetAJoinColumnsSliderValue();
-        Integer joinPercentageB = formDataWrapper.getDatasetBJoinColumnsSliderValue();
-        Integer joinPercentageC = formDataWrapper.getDatasetCJoinColumnsSliderValue();
-        Integer joinPercentageD = formDataWrapper.getDatasetDJoinColumnsSliderValue();
+        Integer joinPercentageA = formDataWrapper.getDatasetAMergeColumnsSliderValue();
+        Integer joinPercentageB = formDataWrapper.getDatasetBMergeColumnsSliderValue();
+        Integer joinPercentageC = formDataWrapper.getDatasetCMergeColumnsSliderValue();
+        Integer joinPercentageD = formDataWrapper.getDatasetDMergeColumnsSliderValue();
         Integer normalizePercentageA = formDataWrapper.getDatasetABCNFSliderValue();
         Integer normalizePercentageB = formDataWrapper.getDatasetBBCNFSliderValue();
         Integer normalizePercentageC = formDataWrapper.getDatasetCBCNFSliderValue();
@@ -312,7 +312,7 @@ public class Generator {
      * Applies normalization to a given Relation and stores the results in a Dataset.
      *
      * @param relation        The Relation to be normalized.
-     * @param structureType   The structure type ("BCNF", "Join Columns" or "No Change").
+     * @param structureType   The structure type ("BCNF", "Merge Columns" or "No Change").
      * @param separator       The separator for the CSV file.
      * @param quoteChar       The quote character for the CSV file.
      * @return A Dataset containing normalized or the original relations.
@@ -401,12 +401,12 @@ public class Generator {
      * Applies a join operation to the dataset if specified by the structure type.
      *
      * @param dataset        The dataset to which the join is applied.
-     * @param structureType  The structure type ("BCNF", "Join Columns" or "No Change").
+     * @param structureType  The structure type ("BCNF", "Merge Columns" or "No Change").
      * @return A Dataset with applied joins or the original Dataset.
      */
     private Dataset applyJoin(Dataset dataset, String structureType, Integer joinPercentage, char separator) {
         Dataset joinedDataset = new Dataset();
-        if (structureType.equals("Join Columns")) {
+        if (structureType.equals("Merge Columns")) {
             Join join = new Join();
             joinedDataset.getRelations().add(join.joinColumns(dataset.getRelations().get(0), joinPercentage, separator));
         } else {

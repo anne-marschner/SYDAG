@@ -73,55 +73,55 @@ public class FormDataWrapper {
     // --------------- Step 4: Structure ------------------
     // Dataset A
     @NotBlank(message = "datasetA structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetA structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    @Pattern(regexp = "BCNF|Merge Columns|No Change", message = "datasetA structure type must be 'BCNF', 'Merge Columns', or 'No Change'")
     private String datasetAStructureType;
 
     @Min(value = 0, message = "datasetA BCNF slider value must be at least 0")
     @Max(value = 100, message = "datasetA BCNF slider value cannot exceed 100")
     private Integer datasetABCNFSliderValue;
 
-    @Min(value = 0, message = "datasetA Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "datasetA Join Columns slider value cannot exceed 100")
-    private Integer datasetAJoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetA Merge Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetA Merge Columns slider value cannot exceed 100")
+    private Integer datasetAMergeColumnsSliderValue;
 
     // Dataset B
     @NotBlank(message = "datasetB structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetB structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    @Pattern(regexp = "BCNF|Merge Columns|No Change", message = "datasetB structure type must be 'BCNF', 'Merge Columns', or 'No Change'")
     private String datasetBStructureType;
 
     @Min(value = 0, message = "datasetB BCNF slider value must be at least 0")
     @Max(value = 100, message = "datasetB BCNF slider value cannot exceed 100")
     private Integer datasetBBCNFSliderValue;
 
-    @Min(value = 0, message = "datasetB Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "datasetB Join Columns slider value cannot exceed 100")
-    private Integer datasetBJoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetB Merge Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetB Merge Columns slider value cannot exceed 100")
+    private Integer datasetBMergeColumnsSliderValue;
 
     // Dataset C
     @NotBlank(message = "datasetC structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetC structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    @Pattern(regexp = "BCNF|Merge Columns|No Change", message = "datasetC structure type must be 'BCNF', 'Merge Columns', or 'No Change'")
     private String datasetCStructureType;
 
     @Min(value = 0, message = "datasetC BCNF slider value must be at least 0")
     @Max(value = 100, message = "datasetC BCNF slider value cannot exceed 100")
     private Integer datasetCBCNFSliderValue;
 
-    @Min(value = 0, message = "datasetC Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "datasetC Join Columns slider value cannot exceed 100")
-    private Integer datasetCJoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetC Merge Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetC Merge Columns slider value cannot exceed 100")
+    private Integer datasetCMergeColumnsSliderValue;
 
     // Dataset D
     @NotBlank(message = "datasetD structure type cannot be blank")
-    @Pattern(regexp = "BCNF|Join Columns|No Change", message = "datasetD structure type must be 'BCNF', 'Join Columns', or 'No Change'")
+    @Pattern(regexp = "BCNF|Merge Columns|No Change", message = "datasetD structure type must be 'BCNF', 'Merge Columns', or 'No Change'")
     private String datasetDStructureType;
 
     @Min(value = 0, message = "datasetD BCNF slider value must be at least 0")
     @Max(value = 100, message = "datasetD BCNF slider value cannot exceed 100")
     private Integer datasetDBCNFSliderValue;
 
-    @Min(value = 0, message = "datasetD Join Columns slider value must be at least 0")
-    @Max(value = 100, message = "datasetD Join Columns slider value cannot exceed 100")
-    private Integer datasetDJoinColumnsSliderValue;
+    @Min(value = 0, message = "datasetD Merge Columns slider value must be at least 0")
+    @Max(value = 100, message = "datasetD Merge Columns slider value cannot exceed 100")
+    private Integer datasetDMergeColumnsSliderValue;
 
     // --------------- Step 5: Schema Noise ------------------
     // Dataset A

@@ -34,13 +34,13 @@ const Step8_SummaryForm = ({
                                datasetCStructureType,
                                datasetDStructureType,
                                datasetABCNFSliderValue,
-                               datasetAJoinColumnsSliderValue,
+                               datasetAMergeColumnsSliderValue,
                                datasetBBCNFSliderValue,
-                               datasetBJoinColumnsSliderValue,
+                               datasetBMergeColumnsSliderValue,
                                datasetCBCNFSliderValue,
-                               datasetCJoinColumnsSliderValue,
+                               datasetCMergeColumnsSliderValue,
                                datasetDBCNFSliderValue,
-                               datasetDJoinColumnsSliderValue,
+                               datasetDMergeColumnsSliderValue,
 
                                // Step 5
                                datasetASchemaNoise,
@@ -327,8 +327,8 @@ const Step8_SummaryForm = ({
                                 {datasetAStructureType}
                                 {datasetAStructureType === "BCNF"
                                     ? ` (${datasetABCNFSliderValue}%)`
-                                    : datasetAStructureType === "Join Columns"
-                                        ? ` (${datasetAJoinColumnsSliderValue}%)`
+                                    : datasetAStructureType === "Merge Columns"
+                                        ? ` (${datasetAMergeColumnsSliderValue}%)`
                                         : ""}
                             </p>
                             <button
@@ -346,8 +346,8 @@ const Step8_SummaryForm = ({
                                 {datasetBStructureType}
                                 {datasetBStructureType === "BCNF"
                                     ? ` (${datasetBBCNFSliderValue}%)`
-                                    : datasetBStructureType === "Join Columns"
-                                        ? ` (${datasetBJoinColumnsSliderValue}%)`
+                                    : datasetBStructureType === "Merge Columns"
+                                        ? ` (${datasetBMergeColumnsSliderValue}%)`
                                         : ""}
                             </p>
                             <button
@@ -368,8 +368,8 @@ const Step8_SummaryForm = ({
                                         {datasetCStructureType}
                                         {datasetCStructureType === "BCNF"
                                             ? ` (${datasetCBCNFSliderValue}%)`
-                                            : datasetCStructureType === "Join Columns"
-                                                ? ` (${datasetCJoinColumnsSliderValue}%)`
+                                            : datasetCStructureType === "Merge Columns"
+                                                ? ` (${datasetCMergeColumnsSliderValue}%)`
                                                 : ""}
                                     </p>
                                     <button
@@ -387,8 +387,8 @@ const Step8_SummaryForm = ({
                                         {datasetDStructureType}
                                         {datasetDStructureType === "BCNF"
                                             ? ` (${datasetDBCNFSliderValue}%)`
-                                            : datasetDStructureType === "Join Columns"
-                                                ? ` (${datasetDJoinColumnsSliderValue}%)`
+                                            : datasetDStructureType === "Merge Columns"
+                                                ? ` (${datasetDMergeColumnsSliderValue}%)`
                                                 : ""}
                                     </p>
                                     <button

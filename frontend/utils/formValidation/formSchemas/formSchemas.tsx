@@ -163,16 +163,16 @@ export const Step4Schema = z
 
         // Structure Type selections for all datasets
         datasetAStructureType: z
-            .enum(["BCNF", "Join Columns", "No Change"])
+            .enum(["BCNF", "Merge Columns", "No Change"])
             .nullable(),
         datasetBStructureType: z
-            .enum(["BCNF", "Join Columns", "No Change"])
+            .enum(["BCNF", "Merge Columns", "No Change"])
             .nullable(),
         datasetCStructureType: z
-            .enum(["BCNF", "Join Columns", "No Change"])
+            .enum(["BCNF", "Merge Columns", "No Change"])
             .nullable().optional(),
         datasetDStructureType: z
-            .enum(["BCNF", "Join Columns", "No Change"])
+            .enum(["BCNF", "Merge Columns", "No Change"])
             .nullable().optional(),
 
         // Slider values for Dataset A
@@ -181,10 +181,10 @@ export const Step4Schema = z
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable(),
-        datasetAJoinColumnsSliderValue: z
+        datasetAMergeColumnsSliderValue: z
             .number()
-            .min(0, {message: "Join Columns Slider Value must be at least 0%"})
-            .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
+            .min(0, {message: "Merge Columns Slider Value must be at least 0%"})
+            .max(100, {message: "Merge Columns Slider Value cannot exceed 100%"})
             .nullable(),
 
         // Slider values for Dataset B
@@ -193,10 +193,10 @@ export const Step4Schema = z
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable(),
-        datasetBJoinColumnsSliderValue: z
+        datasetBMergeColumnsSliderValue: z
             .number()
-            .min(0, {message: "Join Columns Slider Value must be at least 0%"})
-            .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
+            .min(0, {message: "Merge Columns Slider Value must be at least 0%"})
+            .max(100, {message: "Merge Columns Slider Value cannot exceed 100%"})
             .nullable(),
 
         // Slider values for Dataset C
@@ -205,10 +205,10 @@ export const Step4Schema = z
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable().optional(),
-        datasetCJoinColumnsSliderValue: z
+        datasetCMergeColumnsSliderValue: z
             .number()
-            .min(0, {message: "Join Columns Slider Value must be at least 0%"})
-            .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
+            .min(0, {message: "Merge Columns Slider Value must be at least 0%"})
+            .max(100, {message: "Merge Columns Slider Value cannot exceed 100%"})
             .nullable().optional(),
 
         // Slider values for Dataset D
@@ -217,10 +217,10 @@ export const Step4Schema = z
             .min(0, {message: "BCNF Slider Value must be at least 0%"})
             .max(100, {message: "BCNF Slider Value cannot exceed 100%"})
             .nullable().optional(),
-        datasetDJoinColumnsSliderValue: z
+        datasetDMergeColumnsSliderValue: z
             .number()
-            .min(0, {message: "Join Columns Slider Value must be at least 0%"})
-            .max(100, {message: "Join Columns Slider Value cannot exceed 100%"})
+            .min(0, {message: "Merge Columns Slider Value must be at least 0%"})
+            .max(100, {message: "Merge Columns Slider Value cannot exceed 100%"})
             .nullable().optional(),
     })
     .superRefine((data, ctx) => {
@@ -229,7 +229,7 @@ export const Step4Schema = z
         datasets.forEach((dataset) => {
             const structureType = data[`dataset${dataset}StructureType` as keyof typeof data];
             const bcfnSlider = data[`dataset${dataset}BCNFSliderValue` as keyof typeof data];
-            const joinColumnsSlider = data[`dataset${dataset}JoinColumnsSliderValue` as keyof typeof data];
+            const joinColumnsSlider = data[`dataset${dataset}MergeColumnsSliderValue` as keyof typeof data];
 
             if (structureType === "BCNF") {
                 if (bcfnSlider === null || bcfnSlider === undefined) {
@@ -241,12 +241,12 @@ export const Step4Schema = z
                 }
             }
 
-            if (structureType === "Join Columns") {
+            if (structureType === "Merge Columns") {
                 if (joinColumnsSlider === null || joinColumnsSlider === undefined) {
                     ctx.addIssue({
                         code: z.ZodIssueCode.custom,
-                        message: `Join Columns Slider Value for Dataset ${dataset} is required when Join Columns is selected`,
-                        path: [`dataset${dataset}JoinColumnsSliderValue` as keyof typeof data],
+                        message: `Merge Columns Slider Value for Dataset ${dataset} is required when Merge Columns is selected`,
+                        path: [`dataset${dataset}MergeColumnsSliderValue` as keyof typeof data],
                     });
                 }
             }
@@ -314,21 +314,21 @@ export const FormItemsJSONSchema = z
         overlapType: z.enum(['Mixed Overlap', 'Block Overlap']).nullable(),
 
         // Step 4 (Datasets Structure)
-        datasetAStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetAStructureType: z.enum(['BCNF', 'Merge Columns', 'No Change']).nullable(),
         datasetABCNFSliderValue: z.number().min(0).max(100).nullable(),
-        datasetAJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetAMergeColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
-        datasetBStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetBStructureType: z.enum(['BCNF', 'Merge Columns', 'No Change']).nullable(),
         datasetBBCNFSliderValue: z.number().min(0).max(100).nullable(),
-        datasetBJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetBMergeColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
-        datasetCStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetCStructureType: z.enum(['BCNF', 'Merge Columns', 'No Change']).nullable(),
         datasetCBCNFSliderValue: z.number().min(0).max(100).nullable(),
-        datasetCJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetCMergeColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
-        datasetDStructureType: z.enum(['BCNF', 'Join Columns', 'No Change']).nullable(),
+        datasetDStructureType: z.enum(['BCNF', 'Merge Columns', 'No Change']).nullable(),
         datasetDBCNFSliderValue: z.number().min(0).max(100).nullable(),
-        datasetDJoinColumnsSliderValue: z.number().min(0).max(100).nullable(),
+        datasetDMergeColumnsSliderValue: z.number().min(0).max(100).nullable(),
 
         // Step 5 (Schema Noise)
         datasetASchemaNoise: z.boolean().nullable(),
@@ -421,9 +421,9 @@ export const FormItemsJSONSchema = z
         } else {
             const optionalFields = [
                 "datasetCBCNFSliderValue",
-                "datasetCJoinColumnsSliderValue",
+                "datasetCMergeColumnsSliderValue",
                 "datasetDBCNFSliderValue",
-                "datasetDJoinColumnsSliderValue",
+                "datasetDMergeColumnsSliderValue",
                 "datasetCSchemaNoiseValue",
                 "datasetDSchemaNoiseValue",
                 "datasetCDataNoiseValue",

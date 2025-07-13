@@ -9,32 +9,32 @@ import { Slider } from "@/components/ui/slider";
 type StepProps = {
     splitType: "Horizontal" | "Vertical" | "VerticalHorizontal" | null;
 
-    datasetAStructureType: "BCNF" | "Join Columns" | "No Change" | null;
-    datasetBStructureType: "BCNF" | "Join Columns" | "No Change" | null;
-    datasetCStructureType: "BCNF" | "Join Columns" | "No Change" | null;
-    datasetDStructureType: "BCNF" | "Join Columns" | "No Change" | null;
+    datasetAStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
+    datasetBStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
+    datasetCStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
+    datasetDStructureType: "BCNF" | "Merge Columns" | "No Change" | null;
 
     // Slider values for Dataset A
     datasetABCNFSliderValue: number | null;
-    datasetAJoinColumnsSliderValue: number | null;
+    datasetAMergeColumnsSliderValue: number | null;
 
     // Slider values for Dataset B
     datasetBBCNFSliderValue: number | null;
-    datasetBJoinColumnsSliderValue: number | null;
+    datasetBMergeColumnsSliderValue: number | null;
 
     // Slider values for Dataset C
     datasetCBCNFSliderValue: number | null;
-    datasetCJoinColumnsSliderValue: number | null;
+    datasetCMergeColumnsSliderValue: number | null;
 
     // Slider values for Dataset D
     datasetDBCNFSliderValue: number | null;
-    datasetDJoinColumnsSliderValue: number | null;
+    datasetDMergeColumnsSliderValue: number | null;
 
     updateForm: (fieldToUpdate: Partial<FormItems>) => void;
     errors: Record<string, string[]>;
 };
 
-type StructureType = "BCNF" | "Join Columns" | "No Change";
+type StructureType = "BCNF" | "Merge Columns" | "No Change";
 
 const Step4_StructureForm = ({
                                  splitType,
@@ -44,13 +44,13 @@ const Step4_StructureForm = ({
                                  datasetCStructureType,
                                  datasetDStructureType,
                                  datasetABCNFSliderValue,
-                                 datasetAJoinColumnsSliderValue,
+                                 datasetAMergeColumnsSliderValue,
                                  datasetBBCNFSliderValue,
-                                 datasetBJoinColumnsSliderValue,
+                                 datasetBMergeColumnsSliderValue,
                                  datasetCBCNFSliderValue,
-                                 datasetCJoinColumnsSliderValue,
+                                 datasetCMergeColumnsSliderValue,
                                  datasetDBCNFSliderValue,
-                                 datasetDJoinColumnsSliderValue,
+                                 datasetDMergeColumnsSliderValue,
                                  errors,
                              }: StepProps) => {
     // State for selected structure type of each dataset
@@ -61,23 +61,23 @@ const Step4_StructureForm = ({
 
     // State for sliders
     const [datasetABCNFValue, setDatasetABCNFValue] = useState<number>(datasetABCNFSliderValue || 0);
-    const [datasetAJoinColumnsValue, setDatasetAJoinColumnsValue] = useState<number>(
-        datasetAJoinColumnsSliderValue || 0
+    const [datasetAMergeColumnsValue, setDatasetAMergeColumnsValue] = useState<number>(
+        datasetAMergeColumnsSliderValue || 0
     );
 
     const [datasetBBCNFValue, setDatasetBBCNFValue] = useState<number>(datasetBBCNFSliderValue || 0);
-    const [datasetBJoinColumnsValue, setDatasetBJoinColumnsValue] = useState<number>(
-        datasetBJoinColumnsSliderValue || 0
+    const [datasetBMergeColumnsValue, setDatasetBMergeColumnsValue] = useState<number>(
+        datasetBMergeColumnsSliderValue || 0
     );
 
     const [datasetCBCNFValue, setDatasetCBCNFValue] = useState<number>(datasetCBCNFSliderValue || 0);
-    const [datasetCJoinColumnsValue, setDatasetCJoinColumnsValue] = useState<number>(
-        datasetCJoinColumnsSliderValue || 0
+    const [datasetCMergeColumnsValue, setDatasetCMergeColumnsValue] = useState<number>(
+        datasetCMergeColumnsSliderValue || 0
     );
 
     const [datasetDBCNFValue, setDatasetDBCNFValue] = useState<number>(datasetDBCNFSliderValue || 0);
-    const [datasetDJoinColumnsValue, setDatasetDJoinColumnsValue] = useState<number>(
-        datasetDJoinColumnsSliderValue || 0
+    const [datasetDMergeColumnsValue, setDatasetDMergeColumnsValue] = useState<number>(
+        datasetDMergeColumnsSliderValue || 0
     );
 
     /**
@@ -85,7 +85,7 @@ const Step4_StructureForm = ({
      */
     const handleValueChangeA = useCallback(
         (selected: string | null) => {
-            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
+            if (selected === "BCNF" || selected === "Merge Columns" || selected === "No Change") {
                 setPlanSelectedA(selected as StructureType);
                 updateForm({ datasetAStructureType: selected as StructureType });
 
@@ -93,9 +93,9 @@ const Step4_StructureForm = ({
                     setDatasetABCNFValue(0);
                     updateForm({ datasetABCNFSliderValue: 0 });
                 }
-                if (selected !== "Join Columns") {
-                    setDatasetAJoinColumnsValue(0);
-                    updateForm({ datasetAJoinColumnsSliderValue: 0 });
+                if (selected !== "Merge Columns") {
+                    setDatasetAMergeColumnsValue(0);
+                    updateForm({ datasetAMergeColumnsSliderValue: 0 });
                 }
             }
         },
@@ -104,7 +104,7 @@ const Step4_StructureForm = ({
 
     const handleValueChangeB = useCallback(
         (selected: string | null) => {
-            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
+            if (selected === "BCNF" || selected === "Merge Columns" || selected === "No Change") {
                 setPlanSelectedB(selected as StructureType);
                 updateForm({ datasetBStructureType: selected as StructureType });
 
@@ -112,9 +112,9 @@ const Step4_StructureForm = ({
                     setDatasetBBCNFValue(0);
                     updateForm({ datasetBBCNFSliderValue: 0 });
                 }
-                if (selected !== "Join Columns") {
-                    setDatasetBJoinColumnsValue(0);
-                    updateForm({ datasetBJoinColumnsSliderValue: 0 });
+                if (selected !== "Merge Columns") {
+                    setDatasetBMergeColumnsValue(0);
+                    updateForm({ datasetBMergeColumnsSliderValue: 0 });
                 }
             }
         },
@@ -123,7 +123,7 @@ const Step4_StructureForm = ({
 
     const handleValueChangeC = useCallback(
         (selected: string | null) => {
-            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
+            if (selected === "BCNF" || selected === "Merge Columns" || selected === "No Change") {
                 setPlanSelectedC(selected as StructureType);
                 updateForm({ datasetCStructureType: selected as StructureType });
 
@@ -131,9 +131,9 @@ const Step4_StructureForm = ({
                     setDatasetCBCNFValue(0);
                     updateForm({ datasetCBCNFSliderValue: 0 });
                 }
-                if (selected !== "Join Columns") {
-                    setDatasetCJoinColumnsValue(0);
-                    updateForm({ datasetCJoinColumnsSliderValue: 0 });
+                if (selected !== "Merge Columns") {
+                    setDatasetCMergeColumnsValue(0);
+                    updateForm({ datasetCMergeColumnsSliderValue: 0 });
                 }
             }
         },
@@ -142,7 +142,7 @@ const Step4_StructureForm = ({
 
     const handleValueChangeD = useCallback(
         (selected: string | null) => {
-            if (selected === "BCNF" || selected === "Join Columns" || selected === "No Change") {
+            if (selected === "BCNF" || selected === "Merge Columns" || selected === "No Change") {
                 setPlanSelectedD(selected as StructureType);
                 updateForm({ datasetDStructureType: selected as StructureType });
 
@@ -150,9 +150,9 @@ const Step4_StructureForm = ({
                     setDatasetDBCNFValue(0);
                     updateForm({ datasetDBCNFSliderValue: 0 });
                 }
-                if (selected !== "Join Columns") {
-                    setDatasetDJoinColumnsValue(0);
-                    updateForm({ datasetDJoinColumnsSliderValue: 0 });
+                if (selected !== "Merge Columns") {
+                    setDatasetDMergeColumnsValue(0);
+                    updateForm({ datasetDMergeColumnsSliderValue: 0 });
                 }
             }
         },
@@ -171,11 +171,11 @@ const Step4_StructureForm = ({
         [updateForm]
     );
 
-    const handleDatasetAJoinColumnsSliderChange = useCallback(
+    const handleDatasetAMergeColumnsSliderChange = useCallback(
         (value: number[]) => {
             const newValue = value[0];
-            setDatasetAJoinColumnsValue(newValue);
-            updateForm({ datasetAJoinColumnsSliderValue: newValue });
+            setDatasetAMergeColumnsValue(newValue);
+            updateForm({ datasetAMergeColumnsSliderValue: newValue });
         },
         [updateForm]
     );
@@ -189,11 +189,11 @@ const Step4_StructureForm = ({
         [updateForm]
     );
 
-    const handleDatasetBJoinColumnsSliderChange = useCallback(
+    const handleDatasetBMergeColumnsSliderChange = useCallback(
         (value: number[]) => {
             const newValue = value[0];
-            setDatasetBJoinColumnsValue(newValue);
-            updateForm({ datasetBJoinColumnsSliderValue: newValue });
+            setDatasetBMergeColumnsValue(newValue);
+            updateForm({ datasetBMergeColumnsSliderValue: newValue });
         },
         [updateForm]
     );
@@ -207,11 +207,11 @@ const Step4_StructureForm = ({
         [updateForm]
     );
 
-    const handleDatasetCJoinColumnsSliderChange = useCallback(
+    const handleDatasetCMergeColumnsSliderChange = useCallback(
         (value: number[]) => {
             const newValue = value[0];
-            setDatasetCJoinColumnsValue(newValue);
-            updateForm({ datasetCJoinColumnsSliderValue: newValue });
+            setDatasetCMergeColumnsValue(newValue);
+            updateForm({ datasetCMergeColumnsSliderValue: newValue });
         },
         [updateForm]
     );
@@ -225,11 +225,11 @@ const Step4_StructureForm = ({
         [updateForm]
     );
 
-    const handleDatasetDJoinColumnsSliderChange = useCallback(
+    const handleDatasetDMergeColumnsSliderChange = useCallback(
         (value: number[]) => {
             const newValue = value[0];
-            setDatasetDJoinColumnsValue(newValue);
-            updateForm({ datasetDJoinColumnsSliderValue: newValue });
+            setDatasetDMergeColumnsValue(newValue);
+            updateForm({ datasetDMergeColumnsSliderValue: newValue });
         },
         [updateForm]
     );
@@ -241,20 +241,20 @@ const Step4_StructureForm = ({
         if (splitType !== "VerticalHorizontal") {
             setPlanSelectedC(null);
             setDatasetCBCNFValue(0);
-            setDatasetCJoinColumnsValue(0);
+            setDatasetCMergeColumnsValue(0);
             updateForm({
                 datasetCStructureType: null,
                 datasetCBCNFSliderValue: 0,
-                datasetCJoinColumnsSliderValue: 0,
+                datasetCMergeColumnsSliderValue: 0,
             });
 
             setPlanSelectedD(null);
             setDatasetDBCNFValue(0);
-            setDatasetDJoinColumnsValue(0);
+            setDatasetDMergeColumnsValue(0);
             updateForm({
                 datasetDStructureType: null,
                 datasetDBCNFSliderValue: 0,
-                datasetDJoinColumnsSliderValue: 0,
+                datasetDMergeColumnsSliderValue: 0,
             });
         }
     }, [splitType, updateForm]);
@@ -264,17 +264,17 @@ const Step4_StructureForm = ({
      */
     let visibleSlidersCount = 0;
 
-    if (planSelectedA === "BCNF" || planSelectedA === "Join Columns") {
+    if (planSelectedA === "BCNF" || planSelectedA === "Merge Columns") {
         visibleSlidersCount++;
     }
-    if (planSelectedB === "BCNF" || planSelectedB === "Join Columns") {
+    if (planSelectedB === "BCNF" || planSelectedB === "Merge Columns") {
         visibleSlidersCount++;
     }
     if (splitType === "VerticalHorizontal") {
-        if (planSelectedC === "BCNF" || planSelectedC === "Join Columns") {
+        if (planSelectedC === "BCNF" || planSelectedC === "Merge Columns") {
             visibleSlidersCount++;
         }
-        if (planSelectedD === "BCNF" || planSelectedD === "Join Columns") {
+        if (planSelectedD === "BCNF" || planSelectedD === "Merge Columns") {
             visibleSlidersCount++;
         }
     }
@@ -284,7 +284,7 @@ const Step4_StructureForm = ({
     return (
         <FormWrapper
             title="Select Structure Options"
-            description="Choose between 'No Change', 'Normalize to BCNF', and 'Join Columns' for each dataset that SYDAG creates."
+            description="Choose between 'No Change', 'Normalize to BCNF', and 'Merge Columns' for each dataset that SYDAG creates."
         >
             {/* Begin outer scrollable container for everything */}
             <div className="max-h-[600px] overflow-y-auto scrollbar-custom p-4 space-y-6">
@@ -308,10 +308,10 @@ const Step4_StructureForm = ({
                             </ToggleGroup.Item>
 
                             <ToggleGroup.Item
-                                value="Join Columns"
+                                value="Merge Columns"
                                 className="custom-label border border-neutral-600 p-4 h-16 rounded-md data-[state=on]:border-green-500 data-[state=on]:bg-neutral-900 focus:border-green-500 outline-none hover:border-green-500 w-full"
                             >
-                                Join Columns
+                                Merge Columns
                             </ToggleGroup.Item>
 
                             <ToggleGroup.Item
@@ -347,10 +347,10 @@ const Step4_StructureForm = ({
                             </ToggleGroup.Item>
 
                             <ToggleGroup.Item
-                                value="Join Columns"
+                                value="Merge Columns"
                                 className="custom-label border border-neutral-600 p-4 h-16 rounded-md data-[state=on]:border-green-500 data-[state=on]:bg-neutral-900 focus:border-green-500 outline-none hover:border-green-500 w-full"
                             >
-                                Join Columns
+                                Merge Columns
                             </ToggleGroup.Item>
 
                             <ToggleGroup.Item
@@ -389,10 +389,10 @@ const Step4_StructureForm = ({
                                     </ToggleGroup.Item>
 
                                     <ToggleGroup.Item
-                                        value="Join Columns"
+                                        value="Merge Columns"
                                         className="custom-label border border-neutral-600 p-4 h-16 rounded-md data-[state=on]:border-green-500 data-[state=on]:bg-neutral-900 focus:border-green-500 outline-none hover:border-green-500 w-full"
                                     >
-                                        Join Columns
+                                        Merge Columns
                                     </ToggleGroup.Item>
 
                                     <ToggleGroup.Item
@@ -428,10 +428,10 @@ const Step4_StructureForm = ({
                                     </ToggleGroup.Item>
 
                                     <ToggleGroup.Item
-                                        value="Join Columns"
+                                        value="Merge Columns"
                                         className="custom-label border border-neutral-600 p-4 h-16 rounded-md data-[state=on]:border-green-500 data-[state=on]:bg-neutral-900 focus:border-green-500 outline-none hover:border-green-500 w-full"
                                     >
-                                        Join Columns
+                                        Merge Columns
                                     </ToggleGroup.Item>
 
                                     <ToggleGroup.Item
@@ -481,23 +481,23 @@ const Step4_StructureForm = ({
                             </div>
                         )}
 
-                        {planSelectedA === "Join Columns" && (
+                        {planSelectedA === "Merge Columns" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset A - Join Columns Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset A - Merge Columns Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
-                                    value={[datasetAJoinColumnsValue]}
-                                    onValueChange={handleDatasetAJoinColumnsSliderChange}
+                                    value={[datasetAMergeColumnsValue]}
+                                    onValueChange={handleDatasetAMergeColumnsSliderChange}
                                     min={0}
                                     max={100}
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Join Columns Percentage: {datasetAJoinColumnsValue}%
+                  Merge Columns Percentage: {datasetAMergeColumnsValue}%
                 </span>
-                                {errors.datasetAJoinColumnsSliderValue && (
+                                {errors.datasetAMergeColumnsSliderValue && (
                                     <p className="text-red-500 text-sm">
-                                        {errors.datasetAJoinColumnsSliderValue[0]}
+                                        {errors.datasetAMergeColumnsSliderValue[0]}
                                     </p>
                                 )}
                             </div>
@@ -526,23 +526,23 @@ const Step4_StructureForm = ({
                             </div>
                         )}
 
-                        {planSelectedB === "Join Columns" && (
+                        {planSelectedB === "Merge Columns" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset B - Join Columns Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset B - Merge Columns Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
-                                    value={[datasetBJoinColumnsValue]}
-                                    onValueChange={handleDatasetBJoinColumnsSliderChange}
+                                    value={[datasetBMergeColumnsValue]}
+                                    onValueChange={handleDatasetBMergeColumnsSliderChange}
                                     min={0}
                                     max={100}
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Join Columns Percentage: {datasetBJoinColumnsValue}%
+                  Merge Columns Percentage: {datasetBMergeColumnsValue}%
                 </span>
-                                {errors.datasetBJoinColumnsSliderValue && (
+                                {errors.datasetBMergeColumnsSliderValue && (
                                     <p className="text-red-500 text-sm">
-                                        {errors.datasetBJoinColumnsSliderValue[0]}
+                                        {errors.datasetBMergeColumnsSliderValue[0]}
                                     </p>
                                 )}
                             </div>
@@ -571,23 +571,23 @@ const Step4_StructureForm = ({
                             </div>
                         )}
 
-                        {splitType === "VerticalHorizontal" && planSelectedC === "Join Columns" && (
+                        {splitType === "VerticalHorizontal" && planSelectedC === "Merge Columns" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset C - Join Columns Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset C - Merge Columns Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
-                                    value={[datasetCJoinColumnsValue]}
-                                    onValueChange={handleDatasetCJoinColumnsSliderChange}
+                                    value={[datasetCMergeColumnsValue]}
+                                    onValueChange={handleDatasetCMergeColumnsSliderChange}
                                     min={0}
                                     max={100}
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Join Columns Percentage: {datasetCJoinColumnsValue}%
+                  Merge Columns Percentage: {datasetCMergeColumnsValue}%
                 </span>
-                                {errors.datasetCJoinColumnsSliderValue && (
+                                {errors.datasetCMergeColumnsSliderValue && (
                                     <p className="text-red-500 text-sm">
-                                        {errors.datasetCJoinColumnsSliderValue[0]}
+                                        {errors.datasetCMergeColumnsSliderValue[0]}
                                     </p>
                                 )}
                             </div>
@@ -616,23 +616,23 @@ const Step4_StructureForm = ({
                             </div>
                         )}
 
-                        {splitType === "VerticalHorizontal" && planSelectedD === "Join Columns" && (
+                        {splitType === "VerticalHorizontal" && planSelectedD === "Merge Columns" && (
                             <div className="flex flex-col w-full mb-10">
-                                <h3 className="text-lg text-white">Dataset D - Join Columns Percentage</h3>
+                                <h3 className="text-lg text-white">Dataset D - Merge Columns Percentage</h3>
                                 <Slider
                                     className="my-4 w-full"
-                                    value={[datasetDJoinColumnsValue]}
-                                    onValueChange={handleDatasetDJoinColumnsSliderChange}
+                                    value={[datasetDMergeColumnsValue]}
+                                    onValueChange={handleDatasetDMergeColumnsSliderChange}
                                     min={0}
                                     max={100}
                                     step={1}
                                 />
                                 <span className="text-white text-sm">
-                  Join Columns Percentage: {datasetDJoinColumnsValue}%
+                  Merge Columns Percentage: {datasetDMergeColumnsValue}%
                 </span>
-                                {errors.datasetDJoinColumnsSliderValue && (
+                                {errors.datasetDMergeColumnsSliderValue && (
                                     <p className="text-red-500 text-sm">
-                                        {errors.datasetDJoinColumnsSliderValue[0]}
+                                        {errors.datasetDMergeColumnsSliderValue[0]}
                                     </p>
                                 )}
                             </div>

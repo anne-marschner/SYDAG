@@ -73,9 +73,9 @@ In the following we provide an overview of all parameters and their effects on t
 
 ### Structure
 For each new Dataset X: 
-* **datasetXStructureType**: The structure change that will be applied to the datset (join of columns, normalization to BCNF or no change).
+* **datasetXStructureType**: The structure change that will be applied to the datset (merge of columns, normalization to BCNF or no change).
 * **datasetXBCNFSliderValue**: The percentage that determines how many of the possible decomposition steps should be executed (0-100). 
-* **datasetXJoinColumnsSliderValue**: The percentage of overlapping columns to join (0-100).
+* **datasetXMergeColumnsSliderValue**: The percentage of overlapping columns to merge (0-100).
 
 ### Schema Noise
 For each new Dataset X:
@@ -107,21 +107,21 @@ In the GUI the user can either set the parameters manually or upload a JSON file
   "columnDistribution": 0,		// 0 to 100
   "overlapType": "Mixed Overlap",	// "Mixed Overlap", "Block Overlap"
 
-  "datasetAStructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "datasetAStructureType": "No Change",	// "No Change", "BCNF", "Merge Columns"
   "datasetABCNFSliderValue": 0,		// 0 to 100
-  "datasetAJoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetAMergeColumnsSliderValue": 0,	// 0 to 100
 
-  "datasetBStructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "datasetBStructureType": "No Change",	// "No Change", "BCNF", "Merge Columns"
   "datasetBBCNFSliderValue": 0,		// 0 to 100
-  "datasetBJoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetBMergeColumnsSliderValue": 0,	// 0 to 100
 
-  "datasetCStructureType": "No Change",	// "No Change", "BCNF", "Join Columns"
+  "datasetCStructureType": "No Change",	// "No Change", "BCNF", "Merge Columns"
   "datasetCBCNFSliderValue": 0,		// 0 to 100
-  "datasetCJoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetCMergeColumnsSliderValue": 0,	// 0 to 100
 
-  "datasetDStructureType": "No Change", // "No Change", "BCNF", "Join Columns"
+  "datasetDStructureType": "No Change", // "No Change", "BCNF", "Merge Columns"
   "datasetDBCNFSliderValue": 0,		// 0 to 100
-  "datasetDJoinColumnsSliderValue": 0,	// 0 to 100
+  "datasetDMergeColumnsSliderValue": 0,	// 0 to 100
 
   "datasetASchemaNoise": false,		// false, true
   "datasetASchemaNoiseValue": 0,	// 0 to 100
@@ -206,7 +206,7 @@ If you are having trouble building the Docker containers, make sure that you are
 
 #### Why is the generation failing?
 You can check several points:
-1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Join options for each dataset.
+1. If you forget to set certain configuration parameters, SYDAG may fail to generate a result and redirect you to the summary page. Ensure that all necessary parameters are properly configured, and try confirming again. Check if you have set the Structure and Merge options for each dataset.
 2. Ensure that the separator, quote, and escape characters are used correctly in the dataset. If there are inconsistencies in the dataset's structure, the file may not be read correctly.
 3. You may need to increase Docker's memory limit. For datasets larger than 25 MB, at least 4 GB of RAM is recommended.
    

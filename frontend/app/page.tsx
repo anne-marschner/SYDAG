@@ -39,15 +39,15 @@ export default function Home() {
         datasetAStructureType: null,
         datasetBStructureType: null,
         datasetABCNFSliderValue: 0,
-        datasetAJoinColumnsSliderValue: 0,
+        datasetAMergeColumnsSliderValue: 0,
         datasetBBCNFSliderValue: 0,
-        datasetBJoinColumnsSliderValue: 0,
+        datasetBMergeColumnsSliderValue: 0,
         datasetCStructureType: null,
         datasetDStructureType: null,
         datasetCBCNFSliderValue: 0,
-        datasetCJoinColumnsSliderValue: 0,
+        datasetCMergeColumnsSliderValue: 0,
         datasetDBCNFSliderValue: 0,
-        datasetDJoinColumnsSliderValue: 0,
+        datasetDMergeColumnsSliderValue: 0,
 
         datasetASchemaNoise: false,
         datasetASchemaNoiseValue: 0,
@@ -185,13 +185,13 @@ export default function Home() {
                                             datasetCStructureType={formData.datasetCStructureType}
                                             datasetDStructureType={formData.datasetDStructureType}
                                             datasetABCNFSliderValue={formData.datasetABCNFSliderValue}
-                                            datasetAJoinColumnsSliderValue={formData.datasetAJoinColumnsSliderValue}
+                                            datasetAMergeColumnsSliderValue={formData.datasetAMergeColumnsSliderValue}
                                             datasetBBCNFSliderValue={formData.datasetBBCNFSliderValue}
-                                            datasetBJoinColumnsSliderValue={formData.datasetBJoinColumnsSliderValue}
+                                            datasetBMergeColumnsSliderValue={formData.datasetBMergeColumnsSliderValue}
                                             datasetCBCNFSliderValue={formData.datasetCBCNFSliderValue}
-                                            datasetCJoinColumnsSliderValue={formData.datasetCJoinColumnsSliderValue}
+                                            datasetCMergeColumnsSliderValue={formData.datasetCMergeColumnsSliderValue}
                                             datasetDBCNFSliderValue={formData.datasetDBCNFSliderValue}
-                                            datasetDJoinColumnsSliderValue={formData.datasetDJoinColumnsSliderValue}
+                                            datasetDMergeColumnsSliderValue={formData.datasetDMergeColumnsSliderValue}
                                             updateForm={updateForm}
                                             errors={errors}
                                         />
@@ -280,15 +280,15 @@ export default function Home() {
                                             datasetAStructureType={formData.datasetAStructureType}
                                             datasetBStructureType={formData.datasetBStructureType}
                                             datasetABCNFSliderValue={formData.datasetABCNFSliderValue}
-                                            datasetAJoinColumnsSliderValue={formData.datasetAJoinColumnsSliderValue}
+                                            datasetAMergeColumnsSliderValue={formData.datasetAMergeColumnsSliderValue}
                                             datasetBBCNFSliderValue={formData.datasetBBCNFSliderValue}
-                                            datasetBJoinColumnsSliderValue={formData.datasetBJoinColumnsSliderValue}
+                                            datasetBMergeColumnsSliderValue={formData.datasetBMergeColumnsSliderValue}
                                             datasetCStructureType={formData.datasetCStructureType}
                                             datasetDStructureType={formData.datasetDStructureType}
                                             datasetCBCNFSliderValue={formData.datasetCBCNFSliderValue}
-                                            datasetCJoinColumnsSliderValue={formData.datasetCJoinColumnsSliderValue}
+                                            datasetCMergeColumnsSliderValue={formData.datasetCMergeColumnsSliderValue}
                                             datasetDBCNFSliderValue={formData.datasetDBCNFSliderValue}
-                                            datasetDJoinColumnsSliderValue={formData.datasetDJoinColumnsSliderValue}
+                                            datasetDMergeColumnsSliderValue={formData.datasetDMergeColumnsSliderValue}
                                             datasetASchemaNoise={formData.datasetASchemaNoise}
                                             datasetASchemaNoiseValue={formData.datasetASchemaNoiseValue}
                                             datasetASchemaKeyNoise={formData.datasetASchemaKeyNoise}
