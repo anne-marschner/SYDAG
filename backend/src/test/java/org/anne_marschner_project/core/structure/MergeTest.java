@@ -12,10 +12,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JoinTest {
+class MergeTest {
 
     @Test
-    void testJoinColumns_withHeaders() {
+    void testMergeColumns_withHeaders() {
 
         // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
@@ -28,27 +28,27 @@ class JoinTest {
         data.put(6, Arrays.asList("X", "Y", "Z"));
         Relation relation = new Relation(schema, data);
 
-        // Execute Join
-        Join join = new Join();
-        Relation result = join.joinColumns(relation, 50, ',');
+        // Execute merge
+        Merge merge = new Merge();
+        Relation result = merge.mergeColumns(relation, 50, ',');
 
         // Check schema size
         assertEquals(2, result.getSchema().size(), "Schema should have 2 Column");
 
-        // Check joined attribute name
-        Attribute joinedAttribute = result.getSchema().get(2);
-        assertEquals("Column1;Column3", joinedAttribute.getColumnName(), "Attribute name is not correct");
+        // Check merged attribute name
+        Attribute mergedAttribute = result.getSchema().get(2);
+        assertEquals("Column1;Column3", mergedAttribute.getColumnName(), "Attribute name is not correct");
 
-        // Check joined data
-        List<String> joinedData = result.getData().get(2);
-        assertEquals(Arrays.asList("A;X", "B;Y", "C;Z"), joinedData, "Data names not correct");
+        // Check merged data
+        List<String> mergedData = result.getData().get(2);
+        assertEquals(Arrays.asList("A;X", "B;Y", "C;Z"), mergedData, "Data names not correct");
 
         // Check if third row was removed
         assertFalse(result.getData().containsKey(6), "The third column should have been removed");
     }
 
     @Test
-    void testJoinColumns_withoutHeaders() {
+    void testMergeColumns_withoutHeaders() {
 
         // Create relation
         Map<Integer, Attribute> schema = new HashMap<>();
@@ -59,20 +59,20 @@ class JoinTest {
         data.put(5, Arrays.asList("1", "2", "3"));
         Relation relation = new Relation(schema, data);
 
-        // Execute Join
-        Join join = new Join();
-        Relation result = join.joinColumns(relation, 50, ',');
+        // Execute Merge
+        Merge merge = new Merge();
+        Relation result = merge.mergeColumns(relation, 50, ',');
 
         // Check schema size
         assertEquals(1, result.getSchema().size(), "Schema should have 1 Column");
 
-        // Check joined attribute name
-        Attribute joinedAttribute = result.getSchema().get(2);
-        assertNull(joinedAttribute.getColumnName(), "Attribute name is not correct");
+        // Check merged attribute name
+        Attribute mergedAttribute = result.getSchema().get(2);
+        assertNull(mergedAttribute.getColumnName(), "Attribute name is not correct");
 
-        // Check joined data
-        List<String> joinedData = result.getData().get(2);
-        assertEquals(Arrays.asList("A;1", "B;2", "C;3"), joinedData, "Data names not correct");
+        // Check merged data
+        List<String> mergedData = result.getData().get(2);
+        assertEquals(Arrays.asList("A;1", "B;2", "C;3"), mergedData, "Data names not correct");
 
         // Check if second row was removed
         assertFalse(result.getData().containsKey(5), "The second column should have been removed");

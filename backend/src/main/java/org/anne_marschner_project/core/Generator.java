@@ -8,7 +8,7 @@ import org.anne_marschner_project.core.keys.KeyFinder;
 import org.anne_marschner_project.core.noise.DataNoise;
 import org.anne_marschner_project.core.noise.SchemaNoise;
 import org.anne_marschner_project.core.split.Split;
-import org.anne_marschner_project.core.structure.Join;
+import org.anne_marschner_project.core.structure.Merge;
 import org.anne_marschner_project.core.structure.Normalization;
 import org.anne_marschner_project.api.FormDataWrapper;
 import org.anne_marschner_project.api.GeneratorParameters;
@@ -56,10 +56,10 @@ public class Generator {
         String datasetBStructureType = formDataWrapper.getDatasetBStructureType();
         String datasetCStructureType = formDataWrapper.getDatasetCStructureType();
         String datasetDStructureType = formDataWrapper.getDatasetDStructureType();
-        Integer joinPercentageA = formDataWrapper.getDatasetAMergeColumnsSliderValue();
-        Integer joinPercentageB = formDataWrapper.getDatasetBMergeColumnsSliderValue();
-        Integer joinPercentageC = formDataWrapper.getDatasetCMergeColumnsSliderValue();
-        Integer joinPercentageD = formDataWrapper.getDatasetDMergeColumnsSliderValue();
+        Integer mergePercentageA = formDataWrapper.getDatasetAMergeColumnsSliderValue();
+        Integer mergePercentageB = formDataWrapper.getDatasetBMergeColumnsSliderValue();
+        Integer mergePercentageC = formDataWrapper.getDatasetCMergeColumnsSliderValue();
+        Integer mergePercentageD = formDataWrapper.getDatasetDMergeColumnsSliderValue();
         Integer normalizePercentageA = formDataWrapper.getDatasetABCNFSliderValue();
         Integer normalizePercentageB = formDataWrapper.getDatasetBBCNFSliderValue();
         Integer normalizePercentageC = formDataWrapper.getDatasetCBCNFSliderValue();
@@ -131,7 +131,7 @@ public class Generator {
         Integer[] noiseInsidePercentage = {datasetANoiseInside, datasetBNoiseInside, datasetCNoiseInside, datasetDNoiseInside};
         boolean[] dataNoiseInKeys = {datasetADataKeyNoise, datasetBDataKeyNoise, datasetCDataKeyNoise, datasetDDataKeyNoise};
         boolean[] dataNoise = {datasetADataNoise, datasetBDataNoise, datasetCDataNoise, datasetDDataNoise};
-        Integer[] joinPercentages = {joinPercentageA, joinPercentageB, joinPercentageC, joinPercentageD};
+        Integer[] mergePercentages = {mergePercentageA, mergePercentageB, mergePercentageC, mergePercentageD};
         String[] shuffleTypes = {datasetAShuffleOption, datasetBShuffleOption, datasetCShuffleOption, datasetDShuffleOption};
         String[] identifier = {"A", "B", "C", "D"};
 
@@ -164,9 +164,9 @@ public class Generator {
                     dataNoisePercentages[i], noiseInsidePercentage[i], dataNoiseInKeys[i], dataNoise[i]));
         }
 
-        // Apply Join on each created dataset
+        // Apply Merge on each created dataset
         for (int i = 0; i < datasets.size(); i++) {
-            datasets.set(i, applyJoin(datasets.get(i), structureTypes[i], joinPercentages[i], separator));
+            datasets.set(i, applyMerge(datasets.get(i), structureTypes[i], mergePercentages[i], separator));
         }
 
         // Write created datasets and their keys (use fixed thread pool to write concurrently)
@@ -398,21 +398,21 @@ public class Generator {
 
 
     /**
-     * Applies a join operation to the dataset if specified by the structure type.
+     * Applies a merge operation to the dataset if specified by the structure type.
      *
-     * @param dataset        The dataset to which the join is applied.
+     * @param dataset        The dataset to which the merge is applied.
      * @param structureType  The structure type ("BCNF", "Merge Columns" or "No Change").
-     * @return A Dataset with applied joins or the original Dataset.
+     * @return A Dataset with applied merges or the original Dataset.
      */
-    private Dataset applyJoin(Dataset dataset, String structureType, Integer joinPercentage, char separator) {
-        Dataset joinedDataset = new Dataset();
+    private Dataset applyMerge(Dataset dataset, String structureType, Integer mergePercentage, char separator) {
+        Dataset mergedDataset = new Dataset();
         if (structureType.equals("Merge Columns")) {
-            Join join = new Join();
-            joinedDataset.getRelations().add(join.joinColumns(dataset.getRelations().get(0), joinPercentage, separator));
+            Merge merge = new Merge();
+            mergedDataset.getRelations().add(merge.mergeColumns(dataset.getRelations().get(0), mergePercentage, separator));
         } else {
-            joinedDataset = dataset;
+            mergedDataset = dataset;
         }
-        return joinedDataset;
+        return mergedDataset;
     }
 
 

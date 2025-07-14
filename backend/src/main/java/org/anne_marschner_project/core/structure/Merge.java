@@ -4,29 +4,28 @@ import org.anne_marschner_project.core.data.Attribute;
 import org.anne_marschner_project.core.data.Relation;
 import org.anne_marschner_project.core.data.Type;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 /**
- * The Join class provides functionality to join columns within a given {@link Relation}.
+ * The Merge class provides functionality to merge columns within a given {@link Relation}.
  */
-public class Join {
+public class Merge {
 
 
     /**
-     * Joins specified columns of a Relation based on the given percentage of columns to join.
+     * Merges specified columns of a Relation based on the given percentage of columns to merge.
      *
      * @param relation       The Relation object containing the schema and data.
-     * @param joinPercentage The percentage of columns to join from the overlapping columns.
+     * @param mergePercentage The percentage of columns to merge from the overlapping columns.
      * @param separator      The separator dividing the relation.
-     * @return A new Relation with the specified columns joined.
+     * @return A new Relation with the specified columns merged.
      */
-    public Relation joinColumns(Relation relation, Integer joinPercentage, char separator) {
+    public Relation mergeColumns(Relation relation, Integer mergePercentage, char separator) {
 
         // Get schema and data from relation
         Map<Integer, Attribute> schema = relation.getSchema();
 
-        // Determine the indices of the columns that are eligible for joining
+        // Determine the indices of the columns that are eligible for merging
         List<Integer> columnsToConsider;
         if (relation.getOverlappingColumnsIndices() == null) {
             // Due to horizontal Splitting, all columns are eligible, since they are all duplicates
@@ -41,68 +40,68 @@ public class Join {
             return relation;
         }
 
-        // Choose how many of the overlapping columns should be joined into a multivalued attribute
-        int numOfColumnsToJoin = (int) Math.ceil((joinPercentage / 100.0) * columnsToConsider.size());
+        // Choose how many of the overlapping columns should be merged into a multivalued attribute
+        int numOfColumnsToMerge = (int) Math.ceil((mergePercentage / 100.0) * columnsToConsider.size());
 
         // Choose separator to use for multivalued object
-        char joinSeparator = chooseJoinSeparator(separator);
+        char mergeSeparator = chooseMergeSeparator(separator);
 
-        // Execute the decided number of joins
-        return executeJoins(relation, numOfColumnsToJoin, columnsToConsider, joinSeparator);
+        // Execute the decided number of merges
+        return executeMerge(relation, numOfColumnsToMerge, columnsToConsider, mergeSeparator);
     }
 
 
     /**
-     * Executes the joining process on the Relation object by joining a specified number
+     * Executes the merging process on the Relation object by merging a specified number
      * of columns.
      *
-     * @param relation          The Relation to perform joins on.
-     * @param numOfColumnsToJoin The number of columns to join based on the percentage.
-     * @param columnsToConsider  A list of column indices to consider for joining.
-     * @param joinSeparator      The separator to use when joining column values.
-     * @return A Relation object with the joined columns.
+     * @param relation          The Relation to perform merges on.
+     * @param numOfColumnsToMerge The number of columns to merge based on the percentage.
+     * @param columnsToConsider  A list of column indices to consider for merging.
+     * @param mergeSeparator      The separator to use when merging column values.
+     * @return A Relation object with the merged columns.
      */
-    public Relation executeJoins(Relation relation, Integer numOfColumnsToJoin, List<Integer> columnsToConsider, char joinSeparator){
+    public Relation executeMerge(Relation relation, Integer numOfColumnsToMerge, List<Integer> columnsToConsider, char mergeSeparator){
 
         Map<Integer, Attribute> schema = relation.getSchema();
         Map<Integer, List<String>> data = relation.getData();
         List<Integer> keys = relation.getKeyIndices();
-        Set<Integer> joinedColumnIndices = new HashSet<>();
+        Set<Integer> mergedColumnIndices = new HashSet<>();
 
-        // Join until the desired number of joined columns in achieved
-        while (joinedColumnIndices.size() < numOfColumnsToJoin) {
-            int[] indicesToJoin = findBestJoin(relation, columnsToConsider, joinedColumnIndices);
-            Integer firstColumnIndex = indicesToJoin[0];
-            Integer secondColumnIndex = indicesToJoin[1];
+        // Merge until the desired number of merged columns in achieved
+        while (mergedColumnIndices.size() < numOfColumnsToMerge) {
+            int[] indicesToMerge = findBestMerge(relation, columnsToConsider, mergedColumnIndices);
+            Integer firstColumnIndex = indicesToMerge[0];
+            Integer secondColumnIndex = indicesToMerge[1];
 
             // Create multivalued attribute from the two columns
-            Attribute joinedAttribute;
+            Attribute mergedAttribute;
             if (relation.getSchema().entrySet().iterator().next().getValue().getColumnName() != null) {
                 String firstAttributeName = schema.get(firstColumnIndex).getColumnName();
                 String secondAttributeName = schema.get(secondColumnIndex).getColumnName();
-                String joinedAttributeName = firstAttributeName + joinSeparator + secondAttributeName;
-                joinedAttribute = new Attribute(joinedAttributeName, schema.get(firstColumnIndex).getSharedType(schema.get(secondColumnIndex)));
+                String mergedAttributeName = firstAttributeName + mergeSeparator + secondAttributeName;
+                mergedAttribute = new Attribute(mergedAttributeName, schema.get(firstColumnIndex).getSharedType(schema.get(secondColumnIndex)));
             } else {
-                joinedAttribute = new Attribute(null, Type.STRING);
+                mergedAttribute = new Attribute(null, Type.STRING);
             }
 
-            // Join the column entries
+            // Merge the column entries
             List<String> firstColumn = data.get(firstColumnIndex);
             List<String> secondColumn = data.get(secondColumnIndex);
-            List<String> joinedColumn = new ArrayList<>();
+            List<String> mergedColumn = new ArrayList<>();
 
             // Iterate through both columns and combine entries
             for (int i = 0; i < Math.min(firstColumn.size(), secondColumn.size()); i++) {
                 String firstEntry = firstColumn.get(i);
                 String secondEntry = secondColumn.get(i);
-                String joinedEntry = firstEntry + joinSeparator + secondEntry;
-                joinedColumn.add(joinedEntry);
+                String mergedEntry = firstEntry + mergeSeparator + secondEntry;
+                mergedColumn.add(mergedEntry);
             }
 
-            // Set the joined column and attribute at firstColumnIndex and remove the ones at secondColumnIndex
-            data.put(firstColumnIndex, joinedColumn);
+            // Set the merged column and attribute at firstColumnIndex and remove the ones at secondColumnIndex
+            data.put(firstColumnIndex, mergedColumn);
             data.remove(secondColumnIndex);
-            schema.put(firstColumnIndex, joinedAttribute);
+            schema.put(firstColumnIndex, mergedAttribute);
             schema.remove(secondColumnIndex);
             if (keys.contains(secondColumnIndex)) {
                 if (!keys.contains(firstColumnIndex)) {
@@ -113,8 +112,8 @@ public class Join {
             }
 
             // Update values to keep track
-            joinedColumnIndices.add(firstColumnIndex);
-            joinedColumnIndices.add(secondColumnIndex);
+            mergedColumnIndices.add(firstColumnIndex);
+            mergedColumnIndices.add(secondColumnIndex);
             columnsToConsider.remove(secondColumnIndex);
         }
 
@@ -125,15 +124,15 @@ public class Join {
 
 
     /**
-     * Finds the best pair of columns to join based on data type, distance, and whether
-     * columns are already part of a join.
+     * Finds the best pair of columns to merge based on data type, distance, and whether
+     * columns are already part of a merge.
      *
      * @param relation            The Relation containing schema and data.
-     * @param columnsToConsider   List of indices of columns that can be joined.
-     * @param joinedColumnIndices Set of indices for columns already part of a join.
-     * @return An array of two integers representing the best pair of column indices to join.
+     * @param columnsToConsider   List of indices of columns that can be merged.
+     * @param mergedColumnIndices Set of indices for columns already part of a merge.
+     * @return An array of two integers representing the best pair of column indices to merge.
      */
-    public int[] findBestJoin(Relation relation, List<Integer> columnsToConsider, Set<Integer> joinedColumnIndices) {
+    public int[] findBestMerge(Relation relation, List<Integer> columnsToConsider, Set<Integer> mergedColumnIndices) {
 
         Map<Integer, Attribute> schema = relation.getSchema();
         int bestIndex1 = -1;
@@ -159,7 +158,7 @@ public class Join {
                 }
                 double normalizedDistance = (double) Math.abs(index1 - index2) / maxDistance;  // check distance
                 score -= normalizedDistance;
-                if (joinedColumnIndices.contains(index1) || joinedColumnIndices.contains(index2)) { // check if already part of join
+                if (mergedColumnIndices.contains(index1) || mergedColumnIndices.contains(index2)) { // check if already part of merge
                     score -= 0.5;
                 }
 
@@ -177,12 +176,12 @@ public class Join {
 
 
     /**
-     * Determines the separator to use for joining column values based on the input.
+     * Determines the separator to use for merging column values based on the input.
      *
      * @param separator The initial separator of the csv.
      * @return Returns ";" if the initial separator is ","; otherwise, returns ",".
      */
-    public char chooseJoinSeparator(char separator) {
+    public char chooseMergeSeparator(char separator) {
         if (separator == ',') {
             return ';';
         } else {
